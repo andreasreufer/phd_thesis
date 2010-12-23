@@ -1,0 +1,87 @@
+\documentclass[12pt,a4paper,titlepage]{report}
+%\documentclass[a4paper,twoside]{article} 
+%\documentclass[12pt,a4paper,twoside]{article} 
+
+\usepackage[pdftex]{graphicx}
+%\usepackage[pdftex,draft]{graphicx}
+
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage[pdftex,
+	% remove to generate the printout version
+	colorlinks=true,
+	%citecolor=black,
+	%urlcolor=black
+	pdfauthor={Andreas Reufer},
+	pdftitle={Dynamics of Planets in Gaseous Disks},
+	pdfkeywords={protoplanetary disk, astrophysics, exoplanet, extrasolar planet,
+	disk dynamics, disk eccentricity, gap formation, SPH, computational astrophysics, rocket science
+}]{hyperref}
+
+
+\usepackage{amssymb, amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{pdfpages}
+
+%\footnotesep0.5cm
+
+\usepackage{aux/aas_macros}
+
+%\usepackage[T1]{fontenc}
+%\usepackage{pxfonts}
+
+%% One and a half spacing
+\usepackage{setspace}
+
+\usepackage{a4wide}
+\usepackage{enumerate}
+
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+
+\usepackage{verbatim}
+\usepackage{moreverb}
+
+\include{defs}
+
+\let\verbatiminclude\verbatimtabinput
+\def\verbatimtabsize{4\relax}
+
+\begin{document}
+\pagestyle{headings}
+\begin{spacing}{1.5}
+
+%% Sections
+%\include{00title}
+%\include{01introduction}
+%\include{02code}
+%\include{03ssc}
+\include{04mars}
+%\include{05moon}
+%\include{06fluffy}
+
+% code description
+% pmc_colls (paper?)
+% fluffy impacts (paper?)
+% Mars impacts paper
+
+% Include a bibliography
+%\bibliographystyle{plain}
+%\bibliographystyle{natbib}
+%\bibliographystyle{natdin}
+%\bibliographystyle{abbrvnat}
+%\bibliographystyle{unsrtnat}
+\bibliographystyle{plainnat}
+
+\bibliography{bibliography}
+
+% Appendix
+\appendix
+%\include{oosph}
+%\include{miscappendix}
+
+\include{acknowledgement}
+
+\end{spacing}
+\end{document}

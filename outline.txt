@@ -1,0 +1,38 @@
+"Collisions and impacts in planetary systems"
+
+1. introduction
+- short overview of planet formation
+- importance of SSC
+
+2. code description
+- N-Body problem
+- B&H tree, walks, algorithm
+- SPHLATCH v1, how to parallelize for distributed memory
+- SPHLATCH v2, how to parallelize for shared memory, cache strategies
+- cost strategy
+- ANEOS: tables, issues
+- clump detection, FOF vs. gravitationally bound
+- dynamics, 2body mechanics
+- 1D Lagrange code for structure calculations
+
+3. SSC
+- categories
+- mLR, SR, TR, mass spectra, no third remnants, compare Chandrasekhar
+- dynamics
+- L vs. Lcrit
+- thermal structure
+
+4. Mars impacts
+- PSS paper
+
+
+5. HiRes moons, composition moons
+- disk structures
+
+6. fluffy collisions
+- results
+- issues
+
+7. acknowledgements
+
+
