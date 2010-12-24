@@ -30,6 +30,7 @@
 - disk structures
 
 6. fluffy collisions
+- mixed phase issue
 - results
 - issues
 
