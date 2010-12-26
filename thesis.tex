@@ -1,17 +1,19 @@
-\documentclass[12pt,a4paper,titlepage]{report}
+%\documentclass[12pt,a4paper,titlepage]{report}
 %\documentclass[a4paper,twoside]{article} 
 %\documentclass[12pt,a4paper,twoside]{article} 
 
-\usepackage[pdftex]{graphicx}
+\documentclass[xetex,mathserif,serif,titlepage,a4paper]{article}
+
+%\usepackage[pdftex]{graphicx}
 %\usepackage[pdftex,draft]{graphicx}
 
 \usepackage[latin1]{inputenc}
 \usepackage[english]{babel}
 \usepackage[pdftex,
 	% remove to generate the printout version
-	colorlinks=true,
-	%citecolor=black,
-	%urlcolor=black
+	%colorlinks=true,
+	citecolor=black,
+	urlcolor=black
 	pdfauthor={Andreas Reufer},
 	pdftitle={Dynamics of Planets in Gaseous Disks},
 	pdfkeywords={protoplanetary disk, astrophysics, exoplanet, extrasolar planet,
@@ -47,6 +49,12 @@
 
 \let\verbatiminclude\verbatimtabinput
 \def\verbatimtabsize{4\relax}
+
+\usepackage{fontspec}
+\setromanfont{Minion Pro}
+%\setromanfont{Helvetica}
+\setsansfont{Gill Sans}
+
 
 \begin{document}
 \pagestyle{headings}

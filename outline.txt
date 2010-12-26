@@ -12,6 +12,7 @@
 - cost strategy
 - ANEOS: tables, issues
 - clump detection, FOF vs. gravitationally bound
+- flavouring of bodies, atmospheres
 - dynamics, 2body mechanics
 - 1D Lagrange code for structure calculations
 
