@@ -1,11 +1,46 @@
-\section{Code description}
-%\includepdf[pages={2-},fitpaper=true]{02figs/tree_musings}
+\graphicspath{{./02figs/}}
 
-\subsection{Treated physics}
-\subsection{Gravity: N-Body problem}
-\subsection{B \& H Tree, walks algorithm}
-\subsection{Thermodynamics: ANEOS}
-\subsection{Hydro: SPH}
+\chapter{Methods}
+%\includepdf[pages={2-},fitpaper=true]{/tree_musings}
+
+\section{Implemented physics}
+\section{Gravity}
+\subsection{N-Body problem}
+\subsection{Barnes and Hut Tree}
+
+\section{Fluid and Thermo Dynamics}
+\subsection{Theory}
+\subsection{SPH theory}
+\subsection{SPH implementation used}
+sums
+\subsection{ANEOS}
+tables, issues
+
+\section{Code implementation}
 \subsection{Algorithms}
-\subsection{}
+building a tree
+deleting a tree
 
+\subsection{Tree parallelization: shared vs. distributed memory}
+
+
+\section{Tree walks}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{orderwalks.pdf}
+\caption{Postorder vs. preorder recursors}
+\label{fig02walks}
+\end{center}
+\end{figure}
+
+
+
+\section{Algorithms}
+clump detection
+FOF vs. potential
+initial conditions
+
+
+\subsubsection{Neighbour search}
+
+\citep{Barnes:1986p2853}

@@ -2,36 +2,35 @@
 %\documentclass[a4paper,twoside]{article} 
 %\documentclass[12pt,a4paper,twoside]{article} 
 
-\documentclass[xetex,mathserif,serif,titlepage,a4paper]{article}
+%\documentclass[xetex,mathserif,serif,titlepage,a4paper]{article}
 
+\documentclass[xetex,12pt,a4paper]{report}
 %\usepackage[pdftex]{graphicx}
 %\usepackage[pdftex,draft]{graphicx}
 
-\usepackage[latin1]{inputenc}
 \usepackage[english]{babel}
+
 \usepackage[pdftex,
 	% remove to generate the printout version
-	%colorlinks=true,
+	colorlinks=true,
 	citecolor=black,
 	urlcolor=black
 	pdfauthor={Andreas Reufer},
-	pdftitle={Dynamics of Planets in Gaseous Disks},
-	pdfkeywords={protoplanetary disk, astrophysics, exoplanet, extrasolar planet,
-	disk dynamics, disk eccentricity, gap formation, SPH, computational astrophysics, rocket science
-}]{hyperref}
+	pdftitle={Collisions and impacts in planetary system},
+	pdfkeywords={SPH, computational astrophysics, rocket science}]{hyperref}
 
 
-\usepackage{amssymb, amsmath}
+\usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{amsfonts}
 \usepackage{pdfpages}
 
-%\footnotesep0.5cm
+\usepackage{algorithmic}
+\usepackage{algorithm}
 
-\usepackage{aux/aas_macros}
 
-%\usepackage[T1]{fontenc}
-%\usepackage{pxfonts}
+\footnotesep0.5cm
 
 %% One and a half spacing
 \usepackage{setspace}
@@ -44,28 +43,33 @@
 
 \usepackage{verbatim}
 \usepackage{moreverb}
+\usepackage{fontspec}
 
-\include{defs}
+
+
+\usepackage{aux/aas_macros}
+
+\include{aux/definitions}
 
 \let\verbatiminclude\verbatimtabinput
 \def\verbatimtabsize{4\relax}
 
-\usepackage{fontspec}
+
 \setromanfont{Minion Pro}
-%\setromanfont{Helvetica}
+%\setsansfont{Frutiger LT Std}
 \setsansfont{Gill Sans}
 
 
 \begin{document}
 \pagestyle{headings}
-\begin{spacing}{1.5}
+%\begin{spacing}{1.5}
 
 %% Sections
-%\include{00title}
+\include{00title}
 \include{01intro}
 \include{02code}
 \include{03ssc}
-\include{04mars}
+%\include{04mars}
 \include{05moon}
 \include{06fluffy}
 
@@ -91,5 +95,5 @@
 
 \include{acknowledgement}
 
-\end{spacing}
+%\end{spacing}
 \end{document}
