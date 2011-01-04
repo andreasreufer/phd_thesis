@@ -44,7 +44,7 @@
 \usepackage{verbatim}
 \usepackage{moreverb}
 \usepackage{fontspec}
-
+\usepackage{xltxtra}
 
 
 \usepackage{aux/aas_macros}
@@ -55,9 +55,15 @@
 \def\verbatimtabsize{4\relax}
 
 
+\fontspec [ Path = ./fonts/, 
+BoldFont	= MinionPro-Bold.otf ,ItalicFont	= MinionPro-It.otf ,BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
+
+%\fontspec [ Path = ./fonts/, 
+%BoldFont	= FrutigerLTStd-Bold.otf ,%ItalicFont	= FrutigerLTStd-LightItalic.otf ,%BoldItalicFont = FrutigerLTStd-BoldItalic.otf ] {FrutigerLTStd-Light.otf}
+
 \setromanfont{Minion Pro}
-%\setsansfont{Frutiger LT Std}
-\setsansfont{Gill Sans}
+\setsansfont{Frutiger LT Std}
+%\setsansfont{Gill Sans}
 
 
 \begin{document}

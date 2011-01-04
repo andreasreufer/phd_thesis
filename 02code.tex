@@ -3,28 +3,38 @@
 \chapter{Methods}
 %\includepdf[pages={2-},fitpaper=true]{/tree_musings}
 
-\section{Implemented physics}
+\section{Required physics}
+compare timescales
+viscous timescale $t = R^2 / \nu$
+\SSC 
+\textsf{\SSC}
+
 \section{Gravity}
 \subsection{N-Body problem}
 \subsection{Barnes and Hut Tree}
 
-\section{Fluid and Thermo Dynamics}
+\section{Fluid- and Thermodynamics}
 \subsection{Theory}
-\subsection{SPH theory}
+\subsection{SPH formalism}
 \subsection{SPH implementation used}
-sums
+standard SPH vs. integrated density, vs.\\
+derivating SPH sums from Navier-Stokes\\
+surface tension issues, miscilbe SPH
+\subsection{Time integration}
+
 \subsection{ANEOS}
-tables, issues
+tables, interpolating, iterating, issues
+show isobars
+entropy vs. energy integration
 
-\section{Code implementation}
-\subsection{Algorithms}
-building a tree
-deleting a tree
+\section{Implementation}
+\subsection{Organizing particles in Trees}
+building a tree\\
+deleting a tree\\
+neighbour search\\
+tree walks\\
 
-\subsection{Tree parallelization: shared vs. distributed memory}
 
-
-\section{Tree walks}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{orderwalks.pdf}
@@ -34,13 +44,22 @@ deleting a tree
 \end{figure}
 
 
+\subsection{Tree parallelization: shared vs. distributed memory}
+parallelizing a particle code\\
+parallelizing a tree\\
+SPHLATCH v1\\
+SPHLATCH v2\\
+
+show ghost approach\\
+caching issues\\
 
 \section{Algorithms}
-clump detection
-FOF vs. potential
-initial conditions
+clump detection\\
+FOF vs. potential\\
+initial conditions: show theoretical vs. unevolved vs. evolved densities\\
 
 
 \subsubsection{Neighbour search}
 
 \citep{Barnes:1986p2853}
+\citep{Monaghan:2005p2677}

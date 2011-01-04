@@ -1,9 +1,8 @@
 all:
-	#rm *.aux; true
-	#pdflatex thesis
-	# bibtex thesis
-	#pdflatex thesis
-	#pdflatex thesis
+	rm *.aux; true
+	xelatex thesis
+	bibtex thesis
+	xelatex thesis
 	xelatex thesis
 
 archive:
