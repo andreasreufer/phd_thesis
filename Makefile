@@ -1,7 +1,7 @@
 all:
 	rm *.aux; true
 	xelatex thesis
-	bibtex thesis
+	bibtex 02code
 	xelatex thesis
 	xelatex thesis
 
