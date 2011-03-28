@@ -6,7 +6,7 @@ all:
 	xelatex thesis
 
 archive:
-	tar cvf thesis.tar.gz *.tex ??figs *.bib
+	tar cvf thesis.tar.gz *.tex ??figs *.bib aux
 
 clean:
 	rm *.aux *.bbl *.blg *.log *.spl *~ \

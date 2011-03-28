@@ -46,6 +46,53 @@
 \usepackage{fontspec}
 \usepackage{xltxtra}
 
+%--------------
+% Use the fancyhdr-package and redefine headings, page numbers, etc.
+\usepackage{fancyhdr}
+% Use the pagestyle of this package
+\pagestyle{fancy}
+% Redefine the mark for the even side: chapternumber + chaptername in uppercase letters
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% Redefine the mark for the odd side: sectionnumber + sectionname in uppercase letters
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+% Clear all headings
+\fancyhf{}
+% Pagenumber on the left of even and on the right of odd pages
+\fancyhead[LE,RO]{\thepage}
+% Chapter on the right of even pages
+\fancyhead[RE]{\leftmark}
+% Section on the left of odd pages
+\fancyhead[LO]{\rightmark}
+% Draw line below heading
+\renewcommand{\headrulewidth}{0.5pt}
+% No footer, no line at the bottom of the page
+\renewcommand{\footrulewidth}{0pt}
+% Redefine pagestyle 'plain' for starting chapters: all empty
+\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
+% Incrase height of head a little bit
+\addtolength{\headheight}{2pt}
+% End of fancyhdr-Definitions
+%--------------
+
+% Use the xspace package to provide a space after user defined abbreviations if one is necessary
+% (if a word follows) and to supress the space at the end of the sentence. See the definition of \COO below.
+\usepackage{xspace}
+
+% Use the booktabs package to make nice lines in tables
+\usepackage{booktabs}
+
+% Use the package caption2 for captions in smaller font
+\usepackage[footnotesize]{caption}
+
+% Use the package flafter to make sure floating objects appear after their declaration in the text
+\usepackage{flafter}
+
+% \linespread{1.6}
+
+% \clearemptydoublepage: start a new page on the right side of the book (odd page number).
+% Used before the \chapter command and in similar cases
+\newcommand*{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}%
+
 
 \usepackage{aux/aas_macros}
 
@@ -56,10 +103,14 @@
 
 
 \fontspec [ Path = ./fonts/, 
-BoldFont	= MinionPro-Bold.otf ,ItalicFont	= MinionPro-It.otf ,BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
+BoldFont	= MinionPro-Bold.otf ,
+ItalicFont	= MinionPro-It.otf ,
+BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 
 %\fontspec [ Path = ./fonts/, 
-%BoldFont	= FrutigerLTStd-Bold.otf ,%ItalicFont	= FrutigerLTStd-LightItalic.otf ,%BoldItalicFont = FrutigerLTStd-BoldItalic.otf ] {FrutigerLTStd-Light.otf}
+%BoldFont	= FrutigerLTStd-Bold.otf ,
+%ItalicFont	= FrutigerLTStd-LightItalic.otf ,
+%BoldItalicFont = FrutigerLTStd-BoldItalic.otf ] {FrutigerLTStd-Light.otf}
 
 \setromanfont{Minion Pro}
 \setsansfont{Frutiger LT Std}
@@ -75,7 +126,7 @@ BoldFont	= MinionPro-Bold.otf ,ItalicFont	= MinionPro-It.otf ,BoldItalicFont =
 \include{01intro}
 \include{02code}
 \include{03ssc}
-%\include{04mars}
+\include{04mars}
 \include{05moon}
 \include{06fluffy}
 
@@ -99,7 +150,7 @@ BoldFont	= MinionPro-Bold.otf ,ItalicFont	= MinionPro-It.otf ,BoldItalicFont =
 %\include{oosph}
 %\include{miscappendix}
 
-\include{acknowledgement}
+%\include{acknowledgement}
 
 %\end{spacing}
 \end{document}

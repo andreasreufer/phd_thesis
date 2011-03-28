@@ -16,16 +16,20 @@ viscous timescale $t = R^2 / \nu$
 \section{Fluid- and Thermodynamics}
 \subsection{Theory}
 \subsection{SPH formalism}
+
+
 \subsection{SPH implementation used}
 standard SPH vs. integrated density, vs.\\
 derivating SPH sums from Navier-Stokes\\
-surface tension issues, miscilbe SPH
+surface tension issues, miscilbe SPH, show m1H vs. m3H\\
+refer to price
 \subsection{Time integration}
 
+
 \subsection{ANEOS}
-tables, interpolating, iterating, issues
-show isobars
-entropy vs. energy integration
+tables, interpolating, iterating, issues\\
+show isobars\\
+entropy vs. energy integration\\
 
 \section{Implementation}
 \subsection{Organizing particles in Trees}
@@ -33,33 +37,51 @@ building a tree\\
 deleting a tree\\
 neighbour search\\
 tree walks\\
+accelerating a tree: show skip, next and parent pointers by simple tree examples\\
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{cell_wiring.pdf}
+\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree. Note that a \it{next} pointer }
+\label{fig02walks}
+\end{center}
+\end{figure}
 
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{orderwalks.pdf}
-\caption{Postorder vs. preorder recursors}
+\caption{Post-order vs. pre-order recursors}
 \label{fig02walks}
 \end{center}
 \end{figure}
 
 
 \subsection{Tree parallelization: shared vs. distributed memory}
-parallelizing a particle code\\
-parallelizing a tree\\
-SPHLATCH v1\\
-SPHLATCH v2\\
+intro: shared vs. distributed memory\\
 
+SPHLATCH v1\\
+parallelizing a particle code: distributed sums vs. ghosts approach\\
+parallelizing a tree\\
 show ghost approach\\
+
+SPHLATCH v2\\
+shared memory approach\\
+load balancing approach, how this could be memory-\\
+show cost (gravity, NS, total) for giant impact\\
 caching issues\\
+
+building the tree:
+
 
 \section{Algorithms}
 clump detection\\
-FOF vs. potential\\
-initial conditions: show theoretical vs. unevolved vs. evolved densities\\
+FOF vs. potential, not parallelized\\
+initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
 
 
 \subsubsection{Neighbour search}
 
 \citep{Barnes:1986p2853}
 \citep{Monaghan:2005p2677}
+\citep{Price:2004p2613}
