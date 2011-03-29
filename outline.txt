@@ -23,12 +23,19 @@
 - L vs. Lcrit
 - thermal structure
 
+4. Particular applications of SSC
+- HiRes Moon, disk structures
+- alternative Moon sims
+- fluffy collisions: mixed phase issue
+- Lisse impacts
+- 
+
+
 4. Mars impacts
+- introduction
 - PSS paper
 
 
-5. HiRes moons, composition moons
-- disk structures
 
 6. fluffy collisions
 - mixed phase issue
