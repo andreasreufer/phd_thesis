@@ -1,7 +1,11 @@
 all:
 	rm *.aux; true
 	xelatex thesis
+	bibtex 01intro
 	bibtex 02code
+	#bibtex 03ssc 
+	#bibtex 05moon
+	#bibtex 06fluffy
 	xelatex thesis
 	xelatex thesis
 

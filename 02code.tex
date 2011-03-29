@@ -3,26 +3,26 @@
 \chapter{Methods}
 %\includepdf[pages={2-},fitpaper=true]{/tree_musings}
 
-\section{Required physics}
-compare timescales
-viscous timescale $t = R^2 / \nu$
-\SSC 
-\textsf{\SSC}
 
 \section{Gravity}
 \subsection{N-Body problem}
+
 \subsection{Barnes and Hut Tree}
+
 
 \section{Fluid- and Thermodynamics}
 \subsection{Theory}
-\subsection{SPH formalism}
 
+\subsection{SPH formalism}
+advantages and disadvantages of SPH
+formalism
 
 \subsection{SPH implementation used}
 standard SPH vs. integrated density, vs.\\
 deriving SPH sums from Navier-Stokes\\
 surface tension issues, miscible SPH, show m1H vs. m3H\\
-refer to price
+refer to price\\
+
 \subsection{Time integration}
 
 
@@ -73,7 +73,6 @@ caching issues\\
 
 building the tree:
 
-
 \section{Algorithms}
 clump detection\\
 FOF vs. potential, not parallelized\\
@@ -81,6 +80,9 @@ initial conditions: show theoretical vs. unevolved vs. evolved densities, show e
 
 
 \subsubsection{Neighbour search}
+
+\subsection{setting up initial conditions}
+use of spheres for simplicity reason
 
 \citep{Barnes:1986p2853}
 \citep{Monaghan:2005p2677}
