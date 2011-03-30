@@ -56,29 +56,56 @@ A continuum model
 
 
 \subsection{SPH formalism}
-advantages and disadvantages of SPH
-formalism
+The basic idea of SPH is to interpolate all continuum variables in space with an interpolant.
+If our variable is $A(\rv)$ defined at all points in space $\rv$, we start with the basic equality
 
 \begin{equation}
-\label{sph_interpolation_integral}
+\label{02_sph001}
 A(\rv) = \int  \delta(\rv - \rvs) A(\rvs) \ud \rvs
 \end{equation}
 
+We now replace the $\delta$-function with a smoothing kernel $W$, which has typical width $h$, the smoothing length, and which fulfils the following two criteria
+
 \begin{equation}
-\limhzero W(\rv - \rvs(h) = \delta(\rv - \rvs) \hspace{1.0cm}
+\label{02_sph001}
+\limhzero W(\rv - \rvs, h) = \delta(\rv - \rvs) \hspace{1.0cm}
 \int W(\rv - \rvs, h) \ud \rvs = 1
 \end{equation}
 
+Equation \ref{02_sph001} can now be re-written as 
 
 \begin{equation}
-\label{sph_interpolation_integral}
+\label{02_sph001}
 A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
-\approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
 
-derivatives
+The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points (\emph{particles}), on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
 
+\begin{equation}
+\label{02_sph001}
+A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
+\end{equation}
+
+$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. 
+
+For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel 
+
+Spatial derivatives are easily given by writing out the integral interpolant of the derivative of the variable:
+
+\begin{equation}
+\label{02_sph001}
+\nabla A(\rv) = \frac{\partial}{\partial \rv}\int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
+\end{equation}
+
+
+
+
+
+derivatives
 rotation
+advantages and disadvantages of SPH
+formalism
+
 
 \section{Gravity}
 
