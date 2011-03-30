@@ -1,26 +1,95 @@
 \graphicspath{{./02figs/}}
 
 \chapter{Methods}
+Collision events are characterised by a 
+
+range of dynamical 
+
+%\subsection*{Introduction}
 %\includepdf[pages={2-},fitpaper=true]{/tree_musings}
 
-
-\section{Gravity}
-\subsection{N-Body problem}
-
-\subsection{Barnes and Hut Tree}
+Motivation to use SPH, spatial dynamics of collisions, SPH particles are where the mass is (not entirely true for collisions, but necessary), free boundaries
 
 
-\subsection{Fluid- and Thermodynamics}
-Navier-Stokes
+
+Lagrangian nature vs. grid techniques, complexity of AMR vs. simplicity of SPH
+
+Neighbour search is the hardest thing about SPH
+
+
+
+In this chapter we will discuss, how collisions in the strengthless regime as appearing in planetary systems can be modelled.
+The first section gives a short review the governing physics of such collisions and will provide us with a closed set of equations, namely the Navier-Stokes equations and the 
+This set is far too complicated to be solved in an analytical way. 
+Smoothed particle Hydrodynamics (SPH) is a method which discretises fluids with particles of finite volume and presents a framework to solve the equations describing the fluid.
+The second section derives different SPH formulations of the Navier-Stokes equations and demonstrates the advantages and disadvantages of each formulation.
+
+gravity section: 
+
+The initial conditions and also the outcome of collisional events can be charaterized by a 
+
+Smoothed particle hydrodynamics (SPH) is a numerical method which can discretize 
+
+(insert a nice picture of equations, code lines and numbers here)
+
+\newpage
+
+\section{Fluid- and Thermodynamics}
+A continuum model 
+
+
+%%
+%   F L U I D S
+%%
+\subsection{Theory of Fluids}
+
+
+\begin{equation}
+\label{navierstokes1}
+\frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
+\end{equation}
+
+\begin{equation}
+\label{navierstokes2}
+\rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \eta \Delta \mathbf{v} + ( \zeta + \eta ) \nabla ( \nabla \mathbf{v} )
+\end{equation}
 
 
 \subsection{SPH formalism}
 advantages and disadvantages of SPH
 formalism
 
+\begin{equation}
+\label{sph_interpolation_integral}
+A(\rv) = \int  \delta(\rv - \rvs) A(\rvs) \ud \rvs
+\end{equation}
+
+\begin{equation}
+\limhzero W(\rv - \rvs(h) = \delta(\rv - \rvs) \hspace{1.0cm}
+\int W(\rv - \rvs, h) \ud \rvs = 1
+\end{equation}
+
+
+\begin{equation}
+\label{sph_interpolation_integral}
+A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
+\approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
+\end{equation}
+
+derivatives
+
+rotation
+
+\section{Gravity}
+
+\subsection{N-Body problem}
+
+\subsection{Barnes and Hut Tree}
 
 
 
+
+\section{Implementation}
 
 \cite{Abel:2010p3297}
 \citep{Barnes:1986p2853}
@@ -79,6 +148,9 @@ parallelizing a particle code: distributed sums vs. ghosts approach\\
 parallelizing a tree\\
 show ghost approach\\
 
+disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
+
+
 SPHLATCH v2\\
 shared memory approach\\
 load balancing approach, how this could be memory-\\
@@ -86,6 +158,9 @@ show cost (gravity, NS, total) for giant impact\\
 caching issues\\
 
 building the tree:
+
+mention future of parallel computing
+trees on GPUs
 
 \section{Algorithms}
 clump detection\\
