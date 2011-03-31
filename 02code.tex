@@ -52,11 +52,14 @@ A continuum model
 \rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \eta \Delta \mathbf{v} + ( \zeta + \eta ) \nabla ( \nabla \mathbf{v} )
 \end{equation}
 
-show inviscous version
+\label{ch02_fld01_eq003}
+\begin{equation}
+- \frac{\partial \mathbf{v}}{\partial t} =  ( \mathbf{v} \nabla ) \mathbf{v} + \frac{\nabla p}{\rho}
+\end{equation}
 
 The Lagrangian of a inviscous fluid is given by
 \begin{equation}
-\label{ch02_fld01_eq003}
+\label{ch02_fld01_eq004}
 \Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
 \end{equation}
 
@@ -64,6 +67,10 @@ The Lagrangian of a inviscous fluid is given by
 
 \cite{Thorne:2008}
 
+
+%%
+%   S P H
+%%
 
 \subsection{SPH formalism}
 The basic idea of SPH is to interpolate all continuum variables in space with an interpolant.
@@ -153,15 +160,75 @@ with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity diverge
 
 So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle.
 
+The equations of motion can be derived in two different ways: With the inviscous equation of motion of the Navier-Stokes equation \ref{ch02_fld01_eq003}, a symmetric formulation for the pressure gradient term $\nabla p / \rho$ can be found with the trick used above for the velocity divergence. 
+A more elegant way is to derive the equation of motion directly from the Lagrangian given by equation \ref{ch02_fld01_eq004}, whose SPH formulation is
+
+\begin{equation}
+\label{ch02_sph02_eq004}
+\Lagr = \sum_{j} m_j \Big( \frac{1}{2} \vv_j^2 - u(\rho_j, s_j) \Big) 
+\end{equation}
+
+where $u$ is the specific internal energy of a fluid particle dependent only on its density and specific entropy $s$. The Euler-Lagrange equations for a single particle $i$ is
+
+\begin{equation}
+\label{ch02_sph02_eq005}
+\frac{d}{dt} \Big( \frac{\partial \Lagr}{\partial \vv_i} \Big) - \frac{\partial \Lagr}{\partial \rv_i} = 0
+\end{equation}
+
+which yields 
+
+\begin{equation}
+\label{ch02_sph02_eq006}
+m_i \frac{d \vv_i }{dt} = \sum_{j} m_j \frac{\partial u_j}{\partial \rho_j} \frac{\partial \rho_j}{\partial \rv_i}
+\end{equation}
+
+for constant entropy, which is the case in the absence of shocks. The first law of thermodynamics for a particle is given by
+
+\begin{equation}
+\label{ch02_sph02_eq007}
+\frac{u_j}{\rho_j} = \frac{p_j}{\rho_j^2}
+\end{equation}
+
+and the divergence of the density is directly given by
+
+% TODO: do the index magic
+\begin{equation}
+\label{ch02_sph02_eq008}
+\frac{\partial }{\partial \rv_i} \rho_j =  \frac{\partial \rv_j}{\partial \rv_i} \frac{\partial \rho_j}{\partial \rv_j} = \sum_{k} m_k \nabla W_{jk} ( \delta_{ji} - \delta_{ki})
+\end{equation}
+
+So equation \ref{ch02_sph02_eq006} yields
+
+\begin{equation}
+\label{ch02_sph02_eq009}
+m_i \frac{d \vv_i }{dt} = \sum_{j} m_j \frac{p_j}{\rho_j^2} \sum_{k} \nabla_i W_{jk} ( \delta_{ji} - \delta_{ki})\\
+ = m_i \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
+\end{equation}
+
+and leaves us with a symmetric SPH sum for the acceleration of a particle in absence of shocks:
+\begin{equation}
+\label{ch02_sph02_eq010}
+\frac{d \vv_i }{dt} = \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
+\end{equation}
+
+The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio-reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles.
+
+
+
 advantages and disadvantages of SPH
 
 
 \subsection{integrating density}
+basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
 
 \subsection{miscible SPH}
+motivation: big density contrasts
 advantages and disadvantages of SPH
 
+%%
+%   G R A V I T Y 
+%%
 
 \section{Gravity}
 
@@ -170,7 +237,9 @@ advantages and disadvantages of SPH
 \subsection{Barnes and Hut Tree}
 
 
-
+%%
+%   I M P L E M E N T A T I O N
+%%
 
 \section{Implementation}
 
