@@ -2,7 +2,6 @@
 
 \chapter{Methods}
 Collision events are characterised by a 
-
 range of dynamical 
 
 %\subsection*{Introduction}
@@ -43,16 +42,27 @@ A continuum model
 %%
 \subsection{Theory of Fluids}
 
-
 \begin{equation}
-\label{navierstokes1}
+\label{ch02_fld01_eq001}
 \frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
 \end{equation}
 
 \begin{equation}
-\label{navierstokes2}
+\label{ch02_fld01_eq002}
 \rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \eta \Delta \mathbf{v} + ( \zeta + \eta ) \nabla ( \nabla \mathbf{v} )
 \end{equation}
+
+show inviscous version
+
+The Lagrangian of a inviscous fluid is given by
+\begin{equation}
+\label{ch02_fld01_eq003}
+\Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
+\end{equation}
+
+
+
+\cite{Thorne:2008}
 
 
 \subsection{SPH formalism}
@@ -60,51 +70,97 @@ The basic idea of SPH is to interpolate all continuum variables in space with an
 If our variable is $A(\rv)$ defined at all points in space $\rv$, we start with the basic equality
 
 \begin{equation}
-\label{02_sph001}
+\label{ch02_sph01_eq001}
 A(\rv) = \int  \delta(\rv - \rvs) A(\rvs) \ud \rvs
 \end{equation}
 
 We now replace the $\delta$-function with a smoothing kernel $W$, which has typical width $h$, the smoothing length, and which fulfils the following two criteria
 
 \begin{equation}
-\label{02_sph001}
+\label{ch02_sph01_eq002}
 \limhzero W(\rv - \rvs, h) = \delta(\rv - \rvs) \hspace{1.0cm}
 \int W(\rv - \rvs, h) \ud \rvs = 1
 \end{equation}
 
-Equation \ref{02_sph001} can now be re-written as 
+Equation \ref{ch02_sph01_eq001} can now be re-written as 
 
 \begin{equation}
-\label{02_sph001}
+\label{ch02_sph01_eq003}
 A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
 \end{equation}
 
 The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points (\emph{particles}), on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
 
 \begin{equation}
-\label{02_sph001}
+\label{ch02_sph01_eq004}
 A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
 
-$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. 
+$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$\\
 
-For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel 
-
-Spatial derivatives are easily given by writing out the integral interpolant of the derivative of the variable:
+Spatial derivatives are easily given by taking the partial derivative of the integral interpolant variable and replacing it again by the sum over all neighbours:
 
 \begin{equation}
-\label{02_sph001}
-\nabla A(\rv) = \frac{\partial}{\partial \rv}\int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
+\label{ch02_sph01_eq005}
+\nabla A(\rv_i) = \frac{\partial}{\partial \rv}\int A(\rvs) \ud \rvs \frac{\partial}{\partial \rv}\ W(\rv_i - \rvs, h) + O(h^2)
+\approx \sum_{j} A_j V_{j} \nabla \Wij 
 \end{equation}
 
+Rotations of variables can be similarly obtained:
+\begin{equation}
+\label{ch02_sph01_eq006}
+\nabla \times A_i \approx \sum_{j} A_i V_{j} (\nabla \times \Wij)
+\end{equation}
+
+Like in in grid based schemes, there are different ways of calculating spatial derivatives in SPH.
+Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behaviour. They will be presented shortly.
 
 
+\subsection{standard SPH}
+The original and most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density is given by the simple particle sum
 
+\begin{equation}
+\label{ch02_sph02_eq001}
+\rho_i = \sum_{j} m_j \Wij
+\end{equation}
 
-derivatives
-rotation
+The velocity divergence $\nabla \vv$ could in principle be written as
+\begin{equation}
+\label{ch02_sph02_eq002}
+\nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \vv_j \nabla \Wij
+\end{equation}
+
+but this form has the disadvantage of being asymmetric and will ultimately lead to a non-conservative form for the linear momentum. It is better to apply the \emph{second golden rule} of SPH \citep{Monaghan:1992p3721} to re-write the velocity divergence term with the density placed inside the operators:
+
+\begin{equation}
+\label{ch02_sph02_eq003}
+\nabla \vv = \frac{1}{\rho} \Big( \nabla (\rho \vv) - \vv \nabla \rho \Big)
+\end{equation}
+
+so that the corresponding SPH sum becomes 
+
+\begin{equation}
+\label{ch02_sph02_eq003}
+\nabla \vv_i = \frac{1}{\rho_i} \sum_{j} \frac{m_j}{\rho_j} \rho_j \vv_j \Wij - \frac{1}{\rho_i} \vv_i \sum_{j} \frac{m_j}{\rho_j} \rho_j = \frac{1}{\rho_i} \sum_{j} m_j \vvij \Wij 
+\end{equation}
+
+with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity divergence. If we take the partial time derivative of \ref{ch02_sph02_eq001}, where only the particle positions in the Kernel depend explicitly on time, we get: 
+
+\begin{equation}
+\label{ch02_sph02_eq004}
+\frac{\partial \rho_i}{\partial t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
+\end{equation}
+
+So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle.
+
 advantages and disadvantages of SPH
-formalism
+
+
+\subsection{integrating density}
+advantages and disadvantages of SPH
+
+\subsection{miscible SPH}
+advantages and disadvantages of SPH
 
 
 \section{Gravity}
@@ -186,14 +242,13 @@ caching issues\\
 
 building the tree:
 
-mention future of parallel computing
+mention future of parallel computing: CPU vs. GPU computing, stream computing
 trees on GPUs
 
 \section{Algorithms}
 clump detection\\
 FOF vs. potential, not parallelized\\
 initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
-
 
 \subsubsection{Neighbour search}
 
