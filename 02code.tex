@@ -63,15 +63,13 @@ The Lagrangian of a inviscous fluid is given by
 \Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
 \end{equation}
 
-
-
 \cite{Thorne:2008}
-
 
 %%
 %   S P H
 %%
 
+% todo: mention SPH limit
 \subsection{SPH formalism}
 The basic idea of SPH is to interpolate all continuum variables in space with an interpolant.
 If our variable is $A(\rv)$ defined at all points in space $\rv$, we start with the basic equality
@@ -122,6 +120,29 @@ Rotations of variables can be similarly obtained:
 Like in in grid based schemes, there are different ways of calculating spatial derivatives in SPH.
 Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behaviour. They will be presented shortly.
 
+The kernel has to fulfill the two constraints posed by equations \ref{ch02_sph01_eq002}. A natural choice would be a normalized Gaussian, but this has the unpleasant of never vanishing. All particles, also distant ones, would contribute to every individual SPH sum, making the method very inefficient. A better choice are therefore functions with compact support: Functions which vanish at sufficiently large distances. A common selection are cubic splines
+
+\begin{equation}
+\label{ch02_sph01_eq007}
+W(| \rv |, h) = \frac{\sigma}{h^\nu \pi} \left \{ \begin{array}{lll}
+1 - \frac{3}{2}q^2 + \frac{3}{4}q^3 & r \leq h & \\
+\frac{1}{4}(2-q)^3 & h < r  \leq 2h & \hspace{1.0cm} q = r / h\\
+0 & 2h < r & \\
+\end{array} \right. 
+\end{equation}
+
+where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \frac{2}{3}, \frac{10}{7\pi}, \frac{1}{\pi} \big) $ for $\big( 1,2,3\big)$ dimensions. The Kernel vanishes for distances greater than $2h$, reducing SPH sums to contributing terms of only the nearest neighbours. The first derivative is given by 
+
+\begin{equation}
+\label{ch02_sph01_eq008}
+\nabla W(\rv, h) = \frac{\rv}{r} \frac{\sigma}{h^\nu \pi} \left \{ \begin{array}{ll}
+1 - 3q + \frac{9}{4}q^2 & r \leq h \\
+\frac{3}{4}(2-q)^2 & h < r  \leq 2h \\
+0 & 2h < r \\
+\end{array} \right. 
+\end{equation}
+
+and is also continuous. 
 
 \subsection{standard SPH}
 The original and most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density is given by the simple particle sum
@@ -191,13 +212,14 @@ for constant entropy, which is the case in the absence of shocks. The first law 
 
 and the divergence of the density is directly given by
 
-% TODO: do the index magic
 \begin{equation}
 \label{ch02_sph02_eq008}
-\frac{\partial }{\partial \rv_i} \rho_j =  \frac{\partial \rv_j}{\partial \rv_i} \frac{\partial \rho_j}{\partial \rv_j} = \sum_{k} m_k \nabla W_{jk} ( \delta_{ji} - \delta_{ki})
+\frac{\partial }{\partial \rv_i} \rho_j
+= \sum_{k} m_k \frac{\partial}{\rv_i} W_{jk} 
+= \sum_{k} m_k \nabla W_{jk} ( \delta_{ji} - \delta_{ki})
 \end{equation}
 
-So equation \ref{ch02_sph02_eq006} yields
+where the kernel vanishes except if $i = j$ and if $i = k$. So equation \ref{ch02_sph02_eq006} yields
 
 \begin{equation}
 \label{ch02_sph02_eq009}
@@ -212,6 +234,42 @@ and leaves us with a symmetric SPH sum for the acceleration of a particle in abs
 \end{equation}
 
 The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio-reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles.
+
+In most cases, the internal enery of the fluid is non-constant, so we also need a equation for the change in internal energy due to compressional heating.
+The rate of change in specific internal energy is given by 
+
+\begin{equation}
+\label{ch02_sph02_eq011}
+\frac{du}{dt} = -\frac{p}{\rho} \nabla \vv
+\end{equation}
+
+Using the velocity divergence SPH sum \ref{ch02_sph02_eq003}  yields
+
+\begin{equation}
+\label{ch02_sph02_eq012}
+\frac{du_i}{dt} = \frac{p_i}{\rho_i^2} \sum_{j} m_j \vvij  \dWij
+\end{equation}
+
+An SPH sum of this equation consistent with the equation of motion from above can be obtained by applying the golden rule again and putting the density inside the divergence operators:
+
+\begin{equation}
+\label{ch02_sph02_eq013}
+\frac{du}{dt} = - \nabla \Big( \frac{p \vv}{\rho} \Big) + \vv \nabla \Big( \frac{p}{\rho} \Big)
+\end{equation}
+
+The corresponding SPH sum yields the asymmetric equation
+
+\begin{equation}
+\label{ch02_sph02_eq014}
+\frac{du_i}{dt} = - \sum_{j} m_{j} \frac{p_j \vv_j}{\rho_j} \dWij + \vv_i \sum_{j} m_{j} \frac{p_j}{\rho_j^2}  \dWij = \sum_{j} m_j \vvij \frac{p_j}{\rho_j^2}  \dWij
+\end{equation}
+
+A symmetric formulation can be gained by taking the average of equations \ref{ch02_sph02_eq012} and \ref{ch02_sph02_eq014}:
+
+\begin{equation}
+\label{ch02_sph02_eq015}
+\frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} \Big) \dWij
+\end{equation}
 
 
 
@@ -291,6 +349,7 @@ accelerating a tree: show skip, next and parent pointers by simple tree examples
 \end{center}
 \end{figure}
 
+\subsection{Tree algorithms}
 
 \subsection{Tree parallelization: shared vs. distributed memory}
 intro: shared vs. distributed memory\\
@@ -313,6 +372,10 @@ building the tree:
 
 mention future of parallel computing: CPU vs. GPU computing, stream computing
 trees on GPUs
+
+\section{Tests?}
+shocktube
+simple gravity tree
 
 \section{Algorithms}
 clump detection\\
