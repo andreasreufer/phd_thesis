@@ -271,10 +271,34 @@ A symmetric formulation can be gained by taking the average of equations \ref{ch
 \frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} \Big) \dWij
 \end{equation}
 
+\subsection{Resolving shocks}
+Shocks are changes of the characteristics of a fluid on the spatial scale of the molecules mean-free path. Discontinuities arise in the fluid approximation, usually in density, pressure and temperature.
+Numerical schemes tend to react to these discontinuities with unphysical oscillations behind the shock front, because the sharp changes cannot be resolved properly.
+Several approaches exist to tackle this problem. Godunov-schemes solve the Riemann problems on both sides of the shock exactly between computational elements and in a second step superpose all pair-wise solutions for each element. In case of SPH this can be done by solving the Riemann problem for each particle against its neighbours \citep{Monaghan:1997p3938}.
+Another approach is the von Neumann and Richtmyer viscosity: By introducing a small amount of viscosity, the \emph{artificial viscosity}, the shock front is smoothed out and the oscillations disappear. This can be implemented in SPH by adding additional terms to the momentum and energy equation. The most common used variant is that given by \citep{Monaghan:1992ARAA..30..543M}:
+
+\begin{equation}
+\Big( \frac{d \vv_i }{dt} \Big)_{AV} = \sum_{j} m_j - %\frac{p_j}{\rho_j^2} \sum_{k} \nabla_i W_{jk} ( \delta_{ji} - \delta_{ki})
+\end{equation}
 
 
-advantages and disadvantages of SPH
+Monaghan 
 
+
+A disadvantage of this approach is that this viscosity also acts 
+
+
+ tries to smooth out the shock front by introducing a small artificial viscosity to the fluid, the .
+Other approaches 
+
+
+
+
+% TODO: turning off dissipative terms
+
+\subsection{integration}
+
+% TODO: advantages and disadvantages of SPH
 
 \subsection{integrating density}
 basic problem: stiff equations of state require a non-smooth density 
@@ -308,6 +332,7 @@ advantages and disadvantages of SPH
 \citep{Price:2004p2613}
 \citep{Solenthaler:2008p3720}
 \citep{Springel:2003p3298}
+\citep{Monaghan:1992ARAA..30..543M}
 
 
 \subsection{SPH implementation used}
