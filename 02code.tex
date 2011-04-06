@@ -278,25 +278,33 @@ Several approaches exist to tackle this problem. Godunov-schemes solve the Riema
 Another approach is the von Neumann and Richtmyer viscosity: By introducing a small amount of viscosity, the \emph{artificial viscosity}, the shock front is smoothed out and the oscillations disappear. This can be implemented in SPH by adding additional terms to the momentum and energy equation. The most common used variant is that given by \citep{Monaghan:1992ARAA..30..543M}:
 
 \begin{equation}
-\Big( \frac{d \vv_i }{dt} \Big)_{AV} = \sum_{j} m_j - %\frac{p_j}{\rho_j^2} \sum_{k} \nabla_i W_{jk} ( \delta_{ji} - \delta_{ki})
+\label{ch02_sph02_eq016}
+\frac{d \vv_i }{dt} \Big|_{AV} = \sum_{j} m_j \frac{-\alpha c_{ij} \mu_{ij} + \beta \mu_{ij}^2}{\rho_{ij}} \dWij \hspace{1.0cm} \mu_{ij} = \frac{h \vvij \rvij}{\rvij^2 + 0.01h^2}  \hspace{0.5cm} \mathrm{if}  \hspace{0.5cm} \rvij \vvij < 0
 \end{equation}
 
+where $\rho_{ij}$ is the averaged density between two particles and $\mu_{ij}$ is a signal velocity with an order of magnitude of the speed of sound. The artificial viscosity term is only applied in situations of compression, where $\rvij \vvij < 0$. The choice of constants is usually $\alpha = 1$ and $\beta = 2 \alpha$. The $\beta$-term is the actual von Neumann and Richtmyer term and becomes dominant in strong shocks where the velocity difference $\vvij$ between two particles in the shock front becomes large. Momentum conservation is still conserved by the symmetric form of the artificial viscosity term.
 
-Monaghan 
+The contribution of artificial viscosity to the internal energy can be found by requiring that artificial viscosity itself should be energy conserving. The specific energy change due to the dissipative is given by
 
+\begin{equation}
+\label{ch02_sph02_eq017}
+\frac{de_i}{dt} \Big|_{AV}  = \frac{du_i}{dt}  \Big|_{AV} + \vv_i \frac{d\vv_i}{dt}  \Big|_{AV} = 0
+\end{equation}
 
-A disadvantage of this approach is that this viscosity also acts 
+and should be zero. This leads to the thermal contribution
 
+\begin{equation}
+\label{ch02_sph02_eq018}
+\frac{du_i }{dt} \Big|_{AV} = - \sum_{j} m_j \vvij \frac{-\alpha c_{ij} \mu_{ij} + \beta \mu_{ij}^2}{\rho_{ij}} \dWij
+\end{equation}
 
- tries to smooth out the shock front by introducing a small artificial viscosity to the fluid, the .
-Other approaches 
+with the same choice for the signal velocity $\mu_{ij}$ and numerical constants as in equation \ref{ch02_sph02_eq016}. 
 
-
-
-
-% TODO: turning off dissipative terms
+A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly \citep{Morris1997J.-Comput.-Phys.Morris} than the simply checking for compression or recognizing shear flows explicitly \citep{Balsara1995JCoPh.121..357B} and suppressing the artificial viscosity in situations where it is not needed. For the simulation of collisions, this is not a big problem, therefore we skip 
 
 \subsection{integration}
+Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we have a closed set of equations describing the fluid which can be integrated in time.
+
 
 % TODO: advantages and disadvantages of SPH
 
@@ -307,7 +315,6 @@ advantages and disadvantages of SPH
 \subsection{miscible SPH}
 motivation: big density contrasts
 advantages and disadvantages of SPH
-
 %%
 %   G R A V I T Y 
 %%
