@@ -70,8 +70,6 @@ The Lagrangian of a inviscous fluid is given by
 %%
 %   S P H
 %%
-
-% todo: mention SPH limit
 \subsection{SPH formalism}
 The basic idea of SPH is to interpolate all continuum variables in space with an interpolant.
 If our variable is $A(\rv)$ defined at all points in space $\rv$, we start with the basic equality
@@ -103,7 +101,9 @@ The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By 
 A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
 
-$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$\\
+$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$
+
+If the smoothing length goes to zero and the number of neighbours goes to infinity, the sum \ref{ch02_sph01_eq004} approximates the integral \ref{ch02_sph01_eq001} exactly. This is the \emph{SPH limit}.
 
 Spatial derivatives are easily given by taking the partial derivative of the integral interpolant variable and replacing it again by the sum over all neighbours:
 
@@ -145,6 +145,8 @@ where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \fra
 \end{equation}
 
 and is also continuous. 
+
+The choice of the smoothing length is a trade-off. It is large compared compared to the spacing between the particles, then the variables are smoothed out over too large distances and small features cannot be resolved. If the smoothing length is too small, the variables are not sufficiently smoothed and get very noise, ultimately leading to instabilities. As a golden rule, the smoothing length should be chosen, such as the number of neighbors is 50 inside a radius of $2h$. For a hexagonal HCP lattice in 3D with a lattice constant $k$, this leads to $h \approx 0.85 k$. 
 
 \subsection{standard SPH}
 The original and most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density is given by the simple particle sum
@@ -302,10 +304,40 @@ and should be zero. This leads to the thermal contribution
 
 with the same choice for the signal velocity $\mu_{ij}$ and numerical constants as in equation \ref{ch02_sph02_eq016}. 
 
-A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly \citep{Morris1997J.-Comput.-Phys.Morris} than the simply checking for compression or recognizing shear flows explicitly \citep{Balsara1995JCoPh.121..357B} and suppressing the artificial viscosity in situations where it is not needed. For the simulation of collisions, this is not a big problem, therefore we skip 
+A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly \citep{Morris1997J.-Comput.-Phys.Morris} than the simply checking for compression or recognizing shear flows explicitly \citep{Balsara1995JCoPh.121..357B} and suppressing the artificial viscosity in situations where it is not needed. For the simulation of collisions, this is not a big problem, therefore we don't include such fixes.
 
 \subsection{variable smoothing length}
+In order to meet the requirement of $50$ neighbors per particle, the smoothing is adjusted for each particle individually. For constant particle masses the density is proportional to the particle density $\delta_i$, which again is inverse proportional to the particle volume and therefore to the inverse third power of the smoothing length in 3D:
 
+\begin{equation}
+\label{ch02_sph02_eq026}
+\rho_i \sim \delta_i \sim \frac{1}{V_i} \sim \frac{1}{h_i^3}
+\end{equation}
+
+So the rate of change of the smoothing length is given by using the continuity equation \ref{ch02_sph02_eq005} yields
+
+\begin{equation}
+\label{ch02_sph02_eq027}
+\frac{d h_i}{dt} = - \frac{h_i}{3 \rho_i} \frac{d \rho_i}{dt} = \frac{1}{3} h_i \nabla \vv_i
+\end{equation}
+
+This keeps the number of neighbours exactly constant, if the particle density changes isotropically. Usually this is not the case and the number of neighbors ($N_N$) becomes either too large or too small. In such cases it is useful to overcorrect the smoothing length with the global maximum of velocity divergence ($\nabla \vv_{max} = \max_{i} \nabla \vv_i$):
+
+\begin{equation}
+\label{ch02_sph01_eq028}
+\frac{d h_i}{d t} = h_i ( k_1 \nabla \vv_{max}+ k_2 \frac{1}{3} \nabla\vv_i - k_3 \nabla \vv_{max} )
+\end{equation}
+
+\begin{equation}
+\label{ch02_sph01_eq029}
+\begin{array}{ll}
+k_1 = \frac{1}{2} (1 + \tanh{- \frac{N_N - N_{N,min}}{5}} ) & N_{N,min} = \frac{2}{3} N_{N,opt} \\
+k_2 = 1 - k_1 - k_3 & \\
+k_3 = \frac{1}{2} (1 + \tanh{\frac{N_N - N_{N,max}}{5}} ) & N_{N,max} = \frac{5}{3} N_{N,opt}\\
+\end{array}
+\end{equation}
+
+If the number of neighbours is within $\frac{2}{3} N_N$ and $\frac{5}{3} N_N$, the expression \ref{ch02_sph02_eq027} is dominant. If it's below or above the optimal number, the change rate of the smooting length is over- or under-corrected with the maximum velocity divergence. In practice, this scheme keeps the number of neighbors in reasonable limits, without introducing any instabilities.
 
 \subsection{Integration}
 Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we have a closed set of equations describing the fluid which can be integrated in time. A common choice due to its simplicity and low number of derivation steps required is the predictor-corrector scheme \citep{Press2002nrc..book.....P}. For the integration of particle positions we use the second-order form, which yields the prediction step
@@ -366,7 +398,16 @@ For collision events in the gravity regime, the time steps don't vary too much. 
 
 
 \subsection{miscible SPH}
-Big density contrasts normally arise, when two fluids with different equations of state interact, for example a liquid and a gas in mutual thermal equilibrium. Classical SPH can represent such a situation in two distrinctive ways: Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
+Big density contrasts normally arise, when two fluids with different equations of state interact, for example a liquid and a gas in mutual thermal equilibrium. Densities contrasts can easily differ several orders of magnitude. In standard SPH density is a product of particle density and particle mass. So if two fluids with large density differences should be represented in SPH, either the particle densities or the particle masses have to vary considerably.
+
+If all particles have masses in the same order of magnitude, the particle differences 
+
+Classical SPH can represent such a situation in two distinctive ways. 
+% TODO: show particles rho vs. r and p vs. r for standard SPH and miscible SPH
+
+% problem with mixed state
+
+Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
 
 
 
