@@ -1,5 +1,7 @@
 \graphicspath{{./02figs/}}
 
+\tableofcontents
+
 \chapter{Methods}
 Collision events are characterised by a 
 range of dynamical 
@@ -302,22 +304,102 @@ with the same choice for the signal velocity $\mu_{ij}$ and numerical constants 
 
 A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly \citep{Morris1997J.-Comput.-Phys.Morris} than the simply checking for compression or recognizing shear flows explicitly \citep{Balsara1995JCoPh.121..357B} and suppressing the artificial viscosity in situations where it is not needed. For the simulation of collisions, this is not a big problem, therefore we skip 
 
-\subsection{integration}
-Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we have a closed set of equations describing the fluid which can be integrated in time.
+\subsection{variable smoothing length}
 
 
+\subsection{Integration}
+Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we have a closed set of equations describing the fluid which can be integrated in time. A common choice due to its simplicity and low number of derivation steps required is the predictor-corrector scheme \citep{Press2002nrc..book.....P}. For the integration of particle positions we use the second-order form, which yields the prediction step
+
+\begin{eqnarray}
+\label{ch02_sph02_eq019}
+\rv_i^{(p)} = \rv_i^{(0)} + \frac{1}{2} ( 3 \vv_i^{(0)} - \vv_i^{(-1)} )\Delta t \\
+\vv_i^{(p)} = \vv_i^{(0)} + \frac{1}{2} ( 3 \av_i^{(0)} - \av_i^{(-1)} )\Delta t
+\end{eqnarray}
+and the correction step
+
+\begin{eqnarray}
+\label{ch02_sph02_eq020}
+\rv_i^{(1)} = \rv_i^{(0)} + \frac{1}{2} ( \vv_i^{(p)} - \vv_i^{(0)} )\Delta t \\
+\vv_i^{(1)} = \vv_i^{(0)} + \frac{1}{2} ( \av_i^{(p)} - \av_i^{(0)} )\Delta t
+\end{eqnarray}
+
+The integrator requires the evaluation of the derivative $\av_i( \rv_i, \vv_i)$ two times. As the predicted variables $(\rv_i^{(p)}, \vv_i^{(p)})$ and previous variables $(\rv_i^{(-1)}, \vv_i^{(-1)})$ are never used at the same time, it is sufficient to store only one additional set of variables.
+
+Variables defined by first-order differential equations like the internal energy, use the first-order prediction step
+
+\begin{equation}
+\label{ch02_sph02_eq021}
+u_i^{(p)} = u_i^{(0)} + \frac{1}{2} ( 3 \dot{u}_i^{(0)} - \dot{u}_i^{(-1)} )\Delta t \\
+\end{equation}
+and the correction step
+
+\begin{equation}
+\label{ch02_sph02_eq022}
+u_i^{(1)} = u_i^{(0)} + \frac{1}{2} ( \dot{u}_i^{(p)} - \dot{u}_i^{(0)} )\Delta t \\
+\end{equation}
+
+The timestep is limited by several factors. Stability analysis of SPH yields the CFL condition 
+
+\begin{equation}
+\label{ch02_sph02_eq023}
+\Delta t_{CFL} = \mathcal{C}_{CFL} \min_{i} \frac{h_i}{c_i}
+\end{equation}
+
+where c is a constant chosen between $\mathcal{C}_{CFL} = 0.1 \dots 0.4$. All other integrated variables require, that the their maximal change per timestep is not more than their own magnitude. In order to avoid arbitrarily small timestep when a variable goes to zero, a minimal value for such quantities is introduced. This yields for example for the smoothing length the timestep
+
+\begin{equation}
+\label{ch02_sph02_eq024}
+\Delta t_{h} = \mathcal{C} \min_{i} \frac{\dot{h}_i}{h_i + h_{min}}
+\end{equation}
+
+Other such variables are specific internal energy $u_i$ or the density $\rho_i$ in case the continuity equation is integrated. 
+
+The predictor-corrector scheme has the disadvantage of a global time step. Other integrators like the leap-frog integrator allows hierarchical time stepping, due to their inherent symmetry of the sub-steps. In most cases the time step is limited by the CFL-criterion \ref{ch02_sph02_eq023}, which depends on the smoothing length and the speed of sound. For an ideal gas at constant entropy and when using particles of a fixed mass, the time step depends on density as 
+
+\begin{equation}
+\label{ch02_sph02_eq025}
+\Delta t_{CFL} \sim \frac{h}{c} \sim \frac{1}{\sqrt[3]{\rho}} \sqrt{ \frac{\rho}{p} } \sim \frac{1}{\sqrt[3]{\rho}} \frac{1}{\sqrt{u}} \sim \frac{1}{\rho^{2/3}}
+\end{equation}
+
+So when particle density varies over severl orders of magnitudes, so does the time step. This is the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in immensely different time steps. Only hierarchical schemes where the actual time steps between derivations are chosen in the same order of magnitude as the required time step allow to integrate such a particle set with reasonable computational effort.
+For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
 % TODO: advantages and disadvantages of SPH
 
 \subsection{integrating density}
+% TODO: show figure of a stiff euqation of state vs. 
+
+SPH in the regime 
+
+
 basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
 
 \subsection{miscible SPH}
 motivation: big density contrasts
 advantages and disadvantages of SPH
+
+
+\subsection{ANEOS}
+tables, interpolating, iterating, issues\\
+show isobars\\
+entropy vs. energy integration\\
+
+
 %%
 %   G R A V I T Y 
 %%
+
+\cite{Abel:2010p3297}
+\citep{Barnes:1986p2853}
+\citep{Monaghan:2005p2677}
+\citep{Ott:2003p3727}
+\citep{Price:2004p2613}
+\citep{Solenthaler:2008p3720}
+\citep{Springel:2003p3298}
+\citep{Monaghan:1992ARAA..30..543M}
+
+% TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH, show m1H vs. m3H\\
+
 
 \section{Gravity}
 
@@ -330,31 +412,9 @@ advantages and disadvantages of SPH
 %   I M P L E M E N T A T I O N
 %%
 
-\section{Implementation}
-
-\cite{Abel:2010p3297}
-\citep{Barnes:1986p2853}
-\citep{Monaghan:2005p2677}
-\citep{Ott:2003p3727}
-\citep{Price:2004p2613}
-\citep{Solenthaler:2008p3720}
-\citep{Springel:2003p3298}
-\citep{Monaghan:1992ARAA..30..543M}
 
 
-\subsection{SPH implementation used}
-standard SPH vs. integrated density, vs.\\
-deriving SPH sums from Navier-Stokes\\
-surface tension issues, miscible SPH, show m1H vs. m3H\\
-refer to price\\
 
-\subsection{Time integration}
-
-
-\subsection{ANEOS}
-tables, interpolating, iterating, issues\\
-show isobars\\
-entropy vs. energy integration\\
 
 \section{Implementation}
 \subsection{Organizing particles in Trees}
