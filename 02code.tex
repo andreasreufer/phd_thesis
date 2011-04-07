@@ -361,21 +361,27 @@ The predictor-corrector scheme has the disadvantage of a global time step. Other
 \Delta t_{CFL} \sim \frac{h}{c} \sim \frac{1}{\sqrt[3]{\rho}} \sqrt{ \frac{\rho}{p} } \sim \frac{1}{\sqrt[3]{\rho}} \frac{1}{\sqrt{u}} \sim \frac{1}{\rho^{2/3}}
 \end{equation}
 
-So when particle density varies over severl orders of magnitudes, so does the time step. This is the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in immensely different time steps. Only hierarchical schemes where the actual time steps between derivations are chosen in the same order of magnitude as the required time step allow to integrate such a particle set with reasonable computational effort.
+When particle density varies over several orders of magnitudes, so does the time step. This is the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in immensely different time steps. Only hierarchical schemes where the actual time steps between derivations are chosen in the same order of magnitude as the required time step allow to integrate such a particle set with reasonable computational effort.
 For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
-% TODO: advantages and disadvantages of SPH
 
-\subsection{integrating density}
-% TODO: show figure of a stiff euqation of state vs. 
-
-SPH in the regime 
-
-
-basic problem: stiff equations of state require a non-smooth density 
-advantages and disadvantages of SPH
 
 \subsection{miscible SPH}
+Big density contrasts normally arise, when two fluids with different equations of state interact, for example a liquid and a gas in mutual thermal equilibrium. Classical SPH can represent such a situation in two distrinctive ways: Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
+
+
+
+Big density contrast present a problem to SPH. 
+
 motivation: big density contrasts
+advantages and disadvantages of SPH
+
+\subsection{solid state SPH}
+
+\citep{Nyffeler2004}
+
+integrating density
+equations in 
+basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
 
 
@@ -389,7 +395,7 @@ entropy vs. energy integration\\
 %   G R A V I T Y 
 %%
 
-\cite{Abel:2010p3297}
+\citep{Abel:2010p3297}
 \citep{Barnes:1986p2853}
 \citep{Monaghan:2005p2677}
 \citep{Ott:2003p3727}
