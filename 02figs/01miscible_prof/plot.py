@@ -12,7 +12,7 @@ from h5part import H5PartDump
 from plot_helpers import *
 from const_cgs import *
 
-plt.rc('savefig', dpi=300)
+plt.rc('savefig', dpi=450)
 
 dumpMf = H5PartDump("misc/body_S_00.903me_S3.50e11_iron0.30_rock0.70_watr0.00_885k.h5part")
 dumpM = dumpMf.getStepFirst()
@@ -42,14 +42,14 @@ def getPoints(dump):
 (rM, rhoM, pM, colM) = getPoints(dumpM)
 ax1 = plt.subplot(222)
 ax1.scatter( rM / RE, rhoM, 0.05, colM, lw=0.)
-ax1.plot( prof.r[:] / RE, prof.rho[:], 'k-', lw=0.3)
+ax1.plot( prof.r[:] / RE, prof.rho[:], 'k-', lw=0.4)
 ax1.axis([0.2, 1.1, 1.9, 13.5])
 ax1.set_title(r'$\mathrm{miscible}$')
 
 (rS, rhoS, pS, colS) = getPoints(dumpS)
 ax2 = plt.subplot(221)
 ax2.scatter( rS / RE, rhoS, 0.05, colS, lw=0.)
-ax2.plot( prof.r[:] / RE, prof.rho[:], 'k-', lw=0.3)
+ax2.plot( prof.r[:] / RE, prof.rho[:], 'k-', lw=0.5)
 ax2.axis([0.2, 1.1, 1.9, 13.5])
 ax2.set_ylabel(r'$\rho [g/cm^3]$')
 ax2.set_title(r'$\mathrm{standard}$')
