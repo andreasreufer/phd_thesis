@@ -1,6 +1,6 @@
 \graphicspath{{./02figs/}}
 
-\tableofcontents
+%\tableofcontents
 
 \chapter{Methods}
 Collision events are characterised by a 
@@ -38,12 +38,12 @@ Smoothed particle hydrodynamics (SPH) is a numerical method which can discretize
 \section{Fluid- and Thermodynamics}
 A continuum model 
 
-
 %%
 %   F L U I D S
 %%
 \subsection{Theory of Fluids}
 
+% TODO
 \begin{equation}
 \label{ch02_fld01_eq001}
 \frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
@@ -65,8 +65,8 @@ The Lagrangian of a inviscous fluid is given by
 \Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
 \end{equation}
 
-\cite{Thorne:2008}
-
+\citep{Thorne:2008}
+\citep{2004Nyffeler}
 %%
 %   S P H
 %%
@@ -398,18 +398,31 @@ For collision events in the gravity regime, the time steps don't vary too much. 
 
 
 \subsection{miscible SPH}
+Standard SPH interpolates all variables weighed according to density. This works very well for single-phase fluids, but introduces difficulties with multi-phase fluids with large density contrasts. In reality, density can be discontinous along boundaries, for example for fluid droplets embedded in a gas. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{01miscible_prof}
+\caption{default}
+\label{default}
+\end{center}
+\end{figure}
+
+
+As the particle densities
+
+% A: mixed states
+% B: boundaries
+
 Big density contrasts normally arise, when two fluids with different equations of state interact, for example a liquid and a gas in mutual thermal equilibrium. Densities contrasts can easily differ several orders of magnitude. In standard SPH density is a product of particle density and particle mass. So if two fluids with large density differences should be represented in SPH, either the particle densities or the particle masses have to vary considerably.
 
 If all particles have masses in the same order of magnitude, the particle differences 
 
 Classical SPH can represent such a situation in two distinctive ways. 
-% TODO: show particles rho vs. r and p vs. r for standard SPH and miscible SPH
+% TODO: show particles rho vs. r and p vs. r for standard SPH and miscible SPH for a m1H vs. m3H dump
 
 % problem with mixed state
-
 Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
-
-
 
 Big density contrast present a problem to SPH. 
 
@@ -417,25 +430,22 @@ motivation: big density contrasts
 advantages and disadvantages of SPH
 
 \subsection{solid state SPH}
+SPH can also be used to model conti
 
 \citep{Nyffeler2004}
-
 integrating density
 equations in 
 basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
-
 
 \subsection{ANEOS}
 tables, interpolating, iterating, issues\\
 show isobars\\
 entropy vs. energy integration\\
 
-
 %%
 %   G R A V I T Y 
 %%
-
 \citep{Abel:2010p3297}
 \citep{Barnes:1986p2853}
 \citep{Monaghan:2005p2677}
@@ -445,8 +455,8 @@ entropy vs. energy integration\\
 \citep{Springel:2003p3298}
 \citep{Monaghan:1992ARAA..30..543M}
 
-% TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH, show m1H vs. m3H\\
-
+% 
+% TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH \\
 
 \section{Gravity}
 
