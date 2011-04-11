@@ -173,7 +173,7 @@ so that the corresponding SPH sum becomes
 
 \begin{equation}
 \label{ch02_sph02_eq003}
-\nabla \vv_i = \frac{1}{\rho_i} \sum_{j} \frac{m_j}{\rho_j} \rho_j \vv_j \Wij - \frac{1}{\rho_i} \vv_i \sum_{j} \frac{m_j}{\rho_j} \rho_j = \frac{1}{\rho_i} \sum_{j} m_j \vvij \Wij 
+\nabla \vv_i = \frac{1}{\rho_i} \sum_{j} \frac{m_j}{\rho_j} \rho_j \vv_j \dWij - \frac{1}{\rho_i} \vv_i \sum_{j} \frac{m_j}{\rho_j} \rho_j \dWij = \frac{1}{\rho_i} \sum_{j} m_j \vvij \dWij 
 \end{equation}
 
 with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity divergence. If we take the partial time derivative of \ref{ch02_sph02_eq001}, where only the particle positions in the Kernel depend explicitly on time, we get: 
@@ -404,30 +404,45 @@ Standard SPH interpolates all variables weighed according to density. This works
 \begin{center}
 \includegraphics[scale=0.7]{01miscible_prof}
 \caption{default}
-\label{default}
+\label{ch02_fig01}
 \end{center}
 \end{figure}
 
 
-As the particle densities
-
 % A: mixed states
-% B: boundaries
+% . B: boundaries
 
-Big density contrasts normally arise, when two fluids with different equations of state interact, for example a liquid and a gas in mutual thermal equilibrium. Densities contrasts can easily differ several orders of magnitude. In standard SPH density is a product of particle density and particle mass. So if two fluids with large density differences should be represented in SPH, either the particle densities or the particle masses have to vary considerably.
+Big density contrasts normally arise, when two fluid with different equations of state interact and have different densities for the same pressure and thermodynamical state. This difference can be orders of magnitude big like for an atmosphere on top of a liquid or a solids. For material in the same phase the density difference is usually not so big, but can still be easily a factor of a magnitude for example for water ice and solid iron ($\rho_0 \approx 0.9 g/cm^3$ vs. $7.8 g/cm^3$).
 
-If all particles have masses in the same order of magnitude, the particle differences 
+The actual problem of standard SPH and density contrasts arises for fluids with rather stiff equations of state, such as fluids and solids. Even a small deviation from the zero-pressure $\rho_0$ density results in a large pressure. 
 
-Classical SPH can represent such a situation in two distinctive ways. 
+%TODO: lagrange code chapter
+Figure \ref{ch02_fig01} demonstrates that with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of 0.9 $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see chapter haba). Ideally the SPH particles should follow this solution. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation. The iron particles have a density obtained by interpolating between 
+
+This is actually the case except for the boundaries 
+
+
+The upper two plots show density, the lower two pressure. The thin black line indicates 
+
+
+If two fluids now share a common interface,
+
 % TODO: show particles rho vs. r and p vs. r for standard SPH and miscible SPH for a m1H vs. m3H dump
 
 % problem with mixed state
 Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
 
+%
+
+
+
+
 Big density contrast present a problem to SPH. 
 
 motivation: big density contrasts
 advantages and disadvantages of SPH
+
+%\end{landscape}
 
 \subsection{solid state SPH}
 SPH can also be used to model conti
@@ -438,10 +453,56 @@ equations in
 basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
 
+§
+%\begin{landscape}
+
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+\hline
+variant & standard  & integrated density & miscible \\
+\hline \hline
+\multirow{2}{3cm}{first SPH sums} & 
+\multirow{2}{3cm}{$\rho_i = \sum_{j} m_j \Wij $} & 
+\multirow{2}{3cm}{$\rho_i$ is integrated }  & 
+$ \delta_i = \sum_{j} \Wij$ \\
+ &
+ &
+ & 
+$\rho_i = m_i \delta_i $ \\
+\hline
+\multirow{4}{3cm}{second SPH sums} &
+\multicolumn{2}{|l|}{$ \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \dWij $} & 
+$ \nabla \vv_i = \frac{1}{m_i} \sum_{j} \dWij $ \\
+& 
+\multicolumn{2}{|l|}{$ \frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} \Big) \dWij $} & 
+$ \frac{du_i}{dt} = \frac{1}{2 m_i} \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij $ \\
+& 
+\multicolumn{2}{|l|}{$\frac{d \vv_i }{dt} = - \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}$} & 
+$\frac{d \vv_i }{dt} = - \frac{1}{m_i} \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij}$\\
+&   
+& 
+$\frac{d \rho_i}{dt} = \rho_i \nabla \vv_i$ &
+\\
+\hline
+% $ \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \dWij $ 
+
+\hline
+\end{tabular}
+\caption{comparison of SPH variants}
+\end{center}
+\label{default}
+\end{table}
+
+
 \subsection{ANEOS}
 tables, interpolating, iterating, issues\\
 show isobars\\
 entropy vs. energy integration\\
+
+\subsection{SPH summary}
+
+% TODO landspace table
 
 %%
 %   G R A V I T Y 
