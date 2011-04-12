@@ -464,21 +464,15 @@ with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sp
 
 Another situation where standard SPH fails are mixed states between 
 
-% problem with mixed state
+% problem with mixed state	
 
 motivation: big density contrasts
 advantages and disadvantages of SPH
-
 %\end{landscape}
 
 \subsection{solid state SPH}
-SPH can also be used to model conti
-
-\citep{Nyffeler2004}
-integrating density
-equations in 
-basic problem: stiff equations of state require a non-smooth density 
-advantages and disadvantages of SPH
+SPH can also be used to model solids. For an elastic solid, the isotropic pressure of a fluid is replaced with the full stress tensor in order to additionally model shear stresses. Brittle failure due to cracks can be modeled with a statistical approach \citep{Grady1980147}. An SPH implementation of this is presented in \citep{1994Icar..107...98B}. % TODO: refer to Mars chapter
+Chapter 3 makes use of an solid state SPH code with the features mentioned above. The code is described in detail in \citep{Nyffeler2004} and will not be discussed any further here.
 
 \subsection{SPH summary}
 
