@@ -416,28 +416,59 @@ Big density contrasts normally arise, when two fluid with different equations of
 
 The actual problem of standard SPH and density contrasts arises for fluids with rather stiff equations of state, such as fluids and solids. Even a small deviation from the zero-pressure $\rho_0$ density results in a large pressure. 
 
-%TODO: lagrange code chapter
-Figure \ref{ch02_fig01} demonstrates that with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of 0.9 $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see chapter haba). Ideally the SPH particles should follow this solution. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation. The iron particles have a density obtained by interpolating between 
+%TODO: refer to lagrange code chapter
+Figure \ref{ch02_fig01} demonstrates that with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of 0.9 $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see chapter haba). Ideally the SPH particles should follow this solution. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation (green circles). In standard SPH the iron particles obtain their density by interpolating over their neighbors, which include silicate particles with a considerably lower at the same pressure. This leads to an under-estimated density at the boundary and ultimately to a pressure much too low. The same effect works the other way round for the silicate particles, which obtain an over-density and therefore also have a too large pressure.  By smoothing out the density at the boundary, it reaches un-natural values. 
 
-This is actually the case except for the boundaries 
+A method first proposed by \citep{Ott:2003p3727} and also mentioned by \citep{Solenthaler:2008p3720} and \citep{Price:2004p2613} drops the fundamental principle of SPH to interpolate all quantities with density \ref{ch02_sph01_eq001} and uses the particle density instead 
 
+\begin{equation}
+\label{ch02_sph01_eq030}
+\delta_i = \sum_{j} \Wij
+\end{equation}
 
-The upper two plots show density, the lower two pressure. The thin black line indicates 
+The actual density is then obtained by 
 
+\begin{equation}
+\label{ch02_sph01_eq031}
+\rho_i = m_i \delta_i
+\end{equation}
 
-If two fluids now share a common interface,
+While the particle density is still smoothed out, the density can be discontinuous and vary largely if particles of different masses interact. The direct result of this formulation can be seen on the right plots in figure \ref{ch02_fig01}. The density follows correctly the required values also at the boundary and therefore also the pressure becomes continues. 
 
-% TODO: show particles rho vs. r and p vs. r for standard SPH and miscible SPH for a m1H vs. m3H dump
+The other SPH sums can be derived in an analog way as for standard SPH. By taking the time derivative of \ref{ch02_sph01_eq031} and applying the same trick for symmetrizing derivative sums, we get a new SPH formulation of the continuity equation 
+
+\begin{equation}
+\label{ch02_sph01_eq032}
+\frac{d \rho_i}{dt} = m_i \sum_j \vvij \dWij
+\end{equation}
+
+To derive the momentum and energy equations we use the same procedure as for standard SPH and get 
+
+\begin{align}
+\label{ch02_sph01_eq033}
+\frac{d \vv_i }{dt} = - \frac{1}{m_i} & \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij} \\
+\frac{du_i}{dt} = \frac{1}{2 m_i} & \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij \\
+\end{align}
+
+The artificial viscosity term depend directly on density and need to be symmetric in order to conserve linear momentum. Requiring total energy conservation, the contribution yields  to the momentum equation
+
+\begin{align}
+\label{ch02_sph01_eq034}
+\frac{d \vv_i }{dt} \Big|_{AV} = - \frac{1}{m_i} & \sum_{j} \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\delta_{ij} } \nabla W_{ij}
+\end{align}
+
+and similarly to the energy equation
+
+\begin{align}
+\label{ch02_sph01_eq035}
+\frac{du_i}{dt}  \Big|_{AV} = \frac{1}{2 m_i} & \sum_{j} \vvij \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\delta_{ij} } \dWij
+\end{align}
+
+with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sph02_eq016}. 
+
+Another situation where standard SPH fails are mixed states between 
 
 % problem with mixed state
-Either particle masses are chosen in the same order of magnitude for both fluids, such that the particles densities vary 
-
-%
-
-
-
-
-Big density contrast present a problem to SPH. 
 
 motivation: big density contrasts
 advantages and disadvantages of SPH
@@ -453,8 +484,9 @@ equations in
 basic problem: stiff equations of state require a non-smooth density 
 advantages and disadvantages of SPH
 
-§
-%\begin{landscape}
+\subsection{SPH summary}
+
+\begin{landscape}
 
 \begin{table}[htdp]
 \begin{center}
@@ -475,18 +507,17 @@ $\rho_i = m_i \delta_i $ \\
 \multicolumn{2}{|l|}{$ \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \dWij $} & 
 $ \nabla \vv_i = \frac{1}{m_i} \sum_{j} \dWij $ \\
 & 
-\multicolumn{2}{|l|}{$ \frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} \Big) \dWij $} & 
-$ \frac{du_i}{dt} = \frac{1}{2 m_i} \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij $ \\
+\multicolumn{2}{|l|}{$ \frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} + \Pi_{ij} \Big) \dWij $} & 
+$ \frac{du_i}{dt} = \frac{1}{2 m_i} \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} + \Pi_{ij} \Big)  \dWij $ \\
 & 
-\multicolumn{2}{|l|}{$\frac{d \vv_i }{dt} = - \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}$} & 
-$\frac{d \vv_i }{dt} = - \frac{1}{m_i} \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij}$\\
+\multicolumn{2}{|l|}{$\frac{d \vv_i }{dt} = - \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2}  +\Pi_{ij} \Big) \nabla W_{ij}$} & 
+$\frac{d \vv_i }{dt} = - \frac{1}{m_i} \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} + \Pi_{ij} \Big) \nabla W_{ij}$\\
 &   
 & 
-$\frac{d \rho_i}{dt} = \rho_i \nabla \vv_i$ &
-\\
+$\frac{d \rho_i}{dt} = \rho_i \nabla \vv_i$ & \\
 \hline
-% $ \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \dWij $ 
-
+artificial viscosity & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\rho_{ij} } $} & $\Pi_{ij} = \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\delta_{ij} } $ \\
+ & \multicolumn{3}{|c|}{$\mu_{ij} = \frac{h_{ij} \vv_{ij} \rv_{ij}}{\rv_{ij}^2+ 0.01h^2} $} \\
 \hline
 \end{tabular}
 \caption{comparison of SPH variants}
@@ -494,15 +525,14 @@ $\frac{d \rho_i}{dt} = \rho_i \nabla \vv_i$ &
 \label{default}
 \end{table}
 
+\end{landscape}
 
 \subsection{ANEOS}
 tables, interpolating, iterating, issues\\
 show isobars\\
 entropy vs. energy integration\\
 
-\subsection{SPH summary}
 
-% TODO landspace table
 
 %%
 %   G R A V I T Y 
