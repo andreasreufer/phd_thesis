@@ -41,22 +41,37 @@ A continuum model
 %%
 %   F L U I D S
 %%
-\subsection{Theory of Fluids}
-
-% TODO
+\subsection{Fluids}
+A fluid is a classical continuum approximation of an ensemble of molecules or atoms. Characteristic variables defined continuously are density $\rho$, specific internal energy $u$, temperatur $T$, velocity $\vv$ and pressure $p$. Conservation of mass leeds directly to the continuum equation, which equals the local change density to the negative product of velocity divergence and density:
 \begin{equation}
 \label{ch02_fld01_eq001}
 \frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
 \end{equation}
 
+Momentum conservation ultimately gives us the \emph{Navier-Stokes equation} 
 \begin{equation}
 \label{ch02_fld01_eq002}
-\rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \eta \Delta \mathbf{v} + ( \zeta + \eta ) \nabla ( \nabla \mathbf{v} )
+\rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \nabla \Phi + \nu \Big( \nabla^2 \vv - \frac{2}{3} \nabla \nabla \vv \Big)
 \end{equation}
+
+for a viscous fluid, where $\nu$ is the kinematic viscosity and $\Phi$ any external potentials acting on the fluid like gravity \citep{shore2007astrophysical}. In the absence of viscosity and external potentials, the equation reduces  to the momentum equation of the \emph{Euler equations}
 
 \label{ch02_fld01_eq003}
 \begin{equation}
 - \frac{\partial \mathbf{v}}{\partial t} =  ( \mathbf{v} \nabla ) \mathbf{v} + \frac{\nabla p}{\rho}
+\end{equation}
+
+Energy conservation in the absence of dissipative terms (constant entropy) yields
+\label{ch02_fld01_eq003a}
+\begin{equation}
+\frac{\d}{\d t} \Big( \rho u + \frac{1}{2}\rho \vv^2 \Big) + \nabla \vv\Big( \rho u + \frac{1}{2} \rho \vv^2 + p \Big) = 0
+\end{equation}
+
+Those equations are formulated in an eulerian frame a rest. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes
+
+\begin{equation}
+\label{ch02_fld01_eq003b}
+- \frac{\partial \mathbf{v}}{\partial t} = \frac{\nabla p}{\rho}
 \end{equation}
 
 The Lagrangian of a inviscous fluid is given by
@@ -517,7 +532,10 @@ artificial viscosity & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \m
 
 \end{landscape}
 
+
+
 \subsection{ANEOS}
+
 tables, interpolating, iterating, issues\\
 show isobars\\
 entropy vs. energy integration\\
