@@ -67,21 +67,19 @@ Energy conservation in the absence of dissipative terms (constant entropy) yield
 \frac{\d}{\d t} \Big( \rho u + \frac{1}{2}\rho \vv^2 \Big) + \nabla \vv\Big( \rho u + \frac{1}{2} \rho \vv^2 + p \Big) = 0
 \end{equation}
 
-Those equations are formulated in an eulerian frame a rest. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes
+Those equations are formulated in an eulerian frame a rest. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes:
 
 \begin{equation}
 \label{ch02_fld01_eq003b}
 - \frac{\partial \mathbf{v}}{\partial t} = \frac{\nabla p}{\rho}
 \end{equation}
 
-The Lagrangian of a inviscous fluid is given by
+The continuity equation is un-affected by the choice of a Lagrangian frame of reference, as it depends only on the velocity divergence and not the absolute velocity. The actual Lagrangian of a in-viscous fluid without an external potential is given by
 \begin{equation}
 \label{ch02_fld01_eq004}
 \Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
 \end{equation}
 
-\citep{Thorne:2008}
-\citep{2004Nyffeler}
 %%
 %   S P H
 %%
@@ -418,7 +416,7 @@ Standard SPH interpolates all variables weighed according to density. This works
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{01miscible_prof}
-\caption{default}
+\caption{Radial structure of a proto-Earth body of $0.9\ME$ with a $30wt\%$ iron core and a $70wt\%$ silicate mantle. Blue dots show the values of iron particles, red dots show silicate particles. The upper plots show density and the lower plots the resulting pressure. The structure on the left is calculated with standard SPH and the one on the right uses the alternative \emph{miscible SPH} formulation. Both structures are relaxed, which means that the residual particles velocities are very small compared to free-fall velocities inside such a gravitational potential. As in standard SPH density is a smooth value along the boundary between the iron core and the silicate mantle, the iron particles will have an under-density at the boundary, while the silicate particles have an over-density (green circles). This results in anomalous pressures at the boundary. Miscible circumvents this issue by allowing non-smoothed density at the boundary.}
 \label{ch02_fig01}
 \end{center}
 \end{figure}
@@ -477,17 +475,12 @@ and similarly to the energy equation
 
 with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sph02_eq016}. 
 
-Another situation where standard SPH fails are mixed states between 
+Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter like structures, where a solid impactor and after the impact solid debris travels through the gaseous envelope of the target. Details are shown in the corresponding chapter below. 
 
-% problem with mixed state	
-
-motivation: big density contrasts
-advantages and disadvantages of SPH
-%\end{landscape}
 
 \subsection{solid state SPH}
 SPH can also be used to model solids. For an elastic solid, the isotropic pressure of a fluid is replaced with the full stress tensor in order to additionally model shear stresses. Brittle failure due to cracks can be modeled with a statistical approach \citep{Grady1980147}. An SPH implementation of this is presented in \citep{1994Icar..107...98B}. % TODO: refer to Mars chapter
-Chapter 3 makes use of an solid state SPH code with the features mentioned above. The code is described in detail in \citep{Nyffeler2004} and will not be discussed any further here.
+Chapter 3 makes use of an solid state SPH code with the features mentioned above. The code is described in detail in \citep{Nyffeler:2006p96} and will not be discussed any further here.
 
 \subsection{SPH summary}
 
@@ -540,7 +533,8 @@ tables, interpolating, iterating, issues\\
 show isobars\\
 entropy vs. energy integration\\
 
-
+\citep{Melosh:2007p3502}
+\citep{Thompson:1990p1103}
 
 %%
 %   G R A V I T Y 
