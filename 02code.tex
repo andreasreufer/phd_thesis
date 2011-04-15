@@ -456,7 +456,7 @@ To derive the momentum and energy equations we use the same procedure as for sta
 \begin{align}
 \label{ch02_sph01_eq033}
 \frac{d \vv_i }{dt} = - \frac{1}{m_i} & \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij} \\
-\frac{du_i}{dt} = \frac{1}{2 m_i} & \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij \\
+\frac{du_i}{dt} = \frac{1}{2 m_i} & \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij 
 \end{align}
 
 The artificial viscosity term depend directly on density and need to be symmetric in order to conserve linear momentum. Requiring total energy conservation, the contribution yields  to the momentum equation
@@ -474,6 +474,8 @@ and similarly to the energy equation
 \end{align}
 
 with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sph02_eq016}. 
+
+The failure of standard SPH at boundaries can introduce difficulties in resolving Kelvin-Helmholtz instabilities properly, as noted by \citep{Agertz:2006p1552}. We will compare the ability to resolve this instability between standard and miscible SPH in a later chapter about the Moon-forming giant impact.
 
 Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter like structures, where a solid impactor and after the impact solid debris travels through the gaseous envelope of the target. Details are shown in the corresponding chapter below. 
 
@@ -527,7 +529,29 @@ artificial viscosity & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \m
 
 
 
-\subsection{ANEOS}
+\subsection{Equations of state}
+The Navier-Stokes  together with the continuity equation only present a closed system of equations, if an equation of state delivering $p(\rho, s)$ is given. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}).
+
+For an ideal gas, the equation of state and the speed of sound is given by
+
+\begin{equation}
+\label{ch02_sph01_eq036}
+p = ( \gamma - 1 ) \rho u \hspace{2cm} c_S = \sqrt{ \frac{\gamma p}{\rho} }
+\end{equation}
+
+where $\gamma$ is the ratio of specific heats . For a monoatomic ideal gas $\gamma = \frac{5}{3}$, while for a solar mixture roughly three quarters hydrogen and one quarter helium, a value of $\gamma \approx 1.4$ is usually choosen. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.60]{03aneos_isobars}
+\caption{Isobars for different material in the ANEOS equation of state. The blue line depicts iron, the green line dunite, the red line $SiO_2$ and the turquoise line shows $H_2 O$. The flat regions where temperature does not increase for a entropy increase are phase changes. }
+\label{fig03walks}
+\end{center}
+\end{figure}
+
+
+
+% TODO: show isobar plots
 
 tables, interpolating, iterating, issues\\
 show isobars\\
