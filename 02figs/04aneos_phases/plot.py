@@ -15,7 +15,7 @@ from const_cgs import *
 from numpy import log10, power
 
 plt.rc('savefig', dpi=450)
-#mp.rc('text', usetex=True)
+mp.rc('text', usetex=True)
 #plt.rc('text', usetex=True)
 plt.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
 
@@ -23,19 +23,19 @@ plt.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
 aneosf = pt.openFile("aneos_tables.hdf5")
 
 #matstr = "01"
-#mattitle = r'$\mathrm{M-ANEOS } SiO_2$'
+#mattitle = r'$\textrm{M-ANEOS } SiO_2$'
 #rhoref = 2650
 
 #matstr = "02"
-#mattitle = r'$\mathrm{ANEOS } H_2 O$'
+#mattitle = r'$\textrm{ANEOS } H_2 O$'
 #rhoref = 1110
 
 #matstr = "04"
-#mattitle = r'$\mathrm{ANEOS dunite}$'
+#mattitle = r'$\textrm{ANEOS dunite}$'
 #rhoref = 3320
 
 matstr = "05"
-mattitle = r'$\mathrm{ANEOS iron}$'
+mattitle = r'$\textrm{ANEOS iron}$'
 rhoref = 7850
 
 UL = eval("aneosf.root.mat" + matstr + "UL")
@@ -65,9 +65,9 @@ cmap = np.zeros((7,3))
 cmap[0] = cnameToRGB("white")      # not valid
 cmap[1] = cnameToRGB("grey")       # one-phase
 cmap[2] = cnameToRGB("green")      # liq / sol / vap
-cmap[4] = cnameToRGB("red")        # solid 
+cmap[6] = cnameToRGB("red")        # solid 
 cmap[5] = cnameToRGB("orange")     # solid / liquid
-cmap[6] = cnameToRGB("blue")       # liquid
+cmap[4] = cnameToRGB("blue")       # liquid
 
 phsULC = cmap[phsUL]
 phsUHC = cmap[phsUH]
@@ -128,7 +128,7 @@ ax2H.axis([rhomed, rhomax, smin, smax])
 ax2H.yaxis.set_ticks_position("right")
 ax2H.yaxis.set_label_position("right")
 ax2H.set_xlabel(r"$\rho [kg/m^3]$")
-ax2H.set_ylabel(r'$\mathrm{entropy} [J/kg/K]$')
+ax2H.set_ylabel(r'$\textrm{entropy} [J/kg/K]$')
 
 SLar = (np.log10( rhomed ) - np.log10( rhomin ))/( np.log10( smax ) - np.log10( smin ))*3.
 SHar = (np.log10( rhomax ) - np.log10( rhomed ))/( np.log10( smax ) - np.log10( smin ))*1.
@@ -149,18 +149,18 @@ bgax.xaxis.set_ticks( [] )
 bgax.yaxis.set_ticks( [] )
 
 bgax.add_patch( mpl.patches.Rectangle( (0.12, 0.07), 0.14, 0.06, color="grey", fill=True ) )
-bgax.text( 0.12 + 0.07, 0.10, r'$\mathrm{single phase}$', va="center", ha="center")
+bgax.text( 0.12 + 0.07, 0.10, r'$\textrm{single phase}$', va="center", ha="center")
 
 bgax.add_patch( mpl.patches.Rectangle( (0.28, 0.07), 0.14, 0.06, color="green", fill=True ) )
-bgax.text( 0.28 + 0.07, 0.10, r'$\mathrm{sol. + liq. + vap.}$', va="center", ha="center")
+bgax.text( 0.28 + 0.07, 0.10, r'$\textrm{sol. + liq. + vap.}$', va="center", ha="center")
 
 bgax.add_patch( mpl.patches.Rectangle( (0.44, 0.07), 0.14, 0.06, color="red", fill=True ) )
-bgax.text( 0.44 + 0.07, 0.10, r'$\mathrm{solid}$', va="center", ha="center")
+bgax.text( 0.44 + 0.07, 0.10, r'$\textrm{solid}$', va="center", ha="center")
 
 bgax.add_patch( mpl.patches.Rectangle( (0.60, 0.07), 0.14, 0.06, color="orange", fill=True ) )
-bgax.text( 0.60 + 0.07, 0.10, r'$\mathrm{sol. + liq.}$', va="center", ha="center")
+bgax.text( 0.60 + 0.07, 0.10, r'$\textrm{sol. + liq.}$', va="center", ha="center")
 
 bgax.add_patch( mpl.patches.Rectangle( (0.76, 0.07), 0.14, 0.06, color="blue", fill=True ) )
-bgax.text( 0.76 + 0.07, 0.10, r'$\mathrm{liquid}$', va="center", ha="center")
+bgax.text( 0.76 + 0.07, 0.10, r'$\textrm{liquid}$', va="center", ha="center")
 
 plt.savefig("out"+matstr+".png")
