@@ -12,9 +12,10 @@ from gi_plot import *
 from h5part import H5PartDump
 from plot_helpers import *
 from const_cgs import *
+from numpy import log10, power
 
 plt.rc('savefig', dpi=450)
-mp.rc('text', usetex=True)
+#mp.rc('text', usetex=True)
 #plt.rc('text', usetex=True)
 plt.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
 
@@ -22,17 +23,19 @@ plt.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
 aneosf = pt.openFile("aneos_tables.hdf5")
 
 #matstr = "01"
-#rhoref = 2.65
+#mattitle = r'$\mathrm{M-ANEOS } SiO_2$'
+#rhoref = 2650
 
 #matstr = "02"
-#rhoref = 1.11
+#mattitle = r'$\mathrm{ANEOS } H_2 O$'
+#rhoref = 1110
 
 #matstr = "04"
-#rhoref = 3.32
+#mattitle = r'$\mathrm{ANEOS dunite}$'
+#rhoref = 3320
 
 matstr = "05"
-#mattitle = r'\textrm{test}_2'
-mattitle = r'$\mathrm{undamaged~water~ice}$'
+mattitle = r'$\mathrm{ANEOS iron}$'
 rhoref = 7850
 
 UL = eval("aneosf.root.mat" + matstr + "UL")
@@ -40,15 +43,15 @@ UH = eval("aneosf.root.mat" + matstr + "UH")
 SL = eval("aneosf.root.mat" + matstr + "SL")
 SH = eval("aneosf.root.mat" + matstr + "SH")
 
-rhomin = np.power(10., UL.log10rho[0]  ) * 1.e3
-rhomed = np.power(10., UL.log10rho[-1] ) * 1.e3
-rhomax = np.power(10., UH.log10rho[-1] ) * 1.e3
+rhomin = power(10., UL.log10rho[0]  ) * 1.e3
+rhomed = power(10., UL.log10rho[-1] ) * 1.e3
+rhomax = power(10., UH.log10rho[-1] ) * 1.e3
 
-umin = np.power(10., UL.log10u[0]  ) / 1.e4
-umax = np.power(10., UL.log10u[-1] ) / 1.e4
+umin = power(10., UL.log10u[0]  ) / 1.e4
+umax = power(10., UL.log10u[-1] ) / 1.e4
 
-smin = np.power(10., SL.log10S[0] )  / (11605 * 1.e4)
-smax = np.power(10., SL.log10S[-1] ) / (11605 * 1.e4)
+smin = power(10., SL.log10S[0] )  / (11605 * 1.e4)
+smax = power(10., SL.log10S[-1] ) / (11605 * 1.e4)
 
 phsUL = UL.phase[:,:].astype(np.int8).transpose()
 phsUH = UH.phase[:,:].astype(np.int8).transpose()
@@ -80,6 +83,15 @@ ax1H = plt.axes( np.array( [2./11.,1./6.,3./11.,4./6.] ) )
 ax1L.loglog( 2.*rhomin, 0.1*umin, '.' )
 ax1H.loglog( 2.*rhomed, 0.1*umin, '.' )
 ax1H.vlines(rhoref, umin, umax, linestyle=":")
+ax1L.text(rhomin, 1.5*umax, r'$\rho_{min}$')
+ax1H.text(rhomed, 1.5*umax, r'$\rho_{med}$')
+ax1H.text(rhomax, 1.5*umax, r'$\rho_{max}$')
+ax1H.text(rhoref, 1.5*umax, r'$\rho_{0}$')
+
+ax1L.text(power(10., 0.7*(log10(rhomed) + log10(rhomin))), 0.3*umax, r'$100 pts$')
+ax1H.text(power(10., 0.5*(log10(rhomax) + log10(rhomed))), 0.3*umax, r'$500 pts$')
+ax1L.text(3.*rhomin, power(10., 0.46*(log10(umin) + log10(umax))), r'$1500 pts$', rotation='vertical')
+
 
 ax1L.axis([rhomin, rhomed, umin, umax])
 ax1L.xaxis.set_ticks( [1.e-10, 0.1] )
@@ -100,6 +112,15 @@ ax2H = plt.axes( np.array( [7./11.,1./6.,3./11.,4./6.] ) )
 ax2L.loglog( 2.*rhomin, 0.1*smin, '.' )
 ax2H.loglog( 2.*rhomed, 0.1*smin, '.' )
 ax2H.vlines(rhoref, smin, smax, linestyle=":")
+ax2L.text(rhomin, 1.5*smax, r'$\rho_{min}$')
+ax2H.text(rhomed, 1.5*smax, r'$\rho_{med}$')
+ax2H.text(rhomax, 1.5*smax, r'$\rho_{max}$')
+ax2H.text(rhoref, 1.5*smax, r'$\rho_{0}$')
+
+ax2L.text(power(10., 0.7*(log10(rhomed) + log10(rhomin))), 0.5*smax, r'$100 pts$')
+ax2H.text(power(10., 0.5*(log10(rhomax) + log10(rhomed))), 0.5*smax, r'$500 pts$')
+ax2L.text(3.*rhomin, power(10., 0.44*(log10(smin) + log10(smax))), r'$1500 pts$', rotation='vertical')
+
 
 ax2L.axis([rhomin, rhomed, smin, smax])
 ax2L.xaxis.set_ticks( [1.e-10, 0.1] )
@@ -122,9 +143,24 @@ for ax in axs:
 aneosf.close()
 
 bgax = plt.axes( [0., 0., 1., 1.], frameon=False)
-bgax.text( 0.4, 0.9, mattitle)
+bgax.text( 0.4, 0.9, mattitle, size=20)
 bgax.axis([0., 1., 0., 1.])
 bgax.xaxis.set_ticks( [] )
 bgax.yaxis.set_ticks( [] )
+
+bgax.add_patch( mpl.patches.Rectangle( (0.12, 0.07), 0.14, 0.06, color="grey", fill=True ) )
+bgax.text( 0.12 + 0.07, 0.10, r'$\mathrm{single phase}$', va="center", ha="center")
+
+bgax.add_patch( mpl.patches.Rectangle( (0.28, 0.07), 0.14, 0.06, color="green", fill=True ) )
+bgax.text( 0.28 + 0.07, 0.10, r'$\mathrm{sol. + liq. + vap.}$', va="center", ha="center")
+
+bgax.add_patch( mpl.patches.Rectangle( (0.44, 0.07), 0.14, 0.06, color="red", fill=True ) )
+bgax.text( 0.44 + 0.07, 0.10, r'$\mathrm{solid}$', va="center", ha="center")
+
+bgax.add_patch( mpl.patches.Rectangle( (0.60, 0.07), 0.14, 0.06, color="orange", fill=True ) )
+bgax.text( 0.60 + 0.07, 0.10, r'$\mathrm{sol. + liq.}$', va="center", ha="center")
+
+bgax.add_patch( mpl.patches.Rectangle( (0.76, 0.07), 0.14, 0.06, color="blue", fill=True ) )
+bgax.text( 0.76 + 0.07, 0.10, r'$\mathrm{liquid}$', va="center", ha="center")
 
 plt.savefig("out"+matstr+".png")
