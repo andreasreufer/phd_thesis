@@ -530,16 +530,31 @@ artificial viscosity & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \m
 
 
 \subsection{Equations of state}
-The Navier-Stokes  together with the continuity equation only present a closed system of equations, if an equation of state delivering $p(\rho, s)$ is given. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}).
+The Navier-Stokes  together with the continuity equation only present a closed system of equations, if an equation of state (EOS) delivering $p(\rho, s)$ is given. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}).
 
 For an ideal gas, the equation of state and the speed of sound is given by
 
 \begin{equation}
 \label{ch02_sph01_eq036}
-p = ( \gamma - 1 ) \rho u \hspace{2cm} c_S = \sqrt{ \frac{\gamma p}{\rho} }
+p = ( \gamma - 1 ) \rho u \hspace{2cm} c_s = \sqrt{ \frac{\gamma p}{\rho} } \hspace{2cm} \gamma = \frac{c_p}{c_v}
 \end{equation}
 
-where $\gamma$ is the ratio of specific heats . For a monoatomic ideal gas $\gamma = \frac{5}{3}$, while for a solar mixture roughly three quarters hydrogen and one quarter helium, a value of $\gamma \approx 1.4$ is usually choosen. 
+where $\gamma$ is the ratio of specific heats or the adiabatic index. For a monoatomic gas it is $\gamma = \frac{5}{3}$, whereas for a solar mixture of roughly three quarters of molecular hydrogen and a quarter of atomic helium it is $\gamma = 1.4$. The ideal gas EOS can also be written in the form 
+
+\begin{equation}
+p = s \rho^{\gamma}
+\end{equation}
+
+where $s$ is the specific entropy \citep{Springel:2005p51}.
+
+For condensed matter in collisions processes, the ideal gas approximation breaks down and more complex equations of state are required. For geological materials a popular choice is the ANEOS software package. It uses the basic approach of minimizing the Helmholtz free energy $F(\rho, T)$ for a given pair of density $\rho$ and temperature $T$. Various analytical terms contributing to the Helmholtz free energy for ionization, phase changes and low temperatures are included and and guarantee a smooth behavior at phase boundaries \citep{Thompson:1990p1103}. Pressure and entropy are derived from the Helmholtz free energy:
+
+\begin{equation}
+\label{ch02_sph01_eq037}
+p = \rho^2 \frac{\partial F(\rho, T)}{\partial \rho} \Big|_{T} \hspace{2cm} S = - \frac{\partial F(\rho, T)}{\partial T} \Big|_{\rho}
+\end{equation}
+
+Figure \ref{ch02_eos02_fig01} shows isobars for different materials obtained by ANEOS. The jumps in entropy at some temperatures show phase changes, whereas in between phase changes the isobar follows approximately analytical functions. Water at $50bar$ for example (light blue line, figure \ref{ch02_eos02_fig01}, right plot) follows a non-trivial curve in the solid phase, until melting kicks in around $300K$. The it follows again a straight line as expected for a liquid with a constant ratio of specific heats. Another entropy jump for vaporization occurs slightly below $400K$. Then in the vapour phase, the isobar follows again a straight line as expected more or less for a real gas. Above $1000K$ dissociation of the water molecules starts and the isobar follows a more complicated curve again.
 
 \begin{figure}
 \begin{center}
@@ -548,6 +563,23 @@ where $\gamma$ is the ratio of specific heats . For a monoatomic ideal gas $\gam
 \label{ch02_eos02_fig01}
 \end{center}
 \end{figure}
+
+The original version of ANEOS treats the gas phase as a mixture of mono-atomic gases. Compared to a gas of molecules, the monoatomic gas has a very high energy and entropy. So in the mono-atomic case vaporization only starts at comparably high energies. \cite{Melosh:2007p3502} tackled this problem by modifying original ANEOS for $SiO_2$ and introducing molecular species in the gas phase. This modified version is called M-ANEOS. Figure \ref{ch02_eos02_fig05} shows expected gas mixtures for three different pressures as a function of temperature. Vaporization starts by producing a mixture mainly made up of $SiO$ and $O_2$ gas. Dissociation of these molecules only happens at much higher temperatures. The difference between the two models can be seen by comparing the isobars in figure for dunite (ANEOS, no molecules, green line) and for $SiO_2$ (M-ANEOS, with molecules, red line). The two materials are comparable silicate materials. At both pressures, the entropy jump for vaporization for $SiO_2$ starts at a temperature roughly $2000K$ lower compared to dunite. Vaporization of solid $SiO_2$ in collisions by the mean of shock heating occurs, when the particle velocities exceed $7-8km/s$ \citep{Melosh:2007p3502}.
+
+\begin{figure}
+\includegraphics[scale=1.0]{05aneos_phases01}
+\includegraphics[scale=1.0]{05aneos_phases02}
+\includegraphics[scale=1.0]{05aneos_phases03}
+\caption{Figure 4 from \cite{Melosh:2007p3502} showing the present species depending in pressure and temperature for the $SiO_2$ M-ANEOS equation of state.}
+\label{ch02_eos02_fig05}
+\end{figure}
+
+ANEOS uses as $(\rho, T)$ as the thermodynamical state variables as input parameters, whereas the hydrodynamical equations for a fluid yield the $(\rho, u)$ or $(\rho, s)$ depending on whether the energy or the entropy equation is solved and integrated. Specific energy and entropy are both returned by ANEOS. Luckily both variables $u(\rho, T)$ and  $s(\rho, T)$ are monotonic increasing functions of temperature, so the correct temperature for given specific energy or entropy can be found through a root finding algorithm. We found the Brent Rooter \cite{Press2002nrc..book.....P} to converge usually within a few iteration steps, for a temperature range covering a few $K$ to a few ten thousand $K$ and a precision of $3 \times 10^{-8}$.
+
+ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference values. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. 
+
+Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state information returned by ANEOS. Mixed states 
+
 
 \begin{figure}
 \begin{center}
@@ -584,24 +616,14 @@ where $\gamma$ is the ratio of specific heats . For a monoatomic ideal gas $\gam
 \end{center}
 \end{figure}
 
-\begin{figure}
-%\begin{center}
-\includegraphics[scale=1.0]{05aneos_phases01}
-\includegraphics[scale=1.0]{05aneos_phases02}
-\includegraphics[scale=1.0]{05aneos_phases03}
-\caption{Figure 4 from \citep{Melosh:2007p3502} showing the present species depending in pressure and temperature for the $SiO_2$ M-ANEOS equation of state.}
-\label{ch02_eos02_fig05}
-%\end{center}
-\end{figure}
 
-
+\cite{Springel:2005p51}
 
 
 tables, interpolating, iterating, issues\\
 entropy vs. energy integration\\
 
 \citep{Melosh:2007p3502}
-\citep{Thompson:1990p1103}
 
 %%
 %   G R A V I T Y 
@@ -614,6 +636,9 @@ entropy vs. energy integration\\
 \citep{Solenthaler:2008p3720}
 \citep{Springel:2003p3298}
 \citep{Monaghan:1992ARAA..30..543M}
+
+\citep{bryant2010computer}
+
 
 % 
 % TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH \\

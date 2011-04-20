@@ -94,7 +94,7 @@ ax1L.text(3.*rhomin, power(10., 0.46*(log10(umin) + log10(umax))), r'$1500 pts$'
 
 
 ax1L.axis([rhomin, rhomed, umin, umax])
-ax1L.xaxis.set_ticks( [1.e-10, 0.1] )
+ax1L.xaxis.set_ticks( [1.e-8 , 100.] )
 ax1H.axis([rhomed, rhomax, umin, umax])
 ax1H.yaxis.set_ticks_position("right")
 
@@ -123,7 +123,7 @@ ax2L.text(3.*rhomin, power(10., 0.44*(log10(smin) + log10(smax))), r'$1500 pts$'
 
 
 ax2L.axis([rhomin, rhomed, smin, smax])
-ax2L.xaxis.set_ticks( [1.e-10, 0.1] )
+ax2L.xaxis.set_ticks( [1.e-8 , 100.] )
 ax2H.axis([rhomed, rhomax, smin, smax])
 ax2H.yaxis.set_ticks_position("right")
 ax2H.yaxis.set_label_position("right")
