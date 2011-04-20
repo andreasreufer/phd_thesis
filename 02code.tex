@@ -545,41 +545,59 @@ where $\gamma$ is the ratio of specific heats . For a monoatomic ideal gas $\gam
 \begin{center}
 \includegraphics[scale=0.60]{03aneos_isobars}
 \caption{Isobars for different material in the ANEOS equation of state. The blue line depicts iron, the green line dunite, the red line $SiO_2$ and the turquoise line shows $H_2 O$. The flat regions where temperature does not increase for a entropy increase are phase changes. }
-\label{fig03walks}
+\label{ch02_eos02_fig01}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.50]{04aneos_phases_mat05}
+\caption{Look-up tables for the ANEOS equation of state for iron. The left plot shows the table using density and specific energy as the parameter space, while the right plot shows the table using density and specific entropy. Both tables are divided into two sub-tables. A small table with covers the low-density region and uses 100 equally spaced grid points in logged density from $\rho_{min}$ to $\rho_{med}$ and 1500 points in logged specific energy. In the higher density region from $\rho_{med}$ to $\rho_{max}$, the density resolution is increased by using 500 grid points in logged density, in order the resolve the phase transitions well enough. The same sub-division also applies to the density-entropy table, except that instead of logged specific energy logged specific entropy is tabulated. The colors in the plot indicate the phase information returned by ANEOS. Solid is red. Orange indicates material where partial melting occurs and both a solid and a liquid phase exists. For an increase in energy or entropy, the material liquifies completely, indicated by blue color. Green color indicates the mixed state, where solid, liquid and vapor phases co-exist at the same time. White regions are invalid.}
+\label{ch02_eos02_fig02}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.50]{04aneos_phases_mat02}
+\caption{The same tables as in \ref{ch02_eos02_fig02} for $H_2 O$ }
+\label{ch02_eos02_fig03}
 \end{center}
 \end{figure}
 
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.60]{04aneos_phases_mat01}
-\caption{Isobars for different material in the ANEOS equation of state. The blue line depicts iron, the green line dunite, the red line $SiO_2$ and the turquoise line shows $H_2 O$. The flat regions where temperature does not increase for a entropy increase are phase changes. }
-\label{fig03walks}
+\includegraphics[scale=0.50]{04aneos_phases_mat04}
+\caption{The same tables as in \ref{ch02_eos02_fig02} for \emph{dunite}. In the grey zones, ANEOS returns valid pressures and sound speeds, but does not return any particular phase information.}
+\label{ch02_eos02_fig04}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.50]{04aneos_phases_mat01}
+\caption{The same tables as in \ref{ch02_eos02_fig04} for the modified M-ANEOS for $SiO_2$}
+\label{ch02_eos02_fig05}
 \end{center}
 \end{figure}
 
 \begin{figure}
-\begin{center}
-\includegraphics[scale=0.60]{04aneos_phases_mat02}
-\caption{Isobars for different material in the ANEOS equation of state. The blue line depicts iron, the green line dunite, the red line $SiO_2$ and the turquoise line shows $H_2 O$. The flat regions where temperature does not increase for a entropy increase are phase changes. }
-\label{fig03walks}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.60]{04aneos_phases_mat05}
-\caption{Isobars for different material in the ANEOS equation of state. The blue line depicts iron, the green line dunite, the red line $SiO_2$ and the turquoise line shows $H_2 O$. The flat regions where temperature does not increase for a entropy increase are phase changes. }
-\label{fig03walks}
-\end{center}
+%\begin{center}
+\includegraphics[scale=1.0]{05aneos_phases01}
+\includegraphics[scale=1.0]{05aneos_phases02}
+\includegraphics[scale=1.0]{05aneos_phases03}
+\caption{Figure 4 from \citep{Melosh:2007p3502} showing the present species depending in pressure and temperature for the $SiO_2$ M-ANEOS equation of state.}
+\label{ch02_eos02_fig05}
+%\end{center}
 \end{figure}
 
 
 
-% TODO: show isobar plots
 
 tables, interpolating, iterating, issues\\
-show isobars\\
 entropy vs. energy integration\\
 
 \citep{Melosh:2007p3502}
