@@ -576,10 +576,9 @@ The original version of ANEOS treats the gas phase as a mixture of mono-atomic g
 
 ANEOS uses as $(\rho, T)$ as the thermodynamical state variables as input parameters, whereas the hydrodynamical equations for a fluid yield the $(\rho, u)$ or $(\rho, s)$ depending on whether the energy or the entropy equation is solved and integrated. Specific energy and entropy are both returned by ANEOS. Luckily both variables $u(\rho, T)$ and  $s(\rho, T)$ are monotonic increasing functions of temperature, so the correct temperature for given specific energy or entropy can be found through a root finding algorithm. We found the Brent Rooter \cite{Press2002nrc..book.....P} to converge usually within a few iteration steps, for a temperature range covering a few $K$ to a few ten thousand $K$ and a precision of $3 \times 10^{-8}$.
 
-ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference values. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. 
+ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference values. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. In the rare case, that a value outside of the table is requested, the code falls back to the iteration routine used to create the tables. 
 
-Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state information returned by ANEOS. Mixed states 
-
+Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state information returned by ANEOS. For mixed states, the single density used by ANEOS is the average density for all phases together.
 
 \begin{figure}
 \begin{center}
@@ -597,7 +596,6 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 \end{center}
 \end{figure}
 
-
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.50]{04aneos_phases_mat04}
@@ -605,8 +603,6 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 \label{ch02_eos02_fig04}
 \end{center}
 \end{figure}
-
-
 
 \begin{figure}
 \begin{center}
@@ -616,14 +612,6 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 \end{center}
 \end{figure}
 
-
-\cite{Springel:2005p51}
-
-
-tables, interpolating, iterating, issues\\
-entropy vs. energy integration\\
-
-\citep{Melosh:2007p3502}
 
 %%
 %   G R A V I T Y 
@@ -636,8 +624,9 @@ entropy vs. energy integration\\
 \citep{Solenthaler:2008p3720}
 \citep{Springel:2003p3298}
 \citep{Monaghan:1992ARAA..30..543M}
-
 \citep{bryant2010computer}
+\cite{Springel:2005p51}
+\citep{Melosh:2007p3502}
 
 
 % 
