@@ -673,9 +673,21 @@ tree acceleration: show skip, next and parent pointers by simple tree examples\\
 
 
 
+\subsection{Tree parallelization: shared vs. distributed memory}
+intro: shared vs. distributed memory\\
+
 
 \section{Implementation}
 \subsection{SPHLATCH v1}
+
+
+SPHLATCH v1\\
+parallelizing a particle code: distributed sums vs. ghosts approach\\
+parallelizing a tree\\
+show ghost approach\\
+
+disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -705,6 +717,15 @@ tree acceleration: show skip, next and parent pointers by simple tree examples\\
 \subsection{SPHLATCH v2}
 
 
+SPHLATCH v2\\
+shared memory approach\\
+load balancing approach, how this could be memory-\\
+show cost (gravity, NS, total) for giant impact\\
+caching issues\\
+
+building the tree:
+
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{cell_wiring.pdf}
@@ -724,26 +745,6 @@ tree acceleration: show skip, next and parent pointers by simple tree examples\\
 
 
 
-\subsection{Tree parallelization: shared vs. distributed memory}
-intro: shared vs. distributed memory\\
-
-
-SPHLATCH v1\\
-parallelizing a particle code: distributed sums vs. ghosts approach\\
-parallelizing a tree\\
-show ghost approach\\
-
-disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
-
-
-SPHLATCH v2\\
-shared memory approach\\
-load balancing approach, how this could be memory-\\
-show cost (gravity, NS, total) for giant impact\\
-caching issues\\
-
-building the tree:
-
 \subsection{Future of particle codes}
 mention future of parallel computing: CPU vs. GPU computing, stream computing
 trees on GPUs (references)
@@ -751,11 +752,17 @@ trees on GPUs (references)
 
 
 \section{Initial conditions}
+\subsection{vanilla SPH sphere}
+\subsection{getting 1D structures}
+\subsection{flavouring an SPH sphere}
+\subsection{putting an atmosphere on top}
 initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
 use of spheres for simplicity reason
 
 
 \section{Post-processing}
+\subsection{clump detection}
+\subsection{plotting}
 clump detection\\
 FOF vs. potential, not parallelized\\
 
