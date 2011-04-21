@@ -409,7 +409,6 @@ The predictor-corrector scheme has the disadvantage of a global time step. Other
 When particle density varies over several orders of magnitudes, so does the time step. This is the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in immensely different time steps. Only hierarchical schemes where the actual time steps between derivations are chosen in the same order of magnitude as the required time step allow to integrate such a particle set with reasonable computational effort.
 For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
 
-
 \subsection{miscible SPH}
 Standard SPH interpolates all variables weighed according to density. This works very well for single-phase fluids, but introduces difficulties with multi-phase fluids with large density contrasts. In reality, density can be discontinous along boundaries, for example for fluid droplets embedded in a gas. 
 
@@ -539,7 +538,7 @@ For an ideal gas, the equation of state and the speed of sound is given by
 p = ( \gamma - 1 ) \rho u \hspace{2cm} c_s = \sqrt{ \frac{\gamma p}{\rho} } \hspace{2cm} \gamma = \frac{c_p}{c_v}
 \end{equation}
 
-where $\gamma$ is the ratio of specific heats or the adiabatic index. For a monoatomic gas it is $\gamma = \frac{5}{3}$, whereas for a solar mixture of roughly three quarters of molecular hydrogen and a quarter of atomic helium it is $\gamma = 1.4$. The ideal gas EOS can also be written in the form 
+where $\gamma$ is the ratio of specific heats or the adiabatic index. For a monoatomic gas it is $\gamma = \frac{5}{3}$, whereas for a solar mixture of roughly three quarters of molecular hydrogen and a quarter of atomic helium it is $\gamma \approx 1.53$ \citep{Nelson:2000p75}. The ideal gas EOS can also be written in the form 
 
 \begin{equation}
 p = s \rho^{\gamma}
