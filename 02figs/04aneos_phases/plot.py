@@ -14,7 +14,7 @@ from plot_helpers import *
 from const_cgs import *
 from numpy import log10, power
 
-plt.rc('savefig', dpi=450)
+plt.rc('savefig', dpi=300)
 mp.rc('text', usetex=True)
 #plt.rc('text', usetex=True)
 plt.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
@@ -30,13 +30,13 @@ aneosf = pt.openFile("aneos_tables.hdf5")
 #mattitle = r'$\textrm{ANEOS } H_2 O$'
 #rhoref = 1110
 
-#matstr = "04"
-#mattitle = r'$\textrm{ANEOS dunite}$'
-#rhoref = 3320
+matstr = "04"
+mattitle = r'$\textrm{ANEOS dunite}$'
+rhoref = 3320
 
-matstr = "05"
-mattitle = r'$\textrm{ANEOS iron}$'
-rhoref = 7850
+#matstr = "05"
+#mattitle = r'$\textrm{ANEOS iron}$'
+#rhoref = 7850
 
 UL = eval("aneosf.root.mat" + matstr + "UL")
 UH = eval("aneosf.root.mat" + matstr + "UH")
@@ -94,7 +94,7 @@ ax1L.text(3.*rhomin, power(10., 0.46*(log10(umin) + log10(umax))), r'$1500 pts$'
 
 
 ax1L.axis([rhomin, rhomed, umin, umax])
-ax1L.xaxis.set_ticks( [1.e-8 , 100.] )
+ax1L.xaxis.set_ticks( [rhomin, rhomed] )
 ax1H.axis([rhomed, rhomax, umin, umax])
 ax1H.yaxis.set_ticks_position("right")
 
@@ -123,7 +123,7 @@ ax2L.text(3.*rhomin, power(10., 0.44*(log10(smin) + log10(smax))), r'$1500 pts$'
 
 
 ax2L.axis([rhomin, rhomed, smin, smax])
-ax2L.xaxis.set_ticks( [1.e-8 , 100.] )
+ax2L.xaxis.set_ticks( [rhomin, rhomed] )
 ax2H.axis([rhomed, rhomax, smin, smax])
 ax2H.yaxis.set_ticks_position("right")
 ax2H.yaxis.set_label_position("right")
