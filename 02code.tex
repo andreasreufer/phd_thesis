@@ -615,27 +615,47 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 %%
 %   G R A V I T Y 
 %%
-\citep{Abel:2010p3297}
-\citep{Barnes:1986p2853}
-\citep{Monaghan:2005p2677}
-\citep{Ott:2003p3727}
-\citep{Price:2004p2613}
-\citep{Solenthaler:2008p3720}
-\citep{Springel:2003p3298}
-\citep{Monaghan:1992ARAA..30..543M}
-\citep{bryant2010computer}
-\cite{Springel:2005p51}
-\citep{Melosh:2007p3502}
 
 
 % 
 % TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH \\
 
 \section{Gravity}
+A self-gravitating continuum with the density field $\rho(\rv)$ has the gravitational potential $\Phi(\rv)$ which fulfills the Poisson equation for gravity
+\begin{equation}
+\label{ch02_sph01_eq038}
+\nabla ( \nabla \Phi(\rv) ) = \Delta \Phi(\rv) = 4 \pi G \rho(\rv)
+\end{equation}
 
-\subsection{N-Body problem}
+and acts on the fluid through the external potential term in the Navier-Stokes equation \ref{ch02_fld01_eq002}. Grid codes often find the potential by taking the fourier transform of the Poisson equation, which yields directly the fourier transform of the potential which again can be transformed back again into real space.
+
+When we approximate the density field by discrete particles, self-gravity reduces to the N-body problem, where the potential and gravitational acceleration for particle i is given by
+\begin{equation}
+\label{ch02_sph01_eq038}
+\av_j = - G \sum_{i \ne j} \frac{m_i}{r_{ij}^2} \frac{\rvij}{r_{ij}} 
+\end{equation}
+
+
 
 \subsection{Barnes and Hut Tree}
+give moments
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{06quadtree50_xy.pdf}
+\includegraphics[scale=0.3]{06quadtree50.pdf}
+\caption{50 particles randomly distributed in $2D$ and the partitioning into cells (upper plot) with the and the corresponding \emph{quadtree} (lower plot) The green dots represent particles, the red and blue squares cell nodes.}
+\label{ch02_eos02_fig05}
+\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
 
 % TODO: show error plot
 
@@ -643,17 +663,47 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 %   I M P L E M E N T A T I O N
 %%
 
+\subsection{Tree algorithms}
+inserting particles\\
+neighbour search\\
+gravity walk\\
+deleting a tree\\
+tree acceleration: show skip, next and parent pointers by simple tree examples\\
+
 
 
 
 
 \section{Implementation}
-\subsection{Organizing particles in Trees}
-building a tree\\
-deleting a tree\\
-neighbour search\\
-tree walks\\
-accelerating a tree: show skip, next and parent pointers by simple tree examples\\
+\subsection{SPHLATCH v1}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{07quadtree50_xy_TPL2.pdf}
+\includegraphics[scale=0.3]{07quadtree50_TPL2_stage3.pdf}
+\caption{A part of the same particle distribution like in figure \ref{fig:2D_BHtree}. The local domain is shaded green and contains 21 particles for which the acceleration has to be calculated. Bordering this zone is the ghost domain shaded grey, for which all particles are known. Beyond that, no particle information is available, only the corresponding parts of the global tree down to top-tree depth are known here. The plot below shows the corresponding tree. Note the filled top-tree nodes without any children nodes, they correspond to the domain where no particle information is available.}
+\label{fig:2D_BHtree_costzone}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.35]{07quadtree50_TPL2_stage1.pdf}\\ \vspace{1.0cm}
+\includegraphics[scale=0.35]{07quadtree50_TPL2_stage2a.pdf}\\
+\includegraphics[scale=0.35]{07quadtree50_TPL2_stage2b.pdf}\\
+\includegraphics[scale=0.35]{07quadtree50_TPL2_stage3.pdf}\\
+\caption{Building stages of the local tree for the computational domain in figure \ref{fig:2D_BHtree_costzone}. The first tree shows the empty top-tree, a full quad-tree with depth 2. Then the local and the ghost particles are inserted leading to the second and third tree. As a final step the top-tree is summed up globally, filling up the 4 previously empty cell nodes. Top-tree cell nodes are coloured blue, normal cell nodes red and particles green. Ghost particles or cells are coloured grey. Non-filled shapes represent empty nodes.}
+\label{fig:2D_BHtree_building}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{SPHLATCH v2}
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -672,10 +722,11 @@ accelerating a tree: show skip, next and parent pointers by simple tree examples
 \end{center}
 \end{figure}
 
-\subsection{Tree algorithms}
+
 
 \subsection{Tree parallelization: shared vs. distributed memory}
 intro: shared vs. distributed memory\\
+
 
 SPHLATCH v1\\
 parallelizing a particle code: distributed sums vs. ghosts approach\\
@@ -693,26 +744,38 @@ caching issues\\
 
 building the tree:
 
+\subsection{Future of particle codes}
 mention future of parallel computing: CPU vs. GPU computing, stream computing
-trees on GPUs
+trees on GPUs (references)
 
-\section{Tests?}
+
+
+\section{Initial conditions}
+initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
+use of spheres for simplicity reason
+
+
+\section{Post-processing}
+clump detection\\
+FOF vs. potential, not parallelized\\
+
+\section{Tests}
 shocktube
 simple gravity tree
 
-\section{Algorithms}
-clump detection\\
-FOF vs. potential, not parallelized\\
-initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
-
-\subsubsection{Neighbour search}
-
-\subsection{setting up initial conditions}
-use of spheres for simplicity reason
-
+\citep{Abel:2010p3297}
 \citep{Barnes:1986p2853}
+\citep{bryant2010computer}
+\citep{Melosh:2007p3502}
 \citep{Monaghan:2005p2677}
+\citep{Monaghan:1992ARAA..30..543M}
+\citep{Ott:2003p3727}
 \citep{Price:2004p2613}
+\citep{Solenthaler:2008p3720}
+\citep{Springel:2003p3298}
+\citep{Springel:2005p51}
+
+
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
