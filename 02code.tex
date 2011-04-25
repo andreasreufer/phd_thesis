@@ -617,9 +617,6 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 %%
 
 
-% 
-% TODO: standard SPH vs. integrated density, surface tension issues, miscible SPH \\
-
 \section{Gravity}
 A self-gravitating continuum with the density field $\rho(\rv)$ has the gravitational potential $\Phi(\rv)$ which fulfills the Poisson equation for gravity
 \begin{equation}
@@ -634,6 +631,8 @@ When we approximate the density field by discrete particles, self-gravity reduce
 \label{ch02_sph01_eq038}
 \av_j = - G \sum_{i \ne j} \frac{m_i}{r_{ij}^2} \frac{\rvij}{r_{ij}} 
 \end{equation}
+
+Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE). An example of such an application are the evolution and accretion of a proto-lunar into a Moon as done by \cite{Kokubo:2000p2195}.
 
 
 
