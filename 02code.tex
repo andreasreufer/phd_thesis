@@ -634,19 +634,155 @@ When we approximate the density field by discrete particles, self-gravity reduce
 
 Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE). An example of such an application are the evolution and accretion of a proto-lunar into a Moon as done by \cite{Kokubo:2000p2195}.
 
+\subsection{Multipole approximation}
+Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They all make use of the strong $r^{-2}$ dependence of the gravitational field on distance, which means that the most significant contributions in the direct sum come from the nearest particles for more or less equally massive particles. The field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles are summarized into clusters and their field is approximated as the one of a single particle with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
+
+\begin{align}
+\av_j &= - G \sum_{i~\epsilon~C} \frac{m_i}{r_{ij}^2} \frac{\rv_{ij}}{r_{ij}} \approx - G \frac{m_{C}}{r_{Cj}} \frac{\rv_{Cj}}{r_{Cj}} ~~~~ \text{when}~r_{ij} \gg r_{jk} ~~~ \forall j,k ~ \epsilon~C \\
+m_C &= \sum_{i~\epsilon~C} m_i ~~~~ \rv_C = \frac{1}{m_C} \sum_{i~\epsilon~C} \rv_i m_i ~~~~ \rv_{Cj} = \rv_j - \rv_C 
+\end{align}
+
+This is the \emph{monopole approximation}. In more general terms the total mass of the cluster is the rank-0 monopole tensor $M$ with the center of mass $X$
+
+\begin{align}
+M & = \sum_{c} m_{c} \\
+\Xv  & = \frac{1}{M} \sum_{c} m_{c} \rv_{c} ~~~~~~~~ \text{for}~M > 0
+\end{align}
+
+We use the same indices as in \cite{McMillan:1993p43}, where $i,j$ number vector components and $c$ indexes particles in a cluster or clusters in a group of clusters. The next highest non-zero multipole term is the traceless rank-2 quadrupole tensor
+
+\begin{equation}
+Q_{ij} = \sum_{c} m_c \big( 3 r_{i, c} r_{j, c} - \rv_{c}^2 \delta_{i j} \big) \\
+\end{equation}
+
+where $r_{i,c} = \Xv_i - \rv_{i,c}$ denotes the $i$-th component of the distance vector between a cluster's particle $c$ and the center of mass of the cluster. The rank-3 octupole tensor can be reduced to a rank-2 tensor 
+
+\begin{equation}
+S_{ij}  = \sum_{c} m_c \big[ 5 \big( 3 - 2  \delta_{i j} \big) r_{i, c}^2 - 3 \rv_{c}^2 \big] r_{j, c}\\
+\end{equation}
+
+and the single rank-0 component
+
+\begin{equation}
+S_{1 2 3} = 15 \sum_{c} m_c r_{1, c} r_{2, c} r_{3, c}
+\end{equation}
+
+Higher order moments are usually not used and skipped here. The field of a group of cluster can be approximated by summing up the multipole moments of the individual clusters $c$. The mass can simply by summed up:
+
+\begin{equation}
+M = \sum_{c} M_{c}
+\end{equation}
+
+The quadrupole tensor now also includes the quadrupole moments of the individual cluster:
+\begin{equation}
+\label{eq_quadrupole}
+Q_{ij} = \sum_{c} M_{c} \big( 3 r_{i, c} r_{j, c} - \rv_{c}^{2} \delta_{i j} \big) + Q_{i j, c} 
+\end{equation}
+
+and finally the octupole tensor yields:
+
+\begin{align}
+S_{ij} = \sum_{c}&  M_{c} \big[ 5 \big( 3 - 2 \delta_{i,j} \big) r_{i, c}^{2} - 3 \rv_{c}^2 \big] r_{j, c} 
++ 5 \big( 1 - \delta_{i j} \big) r_{i, c} Q_{i j, c} \nonumber \\
+&+ \frac{5}{2} r_{j, c} Q_{i i, c} - \sum_{l} \big[ r_{l, c} Q_{j l, c} \big] + S_{i j, c} \\
+S_{1 2 3} =& 15 \sum_{c} M_{c} r_{1, c} r_{2, c} r_{3, c} + \frac{5}{3} \big( r_{1, c} Q_{2 3, c} + r_{2, c} Q_{3 1, c} + r_{3, c} Q_{1 2, c} \big) + S_{1 2 3, c }
+\end{align}
+
+The center of mass of the group of clusters is simply given by 
+\begin{equation}
+\Xv = \frac{1}{M} \sum_{c} M_{c} \Xv_{c} ~~~~~~~~  M > 0
+\end{equation}
+
+Note that particles can be treated like clusters with vanishing multipole moments.
+
+The gravitational potential of a cluster can now be approximated by its multipole expansion:
+\begin{equation}
+\phi(\rv) = G \bigg(
+\underbrace{ - \frac{M}{r} }_{monopole} ~ 
+\underbrace{ - \frac{Q_{i j}}{r^{3}} \frac{r_{i} r_{j} }{2 r^{2} } }_{quadrupole}~ 
+\underbrace{ - \frac{S_{i j}}{r^{4}} \frac{r_{i}^2 r_{j}}{2 r^{3} } + \frac{ S_{1 2 3} }{r^{4}}\frac{ r_{1} r_{2} r_{3} }{2 r^{3}} }_{octupole}~ 
++ O\Big(\frac{1}{r^{7}}\Big) \bigg)
+\end{equation}
+
+and so the acceleration for a point mass at $\rv$ in this potential yields
+
+\begin{align}
+a_{k} &= - \nabla_{k} \phi(\rv) \approx - G \bigg(
+\underbrace{ \frac{M}{r^{2}} \frac{r_{k}}{r} }_{monopole}+ 
+\underbrace{ \frac{Q_{i j}}{r^{4}}
+\big( \frac{\delta_{i k} r_{j} }{r} + \frac{5 r_{i} r_{j} r_{k} }{2r^{3}} \big)
+}_{quadrupole} \nonumber \\
+&+ \underbrace{ \frac{S_{i j}}{r^{5}}
+\big( \frac{ \delta_{i k} r_{i} r_{j} }{r^{2}}
++ \frac{ \delta_{j k} r_{i}^{2} }{2 r^{2} }
+- \frac{7 r_{i}^{2} r_{j} r_{k} }{r^{4} } \big) 
+ + \frac{S_{1 2 3}}{r^{5} }
+\big( \frac{\delta_{1 k} r_{2} r_{3} + \delta_{2 k} r_{3} r_{1} + \delta_{3 k} r_{1} r_{2}}{2 r^{2}} 
+- \frac{7 r_{1} r_{2} r_{3} r_{k} }{2 r^{4}}\big) 
+}_{octupole}
+\bigg)
+\end{align}
 
 
 \subsection{Barnes and Hut Tree}
-give moments
+\cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. But first we need to know a few basic things about trees. A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. This means a node is the \emph{root node} and the connections between the nodes have a direction. Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
+nodes and has exactly one parent, expect for the root node which has no parent. Nodes can be assigned a depth. The root node per definition has depth $0$ and the children of a node have the inherit the depth of the parent increased by one. Figure \ref{fig:simpletree} shows a simple tree. The blue square represents the root node and has two children with depth 1, while on of this children has again two children with depth 2. Tree data structures are usually drawn upside-down, this means with the root on top and increasing depth to the bottom.
 
-\begin{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{08simpletree.pdf}
+\caption{A simple tree. the squares represent nodes which are interconnected by arrows pointing from the parent node to its children}
+\label{fig:simpletree}
+\end{center}
+\end{figure}
+
+Nodes without children are called \emph{leaf nodes}. A disjoint set of trees is called a \emph{forest}. One notices that the definition for a tree does not only fit the whole set of nodes of a tree, but also subsets. Every node can be taken as a root node and forms again a tree, also called a \emph{subtree} of the tree. Or one can say, that the children of a node form a forest of trees.
+
+A tree datastructure can be used to recursively subdivide space. The basic idea is to take a volume, assign this volume to a node in a tree, then subdivide this volume in disjoint subvolumes and assign these subvolumes to the children of the node. So the subdivision of space can be mapped onto a tree.\ The easiest form of subdivision is using volumes aligned with the dimensions and having the same side length in each dimension. So in 2D this corresponds to squares and in 3D to cubes along the axis. This volumes are then divided along each dimension into two equal-length intervals, which leads to $2^d$ subvolumes in $d$ dimensions. So if we have an arbitrary volume with a minimum $x_{i,min}$ and a maximum $x_{i,max}$ in each coordinate $i$ we can enclose this volume with a volume with sidelength $l$ and the center $x_{i,c}$
+
+\begin{equation}
+l = \max_{i} ( x_{i,max} - x_{i,min})  ~~~~ x_{i,center}= \frac{ x_{i,min} + x_{i,max} }{2}
+\end{equation}
+
+The $2^{d}$ subvolumes indexed with $j$ have a side length of $\frac{l}{2}$ and center vector components $i = 0 \dots d$, where $d_{i}$ stands for $i^{th}$ digit of the binary representation of the subvolume index $j$
+
+\begin{equation}
+x_{i, j~center} = x_{i,center} + l \frac{(-1)^{d_{i} + 1}}{2} ~~~~~ d_{i} = \frac{j  - \sum_{k \ne i} ( j \mod 2^{k} )}{2^{i}}
+\end{equation}
+
+In 2D this subvolumes are called \emph{quadrants}, in 3D \emph{octants}. The corresponding trees to which this subdivision can be mapped to are called \emph{quadtrees} and \emph{octrees}, having up to 4 and 8 children per node.
+
+The Barnes \& Hut algorithm described in \cite{1986Natur.324..446B} subdivides the computational universe containing $N$ gravitationally interacting particles in subvolumes, called \emph{cells}. The particles are children of cell nodes. The tree must be built in a way, that a subvolume of a cell, an octant in 3D, contains no more than one particle. If it does, the subvolume can be again subdivided into a number of cells until the requirement is fulfilled. An example of such a tree is shown in figure \ref{fig:2D_BHtree} for 50 randomly distrbuted particles in 2D. We note that no cell contains more than one particle. Shown below is the corresponding quad-tree to this subdivision of space for the particles
+\begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{06quadtree50_xy.pdf}
 \includegraphics[scale=0.3]{06quadtree50.pdf}
 \caption{50 particles randomly distributed in $2D$ and the partitioning into cells (upper plot) with the and the corresponding \emph{quadtree} (lower plot) The green dots represent particles, the red and blue squares cell nodes.}
-\label{ch02_eos02_fig05}
+\label{fig:2D_BHtree}
 \end{center}
-\end{figure}
+\end{figure}\\
+
+Each cell in the tree represents now a clump of particles. For each cell a center of mass and its multipole moments can be calculated according to section \ref{multipoleapprox}. This calculation is done \emph{bottom-up} with a pre-order tree walk, so that the multipole moments of the children of node are already calculated, when the multipole moments of the node itself are to be calculated. We end up finally with a tree of multipole moments for all the particle clumps given by the subtrees in the tree.\\
+
+For each particle the acceleration due to gravity can now be calculated according to equation \ref{eq:mpacc}. As already mentioned, the multipole approximation only holds, when then size of the particle cluster is small compared to distance of the particle to the center of mass of the cluster $r_{part- cell}$. A good measure for the size of cluster is the cell size $l$, in which it is contained. The cluster cannot be bigger than the cell and it is usually not smaller by magnitudes expect in pathological cases. The cell sizes get smaller by descending in the tree, so that depending of the particle-cell distance the cell size gets small enough to use the multipole approximation. To decide whether it is necessary to descend further down in the tree, the \emph{multipole acceptance criteron} short \emph{MAC} is used. The one proposed by \cite{1986Natur.324..446B} is
+
+\begin{equation}
+\frac{l}{r_{part-cell}} \le \theta ~~~~ \theta = 0.6 \dots 1.0 ~~~~ r_{part-cell} = | \Xv - \rv_{part}|
+\end{equation}
+
+where $\theta$ is the \emph{opening angle} chosen depending on the desired accuracy. The smaller the opening angle, the more accurate the calculation becomes. When $\theta = 0$ no particle cluster cell fulfills the MAC and the tree walk is completed down to each particle, leading again to the direct summation with complexity O($N^2$). For $\theta \ge 1$ an additional error may be introduced, as depending on the distance form the particle to the center of mass of its own cluster the MAC may be fulfilled, leading to a acceleration calculation based on the multipole moments which include the particle itself. This error is called \emph{self-acceleration}. The choice of the MAC determines directly the efficiency and prescision of the Barnes \& Hut method.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
