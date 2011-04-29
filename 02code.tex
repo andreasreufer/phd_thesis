@@ -632,7 +632,10 @@ When we approximate the density field by discrete particles, self-gravity reduce
 Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE). An example of such an application are the evolution and accretion of a proto-lunar into a Moon as done by \cite{Kokubo:2000p2195}.
 
 \subsection{Multipole approximation}
-Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They all make use of the strong $r^{-2}$ dependence of the gravitational field on distance, which means that the most significant contributions in the direct sum come from the nearest particles for more or less equally massive particles. The field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles are summarized into clusters and their field is approximated as the one of a single particle with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
+Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They all make use of the strong $r^{-2}$ dependence of the gravitational field on distance, which means that the most significant contributions in the direct sum come from the nearest particles for more or less equally massive particles. 
+
+
+The field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles are summarized into clusters and their field is approximated as the one of a single particle with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
 
 \begin{align}
 \label{ch02_grav02_eq001}
@@ -784,22 +787,30 @@ where $\theta$ is the \emph{opening angle} chosen depending on the desired accur
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.6]{09bfcomp}
-\caption{Relative acceleration errors, due to the multipole approximation $\Delta_{\av_{mp}} = \frac{|\av_{mp}| - |\av|}{|\av|}$ for a self-gravitating 50'000 particles sphere using an opening angle $\theta = 0.7$.}
+\includegraphics[scale=0.8]{09bfcomp}
+\caption{The left plot shows the relative acceleration errors, due to the multipole approximation $\Delta_{\av_{mp}} = \frac{|\av_{mp}| - |\av|}{|\av|}$ for a self-gravitating spheres using an opening angle $\theta = 0.7$. For all three resolutions, the relative errors are below $10^{-3}$ for more than 90\% of the particles. 
+The right plot shows the execution time for one self-gravity run for the Barnes \& Hut tree and the brute force direct summation for different numbers of particles and an opeing angle of $\theta = 0.7$. The code used is the SPHLATCH v2 implementation discussed below with one CPU. Direct summation execution time follows a $O(N^2)$ scaling (dashed line), while the Barnes \& Hut tree shows a more complex scaling. Speed-ups ($\times 20-190$) are considerably for moderate number of particles.}
 \label{ch02_grav02_fig03}
 \end{center}
 \end{figure}
 
-
-
-
-% TODO: show error plot
 
 %%
 %   I M P L E M E N T A T I O N
 %%
 
 \subsection{Tree algorithms}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.40]{10tree_no_ptr.pdf}
+\includegraphics[scale=0.40]{10tree_next_ptr.pdf}
+\includegraphics[scale=0.40]{10tree_next_ptr.pdf}
+\caption{The same tables as in \ref{ch02_eos02_fig02} for \emph{dunite}. In the grey zones, ANEOS returns valid pressures and sound speeds, but does not return any particular phase information.}
+\label{ch02_eos02_fig04}
+\end{center}
+\end{figure}
 
 
 
@@ -827,6 +838,8 @@ show ghost approach\\
 
 disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
 
+
+% number of pointers, memory requirements
 
 \begin{figure}[htbp]
 \begin{center}
