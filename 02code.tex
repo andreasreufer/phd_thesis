@@ -735,13 +735,15 @@ a_{k} &= - \nabla_{k} \phi(\rv) \approx - G \bigg(
 
 
 \subsection{Barnes and Hut Tree}
-\cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. But first we need to know a few basic things about trees. A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. This means a node is the \emph{root node} and the connections between the nodes have a direction. Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
+\cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. But first we need to know a few basic things about trees: A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. One node is defined as the \emph{root node}.
+
+This means a node is the \emph{root node} and the connections between the nodes have a direction. Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
 nodes and has exactly one parent, expect for the root node which has no parent. Nodes can be assigned a depth. The root node per definition has depth $0$ and the children of a node have the inherit the depth of the parent increased by one. Figure \ref{fig:simpletree} shows a simple tree. The blue square represents the root node and has two children with depth 1, while on of this children has again two children with depth 2. Tree data structures are usually drawn upside-down, this means with the root on top and increasing depth to the bottom.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics{08simpletree.pdf}
-\caption{A simple tree. the squares represent nodes which are interconnected by arrows pointing from the parent node to its children}
+\caption{A simple tree. Squares represent nodes which are interconnected by arrows pointing from the parent node to its children. The blue square is called the root node and has depth $0$.}
 \label{ch02_grav02_fig01}
 \end{center}
 \end{figure}
@@ -765,11 +767,12 @@ x_{i, j~center} = x_{i,center} + l \frac{(-1)^{d_{i} + 1}}{2} ~~~~~ d_{i} = \fra
 In 2D this subvolumes are called \emph{quadrants}, in 3D \emph{octants}. The corresponding trees to which this subdivision can be mapped to are called \emph{quadtrees} and \emph{octrees}, having up to 4 and 8 children per node.
 
 The Barnes \& Hut algorithm described in \cite{1986Natur.324..446B} subdivides the computational universe containing $N$ gravitationally interacting particles in subvolumes, called \emph{cells}. The particles are children of cell nodes. The tree must be built in a way, that a subvolume of a cell, an octant in 3D, contains no more than one particle. If it does, the subvolume can be again subdivided into a number of cells until the requirement is fulfilled. An example of such a tree is shown in figure \ref{fig:2D_BHtree} for 50 randomly distrbuted particles in 2D. We note that no cell contains more than one particle. Shown below is the corresponding quad-tree to this subdivision of space for the particles
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{06quadtree50_xy.pdf}
 \includegraphics[scale=0.3]{06quadtree50.pdf}
-\caption{50 particles randomly distributed in $2D$ and the partitioning into cells (upper plot) with the and the corresponding \emph{quadtree} (lower plot) The green dots represent particles, the red and blue squares cell nodes.}
+\caption{50 particles randomly distributed in $2D$ and the subdivision into cells (upper plot). The corresponding quad-tree is shown in the figure below. Green dots the represent the particles, while red squares indicate cell nodes. The root cell node is highlighted as a blue square.}
 \label{ch02_grav02_fig02}
 \end{center}
 \end{figure}
@@ -798,8 +801,14 @@ The right plot shows the execution time for one self-gravity run for the Barnes 
 %%
 %   I M P L E M E N T A T I O N
 %%
-
-\subsection{Tree algorithms}
+\subsection{Tree implementation and algorithms}
+% types of tree algorithms
+% inserting particles\\
+% neighbor search\\
+% gravity walk\\
+% deleting a tree\\
+% implementing trees (pointers)
+% tree acceleration: show skip, next and parent pointers by simple tree examples\\
 
 
 \begin{figure}
@@ -807,18 +816,13 @@ The right plot shows the execution time for one self-gravity run for the Barnes 
 \includegraphics[scale=0.40]{10tree_no_ptr.pdf}
 \includegraphics[scale=0.40]{10tree_next_ptr.pdf}
 \includegraphics[scale=0.40]{10tree_skip_ptr.pdf}
-\caption{The same tables as in \ref{ch02_eos02_fig02} for \emph{dunite}. In the grey zones, ANEOS returns valid pressures and sound speeds, but does not return any particular phase information.}
+\caption{An excerpt from a  tree with particles at different depths. Grey arrows depict the connections between the tree nodes. In the middle plot, the \emph{next}-pointers are shown. Following them results in a post-order tree walk along all nodes. The very last \emph{next}-pointer The right plot shows the \emph{next}-pointers, lead to the next node with an equal or smaller depth. This \emph{next}- and \emph{skip} pointers allow tree walks to be implemented with non-recursive algorithms.}
 \label{ch02_eos02_fig04}
 \end{center}
 \end{figure}
 
 
 
-inserting particles\\
-neighbour search\\
-gravity walk\\
-deleting a tree\\
-tree acceleration: show skip, next and parent pointers by simple tree examples\\
 
 
 
