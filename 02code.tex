@@ -733,11 +733,10 @@ a_{k} &= - \nabla_{k} \phi(\rv) \approx - G \bigg(
 \bigg)
 \end{align}
 
-
 \subsection{Barnes and Hut Tree}
 \cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. But first we need to know a few basic things about trees: A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. One node is defined as the \emph{root node}.
 
-This means a node is the \emph{root node} and the connections between the nodes have a direction. Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
+Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
 nodes and has exactly one parent, expect for the root node which has no parent. Nodes can be assigned a depth. The root node per definition has depth $0$ and the children of a node have the inherit the depth of the parent increased by one. Figure \ref{fig:simpletree} shows a simple tree. The blue square represents the root node and has two children with depth 1, while on of this children has again two children with depth 2. Tree data structures are usually drawn upside-down, this means with the root on top and increasing depth to the bottom.
 
 \begin{figure}[htbp]
@@ -802,13 +801,67 @@ The right plot shows the execution time for one self-gravity run for the Barnes 
 %   I M P L E M E N T A T I O N
 %%
 \subsection{Tree implementation and algorithms}
-% types of tree algorithms
-% inserting particles\\
+The actual implementation of the Barnes \& Hut method described above consists of two main parts: The tree data structure and the algorithms which are applied onto the data structure.
+
+All the information of the tree lies in the nodes: They contain information about their connection to the parent node and to possible children. Additionally they also contain a payload, the information about the volume in space they represent, like the center, the center of mass and the multipole moments of the particles contained in the cell. 
+
+In modern programming languages like FORTRAN or C, the most common approach for implementing a tree data structure, is to define node data structures and then dynamically allocate them in memory. Connections between the nodes can be realized with pointers, pointing to other nodes in the tree. Walks in the tree can then be performed by following those pointer from node to node. Figure \ref{ch02_grav02_fig04} shows the content of a cell node and two particle nodes in an octree. Not shown is the payload data. Both types of node have a pointer to the parent node, so that also upward walks in the tree are possible. The cell node additionally has eight pointers to possible children. If there is no child for the corresponding sub-volume, the pointer has a special value so that it becomes clear that the pointer is invalid. The \emph{next} and \emph{skip} pointers will be explained later.
+
+Tree walks can now be performed in such a tree data structure by defining a current pointer, which points to the current node being processed in a tree walk. By setting this pointer to a child or a parent of a node, movements in the tree can be performed. 
+
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{11cell_wiring.pdf}
+\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree. Note that a \it{next} pointer }
+\label{ch02_grav02_fig04}
+\end{center}
+\end{figure}
+
+With the root node as the starting point, there exist two particular ways of traversing the tree downward and applying an action to every encountered node : Pre-order and post-order traversal. Both traversals can be realized with recursive algorithms. Figure \ref{ch02_grav02_fig05} shows the two algorithms: The post-order algorithm first executes itself on the children and performs the action after that. So the action is always performed on a child, before it is performed on its parent. This algorithm is therefore suited for calculations like the multipole summation, where the multipole moments of a cell depend on its children. The pre-order algorithm works exactly the other way round: First the action is performed on the parent node and only after that the algorithm executes itself recursively on the children.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{12orderwalks.pdf}
+\caption{Post-order vs. pre-order recursors}
+\label{ch02_grav02_fig05}
+\end{center}
+\end{figure}
+
+The Barnes \& Hut tree gravity calculation method requires the following tree algorithms: Inserting particles into the tree, calculating multipole moments, approximating the self-gravity forces and finally the tree also needs to be deleted again. All those algorithms can be derived from two walks presented above.
+
+Figure \ref{ch02_grav02_fig06} shows the tree insertion algorithm. For a particle which was not yet  inserted into the tree, the walk starts at the root node. The sub-volume where the particle is included is checked for an existing node. If there is no node, a new particle node is created there and the algorithm terminates. If there already exists a cell node, the algorithm simply opens the cell and executes ifself at the current position. The third possibility is, that there already exists a particle node (B). In that case particle B is replaced by a cell node and the particle is placed as a child of the new cell. The particle inserter is then run again at the position of the new cell.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{13algo_particle_insert.pdf}
+\caption{Algorithm for the insertion of particle A.}
+\label{ch02_grav02_fig06}
+\end{center}
+\end{figure}
+
+As mentioned before, the multipole moments can simply be calculated by a recursive post-order algorithm, as shown in figure \ref{ch02_grav02_fig07}.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{14algo_multipoles.pdf}
+\includegraphics[scale=0.6]{15algo_treedelete.pdf}
+\caption{recursive algorithm for Multipole calculation}
+\label{ch02_grav02_fig07}
+\end{center}
+\end{figure}
+
+
+
+% setting up next & skip pointer \\
 % neighbor search\\
 % gravity walk\\
 % deleting a tree\\
 % implementing trees (pointers)
 % tree acceleration: show skip, next and parent pointers by simple tree examples\\
+% SPHLATCHv2: cost zone algorithms
 
 
 \begin{figure}
@@ -880,24 +933,6 @@ show cost (gravity, NS, total) for giant impact\\
 caching issues\\
 
 building the tree:
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.6]{cell_wiring.pdf}
-\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree. Note that a \it{next} pointer }
-\label{fig02walks}
-\end{center}
-\end{figure}
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.6]{orderwalks.pdf}
-\caption{Post-order vs. pre-order recursors}
-\label{fig02walks}
-\end{center}
-\end{figure}
 
 
 
