@@ -741,6 +741,7 @@ nodes and has exactly one parent, expect for the root node which has no parent. 
 
 \begin{figure}[htbp]
 \begin{center}
+\includegraphics[scale=1.0]{10tree_depth.pdf}
 \includegraphics{08simpletree.pdf}
 \caption{A simple tree. Squares represent nodes which are interconnected by arrows pointing from the parent node to its children. The blue square is called the root node and has depth $0$.}
 \label{ch02_grav02_fig01}
@@ -809,9 +810,6 @@ In modern programming languages like FORTRAN or C, the most common approach for 
 
 Tree walks can now be performed in such a tree data structure by defining a current pointer, which points to the current node being processed in a tree walk. By setting this pointer to a child or a parent of a node, movements in the tree can be performed. 
 
-
-
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{11cell_wiring.pdf}
@@ -842,23 +840,35 @@ Figure \ref{ch02_grav02_fig06} shows the tree insertion algorithm. For a particl
 \end{center}
 \end{figure}
 
-As mentioned before, the multipole moments can simply be calculated by a recursive post-order algorithm, as shown in figure \ref{ch02_grav02_fig07}.
+As mentioned before, the multipole moments can simply be calculated by a recursive post-order algorithm. Figure \ref{ch02_grav02_fig07} shows the corresponding algorithm. Tree deletion can also be accomplished by using a post-order recursive algorithm, which can be seen on the right side of figure \ref{ch02_grav02_fig07}. Deleting the children of a cell before the cell itself guarantees, that all cells are still connected to the tree until they are deleted.
+
+Recursive algorithms are implemented in a procedural language like C or FORTRAN, as functions calling themselves recursively. While implementing tree algorithms in a recursive way results in simple algorithms, it introduces a performance penalty. Calling a procedure introduces a computational overhead \citep{bryant2010computer}. It is therefore desirable to implement the most costly tree algorithms in a non-recursive way. This can be done with the introduction of \emph{next}- and \emph{skip} pointers. The basic idea is to store the next node a certain tree walk would end up at for each node. Figure \ref{ch02_grav02_fig08} shows an example of a small tree. The grey arrows depict the connections between the tree nodes. The black arrows in the middle part of the figure now show the \emph{next}-pointers, which point to the next node in a tree walk compromising all tree nodes. Note that all tree nodes have a \emph{next}-pointer. Another useful pointer for the Barnes \& Hut algorithm is the \emph{skip}-pointer. It points to the next node the tree walk leads too, if the cell node is accepted by the multipole acceptance criterion and its subtree is therefore skipped. The right part of figure \ref{ch02_grav02_fig08} shows the skip pointers for the small example tree. A \emph{skip}-pointer of a cell always points to a sibling node at the same or a smaller depth than the cell. It is crucial, that it only skips the subtree of its own cell and no other cells. 
+
+
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{14algo_multipoles.pdf}
 \includegraphics[scale=0.6]{15algo_treedelete.pdf}
-\caption{recursive algorithm for Multipole calculation}
+\caption{recursive algorithms for calculating the multipole moments in the tree and for deleting all tree nodes. Note that the recursive part of the algorithm does not include going to the root node.}
+\label{ch02_grav02_fig07}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{16algo_neighsearch.pdf}
+\caption{A non-recursive algorithm }
 \label{ch02_grav02_fig07}
 \end{center}
 \end{figure}
 
 
 
-% setting up next & skip pointer \\
+% setting up next & skip pointer -> graphics\\
 % neighbor search\\
-% gravity walk\\
-% deleting a tree\\
+% gravity walk \\
+% deleting a tree \\
 % implementing trees (pointers)
 % tree acceleration: show skip, next and parent pointers by simple tree examples\\
 % SPHLATCHv2: cost zone algorithms
@@ -866,17 +876,14 @@ As mentioned before, the multipole moments can simply be calculated by a recursi
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.40]{10tree_no_ptr.pdf}
-\includegraphics[scale=0.40]{10tree_next_ptr.pdf}
-\includegraphics[scale=0.40]{10tree_skip_ptr.pdf}
+\includegraphics[scale=0.80]{10tree_depth.pdf}
+\includegraphics[scale=0.35]{10tree_no_ptr.pdf}
+\includegraphics[scale=0.35]{10tree_next_ptr.pdf}
+\includegraphics[scale=0.35]{10tree_skip_ptr.pdf}
 \caption{An excerpt from a  tree with particles at different depths. Grey arrows depict the connections between the tree nodes. In the middle plot, the \emph{next}-pointers are shown. Following them results in a post-order tree walk along all nodes. The very last \emph{next}-pointer The right plot shows the \emph{next}-pointers, lead to the next node with an equal or smaller depth. This \emph{next}- and \emph{skip} pointers allow tree walks to be implemented with non-recursive algorithms.}
-\label{ch02_eos02_fig04}
+\label{ch02_grav02_fig08}
 \end{center}
 \end{figure}
-
-
-
-
 
 
 
@@ -897,6 +904,7 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 
 
 % number of pointers, memory requirements
+% show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
 
 \begin{figure}[htbp]
 \begin{center}
