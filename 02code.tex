@@ -842,9 +842,6 @@ Figure \ref{ch02_grav02_fig06} shows the tree insertion algorithm. For a particl
 
 As mentioned before, the multipole moments can simply be calculated by a recursive post-order algorithm. Figure \ref{ch02_grav02_fig07} shows the corresponding algorithm. Tree deletion can also be accomplished by using a post-order recursive algorithm, which can be seen on the right side of figure \ref{ch02_grav02_fig07}. Deleting the children of a cell before the cell itself guarantees, that all cells are still connected to the tree until they are deleted.
 
-Recursive algorithms are implemented in a procedural language like C or FORTRAN, as functions calling themselves recursively. While implementing tree algorithms in a recursive way results in simple algorithms, it introduces a performance penalty. Calling a procedure introduces a computational overhead \citep{bryant2010computer}. It is therefore desirable to implement the most costly tree algorithms in a non-recursive way. This can be done with the introduction of \emph{next}- and \emph{skip} pointers. The basic idea is to store the next node a certain tree walk would end up at for each node. Figure \ref{ch02_grav02_fig08} shows an example of a small tree. The grey arrows depict the connections between the tree nodes. The black arrows in the middle part of the figure now show the \emph{next}-pointers, which point to the next node in a tree walk compromising all tree nodes. Note that all tree nodes have a \emph{next}-pointer. Another useful pointer for the Barnes \& Hut algorithm is the \emph{skip}-pointer. It points to the next node the tree walk leads too, if the cell node is accepted by the multipole acceptance criterion and its subtree is therefore skipped. The right part of figure \ref{ch02_grav02_fig08} shows the skip pointers for the small example tree. A \emph{skip}-pointer of a cell always points to a sibling node at the same or a smaller depth than the cell. It is crucial, that it only skips the subtree of its own cell and no other cells. 
-
-
 
 \begin{figure}[htbp]
 \begin{center}
@@ -855,24 +852,7 @@ Recursive algorithms are implemented in a procedural language like C or FORTRAN,
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.6]{16algo_neighsearch.pdf}
-\caption{A non-recursive algorithm }
-\label{ch02_grav02_fig07}
-\end{center}
-\end{figure}
-
-
-
-% setting up next & skip pointer -> graphics\\
-% neighbor search\\
-% gravity walk \\
-% deleting a tree \\
-% implementing trees (pointers)
-% tree acceleration: show skip, next and parent pointers by simple tree examples\\
-% SPHLATCHv2: cost zone algorithms
-
+Recursive algorithms are implemented in a procedural language like C or FORTRAN, as functions calling themselves recursively. While implementing tree algorithms in a recursive way results in simple algorithms, it introduces a performance penalty. Calling a procedure introduces a computational overhead \citep{bryant2010computer}. It is therefore desirable to implement the most costly tree algorithms in a non-recursive way. This can be done with the introduction of \emph{next}- and \emph{skip} pointers. The basic idea is to store the next node a certain tree walk would end up at for each node. Figure \ref{ch02_grav02_fig08} shows an example of a small tree. The grey arrows depict the connections between the tree nodes. The black arrows in the middle part of the figure now show the \emph{next}-pointers, which point to the next node in a tree walk compromising all tree nodes. Note that all tree nodes have a \emph{next}-pointer. Another useful pointer for the Barnes \& Hut algorithm is the \emph{skip}-pointer. It points to the next node the tree walk leads too, if the cell node is accepted by the multipole acceptance criterion and its subtree is therefore skipped. The right part of figure \ref{ch02_grav02_fig08} shows the skip pointers for the small example tree. A \emph{skip}-pointer of a cell always points to a sibling node at the same or a smaller depth than the cell. It is crucial, that it only skips the subtree of its own cell and no other cells. 
 
 \begin{figure}
 \begin{center}
@@ -884,6 +864,37 @@ Recursive algorithms are implemented in a procedural language like C or FORTRAN,
 \label{ch02_grav02_fig08}
 \end{center}
 \end{figure}
+
+The two most costly tree algorithms, the gravity walk and the neighbour search, can now be realized in a non-recursive way. Figure \ref{ch02_grav02_fig09} shows the flow diagram for the gravity walk. The current pointer is set to the root node and the walk starts. First it is checked, whether the current pointer still points to a valid node. If not the walk has terminated. If the node is valid, the type of the node is checked. If the node is a cell node, the multipole acceptance criterion is evaluated. In case the MAC is fulfilled, the multipole moments of the cell are used to approximate the gravity force all particles represented by this cell node onto the single particle the force has to be evaluated for. After that, following the \emph{skip} pointer leads to the next node in the tree. In case the evaluated node is a particle, the 
+
+% TODO: give a memory map of nodes, cachelines
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{19algo_gravwalk.pdf}
+\caption{A non-recursive algorithm for the Barnes \& Hut tree walk.}
+\label{ch02_grav02_fig09}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{16algo_neighsearch.pdf}
+\caption{A non-recursive algorithm }
+\label{ch02_grav02_fig10}
+\end{center}
+\end{figure}
+
+
+
+% gravity walk \\
+% implementing trees (pointers)
+% tree acceleration: show skip, next and parent pointers by simple tree examples\\
+% SPHLATCHv2: cost zone algorithms
+
+
 
 
 
@@ -903,8 +914,8 @@ show ghost approach\\
 disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
 
 
-% number of pointers, memory requirements
-% show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
+% TODO: number of pointers, memory requirements
+% TODO: show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
 
 \begin{figure}[htbp]
 \begin{center}
