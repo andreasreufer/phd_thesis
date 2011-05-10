@@ -865,9 +865,7 @@ Recursive algorithms are implemented in a procedural language like C or FORTRAN,
 \end{center}
 \end{figure}
 
-The two most costly tree algorithms, the gravity walk and the neighbour search, can now be realized in a non-recursive way. Figure \ref{ch02_grav02_fig09} shows the flow diagram for the gravity walk. The current pointer is set to the root node and the walk starts. First it is checked, whether the current pointer still points to a valid node. If not the walk has terminated. If the node is valid, the type of the node is checked. If the node is a cell node, the multipole acceptance criterion is evaluated. In case the MAC is fulfilled, the multipole moments of the cell are used to approximate the gravity force all particles represented by this cell node onto the single particle the force has to be evaluated for. After that, following the \emph{skip} pointer leads to the next node in the tree. In case the evaluated node is a particle, the 
-
-% TODO: give a memory map of nodes, cachelines
+The two most costly tree algorithms, the gravity walk and the neighbor search, can now be realized in a non-recursive way. Figure \ref{ch02_grav02_fig09} shows the flow diagram for the gravity walk for evaluating the gravity acceleration on particle A. The current pointer is set to the root node and the walk starts. First it is checked, whether the current pointer still points to a valid node. If not the walk has terminated. If the node is valid, the type of the node is checked. If the node is a cell node, the multipole acceptance criterion is evaluated. In case the MAC is fulfilled, the multipole moments of the cell are used to approximate the gravity force all particles represented by this cell node onto the single particle the force has to be evaluated for. After that, following the \emph{skip} pointer leads to the next node in the tree. In case the evaluated node is a particle, its interaction with particle A is calculated, when the particle node does not correspond to the one representing particle A itself.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -876,6 +874,16 @@ The two most costly tree algorithms, the gravity walk and the neighbour search, 
 \label{ch02_grav02_fig09}
 \end{center}
 \end{figure}
+
+Searching for particle A's neighbors can be done as shown in figure \ref{ch02_grav02_fig10}. The basic idea of the algorithm is to first find the cell which fully encloses the search sphere around the particle for which the neighbors should be found. This cell is then the root of the subtree where all the potential neighbors can be found. The algorithm starts by setting the current pointer to the particle node of the particle for which the neighbor search is done. The tree is traversed upwards until a cell is reached, which fully enclosed the search sphere given by the particles position and the search radius around it. If this criterion is fulfilled can be simply checked by comparing the edges of the cell to the most extreme coordinate of the search sphere in each dimension. From here on the search for neighbors is started within a subtree. If the node is a particle node, its distance to particle A is calculated and 
+
+
+
+
+% TODO: give a memory map of nodes, cachelines
+
+
+
 
 
 
