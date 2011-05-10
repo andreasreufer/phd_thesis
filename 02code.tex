@@ -830,8 +830,7 @@ With the root node as the starting point, there exist two particular ways of tra
 
 The Barnes \& Hut tree gravity calculation method requires the following tree algorithms: Inserting particles into the tree, calculating multipole moments, approximating the self-gravity forces and finally the tree also needs to be deleted again. All those algorithms can be derived from two walks presented above.
 
-Figure \ref{ch02_grav02_fig06} shows the tree insertion algorithm. For a particle which was not yet  inserted into the tree, the walk starts at the root node. The sub-volume where the particle is included is checked for an existing node. If there is no node, a new particle node is created there and the algorithm terminates. If there already exists a cell node, the algorithm simply opens the cell and executes ifself at the current position. The third possibility is, that there already exists a particle node (B). In that case particle B is replaced by a cell node and the particle is placed as a child of the new cell. The particle inserter is then run again at the position of the new cell.
-
+Figure \ref{ch02_grav02_fig06} shows the tree insertion algorithm. For a particle which was not yet  inserted into the tree, the walk starts at the root node. The sub-volume where the particle is included is checked for an existing node. If there is no node, a new particle node is created there and the algorithm terminates. If there already exists a cell node, the algorithm simply opens the cell and executes ifself at the current position. The third possibility is, that there already exists a particle node (B). In that case particle B is replaced by a cell node and the particle is placed as a child of the new cell. The particle inserter is then run again at the position of the new cell. This algorithm has complexity $N \log{N}$ for $N$ particles, as it has to be executed $N$ times and the depth of the tree goes on average with the factor of $\log{N}$
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{13algo_particle_insert.pdf}
@@ -865,7 +864,7 @@ Recursive algorithms are implemented in a procedural language like C or FORTRAN,
 \end{center}
 \end{figure}
 
-The two most costly tree algorithms, the gravity walk and the neighbor search, can now be realized in a non-recursive way. Figure \ref{ch02_grav02_fig09} shows the flow diagram for the gravity walk for evaluating the gravity acceleration on particle A. The current pointer is set to the root node and the walk starts. First it is checked, whether the current pointer still points to a valid node. If not the walk has terminated. If the node is valid, the type of the node is checked. If the node is a cell node, the multipole acceptance criterion is evaluated. In case the MAC is fulfilled, the multipole moments of the cell are used to approximate the gravity force all particles represented by this cell node onto the single particle the force has to be evaluated for. After that, following the \emph{skip} pointer leads to the next node in the tree. In case the evaluated node is a particle, its interaction with particle A is calculated, when the particle node does not correspond to the one representing particle A itself.
+The two most costly tree algorithms, the gravity walk and the neighbor search, can now be realized in a non-recursive way. Figure \ref{ch02_grav02_fig09} shows the flow diagram for the gravity walk for evaluating the gravity acceleration on particle A. The current pointer is set to the root node and the walk starts. First it is checked, whether the current pointer still points to a valid node. If not the walk has terminated. If the node is valid, the type of the node is checked. If the node is a cell node, the multipole acceptance criterion is evaluated. In case the MAC is fulfilled, the multipole moments of the cell are used to approximate the gravity force all particles represented by this cell node onto the single particle the force has to be evaluated for. After that, following the \emph{skip} pointer leads to the next node in the tree. In case the evaluated node is a particle, its interaction with particle A is calculated, when the particle node does not correspond to the one representing particle A itself. This algorithm has the complexity $\log{N}$ for one particle and $N \log{N}$, although \cite{1986Natur.324..446B} note that the scaling in reality is more like $N$.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -875,17 +874,7 @@ The two most costly tree algorithms, the gravity walk and the neighbor search, c
 \end{center}
 \end{figure}
 
-Searching for particle A's neighbors can be done as shown in figure \ref{ch02_grav02_fig10}. The basic idea of the algorithm is to first find the cell which fully encloses the search sphere around the particle for which the neighbors should be found. This cell is then the root of the subtree where all the potential neighbors can be found. The algorithm starts by setting the current pointer to the particle node of the particle for which the neighbor search is done. The tree is traversed upwards until a cell is reached, which fully enclosed the search sphere given by the particles position and the search radius around it. If this criterion is fulfilled can be simply checked by comparing the edges of the cell to the most extreme coordinate of the search sphere in each dimension. From here on the search for neighbors is started within a subtree. If the node is a particle node, its distance to particle A is calculated and 
-
-
-
-
-% TODO: give a memory map of nodes, cachelines
-
-
-
-
-
+Searching for particle A's neighbors can be done as shown in figure \ref{ch02_grav02_fig10}. The basic idea of the algorithm is to first find the cell which fully encloses the search sphere around the particle for which the neighbors should be found. This cell is then the root of the subtree where all the potential neighbors can be found. The algorithm starts by setting the current pointer to the particle node of the particle for which the neighbor search is done. The tree is traversed upwards until a cell is reached, which fully enclosed the search sphere given by the particles position and the search radius around it. If this criterion is fulfilled can be simply checked by comparing the edges of the cell to the most extreme coordinate of the search sphere in each dimension. From here on the subtree is searched for neighbors. If a particle node is encountered, its distance to the original particle A is checked and if it's inside the search radius, the neighbor function is executed for this particle node. In case the neighbor search is used for SPH, this function is simply a sum term executed on the neighbor. Alternatively if an actual list of neighbors is required, the function simply adds the neighbor particle to this list. If the node in the subtree search is a cell node, it is checked, whether the cell is completely outside the search sphere. If so, the cell is skipped, if not it is opened by following the \emph{next}-pointer. The algorithm is finished, if the search subtree has been traversed. This is the case, if the current pointer points to the \emph{skip}-pointer of the search subtree root node, the one which fully enclosed the search sphere. A nice property of this search algorithm is, that it's complexity is constant. The size of the search subtree does only depend on the size of the search sphere and not on the size of the total tree. Neglecting performance penalties due to caching issues, the algorithm has the same performance independent of the total number of particles. Note that this scaling is only possible, because of the very first step in the algorithm, where the current pointer is set directly to the particle node. This is achieved by storing a pointer to the particle node at the time of particle insertion into the tree. The penalty of storing an extra pointer into the tree for each particle is small, compared to the gain in speed.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -895,23 +884,43 @@ Searching for particle A's neighbors can be done as shown in figure \ref{ch02_gr
 \end{center}
 \end{figure}
 
+The neighbor search algorithm is also used for other tasks, than searching for the SPH neighbors. It can also be used for example for friend-of-friend algorithms or the initial estimate of the smoothing length.
+
+\section{Implementation: SPHLATCH}
+\subsection{Tree and code parallelization: shared vs. distributed memory}
+Nowadays computer codes need to be parallelized
+
+% TODO: figure of shared memory vs. distributed memory
 
 
-% gravity walk \\
-% implementing trees (pointers)
-% tree acceleration: show skip, next and parent pointers by simple tree examples\\
-% SPHLATCHv2: cost zone algorithms
+% SPHLATCHv2: cost zone algorithm
 
-
-
-
-
-\subsection{Tree parallelization: shared vs. distributed memory}
 intro: shared vs. distributed memory\\
 
 
-\section{Implementation}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{20algo_overview.pdf}
+\caption{Overview of the tasks in a common particle code. The main loop consists of the integrator evolving the particles forward in time. The most time consuming part of the code is the derivation step, where derivatives of integrated values are calculated.}
+\label{ch02_grav02_fig11}
+\end{center}
+\end{figure}
+
+
+
+
 \subsection{SPHLATCH v1}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{21algo_sphlatch01.pdf}
+\caption{The derivation part in }
+\label{ch02_grav02_fig12}
+\end{center}
+\end{figure}
 
 
 SPHLATCH v1\\
@@ -924,6 +933,7 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 
 % TODO: number of pointers, memory requirements
 % TODO: show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
+% TODO: show 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -972,6 +982,8 @@ trees on GPUs (references)
 \section{Initial conditions}
 \subsection{vanilla SPH sphere}
 \subsection{getting 1D structures}
+\citep{Benz:1991p700}
+
 \subsection{flavouring an SPH sphere}
 \subsection{putting an atmosphere on top}
 initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
