@@ -888,6 +888,10 @@ The neighbor search algorithm is also used for other tasks, than searching for t
 
 \section{Implementation: SPHLATCH}
 \subsection{Tree and code parallelization: shared vs. distributed memory}
+
+
+
+
 Nowadays computer codes need to be parallelized
 
 % TODO: figure of shared memory vs. distributed memory
@@ -917,7 +921,7 @@ intro: shared vs. distributed memory\\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{21algo_sphlatch01.pdf}
-\caption{The derivation part in }
+\caption{}
 \label{ch02_grav02_fig12}
 \end{center}
 \end{figure}
@@ -927,13 +931,14 @@ SPHLATCH v1\\
 parallelizing a particle code: distributed sums vs. ghosts approach\\
 parallelizing a tree\\
 show ghost approach\\
+disadvantage of a simply spatial decomposition\\
+% TODO: show actual cost in GI simulations
 
 disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
 
 
 % TODO: number of pointers, memory requirements
 % TODO: show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
-% TODO: show 
 
 \begin{figure}[htbp]
 \begin{center}
