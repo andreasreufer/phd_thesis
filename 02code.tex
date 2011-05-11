@@ -813,7 +813,7 @@ Tree walks can now be performed in such a tree data structure by defining a curr
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{11cell_wiring.pdf}
-\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree. Note that a \it{next} pointer }
+\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree.
 \label{ch02_grav02_fig04}
 \end{center}
 \end{figure}
@@ -887,21 +887,10 @@ Searching for particle A's neighbors can be done as shown in figure \ref{ch02_gr
 The neighbor search algorithm is also used for other tasks, than searching for the SPH neighbors. It can also be used for example for friend-of-friend algorithms or the initial estimate of the smoothing length.
 
 \section{Implementation: SPHLATCH}
-\subsection{Tree and code parallelization: shared vs. distributed memory}
+In this section we will discuss the implementation of the SPH and selfgravity tree code SPHLATCH. Figure \ref{ch02_grav02_fig11} shows the basic outline of a common particle code. In a first step, the particles are loaded. Other data like tables for the equations of state are loaded as well. After that the main loop starts, which integrates the particles forward in time. Some integrators like the Predictor-Corrector from equation \ref{}
 
 
-
-
-Nowadays computer codes need to be parallelized
-
-% TODO: figure of shared memory vs. distributed memory
-
-
-% SPHLATCHv2: cost zone algorithm
-
-intro: shared vs. distributed memory\\
-
-
+After a very first bootstrapping step, in which the derivatives are calculated, the maximum allowed timestep is determined. 
 
 
 \begin{figure}[htbp]
@@ -911,6 +900,18 @@ intro: shared vs. distributed memory\\
 \label{ch02_grav02_fig11}
 \end{center}
 \end{figure}
+
+
+
+
+
+\subsection{Tree and code parallelization: shared vs. distributed memory}
+Since the introduction of electronic computers based on semiconductors, the transistor count on a microchip doubled every 18 months \citep{Moore:1965p4006}. Similarly also the performance, measured in FLOPS (floating point operations per second), increased over time. While up until the late 1990ies, this performance increase could be guaranteed by simply increasing the clocking frequency and complexity of the CPUs. After that physical limits upon the frequency and the size semiconductor structures capped the performance increase of a single CPU \footnote{A single CPU can be understood as a unit capable of running independently a computer program}. So the computer industry started to face this problem by simply increasing the number of CPU cores per computer. The increased performance can therefore only be harvested, if a program can run in \emph{parallel} on several CPU cores. There exist basically two types of parallelization: 
+Distributed memory computing is based on several computers with independent memory, but with a common network over which they can exchange data. A popular approach in scientific computing is MPI, a software library which provides functions to exchange numerical data. Often high speed networks like Ethernet or Infiniband are used as a transport media. Although it is non-trivial to parallelize a computer code with MPI, it provides a straightforward solution to use hundreds of CPUs at the same time simply by interconnecting a large number of cheap computers with a network. The first implementation of the code SPHLATCH presented here uses MPI for parallelization. 
+Shared memory computing on the other hand bases on several CPU cores sharing a common memory space. Data is simply exchanged by sharing certain parts of memory. A popularly used implementation of this approach in scientific computing is OpenMP, a simple set of compiler directives parallelizing loops and vector operations. The program runs as one process, but certain tasks are subdivided into threads, which can run on individual CPU cores. The disadvantage of this approach is, that the execution of the program is limited onto one computer. Only as much CPU cores can be used, as a single computer has. While this was a limitation a decade ago, when affordable computers did not have more than two or four CPU cores, nowadays machines offer a much larger number of cores. As of 2011, server machines with 32 or 48 CPU cores are no exception. The second implementation of SPHLATCH uses OpenMP for parallelization.
+
+
+% SPHLATCHv2: cost zone algorithm
 
 
 
