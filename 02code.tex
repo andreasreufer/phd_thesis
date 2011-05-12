@@ -610,7 +610,6 @@ Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the phase state i
 \end{center}
 \end{figure}
 
-
 %%
 %   G R A V I T Y 
 %%
@@ -620,22 +619,18 @@ A self-gravitating continuum with the density field $\rho(\rv)$ has the gravitat
 \label{ch02_sph01_eq038}
 \nabla ( \nabla \Phi(\rv) ) = \Delta \Phi(\rv) = 4 \pi G \rho(\rv)
 \end{equation}
+and acts on the fluid through the external potential term in the Navier-Stokes equation \ref{ch02_fld01_eq002}. Grid codes often calculate the potential by taking the Fourier transform of the Poisson equation, which yields directly the Fourier transform of the potential which again can be transformed back again into real space.
 
-and acts on the fluid through the external potential term in the Navier-Stokes equation \ref{ch02_fld01_eq002}. Grid codes often find the potential by taking the fourier transform of the Poisson equation, which yields directly the fourier transform of the potential which again can be transformed back again into real space.
-
-When we approximate the density field by discrete particles, self-gravity reduces to the N-body problem, where the potential and gravitational acceleration for particle i is given by
+When we approximate the density field by discrete particles like in SPH, self-gravity reduces to the N-body problem, where the potential and gravitational acceleration for particle i is given by
 \begin{equation}
 \label{ch02_sph01_eq038}
 \av_j = - G \sum_{i \ne j} \frac{m_i}{r_{ij}^2} \frac{\rvij}{r_{ij}} 
 \end{equation}
 
-Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE). An example of such an application are the evolution and accretion of a proto-lunar into a Moon as done by \cite{Kokubo:2000p2195}.
+Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE). An example of such an application is the evolution and accretion of a proto-lunar disk into a Moon as done by \cite{Kokubo:2000p2195}. For problems using millions of particles, the direct summation 
 
 \subsection{Multipole approximation}
-Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They all make use of the strong $r^{-2}$ dependence of the gravitational field on distance, which means that the most significant contributions in the direct sum come from the nearest particles for more or less equally massive particles. 
-
-
-The field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles are summarized into clusters and their field is approximated as the one of a single particle with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
+Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They make use of two properties of a self-gravitating system of more or less equal mass particles: First, the strong $r^{-2}$ dependence of the gravitational field on distance means that near particles with a certain mass exert a much larger attraction than particles further away with a comparable mass. Secondly, the field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles can be summarized into clusters and their field be approximated as the one of single particles with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
 
 \begin{align}
 \label{ch02_grav02_eq001}
@@ -701,8 +696,6 @@ The center of mass of the group of clusters is simply given by
 \Xv = \frac{1}{M} \sum_{c} M_{c} \Xv_{c} ~~~~~~~~  M > 0
 \end{equation}
 
-Note that particles can be treated like clusters with vanishing multipole moments.
-
 The gravitational potential of a cluster can now be approximated by its multipole expansion:
 \begin{equation}
 \label{ch02_grav02_eq010}
@@ -733,11 +726,11 @@ a_{k} &= - \nabla_{k} \phi(\rv) \approx - G \bigg(
 \bigg)
 \end{align}
 
-\subsection{Barnes and Hut Tree}
-\cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. But first we need to know a few basic things about trees: A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. One node is defined as the \emph{root node}.
+Note that particles can be treated like clusters with vanishing multipole moments.
 
-Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} 
-nodes and has exactly one parent, expect for the root node which has no parent. Nodes can be assigned a depth. The root node per definition has depth $0$ and the children of a node have the inherit the depth of the parent increased by one. Figure \ref{fig:simpletree} shows a simple tree. The blue square represents the root node and has two children with depth 1, while on of this children has again two children with depth 2. Tree data structures are usually drawn upside-down, this means with the root on top and increasing depth to the bottom.
+
+\subsection{Barnes and Hut Tree}
+\cite{Barnes:1986p2853} describe an algorithm, where particles are grouped into cluster with the help of a Tree. Before we look at the algorithm in detail, we need to discuss a few terms related to trees: A graph is a set of elements represented by \emph{nodes}. A tree is a rooted, directed graph in which any two nodes are connected by one and only one path. One node is defined as the \emph{root node}. Each node can have a number of children\footnote{often the term \emph{daughter} is used, but because of the asexual nature of tree nodes we are using here the term \emph{child}} nodes and has exactly one parent, expect for the root node which has no parent. Nodes are located at a certain depth. The root node per definition has depth $0$ and the children of a node inherit the depth of the parent increased by one. Figure \ref{ch02_grav02_fig01} shows a simple tree. The blue square represents the root node, which has two children with depth 1. One of this children has again two children with depth 2. Tree data structures are usually drawn upside-down, this means with the root on top and depth increasing to the bottom.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -750,7 +743,7 @@ nodes and has exactly one parent, expect for the root node which has no parent. 
 
 Nodes without children are called \emph{leaf nodes}. A disjoint set of trees is called a \emph{forest}. One notices that the definition for a tree does not only fit the whole set of nodes of a tree, but also subsets. Every node can be taken as a root node and forms again a tree, also called a \emph{subtree} of the tree. Or one can say, that the children of a node form a forest of trees.
 
-A tree datastructure can be used to recursively subdivide space. The basic idea is to take a volume, assign this volume to a node in a tree, then subdivide this volume in disjoint subvolumes and assign them to the children of the node. The subdivision of space can be mapped onto a tree. The easiest form of subdivision is using volumes which are aligned with the spatial dimension and have the same sidelength in each dimension. In 2D this corresponds to squares and in 3D to cubes along the axis. This volumes are then divided along each dimension into two equal-length intervals, which leads to $2^d$ subvolumes in $d$ dimensions. So if we have an arbitrary volume with a minimum $x_{i,min}$ and a maximum $x_{i,max}$ in each coordinate $i$ we can enclose this volume with a volume with sidelength $l$ and the center $x_{i,c}$
+A tree data structure can be used to recursively subdivide space. The basic idea is to take a volume, assign this volume to a node in a tree, then subdivide this volume in disjoint sub-volumes and assign them to the children of the node. The subdivision of space can be mapped onto a tree. The easiest form of subdivision is using volumes which are aligned with the spatial dimension and have the same side length in each dimension. In 2D this corresponds to squares and in 3D to cubes along the axis. This volumes are then divided along each dimension into two equal-length intervals, which leads to $2^d$ sub-volumes in $d$ dimensions. So if we have an arbitrary volume with a minimum $x_{i,min}$ and a maximum $x_{i,max}$ in each coordinate $i$ we can enclose this volume with a volume with side length $l$ and the center $x_{i,c}$
 
 \begin{equation}
 \label{ch02_grav02_eq012}
@@ -764,9 +757,9 @@ The $2^{d}$ subvolumes indexed with $j$ have a side length of $\frac{l}{2}$ and 
 x_{i, j~center} = x_{i,center} + l \frac{(-1)^{d_{i} + 1}}{2} ~~~~~ d_{i} = \frac{j  - \sum_{k \ne i} ( j \mod 2^{k} )}{2^{i}}
 \end{equation}
 
-In 2D this subvolumes are called \emph{quadrants}, in 3D \emph{octants}. The corresponding trees to which this subdivision can be mapped to are called \emph{quadtrees} and \emph{octrees}, having up to 4 and 8 children per node.
+In 2D this sub-volumes are called \emph{quadrants}, in 3D \emph{octants}. The corresponding trees to which this subdivision can be mapped to are called \emph{quad trees} and \emph{octrees}, having 4 and 8 children respectively per node.
 
-The Barnes \& Hut algorithm described in \cite{1986Natur.324..446B} subdivides the computational universe containing $N$ gravitationally interacting particles in subvolumes, called \emph{cells}. The particles are children of cell nodes. The tree must be built in a way, that a subvolume of a cell, an octant in 3D, contains no more than one particle. If it does, the subvolume can be again subdivided into a number of cells until the requirement is fulfilled. An example of such a tree is shown in figure \ref{fig:2D_BHtree} for 50 randomly distrbuted particles in 2D. We note that no cell contains more than one particle. Shown below is the corresponding quad-tree to this subdivision of space for the particles
+The Barnes \& Hut algorithm described in \cite{Barnes:1986p2853} subdivides the computational universe containing $N$ gravitationally interacting particles in sub-volumes, called \emph{cells}. The particles are leaf nodes of cell nodes. The tree must be built in a way, that a sub-volume of a cell, an octant in 3D, contains no more than one particle. If it does, the sub-volume has to be subdivided into a number of cells until the requirement is fulfilled. An example of such a tree is shown in figure \ref{ch02_grav02_fig02} for 50 randomly distributed particles in 2D. We note that no cell contains more than one particle. Shown below is the corresponding quad tree to this subdivision of space for the particles
 
 \begin{figure}[htbp]
 \begin{center}
@@ -777,22 +770,25 @@ The Barnes \& Hut algorithm described in \cite{1986Natur.324..446B} subdivides t
 \end{center}
 \end{figure}
 
-Each cell in the tree represents now a clump of particles. For each cell a center of mass and its multipole moments can be calculated. This calculation is done \emph{bottom-up}, so that the multipole moments of the children of node are already calculated, when the multipole moments of the node itself are to be calculated. This can order can be assured with a pre-order tree walk, which will be discussed later. We end up finally with a tree of multipole moments for all the particle clumps given by the subtrees in the tree.
+Each cell in the tree represents now a clump of particles. For each cell a center of mass and its multipole moments can be calculated. This calculation is done \emph{bottom-up}, so that the multipole moments of the children of node are already calculated, when the multipole moments of the node itself are to be calculated. This execution order can be assured with a pre-order tree walk, which will be discussed shortly. We finally end up with a tree of multipole moments for all the particle clumps given by the subtrees in the tree.
 
-For each particle the acceleration due to gravity can now be calculated according to equation \ref{ch02_grav02_eq011}. The multipole approximation only holds, when then size of the particle cluster is small compared to distance of the particle to the center of mass of the cluster $r_{part- cell}$. A good measure for the size of cluster is the cell size $l$, in which it is contained. The cluster cannot be bigger than the cell and it is usually not smaller by magnitudes expect in pathological cases. The cell sizes get smaller by descending in the tree, so that depending of the particle-cell distance the cell size gets small enough to use the multipole approximation. To decide whether it is necessary to descend further down in the tree, the \emph{multipole acceptance criteron} short \emph{MAC} is used. The one proposed by \cite{1986Natur.324..446B} is
+For each particle the acceleration due to gravity can now be calculated according to equation \ref{ch02_grav02_eq011}. The multipole approximation only holds, when then size of the particle cluster is small compared to distance of the particle to the center of mass of the cluster $r_{part- cell}$. A good measure for the size of cluster is the cell size $l$, in which it is contained. The cluster can not be bigger than the cell and it is usually also not smaller by magnitudes expect in pathological cases. The cell sizes get smaller by descending in the tree, so that depending on the particle-cell distance the cell size gets small enough to use the multipole approximation. To decide whether it is necessary to descend further down in the tree, a \emph{multipole acceptance criterion} short \emph{MAC} is used. The one proposed by \cite{1986Natur.324..446B} is
 
 \begin{equation}
 \label{ch02_grav02_eq013}
 \frac{l}{r_{part-cell}} \le \theta ~~~~ \theta = 0.6 \dots 1.0 ~~~~ r_{part-cell} = | \Xv - \rv_{part}|
 \end{equation}
 
-where $\theta$ is the \emph{opening angle} chosen depending on the desired accuracy. The smaller the opening angle, the more accurate the calculation becomes. When $\theta = 0$ no particle cluster cell fulfills the MAC and the tree walk is completed down to each particle, leading again to the direct summation with complexity O($N^2$). For $\theta \ge 1$ an additional error may be introduced, as depending on the distance form the particle to the center of mass of its own cluster the MAC may be fulfilled, leading to a acceleration calculation based on the multipole moments which include the particle itself. This error is called \emph{self-acceleration}. The choice of the MAC determines directly the efficiency and prescision of the Barnes \& Hut method.
+where $\theta$ is the \emph{opening angle} chosen depending on the desired accuracy. 
+
+
+The smaller the opening angle, the more accurate the calculation becomes. When $\theta = 0$ no particle cluster cell fulfills the MAC and the tree walk is completed down to each particle, leading again to the direct summation with complexity O($N^2$). For $\theta \ge 1$ an additional error may be introduced, as depending on the distance between the particle and the center of mass of its own cluster, the MAC may be fulfilled, leading to a acceleration calculation based on the multipole moments which include the particle itself. This error is called \emph{self-acceleration}. The choice of the MAC determines directly the efficiency and precision of the Barnes \& Hut method. 
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.8]{09bfcomp}
 \caption{The left plot shows the relative acceleration errors, due to the multipole approximation $\Delta_{\av_{mp}} = \frac{|\av_{mp}| - |\av|}{|\av|}$ for a self-gravitating spheres using an opening angle $\theta = 0.7$. For all three resolutions, the relative errors are below $10^{-3}$ for more than 90\% of the particles. 
-The right plot shows the execution time for one self-gravity run for the Barnes \& Hut tree and the brute force direct summation for different numbers of particles and an opeing angle of $\theta = 0.7$. The code used is the SPHLATCH v2 implementation discussed below with one CPU. Direct summation execution time follows a $O(N^2)$ scaling (dashed line), while the Barnes \& Hut tree shows a more complex scaling. Speed-ups ($\times 20-190$) are considerably for moderate number of particles.}
+The right plot shows the execution time for one self-gravity run for the Barnes \& Hut tree and the brute force direct summation for different numbers of particles and an opening angle of $\theta = 0.7$. The code used is the SPHLATCH v2 implementation discussed below with one CPU. Direct summation execution time follows a $O(N^2)$ scaling (dashed line), while the Barnes \& Hut tree shows a more complex scaling. Speed-ups ($\times 20-190$) are considerably even for moderate number of particles.}
 \label{ch02_grav02_fig03}
 \end{center}
 \end{figure}
@@ -1010,12 +1006,9 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 
 SPHLATCH v2\\
 shared memory approach\\
+show cost (gravity, NS, total) for giant impact, how this leads to problems in SPHLATCH v1\\
 load balancing approach, how this could be memory-\\
-show cost (gravity, NS, total) for giant impact\\
 caching issues\\
-
-building the tree:
-
 
 
 \subsection{Future of particle codes}
@@ -1037,6 +1030,9 @@ use of spheres for simplicity reason
 
 \section{Post-processing}
 \subsection{clump detection}
+
+
+
 \subsection{plotting}
 clump detection\\
 FOF vs. potential, not parallelized\\
