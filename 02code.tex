@@ -813,7 +813,7 @@ Tree walks can now be performed in such a tree data structure by defining a curr
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{11cell_wiring.pdf}
-\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree.
+\caption{Wiring scheme of an octree cell node a depth $n$ with particle childs in subvolume 1 and 6 and a cell node as child 3. Parent pointers allow going upwards in the tree, child pointers downwards. Following the next pointers results in a pre-order tree traversal, where taking the \it{skip} pointer skips a cells subtree.}
 \label{ch02_grav02_fig04}
 \end{center}
 \end{figure}
@@ -887,10 +887,7 @@ Searching for particle A's neighbors can be done as shown in figure \ref{ch02_gr
 The neighbor search algorithm is also used for other tasks, than searching for the SPH neighbors. It can also be used for example for friend-of-friend algorithms or the initial estimate of the smoothing length.
 
 \section{Implementation: SPHLATCH}
-In this section we will discuss the implementation of the SPH and selfgravity tree code SPHLATCH. Figure \ref{ch02_grav02_fig11} shows the basic outline of a common particle code. In a first step, the particles are loaded. Other data like tables for the equations of state are loaded as well. After that the main loop starts, which integrates the particles forward in time. Some integrators like the Predictor-Corrector from equation \ref{}
-
-
-After a very first bootstrapping step, in which the derivatives are calculated, the maximum allowed timestep is determined. 
+In this section we will discuss the implementation of the SPH and selfgravity tree code SPHLATCH. Figure \ref{ch02_grav02_fig11} shows the basic outline of a common particle code. In a first step, the particles are loaded. Other data like tables for the equations of state are loaded as well. After that the main loop starts, which integrates the particles forward in time. Some integrators like the Predictor-Corrector scheme from equations \ref{ch02_sph02_eq019} - \ref{ch02_sph02_eq021} first determine the maximum allowed timestep. Then the derivatives are calculated several times, two times in case of the Predictor-Corrector. At certain points in time, special tasks like storing the particles or some post-processing is done. When the particles have been forwarded in time 
 
 
 \begin{figure}[htbp]
@@ -901,28 +898,70 @@ After a very first bootstrapping step, in which the derivatives are calculated, 
 \end{center}
 \end{figure}
 
-
-
-
-
 \subsection{Tree and code parallelization: shared vs. distributed memory}
 Since the introduction of electronic computers based on semiconductors, the transistor count on a microchip doubled every 18 months \citep{Moore:1965p4006}. Similarly also the performance, measured in FLOPS (floating point operations per second), increased over time. While up until the late 1990ies, this performance increase could be guaranteed by simply increasing the clocking frequency and complexity of the CPUs. After that physical limits upon the frequency and the size semiconductor structures capped the performance increase of a single CPU \footnote{A single CPU can be understood as a unit capable of running independently a computer program}. So the computer industry started to face this problem by simply increasing the number of CPU cores per computer. The increased performance can therefore only be harvested, if a program can run in \emph{parallel} on several CPU cores. There exist basically two types of parallelization: 
 Distributed memory computing is based on several computers with independent memory, but with a common network over which they can exchange data. A popular approach in scientific computing is MPI, a software library which provides functions to exchange numerical data. Often high speed networks like Ethernet or Infiniband are used as a transport media. Although it is non-trivial to parallelize a computer code with MPI, it provides a straightforward solution to use hundreds of CPUs at the same time simply by interconnecting a large number of cheap computers with a network. The first implementation of the code SPHLATCH presented here uses MPI for parallelization. 
 Shared memory computing on the other hand bases on several CPU cores sharing a common memory space. Data is simply exchanged by sharing certain parts of memory. A popularly used implementation of this approach in scientific computing is OpenMP, a simple set of compiler directives parallelizing loops and vector operations. The program runs as one process, but certain tasks are subdivided into threads, which can run on individual CPU cores. The disadvantage of this approach is, that the execution of the program is limited onto one computer. Only as much CPU cores can be used, as a single computer has. While this was a limitation a decade ago, when affordable computers did not have more than two or four CPU cores, nowadays machines offer a much larger number of cores. As of 2011, server machines with 32 or 48 CPU cores are no exception. The second implementation of SPHLATCH uses OpenMP for parallelization.
 
-
-% SPHLATCHv2: cost zone algorithm
-
-
-
-
 \subsection{SPHLATCH v1}
+The first version of SPHLATCH uses a distributed memory parallelization by employing the MPI library. The simulation space containing the particles is spatially divided into so called \emph{cost zones}. Figure \ref{ch02_grav02_fig12} shows the same particle set as in figure \ref{ch02_grav02_fig02}. In this 2D example, the cells at depth 2 are used as cost-zone cells, resulting in a total number of 16 cost-zone cells. The particles inside a cost-zone cell now is assigned to the computational domain to which this particular cost-zone cell belongs to.
+
+
+The computational cost for calculating the derivatives like acceleration due to gravity or some SPH-sum in an SPH calculation, is typically of the same magnitude for every single particle. So a natural way of parallelizing such a calculation is to divide the set of particles used in the calculation into about equally sized subsets. Each subset is then assigned to a process. 
+
+
+These subsets can be created by subdividing the space in which all particles lie into \emph{computational domains}, volumes containing the desired subset of particles. These volumes are called \emph{cost-zone volumes}. For the parallelization method used for the tree, it is necessary to build these computational domains out of volumes with a side length of $l / 2^{d_{cz}}$, where $l$ is the side length of the root node of the octree or in other words the side length of the smallest cube containing all the particles aligned with the coordinate system. $d_{cz}$ is the \emph{cost zone depth}.
+
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{07quadtree50_xy_TPL2.pdf}
+\includegraphics[scale=0.3]{07quadtree50_TPL2_stage3.pdf}
+\caption{A part of the same particle distribution like in figure \ref{ch02_grav02_fig02}. The local domain is shaded green and contains 21 particles for which the acceleration has to be calculated. Bordering this zone is the ghost domain shaded grey, for which all particles are known. Beyond that, no particle information is available, only the corresponding parts of the global tree down to top-tree depth are known here. The plot below shows the corresponding tree. Note the filled top-tree nodes without any children nodes, they correspond to the domain where no particle information is available.}
+\label{ch02_grav02_fig12}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:2D_BHtree_costzone} shows one computational domain of such a partition of the same particle distribution like in figure \ref{fig:2D_BHtree}. The $21$ particles calculated in the current computational are called \emph{local particles} and are shown in green, the corresponding cost-zone volumes are shaded green. In this example the cost-zone depth is $2$ or the cost-zone volumes are obtained by subdividing space twice in each dimension. \\
+
+Local particles may need information about particles in other computational domains. To compute an SPH-sum for a particle, usually information about particles within two smoothing lengths is needed. When a local particle is right at the edge of the domain, it needs to know about non-local particles in the adjacent domain. Particles inside non-local volumes sharing an edge with a local volume are called \emph{ghost particles} oder just \emph{ghosts}. Besided having to be copied on to the local process, they cause no computational cost, as only their information is used but nothing is calculated for them.\\
+
+It is desirable to have as little ghost particles as possible. The way the computational domains and subsequently are made up by combining the cost-zone volumes determine the number of ghost. Generally it is best to minimize the surface of the computational domains. Composing the domains by cutting space-filling curves like the \emph{Peano-Hilbert-walk} along the cost-zone volumes into intervals leads usually to good results.\\
+
+Parallelizing the gravity calculation with a  B\&H-tree is not as straightforward like parallelizing a particle calculation for short-range forces, where interaction with distant non-local particles just can be omitted. The crucial point is to know, which parts the local particles need to know about the \emph{global tree} generated by all the particles, local and non-local. The tree known to the local particles is called the \emph{local tree} and provides all the necessary information to the local particles. It differs from the \emph{global tree} as such as it does not contain sub-trees not needed by the local particles. The sub-trees which can be omitted are be easily identified by the MAC and a worst-case scenario for the distribution of a local and a non-local particle shown in figure \ref{fig:2D_BHtree_costzone}. Assume a particle right at the edge of the computational domain, marked in the figure with a red dot. The shortest distance between this particle and any point in the non-local domain for which no particle information is available, marked in the figure with a red line, is the side length of the cost zone volumes or in other words the distance between the particle any point in the non-local domain $r_{WC}$ is always bigger than this side length:
+\begin{equation}
+r_{WC} \ge \frac{l}{2^{d_{CZ}} } 
+\end{equation}
+The MAC now tells us how big a cell might be to still be accepted for acceleration calculation, given the worst case distance or in other words, it tells us how deep we have to go in the tree until the multipole approximation is acceptable. Taking the worst case with distance $r_{WC}$ we get the deepest depth we have to go in the tree for a point in the non-local domain, we'll call that the \emph{top-tree depth} $d_{TT}$
+\begin{equation}
+\frac{l_{cell}}{r_{WC}} = \frac{l}{r_{WC} 2^{d_{TT}}} \ge \theta
+\end{equation}
+The top-tree depth is down to which the global tree has to be known on every computational domain. Any tree-structure below that depth is either provided by the local or ghost particles, or is not needed locally. Combining the two equations we get a relation between the top-tree depth, the costzone depth and the opening angle from the MAC:
+\begin{equation}
+2^{d_{CZ} - d_{TT}} \le \theta ~~~~\text{or}~~~~ d_{TT} = d_{CZ} + \uparrow \Big( - \frac{ \log{\theta} }{\log{2} } \Big)
+\end{equation}
+The first expression tells us down to which opening angle the local tree provides enough information for a given costzone and top tree depth. The latter expression gives the minimal needed top tree depth for a given costzone depth and opening angle. The rounding up is because depths are always integer numbers. The example shown in  figure \ref{fig:2D_BHtree_costzone} uses a top-tree depth of 2 and also a costzone depth of 2, so $\theta \ge 1$. In order to use a smaller opening angle we would have to increase the top-tree depth.\\
+
+So we know now which parts of the global tree need to be in the local tree. The next question is how to build the local tree. On no process the global tree can be built, as no process knows about all the particles and also the global tree might be too big to fit into the memory available to a process. The basic idea is to build the local tree with local and ghost particles and then synchronize the \emph{top-tree} which is the global tree starting from the root node down to top-tree depth.
+
+Synchronizing the top-tree is per se non-trivial, as a process does not know which parts of the non-local domain contain particles and therefore need nodes to represent them and which don't. The easiest solution is to build a \emph{full} top-tree, this means each node in the top-tree contains the maximum possible number of children. In 2D this corresponds to a full quad-tree, in 3D to a ful octree. The problem is now, that for non-uniform particle distributions we get many top-tree nodes not containing any particles in or below them, which will lead to unnecessary walks along them and vanishing contributions to the acceleration. The calculation does not get incorrect, but the adding up of vanishing terms leads to a higher computational cost. Therefore we introduce an \emph{emptiness} flag to each cell node. A priori a cell nodes is empty. Only when a particle is inserted the cell node becomes unempty or in other words filled. Emptiness is inherited bottom-up from the children to the parent node in a logically negative way, this means when a node has any non-empty child, it becomes non-empty. This flag can now be queried during tree-walks in order to avoid empty walking along empty sub-trees. So we start building the tree by setting up a full top-tree consisting of empty nodes. The first tree in figure \ref{fig:2D_BHtree_building} shows such an empty quadtree with top-tree depth of two. Every process now has a top-tree of the same structure and therefore we avoid synchronizing different tree structures between the processes.\\
+
+During the next step, the particles locally known to a process, namely the local and ghost particles, are added to the local tree, inserting cell nodes where needed. After that the multipole moments can be calculated bottom-up from the children to their parents. This is a little bit tricky again, as a particle may be present on different process at the same time: On the process assigned to its computational domain as a local particle and to one or more domains as a ghost particle. We have to make sure, that such particles contribute to the multipole moments of the tree only once. But we also have to make sure, that the ghost particles contribute to the multipole moments of a ghost cell node. An example of such a ghost cell node can be seen in the third and fourth tree in figure \ref{fig:2D_BHtree_building} represented by grey squares. This ghost cell nodes may also be used for the acceleration calculation and therefore have to contain the correct multipole moments. For this reason we introduce a \emph{locality} flag to each node. A local particle has the locality \emph{local}, a ghost particle the locality \emph{remote}. Locality is again inherited bottom-up from the childred to their parent nodes in a positive sense. If one children is local, the parent node is also local. Only when all children are remote, the parent is remote. Top-tree nodes are excluded from this rule and have always the locality local. So when calculating the multipole moments of a node, we apply the rule that only nodes with the same locality contribute to the multipole moments. With that rule we fulfill both requirements mentioned above: Ghost cell and particle nodes do not contribute to the globally synchronized top-tree, but ghost cell nodes still get their correct multipole moments based on their remote or ghost children.\\
+
+After adding up the multipoles, we can sum up the multipole moments of the top-tree. This is straightforward, as all top-trees have the same structure. The emptiness flag is summed up using an OR-relation, respecting the additive nature of multipole moments addition. After this step we end up with a valid Barnes\& Hut tree containing all the required particles and cells needed to calculate the gravitational acceleration for the local particles.\\
+
+This parallelization method is rather simple, which is one of the advantages of it. Another advantage is, that after the particles and ghosts have been copied to the processes, only one, big additional communication step is required for summing up the multipole moments of the top-tree nodes. When summing up the multipole moments between two processes, all the data can be sent to one process and summed up there. This is bulk communication and therefore ideal for communication networks with high bandwidth. Latency is not important. In practice, the synchronization needs only a few percent of the total time of the gravity calculation using a reasonably fast network.\\
+
+The downside of the method is that for non-uniform particle distribution a lot of unused and empty top-tree nodes have to be created. Although they don't need to be accessed, they use memory and worsen the caching of other tree nodes. The enforcement of cell nodes in the top-tree also causes a deeper tree than without the top-tree, which lead to longer and thereforce slightly slower tree walks.\\
+
 
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{21algo_sphlatch01.pdf}
-\caption{}
+\caption{Overview of the derivation step for SPHLATCH v1. }
 \label{ch02_grav02_fig12}
 \end{center}
 \end{figure}
@@ -941,14 +980,6 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 % TODO: number of pointers, memory requirements
 % TODO: show two flow diagrams of both codes: derivatiion, integration, loading, auxiliary
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.6]{07quadtree50_xy_TPL2.pdf}
-\includegraphics[scale=0.3]{07quadtree50_TPL2_stage3.pdf}
-\caption{A part of the same particle distribution like in figure \ref{fig:2D_BHtree}. The local domain is shaded green and contains 21 particles for which the acceleration has to be calculated. Bordering this zone is the ghost domain shaded grey, for which all particles are known. Beyond that, no particle information is available, only the corresponding parts of the global tree down to top-tree depth are known here. The plot below shows the corresponding tree. Note the filled top-tree nodes without any children nodes, they correspond to the domain where no particle information is available.}
-\label{fig:2D_BHtree_costzone}
-\end{center}
-\end{figure}
 
 
 
@@ -967,6 +998,14 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 
 
 \subsection{SPHLATCH v2}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{22algo_sphlatch02.pdf}
+\caption{}
+\label{ch02_grav02_fig12}
+\end{center}
+\end{figure}
 
 
 SPHLATCH v2\\
