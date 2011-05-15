@@ -901,18 +901,7 @@ Distributed memory computing is based on several computers with independent (dis
 Shared memory computing on the other hand is based on several CPU cores sharing a common memory space. Data is simply exchanged by sharing certain parts of memory. A popularly used implementation in scientific computing is OpenMP, a simple set of compiler directives parallelizing loops and vector operations. The program runs as one process, but certain tasks are subdivided into threads, which can run on individual CPU cores. The disadvantage of this approach is, that the execution of the program is limited onto one computer. Only as much CPU cores can be used, as a single computer has. While this was a limitation a decade ago, when affordable computers did not have more than two or four CPU cores, nowadays machines offer a much larger number of cores. As of 2011, server machines with 32 or 48 CPU cores are no exception and very offardable. The second implementation of SPHLATCH uses OpenMP for parallelization.
 
 \subsection{SPHLATCH v1}
-The first version of SPHLATCH uses a distributed memory parallelization by employing the MPI library. As a first order approximation, we can assume, that the computational cost to calculate the SPH-sums and gravity forces is more or less the same for all particles. Therefore a standard approach in parallelizing a set of particles is to distribute them equally onto computational domains, called \emph{cost zone}. A cost zone is a sub-volume in the computational 
-
-
-
-The simulation space containing the particles is spatially divided into so called \emph{cost zones}. Figure \ref{ch02_grav02_fig12} shows the same particle set as in figure \ref{ch02_grav02_fig02}. In this 2D example, the cells at depth 2 are used as cost-zone cells, resulting in a total number of 16 cost-zone cells. The particles inside a cost-zone cell now is assigned to the computational domain to which this particular cost-zone cell belongs to.
-
-The computational cost for calculating the derivatives like acceleration due to gravity or some SPH-sum in an SPH calculation, is typically of the same magnitude for every single particle. So a natural way of parallelizing such a calculation is to divide the set of particles used in the calculation into about equally sized subsets. Each subset is then assigned to a process. 
-
-These subsets can be created by subdividing the space in which all particles lie into \emph{computational domains}, volumes containing the desired subset of particles. These volumes are called \emph{cost-zone volumes}. For the parallelization method used for the tree, it is necessary to build these computational domains out of volumes with a side length of $l / 2^{d_{cz}}$, where $l$ is the side length of the root node of the octree or in other words the side length of the smallest cube containing all the particles aligned with the coordinate system. $d_{cz}$ is the \emph{cost zone depth}.
-
-
-
+The first version of SPHLATCH uses a distributed memory parallelization by employing the MPI library. As a first order approximation, we can assume, that the computational cost to calculate the SPH-sums and gravity forces is more or less the same for all particles. Therefore a standard approach in parallelizing a set of particles is to distribute them equally onto computational domains, called \emph{cost zones}. Each cost zone is a sub-volume of the whole simulation space and assigned to a processor. Integration of the particles is done locally in each cost-zone, so this means all forces and other derivatives for integration have to be collected in each cost-zone. Particles of course not only interact with other particles in the same computational domain. For short range forces like hydrodynamics this might be only the case for particles at the border of computational domains, for example when neighbors for a SPH sum actually come to lie in a different computational domain. For long-range forces like gravity, of course all particles depend on information about other particles in other computational domains. The difficult part in a distributed memory parallelization is now to provide all the necessary information to local particles in a cost zone, without having to share all data about the remote particles. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -923,7 +912,24 @@ These subsets can be created by subdividing the space in which all particles lie
 \end{center}
 \end{figure}
 
-Figure \ref{fig:2D_BHtree_costzone} shows one computational domain of such a partition of the same particle distribution like in figure \ref{fig:2D_BHtree}. The $21$ particles calculated in the current computational are called \emph{local particles} and are shown in green, the corresponding cost-zone volumes are shaded green. In this example the cost-zone depth is $2$ or the cost-zone volumes are obtained by subdividing space twice in each dimension. \\
+The decomposition of the complete computational volume into individual domains can be done in any way, but geometrical calculations are simplified a lot, if space is decomposed into regularly spaced and equally sized volumes. The cells in the tree for the Barnes \& Hut algorithm shows before fulfill this criterion, which makes this tree a good choice also for spatial decomposition. Figure \ref{ch02_grav02_fig12} shows the same particle set as in figure \ref{ch02_grav02_fig02} together with the corresponding tree structure. We now choose the cell nodes at a certain depth and use those cells as buidling blocks for the computational domain. This depth is called the \emph{cost zone depth} $d_{cz}$. The 2D example in figure \ref{ch02_grav02_fig02} uses a cost zone depth of $2$, resulting in 16 cost zone cells. The side length of these cells is $l / 2^{d_{cz}}$, if $l$ is the side length of the root node cell enclosing all particles. The green shaded cells now indicate an example of a cost zone. All green particles are considered to be local to this computational domain. If we assume that no particle has neighbors which are more distant to the particle than the side length of the cost zone cells, then local particles only interact with remote particles in cost zone cells directly adjacent to the local cost zone cells. In the figure such cells are shaded grey. Particles in those cells are called \emph{ghost particles} or just \emph{ghosts}. In case the short-range forces are realized as SPH sums with a kernel with compact support, this requires $2h_i < l / 2^{d_{cz}}$ for all particles. 
+
+There exist basically two ways of summing up the interaction terms between local and ghost particles. One way adopted for example in the GADGET \citep{Springel:2005p51} code, is to send the necessary information about local particles to the remote domain. There the partial SPH sum terms caused by the ghosts are calculated and sent back to the local domain, where this partial SPH sums add up  
+
+
+One way is to copy all necessary information 
+
+
+
+% sharing particles for short-range
+% sharing tree info
+
+
+
+
+
+
+
 
 Local particles may need information about particles in other computational domains. To compute an SPH-sum for a particle, usually information about particles within two smoothing lengths is needed. When a local particle is right at the edge of the domain, it needs to know about non-local particles in the adjacent domain. Particles inside non-local volumes sharing an edge with a local volume are called \emph{ghost particles} oder just \emph{ghosts}. Besided having to be copied on to the local process, they cause no computational cost, as only their information is used but nothing is calculated for them.\\
 
