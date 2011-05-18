@@ -981,11 +981,19 @@ Another disadvantage of this approach is the computational overhead of ghost par
 \end{center}
 \end{figure}
 
-
-%disadvantage: distributed memory machines loose importance, not good for parameter space searches, % mutlicore machines are the future
-
 \subsection{SPHLATCH v2}
-The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simulations of medium resolution collisions led to the development of SPHLATCH v2, a shared memory code. 
+The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simulations of medium resolution collisions led to the development of SPHLATCH v2, a shared memory code. The big difference to the first version, is that not the number of particles is distributed amongst individual processors, but the actual \emph{computational cost}. Computational cost is simply the time spent per particle, to calculate for example gravity or the SPH sums and the unit is $[s / \text{particle}]$. If we now distribute the time being spent on computation equally onto processors, we get an efficient and scalable parallelization. Measuring cost for every particle individually would introduce a large overhead and not be very accurate. 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.3]{27algo_quadtree_sphlatchv2.pdf}
+\caption{Cost zone cells in SPHLATCH v2 serve }
+\label{ch02_fig27}
+\end{center}
+\end{figure}
+
+
 
 % use cost instead of 
 % TODO: SPHLATCHv2 tree with CZ cells
@@ -1005,16 +1013,8 @@ The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simul
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=0.3]{27algo_quadtree_sphlatchv2.pdf}
-\caption{Cost zone cells serve a different}
-\label{ch02_fig27}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
 \includegraphics[scale=0.6]{26algo_magnycours.pdf}
-\caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
+\caption{Architecture of a nowadays multi-core machine: The example shows a four processor configuration with AMD Opteron 61xx series processors. The left plot shows the layout of a single NUMA node. There are four processor cores per node, each with individual L1 and L2 caches. The L1 caches are divided into data and instruction caches, each with a capacity of 64 kilobytes. The slower L2 cache has a size of 512 kilobytes. The L3 cache is shared between all processor cores of the node and has a size of 6 megabytes. It serves also as an interface to system memory. }
 \label{ch02_fig26}
 \end{center}
 \end{figure}
@@ -1038,6 +1038,8 @@ cost zones as granularity, show exact determination of CZ cells\\
 %Clockrate: 2.0–2.4 GHz
 %Four HyperTransport 3.1 at 3.2 GHz (6.40 GT/sec)
 
+\cite{amd64:2006}
+
 
 %\subsection{Future of particle codes}
 %mention future of parallel computing: CPU vs. GPU computing, stream computing
@@ -1057,7 +1059,6 @@ cost zones as granularity, show exact determination of CZ cells\\
 initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
 use of spheres for simplicity reason
 
-
 \section{Post-processing}
 \subsection{gravitational bound clump finding}
 \subsection{clumps as friends or friends}
@@ -1074,6 +1075,14 @@ use of spheres for simplicity reason
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{25algo_fof2.pdf}
+\caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
+\label{ch02_fig25}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{27algo_cells.pdf}
 \caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
 \label{ch02_fig25}
 \end{center}
