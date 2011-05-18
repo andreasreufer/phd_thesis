@@ -934,7 +934,6 @@ The first expression tells us down to which opening angle the local tree provide
 
 So we know now which parts of the global tree need to be in the local tree. The next question is how to build the local tree. No domains knows about all the particles, so the tree has to be built globally. On no process the global tree can be built, as no process knows about all the particles and also the global tree might be too big to fit into the memory available to a process. The basic idea is to build the local tree with local and ghost particles and then synchronize the top tree globally.
 
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.35]{07quadtree50_TPL2_stage1.pdf}\\ \vspace{1.0cm}
@@ -956,7 +955,6 @@ This parallelization method is rather simple, which is one of the advantages of 
 
 The downside of the method is that for non-uniform particle distribution a lot of unused and empty top-tree nodes have to be created. Although they don't need to be accessed, they use memory and make the caching of other tree nodes worse. Enforcing cell nodes in the top tree also causes a deeper tree than without the top tree, which leads to longer and therefore slightly slower tree walks.
 
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{21algo_sphlatch01.pdf}
@@ -970,14 +968,10 @@ Figure \ref{ch02_grav02_fig13} now shows a summary of the building blocks of the
 The other parts in the code as shown in figure \ref{ch02_fig20} are parallelized in a straightforward way in this implementation of SPHLATCH. Loading the particles from a dump file in the parallel version differs as such, as only a part of the complete dump has to be loaded. It doesn't matter which part is loaded, as particles are exchanged into their proper cost zones anyway in the first derivation step. Determining the time step with the various criteria (equations \ref{ch02_sph02_eq023}, \ref{ch02_sph02_eq024}) is changed only as such, as the minima have to be found globally. Integrating the derivatives of the local particles can be done like in a serial code. Writing the particles into a dump file in a parallel can be a bit tricky. Writing in parallel to a single file can lead to different behavior depending on system libraries. Our code circumvents this problem by using the HDF5 library \footnote{http://www.hdfgroup.org/HDF5/}, which is supports parallel writes. Dump files are stored in a compatible way like in the H5PART \footnote{http://vis.lbl.gov/Research/H5Part/} library, which allows the use of existing software for analysis and post-processing. Apart from particle data, this file format also supports attributes which can be used for example to store simulation constants, like the gravitational constant or the courant number.
 
 
-This distributed memory parallelization shown here works sufficiently well for problems where particles are  relatively homogeneously distributed. Other codes like GADGET or GASOLINE use a very similar parallelization approach and successfully simulated cosmological problems with billions of particles \cite{2005Natur.435..629S}. While cosmological simulations show large spatial dynamics by collapse, the particles are overall relatively well distributed in space, which allows this parallelization approach to scale well up to large numbers of particles. In simulations of collisions, the particles are not well distributed: In the beginning particles are in two well separated bodies. After the collisions small fragments may fly far away thus enlarging the simulation space, while most particles are still concentrated in one or two large bodies. That the approach shown before is not capable of distributing the particles well onto different processors can be seen through a quick estimate: With the multipole acceptance criterion from equation \ref{ch02_grav02_eq013} with an opening angle between $0.6 \dots 1.0 $, we have seen that the top tree depth $d_{TT}$ has to be one larger than the cost zone depth $d_{cz}$. A top tree depth of 6 leads to $8^6 = 262144$ top tree cells, which for practical reasons is an upper limit. The top tree which has to be globally summed up simply gets too large for a larger top tree depth. This leaves us with a cost zone depth of 5 and 32 cost zone cells in each dimension. Assuming a situation with a large central body, where most particles are located and debris distributed no more than $10 \times$
+This distributed memory parallelization shown here works sufficiently well for problems where particles are  relatively homogeneously distributed. Other codes like GADGET or GASOLINE use a very similar parallelization approach and successfully simulated cosmological problems with billions of particles \cite{2005Natur.435..629S}. While cosmological simulations show large spatial dynamics by collapse, the particles are overall relatively well distributed in space, which allows this parallelization approach to scale well up to large numbers of particles. In simulations of collisions, the particles are not well distributed: In the beginning particles are in two well separated bodies. After the collisions small fragments may fly far away thus enlarging the simulation space, while most particles are still concentrated in one or two large bodies. That the approach shown before is not capable of distributing the particles well onto different processors can be seen through a quick estimate: With the multipole acceptance criterion from equation \ref{ch02_grav02_eq013} with an opening angle between $0.6 \dots 1.0 $, we have seen that the top tree depth $d_{TT}$ has to be one larger than the cost zone depth $d_{cz}$. A top tree depth of 6 leads to $8^6 = 262144$ top tree cells, which for practical reasons is an upper limit. The top tree which has to be globally summed up simply gets too large for a larger top tree depth. This leaves us with a cost zone depth of 5 and 32 cost zone cells in each dimension. Now let's assume a situation in which a large, spherical central body where most particles are located and some debris distributed around it no further than $10 \times$ the central bodies diameter. Figure \ref{ch02_fig23} shows a similar situation where the two original bodies of the collision with a mass ratio of 3:1 largely remained intact, but where large amounts of debris are generated. So in this example roughly $1.5$ cost zone cell side lengths equal the central body diameter. The central body will therefore lie in no more than 8 cost zone cells. Not only is it now impossible to distribute the particles to a large number of computational domains, it is not even possible to distribute the particles evenly to a small number of domains, as the granularity of the cost zone cells is too coarse to balance the domains. This is the reason why this approach of distributing particles does not work well for problems with un-even particles distributions. Not that in practice debris can be located much further out, making the problem worse.
 
+Another disadvantage of this approach is the computational overhead of ghost particles. In practice there are usually twice the number of ghost particles on a domain than local particles. Not only uses this a lot of memory, but communicating ghost information introduces a large overhead. 
 
-
-% CZ depth of only 5 -> 32 cells in each dim.
-% work not truly balanced
-
-Despite using 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -988,18 +982,17 @@ Despite using
 \end{figure}
 
 
-
-
-disadvantage: distributed memory machines loose importance, not good for parameter space searches, mutlicore machines are the future
-
-% TODO: number of pointers, memory requirements
-% TODO: spline smoothing for gravity
-
-
-
-
+%disadvantage: distributed memory machines loose importance, not good for parameter space searches, % mutlicore machines are the future
 
 \subsection{SPHLATCH v2}
+The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simulations of medium resolution collisions led to the development of SPHLATCH v2, a shared memory code. 
+
+% use cost instead of 
+% TODO: SPHLATCHv2 tree with CZ cells
+% exact parallelization approach: tree workers, data is constant
+% caching issues: data structures, look at caching techniques, NUMA architecture, alignment with caches
+% show each step \ref{ch02_fig22}
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1010,17 +1003,47 @@ disadvantage: distributed memory machines loose importance, not good for paramet
 \end{figure}
 
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.3]{27algo_quadtree_sphlatchv2.pdf}
+\caption{Cost zone cells serve a different}
+\label{ch02_fig27}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{26algo_magnycours.pdf}
+\caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
+\label{ch02_fig26}
+\end{center}
+\end{figure}
+
+
+
 SPHLATCH v2\\
 shared memory approach\\
 show cost (gravity, NS, total) for giant impact, how this leads to problems in SPHLATCH v1\\
 load balancing approach, how this could be memory-\\
-caching issues\\
+caching issues, cache lines, alignment of tree data structures\\
+problems of openMP: memory allocation, NUMA architecture\\
+cost zones as granularity, show exact determination of CZ cells\\
+% TODO: get depiction of cache structure
 
 
-\subsection{Future of particle codes}
-mention future of parallel computing: CPU vs. GPU computing, stream computing
-trees on GPUs (references)
+%Octa-core – Magny-Cours MCM (6124-6136)
+%Released March 29, 2010.
+%CPU-Steppings: D1
+%L3-Cache: 2x6 MB, shared
+%Clockrate: 2.0–2.4 GHz
+%Four HyperTransport 3.1 at 3.2 GHz (6.40 GT/sec)
 
+
+%\subsection{Future of particle codes}
+%mention future of parallel computing: CPU vs. GPU computing, stream computing
+%trees on GPUs (references)
+
+% TODO: reference AMD developer manual
 
 
 \section{Initial conditions}
@@ -1036,8 +1059,9 @@ use of spheres for simplicity reason
 
 
 \section{Post-processing}
-\subsection{clump detection}
-bound search:
+\subsection{gravitational bound clump finding}
+\subsection{clumps as friends or friends}
+%bound search:
 
 \begin{figure}[htbp]
 \begin{center}
