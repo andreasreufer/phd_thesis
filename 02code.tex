@@ -972,7 +972,6 @@ This distributed memory parallelization shown here works sufficiently well for p
 
 Another disadvantage of this approach is the computational overhead of ghost particles. In practice there are usually twice the number of ghost particles on a domain than local particles. Not only uses this a lot of memory, but communicating ghost information introduces a large overhead. 
 
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=2.0]{23cost_example.png}
@@ -982,8 +981,7 @@ Another disadvantage of this approach is the computational overhead of ghost par
 \end{figure}
 
 \subsection{SPHLATCH v2}
-The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simulations of medium resolution collisions led to the development of SPHLATCH v2, a shared memory code. The big difference to the first version, is that not the number of particles is distributed amongst individual processors, but the actual \emph{computational cost}. Computational cost is simply the time spent per particle, to calculate for example gravity or the SPH sums and the unit is $[s / \text{particle}]$. If we now distribute the time being spent on computation equally onto processors, we get an efficient and scalable parallelization. Measuring cost for every particle individually would introduce a large overhead and not be very accurate. 
-
+The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simulations of medium resolution collisions led to the development of SPHLATCH v2, a shared memory code. The big difference to the first version, is that not the number of particles is distributed amongst individual processors, but the actual \emph{computational cost}. Computational cost is simply the time spent per particle, to calculate for example gravity or the SPH sums and the unit is $[s / \text{particle}]$. If we now distribute the time being spent on computation equally onto processors, we get an efficient and scalable parallelization. Measuring cost for every particle individually would introduce a large overhead and not be very accurate. For that reason the cost is measured for each cost zone cell. Computations are always performed for all particles, which are in the sub tree of a cost zone level. The elapsed time is measured and the cost is estimated by dividing the time through the number of particles a cost zone has. If particles move from one cost zone to another, the particles' individual cost is removed from one cost zone cell and added up to another cost zone cell. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -993,10 +991,13 @@ The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simul
 \end{center}
 \end{figure}
 
+Figure \ref{ch02_fig27} shows the same tree structure as in figure \ref{ch02_fig07a}. The difference is now, that cost zone cells are not created down to a fixed level, but are created on demand whenever the total cost of all particles which are in a sub tree of a cell node lies within certain boundaries. Note again that cost is only measured on a cost zone cell level. For a normal cell node which is a child of a cost zone cell, the cost can only be estimated by dividing the total cost of the parent cost zone cell through the number of particles in the given cell. Also note in figure \ref{ch02_fig27} that the set of all cost zone cells presents a cut through the tree and includes all particles in the tree.
+
+Cost zone cells are moved to a higher or lower level if their cost goes below or above a certain level. Relative cost is introduced for that reason and is simply a normalized value for cost. The total relative cost of all cost zones in a tree is 1. Now we can introduce the requirement, that cost should be equally distributed 
+
 
 
 % use cost instead of 
-% TODO: SPHLATCHv2 tree with CZ cells
 % exact parallelization approach: tree workers, data is constant
 % caching issues: data structures, look at caching techniques, NUMA architecture, alignment with caches
 % show each step \ref{ch02_fig22}
@@ -1016,6 +1017,14 @@ The disadvantages of SPHLATCH v1 and the demand for a fast code suited for simul
 \includegraphics[scale=0.6]{26algo_magnycours.pdf}
 \caption{Architecture of a nowadays multi-core machine: The example shows a four processor configuration with AMD Opteron 61xx series processors. The left plot shows the layout of a single NUMA node. There are four processor cores per node, each with individual L1 and L2 caches. The L1 caches are divided into data and instruction caches, each with a capacity of 64 kilobytes. The slower L2 cache has a size of 512 kilobytes. The L3 cache is shared between all processor cores of the node and has a size of 6 megabytes. It serves also as an interface to system memory. }
 \label{ch02_fig26}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{28algo_cells.pdf}
+\caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
+\label{ch02_fig25}
 \end{center}
 \end{figure}
 
@@ -1080,13 +1089,6 @@ use of spheres for simplicity reason
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.6]{27algo_cells.pdf}
-\caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
-\label{ch02_fig25}
-\end{center}
-\end{figure}
 
 
 \subsection{setting up a SSC}
