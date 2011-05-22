@@ -1001,13 +1001,6 @@ Figure \ref{ch02_fig22} shows how the derivation procedure is parallelized in SP
 
 The remaining parts of the derivation parts are now run in parallel. The tree data structure is now only accessed read-only, which allows multiple threads to perform tree walks on it. Work is distributed by running a for-loop over \emph{workers} which run on the elements of the cost zone cell list. This for-loop is parallelized with OpenMP. A worker is a small independent procedure, which can for example run a neighbor algorithm for each particle inside a cost zone cell or calculate the gravity.
 
-Although the parallelization itself is simple, running it fast is not so easy. The problem is, that all workers have to access the nodes of the tree and share its data. The performance of nowadays computers is limited by the \emph{von Neumann bottleneck} \citep{bryant2010computer}: While even most complex floating point operations like divisions can be completed in only a few clock cycles, accessing the main memory takes between 50-300 cycles \citep{2008WhitepaperFry}.
-
-% use cost instead of 
-% exact parallelization approach: tree workers, data is constant
-% caching issues: data structures, look at caching techniques, NUMA architecture, alignment with caches
-
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{22algo_sphlatch02.pdf}
@@ -1017,6 +1010,9 @@ Although the parallelization itself is simple, running it fast is not so easy. T
 \end{figure}
 
 
+
+Although the parallelization itself is simple, running it efficiently on multiple processor cores is not easy. The problem is that all workers have to access the nodes of the tree and share its data. The performance of nowadays computers is limited by the \emph{von Neumann bottleneck} \citep{bryant2010computer}: While even most complex floating point operations like divisions can be completed in only a few clock cycles, accessing the main memory takes between 50-300 cycles \citep{2008WhitepaperFry}. Modern CPUs only achieve a high performance because of caching the main memory. The basic idea is to have small cache memories which are very fast and store the most recently used pieces of data from the main memory. While of course the data still has to be fetched from memory the first time it is used, chances are very high that it is used again very shortly and can be retrieved from the much faster cache. 
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{26algo_magnycours.pdf}
@@ -1025,13 +1021,33 @@ Although the parallelization itself is simple, running it fast is not so easy. T
 \end{center}
 \end{figure}
 
+Figure \ref{ch02_fig26} shows a schematic of the cache architecture of an AMD Opteron 61xx, a modern mutli core CPU. The orange boxes depict the CPU cores. For every memory access, it is checked whether the caches already contain the requested data. In case of the AMD Opteron, memory is divided into pieces of 64 bytes, so called \emph{cache lines}, and always cached as a whole. This means even if only a single byte is fetched from memory, the whole cache line this byte resides in is stored in the caches.
+
+The cache architecture is hierarchic. Caches are checked for stored data in decreasing level order. If data is found in a cache, a \emph{cache hit} has occured, otherwise a \emph{cache miss}. The sizes of the caches increase with the level, but so do the access times. Data is stored in caches, whenever it has been used by the processor and kept as long as it has not been changed in memory. Note that data in memory can be changes by the other processor cores independently running instructions. Space in the caches is heavily limited. If new data has to be cached, the data which was not accessed for the longest time is expelled and evicted to the next level. So an evicted cache line from the L1 cache is stored in L2 and so on. This means the chances for a cache hit are the highest for more recently accessed data or in other words for data with a strong \emph{temporal locality}. Another way of increasing chances of a cache hit is assuring \emph{spatial locality}, by accessing data in a cache line which already resides in a cache. 
+
+
+
+
+
+
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{28algo_cells.pdf}
 \caption{Algorithm to find clumps of particles, which are interconnected as friends of friends.}
-\label{ch02_fig25}
+\label{ch02_fig28}
 \end{center}
 \end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{29ssc.pdf}
+\caption{Sidecut view of the impact plane. In a target centric view, the impactor follows an orbit }
+\label{ch02_fig29}
+\end{center}
+\end{figure}
+
 
 
 
@@ -1042,15 +1058,14 @@ load balancing approach, how this could be memory-\\
 caching issues, cache lines, alignment of tree data structures\\
 problems of openMP: memory allocation, NUMA architecture\\
 cost zones as granularity, show exact determination of CZ cells\\
-% TODO: get depiction of cache structure
+
+% use cost instead of 
+% exact parallelization approach: tree workers, data is constant
+% caching issues: data structures, look at caching techniques, NUMA architecture, alignment with caches
 
 
-%Octa-core – Magny-Cours MCM (6124-6136)
-%Released March 29, 2010.
-%CPU-Steppings: D1
-%L3-Cache: 2x6 MB, shared
-%Clockrate: 2.0–2.4 GHz
-%Four HyperTransport 3.1 at 3.2 GHz (6.40 GT/sec)
+
+
 
 \cite{amd64:2006}
 
