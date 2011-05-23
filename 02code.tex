@@ -1025,9 +1025,8 @@ Figure \ref{ch02_fig26} shows a schematic of the cache architecture of an AMD Op
 
 The cache architecture is hierarchic. Caches are checked for stored data in decreasing level order. If data is found in a cache, a \emph{cache hit} has occured, otherwise a \emph{cache miss}. The sizes of the caches increase with the level, but so do the access times. Data is stored in caches, whenever it has been used by the processor and kept as long as it has not been changed in memory. Note that data in memory can be changes by the other processor cores independently running instructions. Space in the caches is heavily limited. If new data has to be cached, the data which was not accessed for the longest time is expelled and evicted to the next level. So an evicted cache line from the L1 cache is stored in L2 and so on. This means the chances for a cache hit are the highest for more recently accessed data or in other words for data with a strong \emph{temporal locality}. Another way of increasing chances of a cache hit is assuring \emph{spatial locality}, by accessing data in a cache line which already resides in a cache.
 
-Code performance can now be improved considerably by trying to increase the chances of cache hits. In SPHLATCH v2 this is achieved with different techniques: Most important the data structures for the tree nodes are designed 
+Code performance can now be improved considerably by trying to increase the chances of cache hits. In SPHLATCH v2 this is achieved with different techniques. Most importantly the tree node data structures are aligned to the cache lines. A particle node uses exactly one cache line of 64 bytes, as shown in figure \ref{ch02_fig28}. These guarantees, that only one cache line is used per particle node. In case the data structure would not be aligned, even if smaller than a cache line, a particle node could use two adjacent cache lines, which would lead to wasted cache memory.
 
-Increasing spatial locality in memory accesses 
 
 % access similar particles again (temporal locality)
 % reduce cache line usage (spatial locality)
