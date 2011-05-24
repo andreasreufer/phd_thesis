@@ -1055,7 +1055,7 @@ The motivation for running collision simulations is to deduce simple quantities 
 The output of the code consists of dumps of particles which need to be post processed. The following few sections will cover the individual steps required for setting up initial conditions and for post processing particle dumps.
 
 \subsection{vanilla SPH spheres}
-For the collisions considered in this thesis, we use spherical impactor and target bodies. The aim is to start with a particle distribution as close to equilibrium as possible. In case of fluids, SPH particles in a relaxed state tend to arrange themselves in a closed-pack configuration. Starting with an HCP lattice and cutting a sphere out of it is a good approximation to such a closed-pack configuration. For a given sphere radius the lattice length is
+For the collisions considered in this thesis, we use three dimensional, spherical impactor and target bodies. The aim is to start with a particle distribution as close to equilibrium as possible. In case of fluids, SPH particles in a relaxed state tend to arrange themselves in a closed-pack configuration. Starting with an HCP lattice and cutting a sphere out of it is a good approximation to such a closed-pack configuration. For a given sphere radius the lattice length is
 
 \begin{equation}
 \label{ch02_aux_eq001}
@@ -1065,33 +1065,44 @@ l = 2 r \big( K N \big)^{\frac{1}{3}}
 $K$ denotes the filling factor of the HCP lattice and $N$ the desired number of particles of the sphere. The smoothing length set to $h = 0.85 l$ leads to roughly 50 neighbors, except at the surface of the sphere.
 
 \subsection{1D structures}
-In case of small spheres which are not self-gravitating, the structure of the sphere is trivial. Pressure vanishes 
+In case of small spheres which are not self-gravitating, the structure of the sphere is trivial. Pressure has to vanish in equilibrium, so density is simply set to the zero-pressure value $\rho_0$ for the given specific energy or entropy. All quantities are radius independent.
 
+Self-gravitating spheres have non-trivial structures. For simple equations of state like ideal gas, exact solutions can be calculated analytically in some special cases. In all other cases a solution has to be found numerically. The basic idea is to start with a 1D structure with vanishing pressure and then letting this structure collapse under the influence of self-gravity with a 1D code. A dampening term assures, that the structure does not oscillate forever, but relaxes sufficiently fast:
 
-the particle mass is set so that the SPH density sum \ref{ch02_sph02_eq001} leads to the reference density $\rho_0$ for which the pressure vanishes. 
+\begin{equation}
+\label{ch02_aux_eq002}
+a_{fric} = - \frac{1}{\tau_{fric}} v \hspace{2.0cm} \tau_{fric} \gg \tau_{ff}\hspace{2.0cm} \tau_{ff} = \frac{1}{\sqrt{G \rho} }
+\end{equation}
 
+The dampening time scale $\tau_{fric}$ has to be larger than the free-fall time scale $\tau_{ff}$ \citep{shore2007astrophysical}, so that the oscillations do not get overdamped. We use a 1D Lagrangian code as described in \citep{Benz:1991p700} and keep the specific entropy constant for all cells. This avoids heating up of the structure during the relaxation process due to artificial viscosity. The 1D Lagrangian code uses the same equations of state as SPHLATCH, like ANEOS or ideal gas. We define the structure to be sufficiently relaxed, of the remnant velocities of the mass elements are below $1\%$ of the escape velocity. 
 
-Setting up one-dimensional profiles is non-trivial in case 
+\subsection{flavoring \& relaxing SPH spheres}
+Flavoring the "vanilla" spheres made out of SPH with a one dimensional structure is straightforward for standard or miscibile SPH: Dividing the required density $\rho_i$ with the particle density $\delta_i$ obtained with SPH sum \ref{ch02_sph01_eq030} leads to the particle mass $m_i$. The inverse of the particle density is the particle volume. In case density is an integrated variable, both the particle mass and the density have to be set. The thermodynamic state variables can be set directly, as they are intensive. For convenience reasons, the particles are also numbered with a unique ID, so that each particle can later on be identified uniquely.
 
-\citep{Benz:1991p700}
+In the next, the 3D SPH sphere also needs to be relaxed to equilibrium. Even if the 1D structure was in equilibrium, the 3D SPH won't be, because all the physical quantities are now interpolated between the particles. This adds in particular edge effects like mentioned before in figure \ref{ch02_fig01}. We apply the same damping term as mentioned before, but now in 3D:
 
+\begin{equation}
+\label{ch02_aux_eq002}
+\av_{fric} = - \frac{1}{\tau_{fric}} \vv \hspace{2.0cm} \tau_{fric} \gg \tau_{ff}\hspace{2.0cm} \tau_{ff} = \frac{1}{\sqrt{G \rho} }
+\end{equation}
 
+Note that the distance vector uses the center of mass for the origin. The SPH sphere is now integrated again for a few free fall times, until random particle velocities reduce below $1\%$ of the escape velocity of the body. Velocities of the particles near the surface will be on the order of the escape velocity in a collision simulation. So remnant velocities below $1\% v_{esc}$ will fall in the same order of magnitude as SPH noise. Instead of integrating specific energy, the specific entropy is simply kept constant, in order to avoid artificial heating by the artificial viscosity terms. Due to summation errors in the self-gravity calculation, a small random momentum might be introduce. At the end of the relaxation, the remnant momentum is divided by the bodies' mass and the resulting velocity is substracted from all particles. Now also the final radius of the body can be determined, by taking the particles at the very surface of the body and adding roughy a smoothing length to this radius. We now have a relaxed, 3D SPH body with the desired structure.
 
-% vanilla sphere + 1D structure -> flavoured body -> relax
-% use of spheres for simplicity reason
+\subsection{Setting up a collision}
+Again without gravity, setting up a collision is simple. To all particles of both the impactor and the target, positions and velocities are added, so that the desired initial separation $r_0$, impact angle $\thimp$ and velocity $\vv_{imp}$ result:
 
+\begin{align}
+\label{ch02_aux_eq002}
+\rv_0 &= \rv_{0,imp} -  \rv_{0,tar} \\
+\vv_0 &= \vv_{0,imp} -  \vv_{0,tar} \\
+\thimp &= \cos{ \frac{\rv_0 \vv_0}{v_0 v_0} }
+t_0 = \frac{r_0}{v_0}
+\end{align}
 
-\subsection{flavoring SPH spheres}
-In case of small spheres which are not self-gravitating, setting the physical quantities is trivial: If standard SPH is going to be used, dividing the required density $\rho_i$ with the particle density $\delta_i$ obtained with SPH sum \ref{ch02_sph01_eq030} leads to the particle mass $m_i$. The inverse of the particle density is the particle volume.
+$t_0$ denotes the time of the initial conditions particle dump, so that the $t = 0$ equals the time of impact. $r_0$ is the initial separation of the bodies and has to fulfill $r_0 > R_{imp} + R_{tar}$, so that they don't touch each other initially. $R_{imp}$ and $R_{tar}$ are the radii of the impactor and target body.
 
+In case gravity is important, thing's becomes more complicated. The motion of the impactor relative to the target will no longer follow a straight, un-accelerated trajectory. Instead the impactor follows an orbit around the target, ultimately hitting it. The relative motion between the impactor with mass $M_{imp}$ and the target $M_{tar}$
 
-
-\subsection{putting an atmosphere on top}
-
-\subsection{relaxing SPH bodies}
-% show theoretical vs. unevolved vs. evolved densities
-
-\subsection{setting up a collision}
 % mimp + mtar collisions equals a collisions in the target rest frame with orbiting body with mu
 % r_imp = R_imp + R_tar
 % impact angle, velocity, masses -> theta_imp, e, rp -> r0, theta0, beta0, v0 -> shift & turn frame, such as p0 = 0 and impact axis aligned (theta_im = pi/2)
