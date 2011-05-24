@@ -7,7 +7,6 @@ Collision events are characterised by a
 range of dynamical 
 
 %\subsection*{Introduction}
-%\includepdf[pages={2-},fitpaper=true]{/tree_musings}
 
 Motivation to use SPH, spatial dynamics of collisions, SPH particles are where the mass is (not entirely true for collisions, but necessary), free boundaries
 
@@ -1009,8 +1008,6 @@ The remaining parts of the derivation parts are now run in parallel. The tree da
 \end{center}
 \end{figure}
 
-
-
 Although the parallelization itself is simple, running it efficiently on multiple processor cores is not easy. The problem is that all workers have to access the nodes of the tree and share its data. The performance of nowadays computers is limited by the \emph{von Neumann bottleneck} \citep{bryant2010computer}: While even most complex floating point operations like divisions can be completed in only a few clock cycles, accessing the main memory takes between 50-300 cycles \citep{2008WhitepaperFry}. Modern CPUs only achieve a high performance because of caching the main memory. The basic idea is to have small cache memories which are very fast and store the most recently used pieces of data from the main memory. While of course the data still has to be fetched from memory the first time it is used, chances are very high that it is used again very shortly and can be retrieved from the much faster cache. 
 
 \begin{figure}[htbp]
@@ -1047,8 +1044,59 @@ The cell node is more complex: Besides the common node data it contains the skip
 
 Temporal locality in the memory accesses is also assured by the order the derivatives of the particles are calculated. As described above, workers calculate the derivatives of the particles on a per-cost zone cell basis. If the number of particles in a cost zone cell is relatively small compared to the total number of particles in a simulation, chances are high that those particles are spatially close to each other. For the SPH sums, interactions will take place mostly between the particles of cost zone cell itself. So chances are high, that neighbors have already been used before for another particles or were actually calculated themselves and reside already in a cache. The same argument applies for the particle to particles interactions in the Barnes \& Hut algorithm. If the cost zone cell is small compared to the simulation space, similar cell nodes will be used for the multipole approximations and again chances are high that those cells will already reside in caches.
 
+The rest of the code is equal to SPHLATCH v1 as described above.
+
+%\subsection{Future of particle codes}
+%mention future of parallel computing: CPU vs. GPU computing, stream computing
+%trees on GPUs (references)
+
+\section{Running collision simulations}
+The motivation for running collision simulations is to deduce simple quantities like the mass of the largest remnant or deflection angle of the impactor for a given set of impact parameters like impact angle and velocity. A hydrodynamical particle code on the other hand requires initial conditions in the form of an initial distribution of particles with their physical quantities set according to the physical situation to be modeled. The particles should also be in equilibrium initially, in order to start with a well defined condition.
+The output of the code consists of dumps of particles which need to be post processed. The following few sections will cover the individual steps required for setting up initial conditions and for post processing particle dumps.
+
+\subsection{vanilla SPH spheres}
+For the collisions considered in this thesis, we use spherical impactor and target bodies. The aim is to start with a particle distribution as close to equilibrium as possible. In case of fluids, SPH particles in a relaxed state tend to arrange themselves in a closed-pack configuration. Starting with an HCP lattice and cutting a sphere out of it is a good approximation to such a closed-pack configuration. For a given sphere radius the lattice length is
+
+\begin{equation}
+\label{ch02_aux_eq001}
+l = 2 r \big( K N \big)^{\frac{1}{3}}
+\end{equation}
+
+$K$ denotes the filling factor of the HCP lattice and $N$ the desired number of particles of the sphere. The smoothing length set to $h = 0.85 l$ leads to roughly 50 neighbors, except at the surface of the sphere.
+
+\subsection{1D structures}
+In case of small spheres which are not self-gravitating, the structure of the sphere is trivial. Pressure vanishes 
 
 
+the particle mass is set so that the SPH density sum \ref{ch02_sph02_eq001} leads to the reference density $\rho_0$ for which the pressure vanishes. 
+
+
+Setting up one-dimensional profiles is non-trivial in case 
+
+\citep{Benz:1991p700}
+
+
+
+% vanilla sphere + 1D structure -> flavoured body -> relax
+% use of spheres for simplicity reason
+
+
+\subsection{flavoring SPH spheres}
+In case of small spheres which are not self-gravitating, setting the physical quantities is trivial: If standard SPH is going to be used, dividing the required density $\rho_i$ with the particle density $\delta_i$ obtained with SPH sum \ref{ch02_sph01_eq030} leads to the particle mass $m_i$. The inverse of the particle density is the particle volume.
+
+
+
+\subsection{putting an atmosphere on top}
+
+\subsection{relaxing SPH bodies}
+% show theoretical vs. unevolved vs. evolved densities
+
+\subsection{setting up a collision}
+% mimp + mtar collisions equals a collisions in the target rest frame with orbiting body with mu
+% r_imp = R_imp + R_tar
+% impact angle, velocity, masses -> theta_imp, e, rp -> r0, theta0, beta0, v0 -> shift & turn frame, such as p0 = 0 and impact axis aligned (theta_im = pi/2)
+
+\cite{thomson1986introduction}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1059,33 +1107,8 @@ Temporal locality in the memory accesses is also assured by the order the deriva
 \end{figure}
 
 
-
-
-\cite{amd64:2006}
-
-
-%\subsection{Future of particle codes}
-%mention future of parallel computing: CPU vs. GPU computing, stream computing
-%trees on GPUs (references)
-
-\section{Initial conditions}
-% show full pipeline
-
-
-\subsection{vanilla SPH sphere}
-\subsection{getting 1D structures}
-\label{ch01_sec99}
-\citep{Benz:1991p700}
-
-\subsection{flavouring an SPH sphere}
-\subsection{putting an atmosphere on top}
-initial conditions: show theoretical vs. unevolved vs. evolved densities, show example of impact with standard SPH and miscible SPH (chondritic, use moon case), setting up a \SSC \\
-use of spheres for simplicity reason
-
-\section{Post-processing}
-\subsection{gravitational bound clump finding}
-\subsection{clumps as friends or friends}
-%bound search:
+\subsection{gravitationally bound clump search}
+% not parallelized!
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1095,6 +1118,8 @@ use of spheres for simplicity reason
 \end{center}
 \end{figure}
 
+
+\subsection{Friend-of-friend clump search}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{25algo_fof2.pdf}
@@ -1104,16 +1129,10 @@ use of spheres for simplicity reason
 \end{figure}
 
 
+\subsection{Determining disks}
+% get orbit parameters from state vectors
+% orbit / surface detection: disk vs. body particles\\
 
-\subsection{setting up a SSC}
-show the whole drill
-orbit setup
-
-
-\subsection{plotting}
-clump detection\\
-FOF vs. potential, not parallelized\\
-orbit / surface detection: disk vs. body particles\\
 
 %\section{Tests}
 %shocktube
@@ -1130,7 +1149,6 @@ orbit / surface detection: disk vs. body particles\\
 %\citep{Solenthaler:2008p3720}
 %\citep{Springel:2003p3298}
 %\citep{Springel:2005p51}
-
 
 
 \bibliographystyle{plainnat}
