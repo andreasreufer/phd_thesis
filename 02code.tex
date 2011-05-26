@@ -1095,19 +1095,22 @@ Again without gravity, setting up a collision is simple. To all particles of bot
 \label{ch02_aux_eq002}
 \rv_0 &= \rv_{0,imp} -  \rv_{0,tar} \\
 \vv_0 &= \vv_{0,imp} -  \vv_{0,tar} \\
-\thimp &= \cos{ \frac{\rv_0 \vv_0}{v_0 v_0} }
-t_0 = \frac{r_0}{v_0}
+\thimp &= \cos{ \frac{\rv_0 \vv_0}{v_0 v_0} }\\
+t_0 &= - \frac{r_0}{v_0}
 \end{align}
+
+The impact angle $\thimp$ determines the geometry of the impact and is defined as the angle between the relative velocity $\vv$ and position vector $\rv$ at the time of impact. Instead of the angle, often the impact parameter $b = \sin{\thimp}$ is used.
 
 $t_0$ denotes the time of the initial conditions particle dump, so that the $t = 0$ equals the time of impact. $r_0$ is the initial separation of the bodies and has to fulfill $r_0 > R_{imp} + R_{tar}$, so that they don't touch each other initially. $R_{imp}$ and $R_{tar}$ are the radii of the impactor and target body.
 
-In case gravity is important, thing's becomes more complicated. The motion of the impactor relative to the target will no longer follow a straight, un-accelerated trajectory. Instead the impactor follows an orbit around the target, ultimately hitting it. The relative motion between the impactor with mass $M_{imp}$ and the target $M_{tar}$
+In case gravity is no longer negligible, things become slightly more complicated. The motion of the impactor relative to the target no longer follow a straight, un-accelerated trajectory. Instead the impactor with mass $\Mimp$ and target with $\Mtar$ present a two-body problem, where both bodies orbit around the mutual bary-center and ultimately hit each other. The relative motion between these two bodies can be replaced by a one-body problem with the reduced mass
 
-% mimp + mtar collisions equals a collisions in the target rest frame with orbiting body with mu
-% r_imp = R_imp + R_tar
-% impact angle, velocity, masses -> theta_imp, e, rp -> r0, theta0, beta0, v0 -> shift & turn frame, such as p0 = 0 and impact axis aligned (theta_im = pi/2)
+\begin{align}
+\label{ch02_aux_eq003}
+M_{red} = \frac{\Mimp \Mtar}{\Mimp + \Mtar}
+\end{align}
 
-\cite{thomson1986introduction}
+Like in the case without gravity, the actual impact is defined as the point of time, where the surfaces of the two bodies first come in contact with each other. Neglecting tidal deformation of the bodies, this is the case when $r = r_{imp} = R_{imp} + R_{tar}$. Figure \ref{ch02_fig29} shows the orbit of the impactor in frame of reference where the target is at rest. The impact angle is still defined the same way as without gravity, but we newly introduce the heading angle $\beta$ which is defined as the deviation of the heading relative to a motion perpendicular to the centre of the larger mass:
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1116,6 +1119,82 @@ In case gravity is important, thing's becomes more complicated. The motion of th
 \label{ch02_fig29}
 \end{center}
 \end{figure}
+
+\begin{align}
+\label{ch02_aux_eq004}
+\thimp = \frac{\pi}{2} - \beta_{imp} = \cos{ \frac{\rv_{imp} \vv_{imp}}{v_{imp} v_{imp}} }
+\end{align}
+
+At perihel, the heading angle is zero. Energy and angular momentum conservation let us determine the eccentricity of the orbit \citep{thomson1986introduction}:
+
+\begin{align}
+\label{ch02_aux_eq005}
+e &= \Big( \frac{r_{imp} \vv_{imp}^2}{\mu} - 1 \Big)^2 \cos{\beta_{imp}}^2 + \sin{\beta_{imp}}^2 \hspace{2.0cm} \mu = G ( \Mimp + \Mtar ) 
+\end{align}
+
+which stays constant. It is $e = 1$ for a parabolic orbit, when $v_{\infty} = 0$ or $e > 1$ for a hyperbolic orbit where $v_{\infty} > 0$. The true anomaly of the impact can now be determined as
+
+\begin{align}
+\label{ch02_aux_eq006}
+\Thimp = \arctan{\frac{k_1 \sin{\beta_{imp}} \cos{\beta_{imp} }}{k_1 \cos{\beta_{imp}}^2 - 1} } \hspace{2.0cm} k_1 = \Big( \frac{r_{imp} \vv_{imp}^2}{\mu} - 1 \Big)^2
+\end{align}
+
+Note that for the arctangent, a special numerical function has to be used in order to get the correct true anomaly. The function is called \emph{atan2} in most programming languages and returns the correct angle in each quadrant of the coordinate system. The distance at perihel is then
+
+\begin{align}
+\label{ch02_aux_eq007}
+r_{p} = r_{imp} \frac{1 + e \cos{\Thimp} }{1 + e}
+\end{align}
+
+The initial true anomaly then follows from the initial separation $r_0$ between the two bodies which is also a free parameter
+
+\begin{align}
+\label{ch02_aux_eq008}
+\Theta_0 = \arccos{\frac{r_p(1 + e) - r_0}{e r_0}}
+\end{align}
+
+The initial relative velocity follow from energy conservation
+\begin{align}
+\label{ch02_aux_eq009}
+v_0 = \sqrt{v_{\infty}^2 + \frac{2 \mu}{r_0} }
+\end{align}
+
+Now the orbital state vectors can be determined.  We choose a reference frame, where total linear momentum vanished and the total center of mass is at the origin. The spatial orientation is choosen so that the impact axis coincides with the $y$-axis of the coordinate system. The relative position and velocity vectors therefore yield 
+
+\begin{align}
+\label{ch02_aux_eq010}
+\rv_0 &= r_0 {- \cos{\alpha} \choose \sin{\alpha}} \hspace{2.0cm} \alpha = \frac{\pi}{2} - \Theta_{imp} + \\\
+\vv_0 &= v_0 {- \cos{\gamma} \choose \sin{\gamma}} \hspace{2.0cm} \gamma = - \beta_0 - \Theta_{imp} + \Theta_0\\
+\rv_{0,tar} &= - \rv_0 \frac{M_{imp}}{M_{tar} + M_{imp}} \hspace{0.5cm}
+\vv_{0,tar} = - \vv_0 \frac{M_{imp}}{M_{tar} + M_{imp}} \\
+\rv_{0,imp} &= \rv_0 \frac{M_{tar}}{M_{tar} + M_{imp}} \hspace{0.8cm}
+\vv_{0,imp} = \vv_0 \frac{M_{tar}}{M_{tar} + M_{imp}} \\
+\end{align}
+
+The initial time can be calculated via the mean anomaly $\Psi$, which links true anomaly with time. Together with the semi-major axis $a$, time is
+
+\begin{align}
+\label{ch02_aux_eq011}
+\sqrt{\frac{\mu}{a^3} } t(\Theta) &=  \frac{e \sqrt{e^2-1} \sin{\theta} }{1 + e \cos{\theta}} - \log{\frac{\sqrt{e^2-1} + (e - 1) \tan{\frac{\Theta}{2}} }{  \sqrt{e^2-1} - (e - 1) \tan{\frac{\Theta}{2}} } } \hspace{2.0cm} \text{for~} e > 1\\
+\sqrt{\frac{\mu}{a^3} } t(\Theta) &=  \frac{1}{2} \Big( \tan{\frac{\Theta}{2}} + \frac{1}{3} \tan{\frac{\Theta}{2}}^3 \Big) \hspace{6.0cm} \text{for~} e = 1\\
+a &= \frac{r_p}{e - 1} 
+\end{align}
+
+so that the initial time is simply given by 
+
+\begin{align}
+\label{ch02_aux_eq012}
+t_0 = t(\Theta_{imp}) -  t(\Theta_0)
+\end{align}
+
+For perfectly head-on collisions ($\thimp = 0$) this calculation breaks down. The second components of both the relative position and velocity vectors are then simply set to the scalar values $r_0$ and $v_0$. The initial time is given by the free fall time from the initial separation to impact:
+
+\begin{align}
+\label{ch02_aux_eq013}
+r' &= \frac{r_{imp}}{r_0} \\
+t_0 &= -\sqrt{\frac{r_0^3}{2 \mu}} \Big( \sqrt{r' (1-r')} + \arccos{r'} \Big)
+\end{align}
+
 
 
 \subsection{gravitationally bound clump search}
