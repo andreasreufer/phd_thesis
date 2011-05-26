@@ -1208,7 +1208,7 @@ The problem is that both terms depend on the choice of reference. A method which
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{24algo_fof1.pdf}
-\caption{The algorithm to find gravitationally bound clumps. All particles are sorted according to their gravitational potential. At first, all particles are marked as unbound.}
+\caption{Algorithm to find gravitationally bound clumps.}
 \label{ch02_fig24}
 \end{center}
 \end{figure}
@@ -1224,7 +1224,7 @@ E_{kin} = \sum_i \frac{1}{2} m_i \vv_i^2 \hspace{2.0cm} E_{pot} = \sum_i \frac{1
 A value of $k_{virial} < 3$ assures in practice, that the clump search algorithm converges reasonably fast. Otherwise the algorithm is executed serially after the simulation during post-processing. After the clumps have been found, several properties of this gravitationally bound objects can be determined, like mass, center of mass, linear and angular momentum, mean density, composition and so on.
 
 \subsection{Friend-of-friend (FOF) clump search}
-Another type of clump search is based on a friend of friend algorithm. The goal is to find clumps of particles with a certain minimal density $\rho_{FOF}$ adjacent to other particles with a least that minimal density. Adjacent means, that they are no further apart than their mean smoothing length $h_{ij}$ times a factor $k$ and are \emph{friends}. In case $k=2$, friends corresponds to the definition of SPH neighbor. Figure \ref{ch02_fig25} shows the algorihm:
+Another type of clump search is based on a friend of friend algorithm. The goal is to find clumps of particles with a certain minimal density $\rho_{FOF}$ adjacent to other particles with a least that minimal density. Adjacent means, that they are no further apart than their mean smoothing length $h_{ij}$ times a factor $k$ and are \emph{friends}. In case $k=2$, friends corresponds to the definition of SPH neighbor. Figure \ref{ch02_fig25} shows the algorithm:
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1234,8 +1234,9 @@ Another type of clump search is based on a friend of friend algorithm. The goal 
 \end{center}
 \end{figure}
 
-For all particles it is checked, whether they have a least the minimal density $\rho_{FOF}$. If not, they are marked as a non-friend. If not, it is checked, whether they are already part of a 
+For all particles it is checked, whether they have a least the minimal density $\rho_{FOF}$. If not, they are marked as a non-friend. Otherwise it is checked, whether they already have a clump ID set and are therefore part of a clump. If not, a neighbor search os started within a radius $k h_i$ in order to find the friends. If some friends already have a set clump ID, the current particle is simply attached to this clump. In case those friends have different IDs, those clumps are additionally merged. In case friends are found, but none of them have a set clump ID, a new clump is started with this particles by putting them on a list of friend neighbors. Each of the found friend neighbors is marked as a friend and also searched for friends. It is important only to put particles onto the list, which have not yet been marked as friends of the current clump. Otherwise pairs of friends could find each other again as new neighbors infinitely and the algorithm would never terminate.
 
+At the end of the algorithm the properties of the FOF clumps are determined as in the previous clump searching algorithm. This FOF algorithm is useful for example to find satellites of bodies. Satellites are gravitationally bound to their parent body and are not detected by the 
 
 \subsection{Determining disks}
 % get orbit parameters from state vectors
