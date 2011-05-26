@@ -1176,7 +1176,7 @@ The initial time can be calculated via the mean anomaly $\Psi$, which links true
 \begin{align}
 \label{ch02_aux_eq011}
 \sqrt{\frac{\mu}{a^3} } t(\Theta) &=  \frac{e \sqrt{e^2-1} \sin{\theta} }{1 + e \cos{\theta}} - \log{\frac{\sqrt{e^2-1} + (e - 1) \tan{\frac{\Theta}{2}} }{  \sqrt{e^2-1} - (e - 1) \tan{\frac{\Theta}{2}} } } \hspace{2.0cm} \text{for~} e > 1\\
-\sqrt{\frac{\mu}{a^3} } t(\Theta) &=  \frac{1}{2} \Big( \tan{\frac{\Theta}{2}} + \frac{1}{3} \tan{\frac{\Theta}{2}}^3 \Big) \hspace{6.0cm} \text{for~} e = 1\\
+\sqrt{\frac{\mu}{a^3} } t(\Theta) &=  \frac{1}{2} \Big( \tan{\frac{\Theta}{2}} + \frac{1}{3} \tan^3{\frac{\Theta}{2}}\Big) \hspace{6.0cm} \text{for~} e = 1\\
 a &= \frac{r_p}{e - 1} 
 \end{align}
 
@@ -1191,25 +1191,41 @@ For perfectly head-on collisions ($\thimp = 0$) this calculation breaks down. Th
 
 \begin{align}
 \label{ch02_aux_eq013}
-r' &= \frac{r_{imp}}{r_0} \\
-t_0 &= -\sqrt{\frac{r_0^3}{2 \mu}} \Big( \sqrt{r' (1-r')} + \arccos{r'} \Big)
+t_0 &= -\sqrt{\frac{r_0^3}{2 \mu}} \Big( \sqrt{r' (1-r')} + \arccos{r'} \Big) \hspace{2.0cm} r' = \frac{r_{imp}}{r_0}
 \end{align}
 
 
-
 \subsection{gravitationally bound clump search}
-% not parallelized!
+In collisions where self-gravity is non-negligible, an important question is which particles re-accrete and form gravitationally bounded clumps. Re-accretion often happens on longer timescales than are possible to simulate. Therefore a method is required to estimate which particles re-accrete again. A good is to look at the total energy of the particles:
+
+\begin{align}
+\label{ch02_aux_eq014}
+\frac{E_{tot,i}}{m_i} = \frac{1}{2} \vv_i^2 + \Phi
+\end{align}
+
+The problem is that both terms depend on the choice of reference. A method which works well is to start with a particle and look what other particles are bound to this initial particle. Those particle are then taken as the members of the new clump and again it is checked whether other particles are bound relative to this clump. This procedure is repeated until no more particles can be added. Figure \ref{ch02_fig24} shows the algorithm in detail.
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{24algo_fof1.pdf}
-\caption{The algorithm to find gravitationally bound clumps. All particles are sorted according to their gravitational potential. At first, all particles are marked as unbound. The }
+\caption{The algorithm to find gravitationally bound clumps. All particles are sorted according to their gravitational potential. At first, all particles are marked as unbound.}
 \label{ch02_fig24}
 \end{center}
 \end{figure}
 
+A list is made of all particles, which is sorted after the gravitational potential. The algorithm is then started for the particle lowest in the potential. It is checked whether there are bound particles until no more particles are added to the current clump. If there are no bounded particles at all for a particle, it is marked as unbound and the next particle in the sorted list is checked. In situations where most particles form a few clearly bound clumps, the algorithm has roughly a computational complexity $O(N)$. The bound clump is found in a few iterations. The worst case is, when the particles are only marginally bound: For every iteration only very few new bound particles are found, so that in the end the algorithm reaches complexity $O(N^2)$. 
 
-\subsection{Friend-of-friend clump search}
+This clump search algorithm is normally run directly during code execution as an auxiliary task whenever a particle dump is stored (see figure \ref{ch02_fig20}). As this algorithm is run serially and in case of slow convergence would lead to a considerable slow down of a simulation, it is only executed if the system appears to be gravitationally bound and fast convergence can be expected. This is estimated by comparing total kinetic $E_{kin}$ and potential energy $E_{pot}$ of all particles. The clump search is only performed if the virial ratio $k_{virial}$ \footnote{the virial ratio of a system fulfilling the virial theorem is 1} is smaller than a certain value:
+\begin{align}
+\label{ch02_aux_eq015}
+E_{kin} = \sum_i \frac{1}{2} m_i \vv_i^2 \hspace{2.0cm} E_{pot} = \sum_i \frac{1}{2} m_i \phi_i \hspace{2.0cm} k_{virial} = - \frac{E_{kin}}{2 E_{pot}}
+\end{align}
+
+A value of $k_{virial} < 3$ assures in practice, that the clump search algorithm converges reasonably fast. Otherwise the algorithm is executed serially after the simulation during post-processing. After the clumps have been found, several properties of this gravitationally bound objects can be determined, like mass, center of mass, linear and angular momentum, mean density, composition and so on.
+
+\subsection{Friend-of-friend (FOF) clump search}
+Another type of clump search is based on a friend of friend algorithm. The goal is to find clumps of particles with a certain minimal density $\rho_{FOF}$ adjacent to other particles with a least that minimal density. Adjacent means, that they are no further apart than their mean smoothing length $h_{ij}$ times a factor $k$ and are \emph{friends}. In case $k=2$, friends corresponds to the definition of SPH neighbor. Figure \ref{ch02_fig25} shows the algorihm:
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.6]{25algo_fof2.pdf}
@@ -1217,6 +1233,8 @@ t_0 &= -\sqrt{\frac{r_0^3}{2 \mu}} \Big( \sqrt{r' (1-r')} + \arccos{r'} \Big)
 \label{ch02_fig25}
 \end{center}
 \end{figure}
+
+For all particles it is checked, whether they have a least the minimal density $\rho_{FOF}$. If not, they are marked as a non-friend. If not, it is checked, whether they are already part of a 
 
 
 \subsection{Determining disks}
