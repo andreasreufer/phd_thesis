@@ -1,8 +1,7 @@
-\graphicspath{{./02figs/}}
-
-%\tableofcontents
 
 \chapter{Methods}
+\graphicspath{{./02figs/}}
+\label{ch02}
 Collision events are characterised by a 
 range of dynamical 
 
@@ -35,13 +34,12 @@ Smoothed particle hydrodynamics (SPH) is a numerical method which can discretize
 \newpage
 
 \section{Fluid- and Thermodynamics}
-A continuum model 
 
 %%
 %   F L U I D S
 %%
-\subsection{Fluids}
-A fluid is a classical continuum approximation of an ensemble of molecules or atoms. Characteristic variables defined continuously are density $\rho$, specific internal energy $u$, temperatur $T$, velocity $\vv$ and pressure $p$. Conservation of mass leeds directly to the continuum equation, which equals the local change density to the negative product of velocity divergence and density:
+\subsection{Basics of fluid dynamics}
+A fluid is a classical continuum approximation of an ensemble of molecules or atoms. Characteristic variables are density $\rho$, specific internal energy $u$, temperature $T$, velocity $\vv$ and pressure $p$. Conservation of mass leads directly to the continuum equation, which equals the local change density to the negative product of velocity divergence and density:
 \begin{equation}
 \label{ch02_fld01_eq001}
 \frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
@@ -53,88 +51,74 @@ Momentum conservation ultimately gives us the \emph{Navier-Stokes equation}
 \rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \nabla \Phi + \nu \Big( \nabla^2 \vv - \frac{2}{3} \nabla \nabla \vv \Big)
 \end{equation}
 
-for a viscous fluid, where $\nu$ is the kinematic viscosity and $\Phi$ any external potentials acting on the fluid like gravity \citep{shore2007astrophysical}. In the absence of viscosity and external potentials, the equation reduces  to the momentum equation of the \emph{Euler equations}
-
-\label{ch02_fld01_eq003}
+for a viscous fluid, where $\nu$ is the kinematic viscosity and $\Phi$ any external potentials acting on the fluid, for example gravity \citep{shore2007astrophysical}. In the absence of viscosity and external potentials, the equation reduces  to the momentum equation of the \emph{Euler equations}
 \begin{equation}
+\label{ch02_fld01_eq003}
 - \frac{\partial \mathbf{v}}{\partial t} =  ( \mathbf{v} \nabla ) \mathbf{v} + \frac{\nabla p}{\rho}
 \end{equation}
 
-Energy conservation in the absence of dissipative terms (constant entropy) yields
-\label{ch02_fld01_eq003a}
+Energy conservation in the absence of dissipative terms yields the energy equation
 \begin{equation}
+\label{ch02_fld01_eq003a}
 \frac{\d}{\d t} \Big( \rho u + \frac{1}{2}\rho \vv^2 \Big) + \nabla \vv\Big( \rho u + \frac{1}{2} \rho \vv^2 + p \Big) = 0
 \end{equation}
 
-Those equations are formulated in an eulerian frame a rest. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes:
-
+Those equations are formulated in an eulerian form, this means in an inertial frame of reference. The fluid moves relative to this reference frame. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes:
 \begin{equation}
 \label{ch02_fld01_eq003b}
 - \frac{\partial \mathbf{v}}{\partial t} = \frac{\nabla p}{\rho}
 \end{equation}
-
 The continuity equation is un-affected by the choice of a Lagrangian frame of reference, as it depends only on the velocity divergence and not the absolute velocity. The actual Lagrangian of a in-viscous fluid without an external potential is given by
 \begin{equation}
 \label{ch02_fld01_eq004}
 \Lagr = \int \Big( \frac{1}{2} \rho \vv ^2 - \rho u \Big) dV
 \end{equation}
 
-%%
-%   S P H
-%%
 \subsection{SPH formalism}
-The basic idea of SPH is to interpolate all continuum variables in space with an interpolant.
-If our variable is $A(\rv)$ defined at all points in space $\rv$, we start with the basic equality
-
+SPH is the abbreviation for \emph{Smoothed particle hydrodynamics} and is approach to discretize fluids. The basic idea of SPH is to interpolate all continuum variables in space with an interpolant: If a variable $A(\rv)$ is defined at all points in space $\rv$, we start with the basic equality
 \begin{equation}
 \label{ch02_sph01_eq001}
 A(\rv) = \int  \delta(\rv - \rvs) A(\rvs) \ud \rvs
 \end{equation}
 
 We now replace the $\delta$-function with a smoothing kernel $W$, which has typical width $h$, the smoothing length, and which fulfils the following two criteria
-
 \begin{equation}
 \label{ch02_sph01_eq002}
 \limhzero W(\rv - \rvs, h) = \delta(\rv - \rvs) \hspace{1.0cm}
 \int W(\rv - \rvs, h) \ud \rvs = 1
 \end{equation}
 
-Equation \ref{ch02_sph01_eq001} can now be re-written as 
-
+Equation \ref{ch02_sph01_eq001} can be re-written as a Taylor expansion:
 \begin{equation}
 \label{ch02_sph01_eq003}
 A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
 \end{equation}
 
-The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points (\emph{particles}), on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
-
+The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $\delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points, \emph{particles}, on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
 \begin{equation}
 \label{ch02_sph01_eq004}
 A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
 
-$V_{j}$ is the particle volume and is usually given assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbours} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$
+$V_{j}$ is the particle volume and is usually given by assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbors} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$. If the smoothing length goes to zero and the number of neighbors goes to infinity, the sum \ref{ch02_sph01_eq004} approximates the integral \ref{ch02_sph01_eq001} exactly. This is the \emph{SPH limit}.
 
-If the smoothing length goes to zero and the number of neighbours goes to infinity, the sum \ref{ch02_sph01_eq004} approximates the integral \ref{ch02_sph01_eq001} exactly. This is the \emph{SPH limit}.
-
-Spatial derivatives are easily given by taking the partial derivative of the integral interpolant variable and replacing it again by the sum over all neighbours:
-
+Spatial derivatives can be calculated by taking the partial derivative of the variable integral interpolant  and replacing it by the sum over all neighbors:
 \begin{equation}
 \label{ch02_sph01_eq005}
 \nabla A(\rv_i) = \frac{\partial}{\partial \rv}\int A(\rvs) \ud \rvs \frac{\partial}{\partial \rv}\ W(\rv_i - \rvs, h) + O(h^2)
 \approx \sum_{j} A_j V_{j} \nabla \Wij 
 \end{equation}
 
-Rotations of variables can be similarly obtained:
+Rotations of variables are similarly obtained:
 \begin{equation}
 \label{ch02_sph01_eq006}
 \nabla \times A_i \approx \sum_{j} A_i V_{j} (\nabla \times \Wij)
 \end{equation}
 
-Like in in grid based schemes, there are different ways of calculating spatial derivatives in SPH.
-Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behaviour. They will be presented shortly.
+Like in in grid based schemes, there are various ways of calculating spatial derivatives in SPH.
+Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behavior. They will be presented further below.
 
-The kernel has to fulfill the two constraints posed by equations \ref{ch02_sph01_eq002}. A natural choice would be a normalized Gaussian, but this has the unpleasant of never vanishing. All particles, also distant ones, would contribute to every individual SPH sum, making the method very inefficient. A better choice are therefore functions with compact support: Functions which vanish at sufficiently large distances. A common selection are cubic splines
+The kernel has to fulfill the two constraints given by equations \ref{ch02_sph01_eq002}. A natural choice would be a normalized Gaussian, but this function has the unpleasant property that it never goes to zero. All particles, also distant ones, would contribute to every individual SPH sum, making the method very inefficient although the distant contributions to sums would be very small. A better choice therefore are functions with compact support, which means that they go to zero at finite distance. A common choice is the cubic spline kernel
 
 \begin{equation}
 \label{ch02_sph01_eq007}
@@ -144,9 +128,7 @@ W(| \rv |, h) = \frac{\sigma}{h^\nu \pi} \left \{ \begin{array}{lll}
 0 & 2h < r & \\
 \end{array} \right. 
 \end{equation}
-
-where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \frac{2}{3}, \frac{10}{7\pi}, \frac{1}{\pi} \big) $ for $\big( 1,2,3\big)$ dimensions. The Kernel vanishes for distances greater than $2h$, reducing SPH sums to contributing terms of only the nearest neighbours. The first derivative is given by 
-
+where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \frac{2}{3}, \frac{10}{7\pi}, \frac{1}{\pi} \big) $ for $\big( 1,2,3\big)$ dimensions. This kernel vanishes for distances greater than $2h$, reducing SPH sums to contributing terms of only the nearest neighbors. The first derivative is given by 
 \begin{equation}
 \label{ch02_sph01_eq008}
 \nabla W(\rv, h) = \frac{\rv}{r} \frac{\sigma}{h^\nu \pi} \left \{ \begin{array}{ll}
@@ -155,14 +137,12 @@ where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \fra
 0 & 2h < r \\
 \end{array} \right. 
 \end{equation}
-
 and is also continuous. 
 
-The choice of the smoothing length is a trade-off. It is large compared compared to the spacing between the particles, then the variables are smoothed out over too large distances and small features cannot be resolved. If the smoothing length is too small, the variables are not sufficiently smoothed and get very noise, ultimately leading to instabilities. As a golden rule, the smoothing length should be chosen, such as the number of neighbors is 50 inside a radius of $2h$. For a hexagonal HCP lattice in 3D with a lattice constant $k$, this leads to $h \approx 0.85 k$. 
+The choice of the smoothing length is a trade-off. It is large compared compared to the spacing between the particles, then the variables are smoothed out over too large distances and small features cannot be resolved. If the smoothing length is too small, the variables are not sufficiently smoothed and become very noise, ultimately leading to instabilities. As a golden rule, the smoothing length should be chosen, such as the number of neighbors is roughly 50 inside a radius of $2h$.
 
 \subsection{standard SPH}
-The original and most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density is given by the simple particle sum
-
+The most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density for the particle with index $i$ is given by the simple particle sum
 \begin{equation}
 \label{ch02_sph02_eq001}
 \rho_i = \sum_{j} m_j \Wij
@@ -174,172 +154,136 @@ The velocity divergence $\nabla \vv$ could in principle be written as
 \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \vv_j \nabla \Wij
 \end{equation}
 
-but this form has the disadvantage of being asymmetric and will ultimately lead to a non-conservative form for the linear momentum. It is better to apply the \emph{second golden rule} of SPH \citep{Monaghan:1992p3721} to re-write the velocity divergence term with the density placed inside the operators:
-
+but this form has the disadvantage of being asymmetric and not conserving linear momentum when used in the Euler equation. It is better to apply the \emph{second golden rule} of SPH \citep{Monaghan:1992p3721} and to re-write the velocity divergence term with the density placed inside the operators:
 \begin{equation}
 \label{ch02_sph02_eq003}
 \nabla \vv = \frac{1}{\rho} \Big( \nabla (\rho \vv) - \vv \nabla \rho \Big)
 \end{equation}
-
 so that the corresponding SPH sum becomes 
-
 \begin{equation}
 \label{ch02_sph02_eq003}
 \nabla \vv_i = \frac{1}{\rho_i} \sum_{j} \frac{m_j}{\rho_j} \rho_j \vv_j \dWij - \frac{1}{\rho_i} \vv_i \sum_{j} \frac{m_j}{\rho_j} \rho_j \dWij = \frac{1}{\rho_i} \sum_{j} m_j \vvij \dWij 
 \end{equation}
-
 with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity divergence. If we take the partial time derivative of \ref{ch02_sph02_eq001}, where only the particle positions in the Kernel depend explicitly on time, we get: 
-
 \begin{equation}
 \label{ch02_sph02_eq004}
 \frac{\partial \rho_i}{\partial t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
 \end{equation}
+So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle exactly.
 
-So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle.
-
-The equations of motion can be derived in two different ways: With the inviscous equation of motion of the Navier-Stokes equation \ref{ch02_fld01_eq003}, a symmetric formulation for the pressure gradient term $\nabla p / \rho$ can be found with the trick used above for the velocity divergence. 
-A more elegant way is to derive the equation of motion directly from the Lagrangian given by equation \ref{ch02_fld01_eq004}, whose SPH formulation is
-
+The equations of motion in standard SPH can be derived in two different ways: With the inviscous equation of motion of the Navier-Stokes equation \ref{ch02_fld01_eq003}, a symmetric formulation for the pressure gradient term $\nabla p / \rho$ can be found with the trick used above for the velocity divergence. 
+A more elegant way is to derive the equation of motion directly from the Lagrangian given by equation \ref{ch02_fld01_eq004} whose SPH formulation is
 \begin{equation}
 \label{ch02_sph02_eq004}
 \Lagr = \sum_{j} m_j \Big( \frac{1}{2} \vv_j^2 - u(\rho_j, s_j) \Big) 
 \end{equation}
-
-where $u$ is the specific internal energy of a fluid particle dependent only on its density and specific entropy $s$. The Euler-Lagrange equations for a single particle $i$ is
-
+where $u$ is the specific internal energy of a fluid particle depending only on its density and specific entropy $s$. The Euler-Lagrange equations for a single particle with index $i$ is
 \begin{equation}
 \label{ch02_sph02_eq005}
 \frac{d}{dt} \Big( \frac{\partial \Lagr}{\partial \vv_i} \Big) - \frac{\partial \Lagr}{\partial \rv_i} = 0
 \end{equation}
-
 which yields 
-
 \begin{equation}
 \label{ch02_sph02_eq006}
 m_i \frac{d \vv_i }{dt} = \sum_{j} m_j \frac{\partial u_j}{\partial \rho_j} \frac{\partial \rho_j}{\partial \rv_i}
 \end{equation}
-
 for constant entropy, which is the case in the absence of shocks. The first law of thermodynamics for a particle is given by
-
 \begin{equation}
 \label{ch02_sph02_eq007}
 \frac{u_j}{\rho_j} = \frac{p_j}{\rho_j^2}
 \end{equation}
-
 and the divergence of the density is directly given by
-
 \begin{equation}
 \label{ch02_sph02_eq008}
 \frac{\partial }{\partial \rv_i} \rho_j
 = \sum_{k} m_k \frac{\partial}{\rv_i} W_{jk} 
 = \sum_{k} m_k \nabla W_{jk} ( \delta_{ji} - \delta_{ki})
 \end{equation}
-
 where the kernel vanishes except if $i = j$ and if $i = k$. So equation \ref{ch02_sph02_eq006} yields
-
 \begin{equation}
 \label{ch02_sph02_eq009}
 m_i \frac{d \vv_i }{dt} = \sum_{j} m_j \frac{p_j}{\rho_j^2} \sum_{k} \nabla_i W_{jk} ( \delta_{ji} - \delta_{ki})\\
  = m_i \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
 \end{equation}
-
 and leaves us with a symmetric SPH sum for the acceleration of a particle in absence of shocks:
 \begin{equation}
 \label{ch02_sph02_eq010}
 \frac{d \vv_i }{dt} = \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
 \end{equation}
+The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio et reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles.
 
-The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio-reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles.
-
-In most cases, the internal enery of the fluid is non-constant, so we also need a equation for the change in internal energy due to compressional heating.
-The rate of change in specific internal energy is given by 
-
+Except for isothermal calculations, the energy of the fluid is non-constant, so we also need a equation for the change in internal energy due to compressional heating. The rate of change in specific internal energy is given by 
 \begin{equation}
 \label{ch02_sph02_eq011}
 \frac{du}{dt} = -\frac{p}{\rho} \nabla \vv
 \end{equation}
 
 Using the velocity divergence SPH sum \ref{ch02_sph02_eq003}  yields
-
 \begin{equation}
 \label{ch02_sph02_eq012}
 \frac{du_i}{dt} = \frac{p_i}{\rho_i^2} \sum_{j} m_j \vvij  \dWij
 \end{equation}
 
 An SPH sum of this equation consistent with the equation of motion from above can be obtained by applying the golden rule again and putting the density inside the divergence operators:
-
 \begin{equation}
 \label{ch02_sph02_eq013}
 \frac{du}{dt} = - \nabla \Big( \frac{p \vv}{\rho} \Big) + \vv \nabla \Big( \frac{p}{\rho} \Big)
 \end{equation}
 
 The corresponding SPH sum yields the asymmetric equation
-
 \begin{equation}
 \label{ch02_sph02_eq014}
 \frac{du_i}{dt} = - \sum_{j} m_{j} \frac{p_j \vv_j}{\rho_j} \dWij + \vv_i \sum_{j} m_{j} \frac{p_j}{\rho_j^2}  \dWij = \sum_{j} m_j \vvij \frac{p_j}{\rho_j^2}  \dWij
 \end{equation}
 
 A symmetric formulation can be gained by taking the average of equations \ref{ch02_sph02_eq012} and \ref{ch02_sph02_eq014}:
-
 \begin{equation}
 \label{ch02_sph02_eq015}
 \frac{du_i}{dt} = \frac{1}{2} \sum_{j} m_{j} \vvij \Big( \frac{p_i}{\rho_i^2}  + \frac{p_j}{\rho_j^2} \Big) \dWij
 \end{equation}
 
 \subsection{Resolving shocks}
-Shocks are changes of the characteristics of a fluid on the spatial scale of the molecules mean-free path. Discontinuities arise in the fluid approximation, usually in density, pressure and temperature.
-Numerical schemes tend to react to these discontinuities with unphysical oscillations behind the shock front, because the sharp changes cannot be resolved properly.
-Several approaches exist to tackle this problem. Godunov-schemes solve the Riemann problems on both sides of the shock exactly between computational elements and in a second step superpose all pair-wise solutions for each element. In case of SPH this can be done by solving the Riemann problem for each particle against its neighbours \citep{Monaghan:1997p3938}.
-Another approach is the von Neumann and Richtmyer viscosity: By introducing a small amount of viscosity, the \emph{artificial viscosity}, the shock front is smoothed out and the oscillations disappear. This can be implemented in SPH by adding additional terms to the momentum and energy equation. The most common used variant is that given by \citep{Monaghan:1992ARAA..30..543M}:
-
+Shocks are changes of the characteristics of a fluid on the spatial scale of the molecules mean-free path. Discontinuities arise in the fluid approximation, usually in density, pressure and temperature. Because the sharp changes cannot be resolved properly, numerical schemes tend to react to these discontinuities with unphysical oscillations behind the shock front.
+Several approaches exist to tackle this problem: Godunov-schemes solve the Riemann problem on both sides of the shock exactly between computational elements and in a second step superpose all pair-wise solutions for each element. In case of SPH this can be done by solving the Riemann problem for each particle against its neighbors \citep{Monaghan:1997p3938}.
+Another approach is the von Neumann and Richtmyer viscosity: By introducing a small amount of viscosity, an \emph{artificial viscosity}, the shock front is smoothed out and the oscillations disappear. This can be implemented in SPH by adding additional terms to the momentum and energy equation. The most commonly used variant is that given by \cite{Monaghan:1992ARAA..30..543M}:
 \begin{equation}
 \label{ch02_sph02_eq016}
 \frac{d \vv_i }{dt} \Big|_{AV} = \sum_{j} m_j \frac{-\alpha c_{ij} \mu_{ij} + \beta \mu_{ij}^2}{\rho_{ij}} \dWij \hspace{1.0cm} \mu_{ij} = \frac{h \vvij \rvij}{\rvij^2 + 0.01h^2}  \hspace{0.5cm} \mathrm{if}  \hspace{0.5cm} \rvij \vvij < 0
 \end{equation}
-
-where $\rho_{ij}$ is the averaged density between two particles and $\mu_{ij}$ is a signal velocity with an order of magnitude of the speed of sound. The artificial viscosity term is only applied in situations of compression, where $\rvij \vvij < 0$. The choice of constants is usually $\alpha = 1$ and $\beta = 2 \alpha$. The $\beta$-term is the actual von Neumann and Richtmyer term and becomes dominant in strong shocks where the velocity difference $\vvij$ between two particles in the shock front becomes large. Momentum conservation is still conserved by the symmetric form of the artificial viscosity term.
+where $\rho_{ij}$ is the averaged density between two particles and $\mu_{ij}$ is a signal velocity with an order of magnitude of the speed of sound. The artificial viscosity term is only applied in situations of compression, where $\rvij \vvij < 0$. The choice of constants is usually $\alpha = 1$ and $\beta = 2 \alpha$. The $\beta$-term is the actual von Neumann and Richtmyer term and becomes dominant in strong shocks where the velocity difference $\vvij$ between two particles in the shock front becomes large. $\mu_{ij}$ is called the signal velocity between two particles. Momentum conservation is still guaranteed thanks to the symmetric form of the artificial viscosity term.
 
 The contribution of artificial viscosity to the internal energy can be found by requiring that artificial viscosity itself should be energy conserving. The specific energy change due to the dissipative is given by
-
 \begin{equation}
 \label{ch02_sph02_eq017}
 \frac{de_i}{dt} \Big|_{AV}  = \frac{du_i}{dt}  \Big|_{AV} + \vv_i \frac{d\vv_i}{dt}  \Big|_{AV} = 0
 \end{equation}
-
 and should be zero. This leads to the thermal contribution
-
 \begin{equation}
 \label{ch02_sph02_eq018}
 \frac{du_i }{dt} \Big|_{AV} = - \sum_{j} m_j \vvij \frac{-\alpha c_{ij} \mu_{ij} + \beta \mu_{ij}^2}{\rho_{ij}} \dWij
 \end{equation}
+with the same choice for the signal velocity $\mu_{ij}$ and numerical constants as in equation \ref{ch02_sph02_eq016}.
 
-with the same choice for the signal velocity $\mu_{ij}$ and numerical constants as in equation \ref{ch02_sph02_eq016}. 
-
-A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly \citep{Morris1997J.-Comput.-Phys.Morris} than the simply checking for compression or recognizing shear flows explicitly \citep{Balsara1995JCoPh.121..357B} and suppressing the artificial viscosity in situations where it is not needed. For the simulation of collisions, this is not a big problem, therefore we don't include such fixes.
+A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly: One approach by \cite{Morris1997J.-Comput.-Phys.Morris} tries to detect shocks more cleverly than by simply checking for compression. Another approach tries to limit artificial viscosity in shears flows \citep{Balsara1995JCoPh.121..357B}, which is useful for example when modeling astrophysical disks. In collision simulations increased viscosity due to artificial viscosity is hardly a problem, therefore we don't include such fixes in the code which will be presented later.
 
 \subsection{variable smoothing length}
-In order to meet the requirement of $50$ neighbors per particle, the smoothing is adjusted for each particle individually. For constant particle masses the density is proportional to the particle density $\delta_i$, which again is inverse proportional to the particle volume and therefore to the inverse third power of the smoothing length in 3D:
-
+In order to meet the requirement of the optimum number of neighbors $N_{N,opt} = 50$ neighbors per particle, the smoothing has to be adjusted for each particle individually. For constant particle masses the density is proportional to the particle density $\delta_i$, which again is inverse proportional to the particle volume and therefore to the inverse third power of the smoothing length in 3D:
 \begin{equation}
 \label{ch02_sph02_eq026}
 \rho_i \sim \delta_i \sim \frac{1}{V_i} \sim \frac{1}{h_i^3}
 \end{equation}
 
-So the rate of change of the smoothing length is given by using the continuity equation \ref{ch02_sph02_eq005} yields
-
+So the rate of change of the smoothing length can be obtained by using the continuity equation \ref{ch02_sph02_eq005} and yields
 \begin{equation}
 \label{ch02_sph02_eq027}
 \frac{d h_i}{dt} = - \frac{h_i}{3 \rho_i} \frac{d \rho_i}{dt} = \frac{1}{3} h_i \nabla \vv_i
 \end{equation}
 
-This keeps the number of neighbours exactly constant, if the particle density changes isotropically. Usually this is not the case and the number of neighbors ($N_N$) becomes either too large or too small. In such cases it is useful to overcorrect the smoothing length with the global maximum of velocity divergence ($\nabla \vv_{max} = \max_{i} \nabla \vv_i$):
-
+This keeps the number of neighbours exactly constant, if the particle density changes isotropically. Usually this is not the case and the number of neighbors ($N_N$) becomes either too large or too small. In such cases it is useful to overcorrect the smoothing length with the global maximum of velocity divergence $\nabla \vv_{max} = \max_{i} \nabla \vv_i$:
 \begin{equation}
 \label{ch02_sph01_eq028}
 \frac{d h_i}{d t} = h_i ( k_1 \nabla \vv_{max}+ k_2 \frac{1}{3} \nabla\vv_i - k_3 \nabla \vv_{max} )
 \end{equation}
-
 \begin{equation}
 \label{ch02_sph01_eq029}
 \begin{array}{ll}
@@ -352,60 +296,54 @@ k_3 = \frac{1}{2} (1 + \tanh{\frac{N_N - N_{N,max}}{5}} ) & N_{N,max} = \frac{5}
 If the number of neighbours is within $\frac{2}{3} N_N$ and $\frac{5}{3} N_N$, the expression \ref{ch02_sph02_eq027} is dominant. If it's below or above the optimal number, the change rate of the smooting length is over- or under-corrected with the maximum velocity divergence. In practice, this scheme keeps the number of neighbors in reasonable limits, without introducing any instabilities.
 
 \subsection{Integration}
-Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we have a closed set of equations describing the fluid which can be integrated in time. A common choice due to its simplicity and low number of derivation steps required is the predictor-corrector scheme \citep{Press2002nrc..book.....P}. For the integration of particle positions we use the second-order form, which yields the prediction step
-
+Together with an equation of state which gives us the pressure $p_i(u_i, \rho_i)$ and as a side effect also the speed of sound $c_i(u_i, \rho_i)$, we now have a closed set of equations describing the fluid which can be integrated in time. A common choice due to its simplicity and low number of derivation steps required is the predictor-corrector scheme \citep{Press2002nrc..book.....P}. For the integration of particle positions we use the second-order form, which yields the prediction step
 \begin{eqnarray}
 \label{ch02_sph02_eq019}
 \rv_i^{(p)} = \rv_i^{(0)} + \frac{1}{2} ( 3 \vv_i^{(0)} - \vv_i^{(-1)} )\Delta t \\
 \vv_i^{(p)} = \vv_i^{(0)} + \frac{1}{2} ( 3 \av_i^{(0)} - \av_i^{(-1)} )\Delta t
 \end{eqnarray}
 and the correction step
-
 \begin{eqnarray}
 \label{ch02_sph02_eq020}
 \rv_i^{(1)} = \rv_i^{(0)} + \frac{1}{2} ( \vv_i^{(p)} - \vv_i^{(0)} )\Delta t \\
 \vv_i^{(1)} = \vv_i^{(0)} + \frac{1}{2} ( \av_i^{(p)} - \av_i^{(0)} )\Delta t
 \end{eqnarray}
 
-The integrator requires the evaluation of the derivative $\av_i( \rv_i, \vv_i)$ two times. As the predicted variables $(\rv_i^{(p)}, \vv_i^{(p)})$ and previous variables $(\rv_i^{(-1)}, \vv_i^{(-1)})$ are never used at the same time, it is sufficient to store only one additional set of variables.
+The integrator requires the evaluation of the derivative $\av_i( \rv_i, \vv_i)$ for two times. As the predicted variables $(\rv_i^{(p)}, \vv_i^{(p)})$ and previous variables $(\rv_i^{(-1)}, \vv_i^{(-1)})$ are never used at the same time, it is sufficient to store only one additional set of variables. This integrations scheme is therefore also very memory conserving.
 
 Variables defined by first-order differential equations like the internal energy, use the first-order prediction step
-
 \begin{equation}
 \label{ch02_sph02_eq021}
 u_i^{(p)} = u_i^{(0)} + \frac{1}{2} ( 3 \dot{u}_i^{(0)} - \dot{u}_i^{(-1)} )\Delta t \\
 \end{equation}
 and the correction step
-
 \begin{equation}
 \label{ch02_sph02_eq022}
 u_i^{(1)} = u_i^{(0)} + \frac{1}{2} ( \dot{u}_i^{(p)} - \dot{u}_i^{(0)} )\Delta t \\
 \end{equation}
 
-The timestep is limited by several factors. Stability analysis of SPH yields the CFL condition 
-
+The timestep is limited by several factors. Stability analysis of SPH yields the \emph{Courant-Friedrich-Lax} (short: CFL) condition 
 \begin{equation}
 \label{ch02_sph02_eq023}
 \Delta t_{CFL} = \mathcal{C}_{CFL} \min_{i} \frac{h_i}{c_i}
 \end{equation}
 
-where c is a constant chosen between $\mathcal{C}_{CFL} = 0.1 \dots 0.4$. All other integrated variables require, that the their maximal change per time step is not more than their own magnitude. In order to avoid arbitrarily small time step when a variable goes to zero, a minimal value for such quantities is introduced. This yields for example for the smoothing length the time step
-
+where $\mathcal{C}_{CFL}$ is a constant chosen between $\mathcal{C}_{CFL} = 0.1 \dots 0.4$. All other integrated variables require, that the their maximal change per time step is not more than their own order of magnitude. In order to avoid arbitrarily small time step when a variable goes to zero, a minimal value for such quantities is introduced. This yields for example for the smoothing length the time step
 \begin{equation}
 \label{ch02_sph02_eq024}
 \Delta t_{h} = \mathcal{C} \min_{i} \frac{\dot{h}_i}{h_i + h_{min}}
 \end{equation}
 
-Other such variables are specific internal energy $u_i$ or the density $\rho_i$ in case the continuity equation is integrated. 
+Other variables integrated in that way and therefore requiring a time step criterion are specific internal energy $u_i$ or the density $\rho_i$ in case the continuity equation is integrated. 
 
 The predictor-corrector scheme has the disadvantage of a global time step. Other integrators like the leap-frog integrator allows hierarchical time stepping, due to their inherent symmetry of the sub-steps. In most cases the time step is limited by the CFL-criterion \ref{ch02_sph02_eq023}, which depends on the smoothing length and the speed of sound. For an ideal gas at constant entropy and when using particles of a fixed mass, the time step depends on density as 
-
 \begin{equation}
 \label{ch02_sph02_eq025}
 \Delta t_{CFL} \sim \frac{h}{c} \sim \frac{1}{\sqrt[3]{\rho}} \sqrt{ \frac{\rho}{p} } \sim \frac{1}{\sqrt[3]{\rho}} \frac{1}{\sqrt{u}} \sim \frac{1}{\rho^{2/3}}
 \end{equation}
 
-When particle density varies over several orders of magnitudes, so does the time step. This is the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in immensely different time steps. Only hierarchical schemes where the actual time steps between derivations are chosen in the same order of magnitude as the required time step allow to integrate such a particle set with reasonable computational effort.
+When particle density varies over several orders of magnitudes, the time step does so too. This if for example the case for cosmological simulations, where the collapse of dilute collapse gas to hot dense clumps results in highly different time steps. In this case, only hierarchical schemes the actual used time step for a particle is in the same order of magnitude as the time step allowed by the various criterions, allows an integration with reasonable computational effort.
+
 For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
 
 \subsection{miscible SPH}
@@ -414,87 +352,74 @@ Standard SPH interpolates all variables weighed according to density. This works
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{01miscible_prof}
-\caption{Radial structure of a proto-Earth body of $0.9\ME$ with a $30wt\%$ iron core and a $70wt\%$ silicate mantle. Blue dots show the values of iron particles, red dots show silicate particles. The upper plots show density and the lower plots the resulting pressure. The structure on the left is calculated with standard SPH and the one on the right uses the alternative \emph{miscible SPH} formulation. Both structures are relaxed, which means that the residual particles velocities are very small compared to free-fall velocities inside such a gravitational potential. As in standard SPH density is a smooth value along the boundary between the iron core and the silicate mantle, the iron particles will have an under-density at the boundary, while the silicate particles have an over-density (green circles). This results in anomalous pressures at the boundary. Miscible circumvents this issue by allowing non-smoothed density at the boundary.}
+\caption{Radial structure of a proto-Earth body of $0.9\ME$ with a $30wt\%$ iron core and a $70wt\%$ silicate mantle. Blue dots show the values of iron particles, red dots show silicate particles. The upper plots show density and the lower plots the resulting pressure. The structure on the left plots is calculated with standard SPH and the one on the right plots uses the alternative \emph{miscible SPH} formulation. Both structures are relaxed, which means that the residual particles velocities are very small compared to free-fall velocities inside such a gravitational potential. As in standard SPH density is a smooth value along the boundary between the iron core and the silicate mantle, the iron particles will have an under-density at the boundary, while the silicate particles have an over-density (green circles). This results in anomalous pressures at the boundary. Miscible SPH circumvents this issue by allowing non-smoothed density at the boundary.}
 \label{ch02_fig01}
 \end{center}
 \end{figure}
 
-Big density contrasts normally arise, when two fluid with different equations of state interact and have different densities for the same pressure and thermodynamical state. This difference can be orders of magnitude big like for an atmosphere on top of a liquid or a solids. For material in the same phase the density difference is usually not so big, but can still be easily a factor of a magnitude for example for water ice and solid iron ($\rho_0 \approx 0.9 g/cm^3$ vs. $7.8 g/cm^3$).
+Big density contrasts normally arise, when two fluid with different equations of state interact and have different densities for the same pressure and thermodynamical state. This difference can be orders of magnitude large like for an atmosphere on top of a liquid or a solids. For material in the same phase the density difference is usually not so big, but can still be easily a factor of a magnitude for example for water ice and solid iron ($\rho_0 \approx 0.9 g/cm^3$ vs. $7.8 g/cm^3$).
 
-The actual problem of standard SPH and density contrasts arises for fluids with rather stiff equations of state, such as fluids and solids. Even a small deviation from the zero-pressure $\rho_0$ density results in a large pressure. 
+The actual problem of standard SPH and density contrasts arises for fluids with rather stiff equations of state, such as fluids and solids. Even a small deviation from the zero-pressure density $\rho_0$  results in a large pressure. 
 
-Figure \ref{ch02_fig01} demonstrates that with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of 0.9 $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see section \ref{ch01_sec99}). Ideally the SPH particles should follow this solution. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation (green circles). In standard SPH the iron particles obtain their density by interpolating over their neighbors, which include silicate particles with a considerably lower at the same pressure. This leads to an under-estimated density at the boundary and ultimately to a pressure much too low. The same effect works the other way round for the silicate particles, which obtain an over-density and therefore also have a too large pressure.  By smoothing out the density at the boundary, it reaches un-natural values. 
+Figure \ref{ch02_fig01} demonstrates this with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see section \ref{ch02_sec1dstruc}). Ideally the SPH particles would represent this solution in 3D. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation (green circles). In standard SPH the iron particles obtain their density by interpolating over their neighbors, which include silicate particles with a considerably lower density for the same pressure. This leads to an under-estimated density at the boundary and ultimately to a pressure much too low. The same effect works the other way round for the silicate particles, which obtain an over-density and therefore also have a too large pressure.  By smoothing out the density at the boundary, it reaches unnatural values. 
 
-A method first proposed by \citep{Ott:2003p3727} and also mentioned by \citep{Solenthaler:2008p3720} and \citep{Price:2004p2613} drops the fundamental principle of SPH to interpolate all quantities with density \ref{ch02_sph01_eq001} and uses the particle density instead 
-
+A method first proposed by \citep{Ott:2003p3727} and also mentioned by \cite{Solenthaler:2008p3720} and \cite{Price:2004p2613} drops the fundamental principle of SPH of interpolating all quantities with density \ref{ch02_sph01_eq001} and uses the particle density instead 
 \begin{equation}
 \label{ch02_sph01_eq030}
 \delta_i = \sum_{j} \Wij
 \end{equation}
 
 The actual density is then obtained by 
-
 \begin{equation}
 \label{ch02_sph01_eq031}
 \rho_i = m_i \delta_i
 \end{equation}
 
-While the particle density is still smoothed out, the density can be discontinuous and vary largely if particles of different masses interact. The direct result of this formulation can be seen on the right plots in figure \ref{ch02_fig01}. The density follows correctly the required values also at the boundary and therefore also the pressure becomes continues. 
+While the particle density is still smoothed out, the density can be discontinuous and vary largely if particles of different masses interact. The direct result of this formulation can be seen on the right plots in figure \ref{ch02_fig01}. The density follows correctly the required values also at the boundary and as a result also the pressure becomes continuous in the correct way.
 
 The other SPH sums can be derived in an analog way as for standard SPH. By taking the time derivative of \ref{ch02_sph01_eq031} and applying the same trick for symmetrizing derivative sums, we get a new SPH formulation of the continuity equation 
-
 \begin{equation}
 \label{ch02_sph01_eq032}
 \frac{d \rho_i}{dt} = m_i \sum_j \vvij \dWij
 \end{equation}
 
 To derive the momentum and energy equations we use the same procedure as for standard SPH and get 
-
 \begin{align}
 \label{ch02_sph01_eq033}
-\frac{d \vv_i }{dt} = - \frac{1}{m_i} & \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij} \\
-\frac{du_i}{dt} = \frac{1}{2 m_i} & \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij 
+\frac{d \vv_i }{dt} &= - \frac{1}{m_i}  \sum_{j} \Big( \frac{p_i}{\delta_i^2} + \frac{p_j}{\delta_j^2} \Big) \nabla W_{ij} \\
+\frac{du_i}{dt} &= \frac{1}{2 m_i}  \sum_{j} \vvij \Big( \frac{p_i}{\delta_i^2}  + \frac{p_j}{\delta_j^2} \Big)  \dWij 
 \end{align}
 
-The artificial viscosity term depend directly on density and need to be symmetric in order to conserve linear momentum. Requiring total energy conservation, the contribution yields  to the momentum equation
-
+The artificial viscosity term depend directly on density and need to be symmetric in order to conserve linear momentum. Requiring total energy conservation, the contribution to the momentum equation yields
 \begin{align}
 \label{ch02_sph01_eq034}
 \frac{d \vv_i }{dt} \Big|_{AV} = - \frac{1}{m_i} & \sum_{j} \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\delta_{ij} } \nabla W_{ij}
 \end{align}
-
 and similarly to the energy equation
-
 \begin{align}
 \label{ch02_sph01_eq035}
 \frac{du_i}{dt}  \Big|_{AV} = \frac{1}{2 m_i} & \sum_{j} \vvij \frac{- \alpha c_{ij} \mu_{ij} +  \beta \mu_{ij}^2 }{\delta_{ij} } \dWij
 \end{align}
-
 with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sph02_eq016}. 
 
-% TODO: actual reference to Giant impact chapter
-The failure of standard SPH at boundaries can introduce difficulties in resolving Kelvin-Helmholtz instabilities properly, as noted by \cite{Agertz:2006p1552}. We will compare the ability to resolve this instability between standard and miscible SPH in a later chapter about the Moon-forming giant impact.
+The failure of standard SPH at boundaries can introduce difficulties in resolving Kelvin-Helmholtz instabilities properly, as noted by \cite{Agertz:2006p1552}. We will compare the ability to resolve this instability between standard and miscible SPH in chapter \ref{ch05} about the Moon-forming giant impact.
 
-Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter like structures, where a solid impactor and after the impact solid debris travels through the gaseous envelope of the target. Details are shown in the corresponding chapter below. 
-
+Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter-like structures, where a solid impactor and, after the collision, solid debris travels through the gaseous envelope of the target.
 
 \subsection{solid state SPH}
-SPH can also be used to model solids. For an elastic solid, the isotropic pressure of a fluid is replaced with the full stress tensor in order to additionally model shear stresses. Brittle failure due to cracks can be modeled with a statistical approach \citep{Grady1980147}. An SPH implementation of this is presented in \citep{1994Icar..107...98B}. % TODO: refer to Mars chapter
-Chapter 3 makes use of an solid state SPH code with the features mentioned above. The code is described in detail in \citep{Nyffeler:2006p96} and will not be discussed any further here.
+SPH can also be used for modelling solids. For an elastic solid, the isotropic pressure of a fluid is replaced with the full stress tensor in order to additionally model shear stresses. Brittle failure due to cracks can be modeled with a statistical approach \cite{Grady1980147}. An SPH implementation of this is presented in \cite{1994Icar..107...98B}. Chapter \ref{ch04} uses an solid state SPH code with the features mentioned above. The code is described in detail in \cite{Nyffeler:2006p96} and will not be discussed any further here.
 
-\subsection{SPH summary}
-
-%\begin{landscape}
-
+\subsection{fluid SPH summary}
+Table 2.1 shows a summary of the sums of the three different SPH formulations presented above. On modern computers, the computationally most expensive thing is to find the neighbors and fetch their variables. It is therefore useful, to collect several SPH sums which are independent of each other results to a single summation step. In case of standard SPH this means for example, that the 2nd SPH summation step searches the neighbors for particle with index $i$ and then calculates $\nabla \vv_i$, $ \frac{du_i}{dt} $ and $\frac{d \vv_i }{dt}$ at the same time. Standard and miscible SPH both require two summation steps, in order to calculate the physical and particle density respectively. In case the density is an integrated variable, only one summation step is required. 
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{|l|l|l|l|}
 \hline
-variant & standard  & integrated density & miscible \\
+variant & standard & integrated density & miscible \\
 \hline \hline
 \multirow{2}{1.5cm}{1st SPH sums} & 
-\multirow{2}{1.5cm}{$\rho_i = \sum_{j} m_j \Wij $} & 
-\multirow{2}{1.5cm}{$\rho_i$ is integrated }  & 
+\multirow{2}{2.5cm}{$\rho_i = \sum_{j} m_j \Wij $} & 
+\multirow{2}{2.0cm}{$\rho_i$ is integrated}  & 
 $ \delta_i = \sum_{j} \Wij$ \\
  &
  &
@@ -518,40 +443,33 @@ art. visc. & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \mu_{ij} +  
  & \multicolumn{3}{|c|}{$\mu_{ij} = \frac{h_{ij} \vv_{ij} \rv_{ij}}{\rv_{ij}^2+ 0.01h^2} $} \\
 \hline
 \end{tabular}
-\caption{comparison of SPH variants}
+\caption{Overview of the sums for different SPH variants}
 \end{center}
 \label{ch02_sph01_tabl01}
 \end{table}
 
-%\end{landscape}
-
 
 \subsection{Equations of state}
-The Navier-Stokes  together with the continuity equation only present a closed system of equations, if an equation of state (EOS) delivering $p(\rho, s)$ is given. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}).
+The Navier-Stokes equation together with the continuity equation only present a closed system of equations, if an equation of state (EOS) delivering $p(\rho, s)$ is provided. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}) and in the artificial viscosity (equation \ref{ch02_sph02_eq016}).
 
 For an ideal gas, the equation of state and the speed of sound is given by
-
 \begin{equation}
 \label{ch02_sph01_eq036}
 p = ( \gamma - 1 ) \rho u \hspace{2cm} c_s = \sqrt{ \frac{\gamma p}{\rho} } \hspace{2cm} \gamma = \frac{c_p}{c_v}
 \end{equation}
-
 where $\gamma$ is the ratio of specific heats or the adiabatic index. For a monoatomic gas it is $\gamma = \frac{5}{3}$, whereas for a solar mixture of roughly three quarters of molecular hydrogen and a quarter of atomic helium it is $\gamma \approx 1.53$ \citep{Nelson:2000p75}. The ideal gas EOS can also be written in the form 
-
 \begin{equation}
 p = s \rho^{\gamma}
 \end{equation}
-
 where $s$ is the specific entropy \citep{Springel:2005p51}.
 
 For condensed matter in collisions processes, the ideal gas approximation breaks down and more complex equations of state are required. For geological materials a popular choice is the ANEOS software package. It uses the basic approach of minimizing the Helmholtz free energy $F(\rho, T)$ for a given pair of density $\rho$ and temperature $T$. Various analytical terms contributing to the Helmholtz free energy for ionization, phase changes and low temperatures are included and and guarantee a smooth behavior at phase boundaries \citep{Thompson:1990p1103}. Pressure and entropy are derived from the Helmholtz free energy:
-
 \begin{equation}
 \label{ch02_sph01_eq037}
 p = \rho^2 \frac{\partial F(\rho, T)}{\partial \rho} \Big|_{T} \hspace{2cm} S = - \frac{\partial F(\rho, T)}{\partial T} \Big|_{\rho}
 \end{equation}
 
-Figure \ref{ch02_fig03} shows isobars for different materials obtained by ANEOS. The jumps in entropy at some temperatures show phase changes, whereas in between phase changes the isobar follows approximately analytical functions. Water at $50bar$ for example (light blue line, figure \ref{ch02_eos02_fig01}, right plot) follows a non-trivial curve in the solid phase, until melting kicks in around $300K$. The it follows again a straight line as expected for a liquid with a constant ratio of specific heats. Another entropy jump for vaporization occurs slightly below $400K$. Then in the vapour phase, the isobar follows again a straight line as expected more or less for a real gas. Above $1000K$ dissociation of the water molecules starts and the isobar follows a more complicated curve again.
+Figure \ref{ch02_fig03} shows isobars for different materials obtained by ANEOS. The jumps in entropy at certain temperatures show phase changes, whereas in between phase changes the isobar follows approximately analytical functions. Water at $50bar$ for example (light blue line, figure \ref{ch02_fig03}, right plot) follows a non-trivial curve in the solid phase, until melting kicks in around $300K$. Then the isobar follows again a straight line as expected for a liquid with a constant ratio of specific heats. Another entropy jump for vaporization occurs slightly below $400K$. Then in the vapor phase, the isobar follows again a straight line as expected for a more or less real gas. Above $1000K$ dissociation of the water molecules starts and the isobar follows a more complicated curve again.
 
 \begin{figure}
 \begin{center}
@@ -561,7 +479,7 @@ Figure \ref{ch02_fig03} shows isobars for different materials obtained by ANEOS.
 \end{center}
 \end{figure}
 
-The original version of ANEOS treats the gas phase as a mixture of mono-atomic gases. Compared to a gas of molecules, the monoatomic gas has a very high energy and entropy. So in the mono-atomic case vaporization only starts at comparably high energies. \cite{Melosh:2007p3502} tackled this problem by modifying original ANEOS for $SiO_2$ and introducing molecular species in the gas phase. This modified version is called M-ANEOS. Figure \ref{ch02_fig03} shows expected gas mixtures for three different pressures as a function of temperature. Vaporization starts by producing a mixture mainly made up of $SiO$ and $O_2$ gas. Dissociation of these molecules only happens at much higher temperatures. The difference between the two models can be seen by comparing the isobars in figure for dunite (ANEOS, no molecules, green line) and for $SiO_2$ (M-ANEOS, with molecules, red line). The two materials are comparable silicate materials. At both pressures, the entropy jump for vaporization for $SiO_2$ starts at a temperature roughly $2000K$ lower compared to dunite. Vaporization of solid $SiO_2$ in collisions by the mean of shock heating occurs, when the particle velocities exceed $7-8km/s$ \citep{Melosh:2007p3502}.
+The original version of ANEOS treats the gas phase as a mixture of mono-atomic gases. Compared to a gas of molecules, the monoatomic gas has a very high internal energy and entropy for a given temperature. So in the mono-atomic case vaporization only starts at comparably high energies. \cite{Melosh:2007p3502} tackled this problem by modifying original ANEOS for $SiO_2$ and introducing molecular species in the gas phase. This modified version is called M-ANEOS. Figure \ref{ch02_fig05} shows expected gas mixtures for three different pressures as a function of temperature. Vaporization starts by producing a mixture mainly made up of $SiO$ and $O_2$ gas. Dissociation of these molecules only happens at much higher temperatures. The difference between the two models can be seen by comparing the isobars in figure for dunite (ANEOS, no molecules, green line) and for $SiO_2$ (M-ANEOS, with molecules, red line). The two materials are comparable silicates. At both pressures, the entropy jump for vaporization for $SiO_2$ starts at a temperature roughly $2000K$ lower compared to dunite. Vaporization of solid $SiO_2$ in collisions as a consequence of shock heating occurs, when the particle velocities exceed $7-8km/s$ \citep{Melosh:2007p3502}.
 
 \begin{figure}
 \includegraphics[scale=1.0]{05aneos_phases01}
@@ -571,9 +489,9 @@ The original version of ANEOS treats the gas phase as a mixture of mono-atomic g
 \label{ch02_fig05}
 \end{figure}
 
-ANEOS uses as $(\rho, T)$ as the thermodynamical state variables as input parameters, whereas the hydrodynamical equations for a fluid yield the $(\rho, u)$ or $(\rho, s)$ depending on whether the energy or the entropy equation is solved and integrated. Specific energy and entropy are both returned by ANEOS. Luckily both variables $u(\rho, T)$ and  $s(\rho, T)$ are monotonic increasing functions of temperature, so the correct temperature for given specific energy or entropy can be found through a root finding algorithm. We found the Brent Rooter \cite{Press2002nrc..book.....P} to converge usually within a few iteration steps, for a temperature range covering a few $K$ to a few ten thousand $K$ and a precision of $3 \times 10^{-8}$.
+ANEOS uses as $(\rho, T)$ as the thermodynamical state variables as input parameters, whereas the hydrodynamical equations for a fluid require $(\rho, u)$ or $(\rho, s)$ as state variables, depending on whether the energy or the entropy equation is solved and integrated. Specific energy and entropy are both returned by ANEOS. Luckily both quantities $u(\rho, T)$ and  $s(\rho, T)$ are monotonic increasing functions of temperature, so the correct temperature for given specific energy or entropy can be found through a root finding algorithm. The Brent Rooter \citep{Press2002nrc..book.....P} converges usually within a few iteration steps, for a temperature range covering a few $K$ to a few ten thousand $K$ and a precision of $3 \times 10^{-8}$.
 
-ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_eos02_fig02} - \label{ch02_eos02_fig05} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference values. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. In the rare case, that a value outside of the table is requested, the code falls back to the iteration routine used to create the tables. 
+ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference value. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. In the rare case, that a value outside of the table is requested, the code falls back to the iteration routine used to create the tables. 
 
 Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the phase state information returned by ANEOS. For mixed states, the single density used by ANEOS is the average density for all phases together.
 
@@ -1064,7 +982,8 @@ l = 2 r \big( K N \big)^{\frac{1}{3}}
 
 $K$ denotes the filling factor of the HCP lattice and $N$ the desired number of particles of the sphere. The smoothing length set to $h = 0.85 l$ leads to roughly 50 neighbors, except at the surface of the sphere.
 
-\subsection{1D structures}
+\subsection{Calculating 1D structures}
+\label{ch02_sec1dstruc}
 In case of small spheres which are not self-gravitating, the structure of the sphere is trivial. Pressure has to vanish in equilibrium, so density is simply set to the zero-pressure value $\rho_0$ for the given specific energy or entropy. All quantities are radius independent.
 
 Self-gravitating spheres have non-trivial structures. For simple equations of state like ideal gas, exact solutions can be calculated analytically in some special cases. In all other cases a solution has to be found numerically. The basic idea is to start with a 1D structure with vanishing pressure and then letting this structure collapse under the influence of self-gravity with a 1D code. A dampening term assures, that the structure does not oscillate forever, but relaxes sufficiently fast:
@@ -1122,7 +1041,7 @@ Like in the case without gravity, the actual impact is defined as the point of t
 
 \begin{align}
 \label{ch02_aux_eq004}
-\thimp = \frac{\pi}{2} - \beta_{imp} = \cos{ \frac{\rv_{imp} \vv_{imp}}{v_{imp} v_{imp}} }
+\thimp = \frac{\pi}{2} - \beta_{imp} = \arccos{ \frac{\rv_{imp} \vv_{imp}}{v_{imp} v_{imp}} }
 \end{align}
 
 At perihel, the heading angle is zero. Energy and angular momentum conservation let us determine the eccentricity of the orbit \citep{thomson1986introduction}:
