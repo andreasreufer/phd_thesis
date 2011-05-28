@@ -1241,23 +1241,32 @@ The algorithm has two free parameters: the minimal clump density $\rho_{FOF}$ an
 This FOF algorithm is useful for example to find satellites of bodies. While the previous algorithm will treat a parent body and its satellite as one bound object, the FOF successfully finds two individual bodies.
 
 \subsection{Determining disks}
-Determining the disk of a body is important for simulations of satellite formation. 
+Determining the disk of a body is important for simulations of satellite formation. Disk detection involves several steps:  First of all the gravitationally bound clump has to be found for which the disk particles should be determined. This is done with algorithm previously described.
+The basic idea is now to determine the surface of the central body and then find the particles which have orbits with a perihel above that surface. To find the surface, a method which works well in practice is to sort all particles according to the gravitational potential. This sorted list is then traversed toward higher potential. Particles with a density below a certain value $\rho_{surf}$ are then considered surface particles. This density $\rho_{surf}$ should be slightly below the zero-pressure density $\rho_0$ for which pressure vanished for a given thermodynamic state. In standard SPH, the particles of a body which is surrounded by vacuum will have a density slightly below this zero-pressure density, because of edge effects demonstrated before  (see figure \ref{ch02_fig01}). After a fraction of $\approx 1\%$ of the total particles in the gravitationally bound clump have been found as surface particles, the list traversal is stopped. Taking this fraction guarantees, that in case the central body is surrounded by an atmosphere, not too many low-density atmosphere particles are considered to belong to the surface layer. Note that it is still not known at this point, which particles belong to the central body. For that reason, the center of mass of all surface particles is now taken as a first guess for the center of mass of the central body. The mean distance of the surface particles to this first guess of the central body's center of mass is determined and all particles within this radius are now defined as being part of the central body. The center of mass and the velocity of the central body can now be determined. The radius of the central body is now $R_{bod}$.
+All other particles are now assumed to be on an orbit around the central body. Determining the orbit is basically the inverse problem what we have solved for setting up a collision in the gravity regime. For each particle we have the orbital state vectors $\rv_0$ and $\vv_0$ relative to the central body and would like to determine the orbit parameters, notably the radius of perihel $r_p$ and the eccentricity in order to know whether the particle is bound. In a first step the heading angle $\beta_0$ and the eccentricity vector $\ev$ determined:
 
-Disk detection involves several steps: 
+\begin{align}
+\label{ch02_aux_eq016}
+\beta_0 &= \arcsin{\frac{\rv_0 \vv_0}{r_0 v_0}} \\
+\ev &=  \frac{\vv_0 \times (\rv_0 \times \vv_0) }{\mu} - \frac{\rv_0}{r_0} \hspace{1.0cm} \mu = G (M_{bod} + m_i)
+\end{align}
 
-First of all the gravitationally bound clump has to be found for which the disk particles should be determined. This is done with algorithm previously described.
+$M_{bod}$ is the mass of the central body and $m_i$ the particle's mass. From the heading angle and the eccentricity vector follow directly the true anomaly $\Theta_0$, the eccentricity and from that the radius of perihel:
 
-The basic idea is now to determine the surface of the central body and then find the particles which have orbits with a perihel above that surface. 
+\begin{align}
+\label{ch02_aux_eq017}
+\Theta_0 &= \arctan{\frac{k_1 \sin{\beta_0} \cos{\beta_0}}{k_1 \cos{\beta_0} \cos{\beta_0} - 1} } \hspace{2.0cm} k_1 = \frac{r_0 v_0^2}{\mu} \\
+e &= \| \ev \| \\
+r_p &= r_0 \frac{1 + e \cos{\Theta_0} }{1 + e} \\
+\end{align}
 
-
-To find the surface, a method which works well in practice is to sort all particles according to the gravitational potential. This sorted list is then traversed toward higher potential. Particles with a density below a certain value $\rho_{surf}$ are then considered surface particles. This density $\rho_{surf}$ should be slightly below the zero-pressure density $\rho_0$ for which pressure vanished for a given thermodynamic state. In standard SPH, the particles of a body which is surrounded by vacuum will have a density slightly below this zero-pressure density, because of edge effects demonstrated before  (see figure \ref{ch02_fig01}). After a certain fraction of the total number of particles in the gravitationally bound clump have been found in the sorted list, traversing the list is aborted. Taking a fraction of $\approx 1\%$ in case the clumps consists of a few ten to hundred thousand particles assures, that this layer of surface particles is not too 
-
+Now the particles not belonging to the central body can be categorized into three different types. Figure \ref{ch02_fig32} shows a snapshot of a collision simulation, with particles color coded according to the categorization from the disk determination algorithm. Now if the eccentricity $e \ge 1$ and the true anomaly $\Theta_0 > 0$, the particle will escape the gravitational clump (red particles). Not that not too many such particles are usually detected, as they should not have been detected as part of the gravitationally bound clump in the first place (grey particles are not part of the clump). If $\Theta_0 < 0$, it has to be checked, whether $r_p < R_{bod}$, in which case the particle is probably going to re-impact. Particles with $e < 1$ have bound orbits. If the perihel now comes to lies inside the central body so that $r_p < R_{bod}$, the particle is classified as re-impacting (orange), otherwise it is classified as a disk particles (green). 
 
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=2.0]{32disk.png}
-\caption{A snapshot of a potentially Moon-forming collision. Particles are color coded according to their classification from the disk determination algorithm: Blue indicates particles of the central body. Green particles have orbits with a perihel above the central body's orbit, neglecting hydrodynamical forces. Orange particles will re-impact again the central body.}
+\caption{A snapshot of a potentially Moon-forming collision. Particles are color coded according to their classification from the disk determination algorithm: Blue indicates particles of the central body. Green particles have orbits with a perihel above the central body's orbit, neglecting hydrodynamical forces. Orange particles will re-impact again the central body. Grey particles have not been determined to be gravitationally bound to the whole clump and therefore also no disk }
 \label{ch02_fig32}
 \end{center}
 \end{figure}
