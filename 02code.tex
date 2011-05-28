@@ -1262,39 +1262,18 @@ r_p &= r_0 \frac{1 + e \cos{\Theta_0} }{1 + e} \\
 
 Now the particles not belonging to the central body can be categorized into three different types. Figure \ref{ch02_fig32} shows a snapshot of a collision simulation, with particles color coded according to the categorization from the disk determination algorithm. Now if the eccentricity $e \ge 1$ and the true anomaly $\Theta_0 > 0$, the particle will escape the gravitational clump (red particles). Not that not too many such particles are usually detected, as they should not have been detected as part of the gravitationally bound clump in the first place (grey particles are not part of the clump). If $\Theta_0 < 0$, it has to be checked, whether $r_p < R_{bod}$, in which case the particle is probably going to re-impact. Particles with $e < 1$ have bound orbits. If the perihel now comes to lies inside the central body so that $r_p < R_{bod}$, the particle is classified as re-impacting (orange), otherwise it is classified as a disk particles (green). 
 
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=2.0]{32disk.png}
-\caption{A snapshot of a potentially Moon-forming collision. Particles are color coded according to their classification from the disk determination algorithm: Blue indicates particles of the central body. Green particles have orbits with a perihel above the central body's orbit, neglecting hydrodynamical forces. Orange particles will re-impact again the central body. Grey particles have not been determined to be gravitationally bound to the whole clump and therefore also no disk }
+\caption{A snapshot of a potentially Moon-forming collision. Particles are color coded according to their classification from the disk determination algorithm: Blue indicates particles of the central body. Green particles have orbits with a perihel above the central body's orbit, neglecting hydrodynamical forces. Orange particles will re-impact again the central body. Red particles are on escaping orbits and grey particles are not part of the gravitationally bound clump. Note that only very few particles are marked as escaping, as most of them are not found as members of the gravitationally bound clump in the first place.}
 \label{ch02_fig32}
 \end{center}
 \end{figure}
 
-
-
-% several steps: find surface, then get orbits of particles outside of surface, if perihel outside of surface is a disk particle
-% orbit determination not correct in the beginning, but becomes ok later on if bodies are spherical again
-% categories
-
-% get orbit parameters from state vectors
-% orbit / surface detection: disk vs. body particles\\
-
+Note that this algorithm assumes, that each particle simply behaves as a single particle orbiting the center of mass of the central body. Pressure forces are completely neglected, as are interactions with other disk particles or particles from other clumps. Nevertheless this method determines disks surprisingly well, if the whole system has evolved sufficiently enough. 
 
 %\section{Tests}
 %shocktube
-
-%\citep{Abel:2010p3297}
-%\citep{Barnes:1986p2853}
-%\citep{bryant2010computer}
-%\citep{Melosh:2007p3502}
-%\citep{Monaghan:2005p2677}
-%\citep{Monaghan:1992ARAA..30..543M}
-%\citep{Ott:2003p3727}
-%\citep{Price:2004p2613}
-%\citep{Solenthaler:2008p3720}
-%\citep{Springel:2003p3298}
-%\citep{Springel:2005p51}
 
 
 \bibliographystyle{plainnat}
