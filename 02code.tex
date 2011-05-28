@@ -409,7 +409,7 @@ When particle density varies over several orders of magnitudes, so does the time
 For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
 
 \subsection{miscible SPH}
-Standard SPH interpolates all variables weighed according to density. This works very well for single-phase fluids, but introduces difficulties with multi-phase fluids with large density contrasts. In reality, density can be discontinous along boundaries, for example for fluid droplets embedded in a gas. 
+Standard SPH interpolates all variables weighed according to density. This works very well for single-phase fluids, but introduces difficulties with multi-phase fluids with large density contrasts. In reality, density can be discontinuous along boundaries, for example for fluid droplets embedded in a gas. 
 
 \begin{figure}[htbp]
 \begin{center}
@@ -1241,7 +1241,28 @@ The algorithm has two free parameters: the minimal clump density $\rho_{FOF}$ an
 This FOF algorithm is useful for example to find satellites of bodies. While the previous algorithm will treat a parent body and its satellite as one bound object, the FOF successfully finds two individual bodies.
 
 \subsection{Determining disks}
-Determining the disk of a body is important for simulations of satellite formation. Disk detection involves several steps: First of all the gravitationally bound clump 
+Determining the disk of a body is important for simulations of satellite formation. 
+
+Disk detection involves several steps: 
+
+First of all the gravitationally bound clump has to be found for which the disk particles should be determined. This is done with algorithm previously described.
+
+The basic idea is now to determine the surface of the central body and then find the particles which have orbits with a perihel above that surface. 
+
+
+To find the surface, a method which works well in practice is to sort all particles according to the gravitational potential. This sorted list is then traversed toward higher potential. Particles with a density below a certain value $\rho_{surf}$ are then considered surface particles. This density $\rho_{surf}$ should be slightly below the zero-pressure density $\rho_0$ for which pressure vanished for a given thermodynamic state. In standard SPH, the particles of a body which is surrounded by vacuum will have a density slightly below this zero-pressure density, because of edge effects demonstrated before  (see figure \ref{ch02_fig01}). After a certain fraction of the total number of particles in the gravitationally bound clump have been found in the sorted list, traversing the list is aborted. Taking a fraction of $\approx 1\%$ in case the clumps consists of a few ten to hundred thousand particles assures, that this layer of surface particles is not too 
+
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=2.0]{32disk.png}
+\caption{A snapshot of a potentially Moon-forming collision. Particles are color coded according to their classification from the disk determination algorithm: Blue indicates particles of the central body. Green particles have orbits with a perihel above the central body's orbit, neglecting hydrodynamical forces. Orange particles will re-impact again the central body.}
+\label{ch02_fig32}
+\end{center}
+\end{figure}
+
+
 
 % several steps: find surface, then get orbits of particles outside of surface, if perihel outside of surface is a disk particle
 % orbit determination not correct in the beginning, but becomes ok later on if bodies are spherical again
@@ -1253,7 +1274,6 @@ Determining the disk of a body is important for simulations of satellite formati
 
 %\section{Tests}
 %shocktube
-%simple gravity tree
 
 %\citep{Abel:2010p3297}
 %\citep{Barnes:1986p2853}
