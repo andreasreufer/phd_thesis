@@ -1,35 +1,11 @@
-
 \chapter{Methods}
 \graphicspath{{./02figs/}}
 \label{ch02}
-Collision events are characterised by a 
-range of dynamical 
-
-%\subsection*{Introduction}
-
-Motivation to use SPH, spatial dynamics of collisions, SPH particles are where the mass is (not entirely true for collisions, but necessary), free boundaries
-
-
-
-Lagrangian nature vs. grid techniques, complexity of AMR vs. simplicity of SPH
-
-Neighbour search is the hardest thing about SPH
-
-
-
-In this chapter we will discuss, how collisions in the strengthless regime as appearing in planetary systems can be modelled.
-The first section gives a short review the governing physics of such collisions and will provide us with a closed set of equations, namely the Navier-Stokes equations and the 
-This set is far too complicated to be solved in an analytical way. 
-Smoothed particle Hydrodynamics (SPH) is a method which discretises fluids with particles of finite volume and presents a framework to solve the equations describing the fluid.
-The second section derives different SPH formulations of the Navier-Stokes equations and demonstrates the advantages and disadvantages of each formulation.
-
-gravity section: 
-
-The initial conditions and also the outcome of collisional events can be charaterized by a 
-
-Smoothed particle hydrodynamics (SPH) is a numerical method which can discretize 
-
-(insert a nice picture of equations, code lines and numbers here)
+This chapter describes the methods used to model the collisions covered in this thesis. The first section gives a short review of the governing physics of collision: Fluid- and thermodynamics.  Collision often can be characterized by large spatial dynamics: The mass is concentrated in bodies which only occupy a small fraction of the space to be modeled. Nevertheless it is still important to resolve the bodies well enough. Grid techniques can only handle this problem with complicated adaptive mesh refinement routines. 
+A more elegant Lagrangian approach is \emph{Smooth Particle Hydrodynamics} (SPH), a method in which the fluid is approximated by particles. It has the advantage that the computational elements in the form of particles follow the mass of the fluid, so the resolution is inherently where it is required. The second section of this cover different formulations of SPH.
+Gravity plays an important in planetary collisions. First of all gravity is the source of the kinetic energy such collisions. While for small bodies self-gravity can be neglected because it is too weak, it has to be modeled explicitly for large bodies. The third section covers the Barnes \& Hut tree algorithm, which allow to implement self-gravity into a particle code.
+A fourth section describes an implementation of a hydrodynamic SPH code with self-gravity adapted especially for collision simulations called \emph{SPHLATCH}. Two different versions are presented with different approaches for parallelization, one for distributed and one for shared memory computers.
+The last section of this chapter describes several techniques required for setting up and post-processing collision simulations.
 
 \newpage
 
@@ -1133,10 +1109,6 @@ Now the particles not belonging to the central body can be categorized into thre
 \end{figure}
 
 Note that this algorithm assumes, that each particle simply behaves as a single particle orbiting the center of mass of the central body. Pressure forces are completely neglected, as are interactions with other disk particles or particles from other clumps. Nevertheless this method determines disks surprisingly well, if the whole system has evolved sufficiently enough. 
-
-%\section{Tests}
-%shocktube
-
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
