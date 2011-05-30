@@ -3,10 +3,11 @@ all:
 	xelatex thesis
 	#bibtex 01intro
 	#bibtex 02code
-	#bibtex 03ssc 
+	bibtex 03ssc 
+	#bibtex 04mars 
 	#bibtex 05moon
 	#bibtex 06fluffy
-	bibtex thesis
+	#bibtex thesis
 	xelatex thesis
 	xelatex thesis
 
