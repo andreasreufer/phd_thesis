@@ -7,6 +7,7 @@ all:
 	#bibtex 04mars 
 	#bibtex 05moon
 	#bibtex 06fluffy
+	#bibtex 07appendix
 	#bibtex thesis
 	xelatex thesis
 	xelatex thesis
