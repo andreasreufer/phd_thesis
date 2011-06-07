@@ -1,4 +1,48 @@
 \newpage
-\chapter{Volumetric blabla}
+\section{Calculating the cross section volumes of two spheres}
 \graphicspath{{./07figs/}}
+The volume of the cross section between the impactor and target sphere can be calculated in the following way: The cross section is integrated along the x-axis, which is parallel to the impact velocity vector $\vimp$. Figure \ref{ch07_fig01} shows a head-on view on the left and a side view on the right plot. The cross section depends on the actual x-position the cross section is taken. The shaded are on the left plot shows the cross section for the $r = \Rimp$ case. The cross section is composed of two areas $A_{tar}$ and $A_{imp}$ which can be calculated as follows. The unscaled impact parameter 
+
+\begin{equation}
+\label{ch07_sec01_eq001}
+Y = ( \Rtar + \Rimp ) \sin{ \thimp } 
+\end{equation}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.4]{01_Vhit}
+\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
+\label{ch07_fig01}
+\end{center}
+\end{figure}
+
+is subdivided into two sections $y_{imp}$ and $y_{tar}$. The middle point between the two sections is given by spanning the radial vectors $\Rtar$ from the targets center and $r$ from the impactors center respectively.    By using the Pythagorean theorem and $Y = y_{tar} + y_{imp}$ the two sections yield:
+\begin{align}
+\label{ch07_sec01_eq002}
+y_{imp} &= \frac{Y^2 + r^2 - \Rtar^2}{2 Y} \\
+y_{tar} &= Y - y_{imp}
+\end{align}
+
+Now the height of the two circle sections can be determined
+\begin{align}
+\label{ch07_sec01_eq003}
+h_{imp} &= r - y_{imp}\\
+h_{tar} &= \Rtar - y_{tar} 
+\end{align}
+
+The two areas are now simply given by
+\begin{align}
+\label{ch07_sec01_eq004}
+A_{imp} &= r^2 \arccos{\Big( 1 - \frac{h_{imp}}{r} \Big) } - \sqrt{2 r h_{imp} - h_{imp}^2} (r - h_{imp} )  \\
+A_{tar} &= R_{tar}^2 \arccos{\Big(1 - \frac{h_{tar}}{R_{tar}} \Big)  } - \sqrt{2 R_{tar} h_{tar} - h_{tar}^2} (R_{tar} - h_{tar} )  \\
+A(r) &= A_{imp} + A_{tar}
+\end{align}
+
+Two special cases can arise. First if $Y < \Rtar - r $ then the area is simple that of the circle $\pi r^2$. Secondly in if $Y > \Rtar + r$, then the cross section vanished and so $A = 0$. The cross section volume is now given by integrating $A(x)$ along the x-axis:
+\begin{align}
+\label{ch07_sec01_eq002}
+V_{hit, imp} = \int_{-\Rimp}^{\Rimp} dx A(x)
+\end{align}
+
+assuming that the center point of the impactor sphere lies in the origin of the x-axis. The cross section volume of the target $V_{hit, tar}$ can simply by calculated by exchanging the impactor and target variables. 
 
