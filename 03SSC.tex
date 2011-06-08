@@ -2,41 +2,7 @@
 \chapter{Similar sized collisions}
 \graphicspath{{./03figs/}}
 
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.4]{03_grazing}
-\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
-\label{ch03_fig01}
-\end{center}
-\end{figure}
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.5]{04_vartheta}
-\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
-\label{ch03_fig02}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.7]{05_Mhit}
-\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
-\label{ch03_fig02}
-\end{center}
-\end{figure}
-
-
-\begin{equation}
-\label{ch03_fld01_eq002}
-\rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \nabla \Phi + \nu \Big( \nabla^2 \vv - \frac{2}{3} \nabla \nabla \vv \Big)
-\end{equation}
-
 Section \ref{ch07_sec01} in the appendix hababa
-
-
 
 why are SSC non-trivial?
 lot of spill-over for similar sizes
@@ -53,8 +19,45 @@ motivation: moon formation, Lisse stuff, disks \& moons
 ejecta is determined by releasing material from the surface with $v > \vesc$
 
 % TODO: show overview plot or collisional orbit
+
+
 % TODO: show plot of e*v_kep vs. v_esc of Earth
 % show phenomena in the angle vs. vimp plot
+
+
+% TODO: plot theta_imp vs. theta_imp,core for chondritic and icy composition
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.4]{03_grazing}
+\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
+\label{ch03_fig01}
+\end{center}
+\end{figure}
+
+\begin{equation}
+\label{ch03_eq001}
+\theta_{graz} = \arccos{ \frac{\Rtar}{\Rtar + \Rimp} }
+\end{equation}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{05_Mhit}
+\caption{Relative volume of the impactor ($V_{hit, imp}$, left plots) and the target ($V_{hit, tar}$, right plots) hit by the other body as a function of impact angle (top plots) and impact parameter (bottom plots) for different mass ratios $\gamma$. Compare figure \ref{ch07_fig01} for an illustration of those volumes. Note that the ratio of radii scales with the cubic root of the mass ratio: $R_{imp} / R_{tar} \sim \sqrt[3]{\gamma}$. The dotted line shows for which impact angle half of the impactor volume grazes past the target.} 
+\label{ch03_fig02}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.5]{04_vartheta}
+\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
+\label{ch03_fig02}
+\end{center}
+\end{figure}
+
 
 \section{Collision physics}
 compare timescales
@@ -100,6 +103,7 @@ now show c1 \& i1
 \subsection{compositional changes}
 give volumetric estimate
 compare icy vs. chondritic composition
+introduce alternative impact angles $\theta_{core}$
 
 \subsection{ejecta}
 jetting, show decay of shock wave plot
