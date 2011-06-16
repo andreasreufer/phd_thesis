@@ -2,40 +2,7 @@
 \chapter{Similar sized collisions}
 \graphicspath{{./03figs/}}
 
-Section \ref{ch07_sec01} in the appendix hababa
 
-why are SSC non-trivial?
-lot of spill-over for similar sizes
-target gets changed
-
-basic process: 
-
-small impactor: size of impactor vs. central body field gradient small -> almost no torques
-
-define grazing angle for each mass ratio (radii ratio)
-
-motivation: moon formation, Lisse stuff, disks \& moons
-
-ejecta is determined by releasing material from the surface with $v > \vesc$
-
-
-
-% TODO: show phenomena in the angle vs. vimp plot
-
-% TODO: plot theta_imp vs. theta_imp,core for chondritic and icy composition
-
-% TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
-
-% plot accretion efficiency as a function of impact angle and compare with volumetric guess
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.8]{01_overview_params.pdf}
-\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
-\label{ch03_fig01}
-\end{center}
-\end{figure}
 
 
 \begin{figure}[htbp]
@@ -55,7 +22,7 @@ ejecta is determined by releasing material from the surface with $v > \vesc$
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{05_Mhit}
-\caption{Relative volume of the impactor ($V_{hit, imp}$, left plots) and the target ($V_{hit, tar}$, right plots) hit by the other body as a function of impact angle (top plots) and impact parameter (bottom plots) for different mass ratios $\gamma$. Compare figure \ref{ch07_fig01} for an illustration of those volumes. Note that the ratio of radii scales with the cubic root of the mass ratio: $R_{imp} / R_{tar} \sim \sqrt[3]{\gamma}$. The dotted line shows for which impact angle half of the impactor volume grazes past the target.} 
+\caption{Relative volume of the impactor ($V_{hit, imp}$, left plots) and the target ($V_{hit, tar}$, right plots) hit by the other body as a function of impact angle (top plots) and impact parameter (bottom plots) for different mass ratios $\gamma$. Compare figure \ref{ch07_fig01} for an illustration of those volumes. Note that the ratio of radii scales with the cubic root of the mass ratio: $R_{imp} / R_{tar} \sim \sqrt[3]{\gamma}$. The dotted line shows for which impact angle half of the impactor volume grazes past the target. } 
 \label{ch03_fig02}
 \end{center}
 \end{figure}
@@ -78,111 +45,113 @@ ejecta is determined by releasing material from the surface with $v > \vesc$
 \end{figure}
 
 
+
+\section{Introduction}
+motivation: moon formation, Lisse stuff, disks \& moons \\
+small impactor: size of impactor vs. central body field gradient small -> almost no torques \\
+define grazing angle for each mass ratio (radii ratio) \\
+why are SSC non-trivial? \\
+lot of spill-over for similar sizes \\
+target gets changed \\
+Section \ref{ch07_sec01} in the appendix hababa \\
+
+
+
 \section{Collision physics}
-compare timescales
-viscous timescale $t = R^2 / \nu$
-collisional timescale $t = 2 R / \vimp$
-self-gravitational timescale $t = \sqrt{3\pi / G \rho}$
-local gravity, free fall time
-impact vs. shock velocity (super-sonic), shock waves
-surface tension (Walker and Mullins 1981) vs. shearing forces, approximation of fluid bodies
-
-\section{Review of previous work}
-
-
-\section{various quantities}
-accretion \& striping efficiency, compositional $\theta$ and $\xi$
-angular momentum: rot. vs. pot. energy, $L_{bound}$ vs. $L_{imp}$
-dynamics: deflection angle $2 \vartheta$ and $\vimp$ (momentum transfer)
-energy partition, $\Delta U$
-disk: mass, composition, mean a and mean e, angular momentum, compare with Kokubo moon formation scaling laws
+compare timescales\\
+viscous timescale $t = R^2 / \nu$ \\
+collisional timescale $t = 2 R / \vimp$ \\
+self-gravitational timescale $t = \sqrt{3\pi / G \rho}$ \\
+orbital time scale in solar system \\
+local gravity, free fall time \\
+impact vs. shock velocity (super-sonic), shock waves $t = R / c_S $ \\
+surface tension (Walker and Mullins 1981) vs. shearing forces, approximation of fluid bodies \\
+compare central potential of a planetary system with local gravity, compare timescales \\
+% TODOPLOT: show phenomena in the angle vs. vimp plot
 
 
-\section{present initial conditions for the three runs}
-\subsubsection{c1}
-\subsubsection{i1}
-when to stop
-
-\section{\SSC categories}
-show simple r3 (pure bodies)
 
 
-\subsection{accretion}
-\subsection{partial accretion}
-\subsection{erosion \& disruption}
-\subsection{hit \& run}
+\section{Setup and parameters used}
+describe parameter space \\
+how long a simulation is integrated \\
+post-processing \\
+r3, c1, i1 \\
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{01_overview_params.pdf}
+\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
+\label{ch03_fig01}
+\end{center}
+\end{figure}
 
 
-self-similarity when scaling impact angle vs. grazing angle and some volumetric correction?
 
-\section{Specialities}
-now show c1 \& i1
-\subsection{Disks \& moon formation}
+\section{Results}
 
-\subsection{compositional changes}
-give volumetric estimate
-compare icy vs. chondritic composition
-introduce alternative impact angles $\theta_{core}$
-
-\subsection{ejecta}
-jetting, show decay of shock wave plot
-
-\section{the impactor perspective}
-striping efficiency
-
-
-\section{interesting quantities}
-\section{accretion efficiency}
-\section{striping efficiency}
-
-\cite{Chambers:2001p2105}
-\citep{chandrasekhar1969ellipsoidal}
-\cite{Lissauer:1993p56}
-\cite{Wetherill:1993p3351}
+\subsection{Largest remnant mass, accretion efficiency $\xi$}
+compare with previous work\\
+\cite{Benz:1988p3336} 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding\\
+\cite{Benz1999Icar..142....5B}: MLR / Mtarg ~ Q / Q*, parabolic fit \\
+\cite{Agnor:2004p3329}  two 0.1Mearth mass bodies, chondritic, Tillotson \\
+\cite{Stewart:2009p3265} catastrophic disruption criteria, Mlr / Mtarg replaced by Mlr / Mtot, Q* scaled to reduced mass in kinetic energy \\ 
+\cite{2010ApJ...714L..21K} Kokubo 2010,  mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth, defined $v_{cr}$ \\
+try volumetric scaling for oblique impacts \\
+show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
+check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
+volumetric scaling (Canup 2005, Leinhardt) \\
+% TODOPLOT: plot accretion efficiency as a function of impact angle and compare with volumetric guess
 
 
-% plots:
-% impact parameter range (Mimp vs. Mtar, vimp vs. vimprel, vimp vs. angle)
-% QD plot, QD*
-% compositional changes
-% rotational vs. potential energy and link with error in accretion efficiency
 
-% introduce terms
+\subsection{Spin-up, critical angular momentum}
+\cite{Canup:2000p3542}: critical ang. momentum\\
+critical T / W \\
+shedding of material due to rotational ejection \\
+$L_{bound}$ vs. $L_{imp}$ \\
 
-% show effects: bouncing, strings of pearls, non-completion of 
+\subsection{Energy partition}
+potential, internal and rotational energy\\
+energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
+$\Delta U$, accretion vs. non-accretion \\
 
-%focus:
-%- show parameter space, overview plot
-%- chains from h&r, composition and thermodynamics of such chains
-%- deflection angles for h&r, rotation (for h&r)
-%- compositional changes for h&r
-%- reproduce accr. efficiency in the Earth regime
-%- accr. efficiencies for individual components
-%- energy partition in bodies (shocks, tidal vs. self-gravity stress)
-%- check Kokubo 2010 (critical velocity)
-%- check Benz 1999, Angor & Asphaug 2004, Stewart & Leinhardt 2009, Marcus 2009, Marcus 2010
-%- analyze ejecta, entropy and energy of ejecta
-%- compare central potential of a planetary system with local gravity, compare timescales
-%- analyze disk masses & composition
-%- volumetric scaling (Canup 2005, Leinhardt)
-%- shedding of material due to rotational ejection
+\subsection{Compositional changes, mixing}
+% TODOPLOT: plot theta_imp vs. theta_imp,core for chondritic and icy composition
+mainly for next largest bodies\\
+mantle striping\\
+impactor perspective\\
+accr. efficiencies for individual components \\
+compositional changes for h\&r \\
+introduce alternative impact angles $\theta_{core}$ \\
+give volumetric estimate \\
 
-\cite{Benz:1988p3336}
-%- 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding
 
-\cite{Benz1999Icar..142....5B}
-Benz \& Asphaug 1999:
-%- MLR / Mtarg ~ Q / Q*
-%- parabolic fit
 
-\cite{Canup:2000p3542}
-Canup \& Agnor 2000:
-%- eccentricities and masses at late stage of terrestrial planet formation
-%- critical angular momentum Lcrit
-%- satellite impacts are much less common due to 
+
+\subsection{Satellite and disk formation}
+crucial for life? (Laskar paper)\\
+analyze disk masses, angular momentum \& composition \\
+mean a and mean e, compare with roche limit \\
+
+\subsection{Dynamical effects}
+vinf and deflection of impactor for non-accreting case\\
+deflection angles for h\&r \\
+bouncing vs. shearing \\
+
+\subsection{Ejecta}
+cite Lisse\\
+analyze ejecta, entropy and energy of ejecta \\
+show decay of shock wave plot\\ % TODOPLOT
+
+
+\section{Discussion}
+little toy model population in the early solar system (-> chambers) \\
+% TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
+
 	
 \cite{Agnor:2004p3329}
-Agnor \& Asphaug 2004: accretion efficiency during planetary collisions
+%Agnor \& Asphaug 2004: accretion efficiency during planetary collisions
 %- impact probability of eps: dP = 2*sin(eps)*cos(eps)*deps (Shoemaker 1962)
 %- non-disruption doesn't mean merging
 %- M1: largest remnant, M2: largest escaping remnant
@@ -191,7 +160,7 @@ Agnor \& Asphaug 2004: accretion efficiency during planetary collisions
 %- non-accretionary collisions are the norm
 
 \cite{Asphaug:2006p3729}
-Asphaug 2006: h\&r planetary collisions
+%Asphaug 2006: h\&r planetary collisions
 %- 0deg: shocks dominate, 90deg gravity (tides, stresses) dominates
 %- "strings of pearls"
 %- for large bodies, the impactor, not the target, are destroyed
@@ -199,7 +168,7 @@ Asphaug 2006: h\&r planetary collisions
 %- relativ energy deposition 
 
 \cite{Asphaug:2010p3539}
-Asphaug 2010: SSC collisions and the diversity of planets
+%Asphaug 2010: SSC collisions and the diversity of planets
 %- next-largest bodies (NLB)
 %- hit&run common for v_rand = v_inf
 %- Safronov number 1-2 in late systems
@@ -222,23 +191,18 @@ Asphaug 2010: SSC collisions and the diversity of planets
 
 
 \cite{2009ApJ...700L.118M}
-Marcus 2009:
+%Marcus 2009:
 %- confirmation of Stewart & Leinhardt 2009 for bodies > 100km
 %- masses 1., 5., 10. Mearth, ratios 0.25, 0.50, 0.75
 %- scaling relationship for MFe / Mlr
 %- compositional changes require: a) small impact angle or b) small & fast impactor
 
 \cite{2010ApJ...712L..73M}
-Marcus et al. 2010: Minimum radii from Super-Earths: Constraints from GIs
+%Marcus et al. 2010: Minimum radii from Super-Earths: Constraints from GIs
 %- super-Mercuries are not expected, as striping bodies would have to be > 10 MEarth
 
-\cite{Stewart:2009p3265}
-Stewart \& Leinhardt 2009:
-%- catastrophic disruption criteria
-%- Mlr / Mtarg replaced by Mlr / Mtot, Q* sclaed to reduced mass in kinetic energy
-
 \cite{2010ApJ...714L..21K}
-Kokubo \& Genda 2010:
+%Kokubo \& Genda 2010:
 %- about half the collisions do not accrete
 %- orbit integration of 16 bodies, total mass 2.3MEarth
 %- mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth
@@ -247,10 +211,15 @@ Kokubo \& Genda 2010:
 %- critical spin angular velocity
 
 \cite{2011arXiv1105.4616E}
-Elser et al, 2011:
+%Elser et al, 2011:
 %- Moon formation in planetary systems
+%- might be crucial for life
 
-\section{Discussion}
+\cite{Chambers:2001p2105}
+\citep{chandrasekhar1969ellipsoidal}
+\cite{Lissauer:1993p56}
+\cite{Wetherill:1993p3351}
+
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}

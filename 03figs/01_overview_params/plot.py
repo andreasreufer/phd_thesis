@@ -48,7 +48,7 @@ c1masses = [ ( 0.007, 0.01),
 
 from plot_helpers import *
 #plt.rc('savefig', dpi=450)
-plt.figure(figsize=(8, 4.5) )
+plt.figure(figsize=(9, 4.1) )
 
 ax1 = plt.subplot(121)
 ax2 = plt.subplot(122)
