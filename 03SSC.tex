@@ -27,27 +27,10 @@
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.5]{04_vartheta}
-\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
-\label{ch03_fig02}
-\end{center}
-\end{figure}
-
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.7]{06_vimp}
-\caption{An order of magnitude estimation of the random velocities for bodies undergoing collisions in a protoplanetary system with a solar mass central star. The random velocity is roughly the Kepler velocity times the orbital eccentricity. Shown are isolines of velocities for given distance from a star with a solar mass for given eccentricities. The red line shows the speed of sound of for quartz at standard conditions \cite{Melosh:2007p3502}. Note that the actual impact velocity is given by $\vimp = \sqrt{ v_{rand}^2 + \vesc^2}$ and depends on the masses of the two colliding bodies. Due to the high Kepler velocity in the inner parts of the system, even small eccentricities lead to random velocities well above the speed of sound for silicates and therefore to hypervelocity impacts even for small bodies.}
-\label{ch03_fig06}
-\end{center}
-\end{figure}
-
 
 
 \section{Introduction}
-motivation: moon formation, Lisse stuff, disks \& moons \\
+motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation \\
 small impactor: size of impactor vs. central body field gradient small -> almost no torques \\
 define grazing angle for each mass ratio (radii ratio) \\
 why are SSC non-trivial? \\
@@ -67,9 +50,8 @@ local gravity, free fall time \\
 impact vs. shock velocity (super-sonic), shock waves $t = R / c_S $ \\
 surface tension (Walker and Mullins 1981) vs. shearing forces, approximation of fluid bodies \\
 compare central potential of a planetary system with local gravity, compare timescales \\
-% TODOPLOT: show phenomena in the angle vs. vimp plot
-
-
+%TODOPLOT: show phenomena in the angle vs. vimp plot
+basic process of cratering collisions: contact and compression stage, excavation stage \cite{Melosh:2007p3502} \\
 
 
 \section{Setup and parameters used}
@@ -77,6 +59,11 @@ describe parameter space \\
 how long a simulation is integrated \\
 post-processing \\
 r3, c1, i1 \\
+resolution, number of particles, particles per body diameter \\
+initial temperature not important, show profiles nevertheless \\
+% TODOPLOT: show structures for r3, c1, i1 with variables T, rho, p (3x3)
+
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -86,7 +73,7 @@ r3, c1, i1 \\
 \end{center}
 \end{figure}
 
-
+% TODOPLOT: insert a summary.pdf example
 
 \section{Results}
 
@@ -102,7 +89,12 @@ show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
 check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
 volumetric scaling (Canup 2005, Leinhardt) \\
 % TODOPLOT: plot accretion efficiency as a function of impact angle and compare with volumetric guess
+% TODOPLOT: Q_D plot
 
+
+\subsection{secondary remnants}
+\cite{Agnor:2004p3329} compare with figure 2\\
+% TODOPLOT: 
 
 
 \subsection{Spin-up, critical angular momentum}
@@ -133,11 +125,22 @@ give volumetric estimate \\
 crucial for life? (Laskar paper)\\
 analyze disk masses, angular momentum \& composition \\
 mean a and mean e, compare with roche limit \\
+satellite formation in second \\
 
 \subsection{Dynamical effects}
 vinf and deflection of impactor for non-accreting case\\
 deflection angles for h\&r \\
 bouncing vs. shearing \\
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.5]{04_vartheta}
+\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
+\label{ch03_fig02}
+\end{center}
+\end{figure}
+
+
 
 \subsection{Ejecta}
 cite Lisse\\
@@ -148,6 +151,15 @@ show decay of shock wave plot\\ % TODOPLOT
 \section{Discussion}
 little toy model population in the early solar system (-> chambers) \\
 % TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{06_vimp}
+\caption{An order of magnitude estimation of the random velocities for bodies undergoing collisions in a protoplanetary system with a solar mass central star. The random velocity is roughly the Kepler velocity times the orbital eccentricity. Shown are isolines of velocities for given distance from a star with a solar mass for given eccentricities. The red line shows the speed of sound of for quartz at standard conditions \cite{Melosh:2007p3502}. Note that the actual impact velocity is given by $\vimp = \sqrt{ v_{rand}^2 + \vesc^2}$ and depends on the masses of the two colliding bodies. Due to the high Kepler velocity in the inner parts of the system, even small eccentricities lead to random velocities well above the speed of sound for silicates and therefore to hypervelocity impacts even for small bodies.}
+\label{ch03_fig06}
+\end{center}
+\end{figure}
+
 
 	
 \cite{Agnor:2004p3329}
