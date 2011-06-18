@@ -16,6 +16,7 @@ import os
 import stat
 import time
 import numpy as np
+import pylab as pl
 
 #rcParams['text.usetex']=True
 mp.rc('text', usetex=True)
@@ -76,6 +77,10 @@ for ( sparm, axv ) in params:
     (col, ls) = getVimpColor(vimp)
 
     ax.plot( xll[i], resll[i], ls, label=vimpstr, color=col, markersize=6)
+    #ax.semilogx( xll[i], resll[i], ls, label=vimpstr, color=col, markersize=6)
+
+  Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
+  ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   ax.axis( [ 0., 90., -2.1, 1.1 ])
   ax.grid(True)
@@ -106,6 +111,7 @@ bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='verti
 bgax.text( 0.03, y0 + (1+0.7)*dy, r"$M_{tar} = 0.1 M_{\oplus}$", rotation='vertical')
 bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.01 M_{\oplus}$", rotation='vertical')
 
+bgax.text( 0.03, 0.93, r"$\mathrm{i1}$", size=20)
 
 for i in range(0, len(zl) ):
   vimp = zl[i]

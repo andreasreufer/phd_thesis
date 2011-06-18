@@ -25,7 +25,7 @@ mp.rc('text.latex', preamble = '\usepackage{amssymb}, \usepackage{wasysym}')
 nan = float('nan')
 
 sscfg = SimSetConfig()
-sscfg.name = "c1"
+sscfg.name = "r3"
 sscfg.dir = "/Users/areufer/Documents/UniTAPS/gi_sims"
 
 simadm = SimAdmin(sscfg)
@@ -40,14 +40,8 @@ dy = 0.27
 
 
 params = [ \
-    ( SimParam(0.200, 1.000, nan, nan), [2,0] ),
-    ( SimParam(0.700, 1.000, nan, nan), [0,0] ),
-    ( SimParam(0.010, 0.100, nan, nan), [3,1] ),
-    ( SimParam(0.020, 0.100, nan, nan), [2,1] ),
-    ( SimParam(0.035, 0.100, nan, nan), [1,1] ),
-    ( SimParam(0.070, 0.100, nan, nan), [0,1] ),
-    ( SimParam(0.002, 0.010, nan, nan), [2,2] ),
-    ( SimParam(0.007, 0.010, nan, nan), [0,2] ) ]
+    ( SimParam(0.100, 0.500, nan, nan), [1,1] ),
+    ( SimParam(0.100, 0.200, nan, nan), [2,1] )]
 
 bgax = plt.axes( [0.0, 0.0, 1.0, 1.0], frameon=False)
 axs = []
@@ -82,10 +76,10 @@ for ( sparm, axv ) in params:
     (col, ls) = getVimpColor(vimp)
 
     ax.plot( xll[i], resll[i], ls, label=vimpstr, color=col, markersize=6)
+    #ax.semilogx( xll[i], resll[i], ls, label=vimpstr, color=col, markersize=6)
 
   Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
-
   
   ax.axis( [ 0., 90., -2.1, 1.1 ])
   ax.grid(True)
@@ -102,21 +96,21 @@ for i in (0,1):
   axs[i].xaxis.set_major_formatter(int_formatter)
   axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")
 
-for i in (1,5,7):
+for i in (0,):
   axs[i].yaxis.set_major_formatter(math_formatter)
   axs[i].set_ylabel(r"$\xi$")
 
 
-bgax.text( x0 + 3*dx + 0.07, 0.93, r"$\gamma = 0.10 $" )
+#bgax.text( x0 + 3*dx + 0.07, 0.93, r"$\gamma = 0.10 $" )
 bgax.text( x0 + 2*dx + 0.07, 0.93, r"$\gamma = 0.20 $" )
-bgax.text( x0 + 1*dx + 0.07, 0.93, r"$\gamma = 0.35 $" )
-bgax.text( x0 + 0*dx + 0.07, 0.93, r"$\gamma = 0.70 $" )
+bgax.text( x0 + 1*dx + 0.07, 0.93, r"$\gamma = 0.50 $" )
+#bgax.text( x0 + 0*dx + 0.07, 0.93, r"$\gamma = 0.70 $" )
 
-bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='vertical')
+#bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='vertical')
 bgax.text( 0.03, y0 + (1+0.7)*dy, r"$M_{tar} = 0.1 M_{\oplus}$", rotation='vertical')
-bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.01 M_{\oplus}$", rotation='vertical')
+#bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.01 M_{\oplus}$", rotation='vertical')
 
-bgax.text( 0.03, 0.93, r"$\mathrm{c1}$", size=20)
+bgax.text( 0.03, 0.93, r"$\mathrm{r3}$", size=20)
 
 for i in range(0, len(zl) ):
   vimp = zl[i]
@@ -131,6 +125,6 @@ bgax.legend(loc=(0.80, 0.06), frameon=False, numpoints=1, ncol=2, columnspacing=
 bgax.xaxis.set_ticks( () )
 bgax.yaxis.set_ticks( () )
 
-plt.savefig("out_c1.pdf")
+plt.savefig("out_r3.pdf")
 
 
