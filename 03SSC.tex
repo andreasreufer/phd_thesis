@@ -55,7 +55,7 @@ basic process of cratering collisions: contact and compression stage, excavation
 
 
 \section{Setup and parameters used}
-describe parameter space \\
+describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
 how long a simulation is integrated \\
 post-processing \\
 r3, c1, i1 \\
@@ -90,19 +90,54 @@ initial temperature not important, show profiles nevertheless \\
 \subsection{Largest remnant mass, accretion efficiency $\xi$}
 compare with previous work\\
 \cite{Benz:1988p3336} 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding\\
+
+
 \cite{Benz1999Icar..142....5B}: MLR / Mtarg ~ Q / Q*, parabolic fit \\
+
+
+
 \cite{Agnor:2004p3329}  two 0.1Mearth mass bodies, chondritic, Tillotson \\
+
+
+
+
 \cite{Stewart:2009p3265} catastrophic disruption criteria, Mlr / Mtarg replaced by Mlr / Mtot, Q* scaled to reduced mass in kinetic energy \\ 
+
+
+
+
 \cite{2010ApJ...714L..21K} ,mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth, defined $v_{cr}$ \\
 try volumetric scaling for oblique impacts \\
+
+
+
 show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
+
 check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
+
 volumetric scaling (Canup 2005, Leinhardt) \\
+
+
 mention problems with slow accretion producing secondary impacts, show example with very large timescales, problem to estimate result due to pre-rotation\\
 % TODOPLOT: plot accretion efficiency as a function of impact angle and compare with volumetric guess
 % TODOPLOT: Q_D plot
 
+
+
+
+
+
+
 \begin{landscape}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{08_accreff_r3.pdf}
+\caption{Accretion efficiency }
+\label{ch03_fig08a}
+\end{center}
+\end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
@@ -121,6 +156,56 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{figure}
 
 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{09_accreff_vimp_r3.pdf}
+\caption{Accretion efficiency }
+\label{ch03_fig08a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{09_accreff_vimp_c1.pdf}
+\caption{Accretion efficiency }
+\label{ch03_fig09a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{09_accreff_vimp_i1.pdf}
+\caption{I}
+\label{ch03_fig09b}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{15_QQRD_c1.pdf}
+\caption{I}
+\label{ch03_fig15a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{15_QQRD_i1.pdf}
+\caption{I}
+\label{ch03_fig15b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{15_QQRD_r3.pdf}
+\caption{I}
+\label{ch03_fig15c}
+\end{center}
+\end{figure}
+
+
 \end{landscape}
 
 
@@ -134,6 +219,11 @@ mention problems with slow accretion producing secondary impacts, show example w
 \subsection{Spin-up, critical angular momentum}
 \cite{Canup:2000p3542}: critical ang. momentum\\
 critical T / W \\
+how to get from Erot and I to a rotation rate:
+\begin{equation}
+T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
+\end{equation}
+\\
 shedding of material due to rotational ejection \\
 $L_{bound}$ vs. $L_{imp}$ \\
 
@@ -193,6 +283,9 @@ little toy model population in the early solar system (-> chambers) \\
 \label{ch03_fig06}
 \end{center}
 \end{figure}
+
+
+
 
 
 	

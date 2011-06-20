@@ -41,7 +41,8 @@ dy = 0.27
 
 params = [ \
     ( SimParam(0.100, 0.500, nan, nan), [1,1] ),
-    ( SimParam(0.100, 0.200, nan, nan), [2,1] )]
+    #( SimParam(0.100, 1.000, nan, nan), [2,0] ),
+    ( SimParam(0.100, 0.200, nan, nan), [0,2] )]
 
 bgax = plt.axes( [0.0, 0.0, 1.0, 1.0], frameon=False)
 axs = []
@@ -96,19 +97,19 @@ for i in (0,1):
   axs[i].xaxis.set_major_formatter(int_formatter)
   axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")
 
-for i in (0,):
+for i in (0,1):
   axs[i].yaxis.set_major_formatter(math_formatter)
   axs[i].set_ylabel(r"$\xi$")
 
 
-#bgax.text( x0 + 3*dx + 0.07, 0.93, r"$\gamma = 0.10 $" )
-bgax.text( x0 + 2*dx + 0.07, 0.93, r"$\gamma = 0.20 $" )
-bgax.text( x0 + 1*dx + 0.07, 0.93, r"$\gamma = 0.50 $" )
+bgax.text( x0 + 2*dx + 0.07, 0.93, r"$\gamma = 0.10 $" )
+bgax.text( x0 + 1*dx + 0.07, 0.93, r"$\gamma = 0.20 $" )
+bgax.text( x0 + 0*dx + 0.07, 0.93, r"$\gamma = 0.50 $" )
 #bgax.text( x0 + 0*dx + 0.07, 0.93, r"$\gamma = 0.70 $" )
 
-#bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='vertical')
-bgax.text( 0.03, y0 + (1+0.7)*dy, r"$M_{tar} = 0.1 M_{\oplus}$", rotation='vertical')
-#bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.01 M_{\oplus}$", rotation='vertical')
+bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='vertical')
+bgax.text( 0.03, y0 + (1+0.7)*dy, r"$M_{tar} = 0.5 M_{\oplus}$", rotation='vertical')
+bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.2 M_{\oplus}$", rotation='vertical')
 
 bgax.text( 0.03, 0.93, r"$\mathrm{r3}$", size=20)
 
