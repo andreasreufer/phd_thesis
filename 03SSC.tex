@@ -23,21 +23,18 @@
 \begin{center}
 \includegraphics[scale=0.7]{05_Mhit}
 \caption{Relative volume of the impactor ($V_{hit, imp}$, left plots) and the target ($V_{hit, tar}$, right plots) hit by the other body as a function of impact angle (top plots) and impact parameter (bottom plots) for different mass ratios $\gamma$. Compare figure \ref{ch07_fig01} for an illustration of those volumes. Note that the ratio of radii scales with the cubic root of the mass ratio: $R_{imp} / R_{tar} \sim \sqrt[3]{\gamma}$. The dotted line shows for which impact angle half of the impactor volume grazes past the target. } 
-\label{ch03_fig02}
+\label{ch03_fig05}
 \end{center}
 \end{figure}
 
-
-
 \section{Introduction}
-motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation \\
+motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation, no big study before \\
 small impactor: size of impactor vs. central body field gradient small -> almost no torques \\
 define grazing angle for each mass ratio (radii ratio) \\
 why are SSC non-trivial? \\
 lot of spill-over for similar sizes \\
 target gets changed \\
 Section \ref{ch07_sec01} in the appendix hababa \\
-
 
 
 \section{Collision physics}
@@ -57,11 +54,13 @@ basic process of cratering collisions: contact and compression stage, excavation
 \section{Setup and parameters used}
 describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
 how long a simulation is integrated \\
+problems: 
 post-processing \\
 r3, c1, i1 \\
 resolution, number of particles, particles per body diameter \\
 initial temperature not important, show profiles nevertheless \\
-% TODOPLOT: show structures for r3, c1, i1 with variables T, rho, p (3x3)
+
+as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 
 
 
@@ -134,7 +133,7 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_r3.pdf}
-\caption{Accretion efficiency }
+\caption{Accretion efficiency $\xi$ as a function of the impact angle for different relative impact velocities. Each subplot shows a set of simulations for a given target mass $\Mtar$ and mass ratio $\gamma = \Mimp / \Mtar$. Each point shows the outcome of an individual simulation of the \emph{r3} simulation set involving bodies composed purely of $\silc$. The black dashed line shows the relative volume of the impactor hitting the target for the given mass ratio (compare figure \ref{ch03_fig05}).}
 \label{ch03_fig08a}
 \end{center}
 \end{figure}
@@ -142,16 +141,16 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_c1.pdf}
-\caption{Accretion efficiency }
-\label{ch03_fig08a}
+\caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set with bodies of chondritic composition (compare figure \ref{ch03_fig08a}. Each shows a different magnitude of target mass, each column a different mass ratio.}
+\label{ch03_fig08b}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_i1.pdf}
-\caption{I}
-\label{ch03_fig08b}
+\caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set with bodies of icy composition (compare figure \ref{ch03_fig08b}).}
+\label{ch03_fig08c}
 \end{center}
 \end{figure}
 

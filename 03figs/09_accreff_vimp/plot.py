@@ -96,7 +96,10 @@ for ( sparm, axv ) in params:
     z = 0
     if xvar == "vimp":
       x = sim.params.vimprel
-
+      
+      vimp = sim.params.vimprel
+      vinf = sqrt( vimp*vimp - 1.)
+      #x = vinf
       z = sim.params.impa
     else:
       x = sim.params.impa
@@ -124,11 +127,15 @@ for ( sparm, axv ) in params:
       ax.semilogy( xll[i], resll[i], ls, color=col, markersize=6)
     else:
       ax.semilogx( xll[i], resll[i], ls, color=col, markersize=6)
+      #ax.plot( xll[i], resll[i], ls, color=col, markersize=6)
   
     angl = zl[i]
     afct = pow( (1-np.sin( 2*pi*angl / 360. ) ), 5./2. )
     vcrkok = c1*mctr*afct + c2*mctr*mctr + c3*afct + c4
+      
+    vcrinf = sqrt( vcrkok*vcrkok - 1.)
     ax.vlines( vcrkok, yaxis[0], yaxis[1], color=col, linestyles="-", linewidth=0.6 ) 
+    #ax.vlines( vcrinf, yaxis[0], yaxis[1], color=col, linestyles="-", linewidth=0.6 ) 
 
   #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
@@ -136,6 +143,8 @@ for ( sparm, axv ) in params:
   if xvar == "vimp":
     ax.axis( [ 1.0, 5.1, yaxis[0], yaxis[1] ])
     ax.xaxis.set_ticks( (1.0, 1.5, 2.3, 3.4, 5.1 ) )
+    #ax.axis( [ 0.0, 5.1, yaxis[0], yaxis[1] ])
+    #ax.xaxis.set_ticks( (1.0, 1.5, 2.3, 3.4, 5.1 ) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   else:
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
