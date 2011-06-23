@@ -51,7 +51,7 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{744, 496}, {115, 91}}</string>
+			<string>{{759.398, 496}, {115, 91}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -160,7 +160,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{727, 201}, {24, 29}}</string>
+			<string>{{718.5, 212}, {24, 29}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -368,7 +368,7 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{809, 212}, {45, 29}}</string>
+			<string>{{779, 207.331}, {45, 29}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -644,7 +644,7 @@
 			<key>ID</key>
 			<integer>113</integer>
 			<key>ImageID</key>
-			<integer>7</integer>
+			<integer>8</integer>
 			<key>Shape</key>
 			<string>Rectangle</string>
 			<key>Style</key>
@@ -759,7 +759,7 @@
 	<key>HPages</key>
 	<integer>2</integer>
 	<key>ImageCounter</key>
-	<integer>8</integer>
+	<integer>9</integer>
 	<key>ImageLinkBack</key>
 	<array>
 		<dict/>
@@ -767,7 +767,7 @@
 	</array>
 	<key>ImageList</key>
 	<array>
-		<string>image7.pdf</string>
+		<string>image8.pdf</string>
 		<string>image6.pdf</string>
 	</array>
 	<key>KeepToScale</key>
@@ -807,7 +807,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2011-06-06 13:41:09 +0200</string>
+	<string>2011-06-22 17:18:41 +0200</string>
 	<key>Modifier</key>
 	<string>Andreas Reufer</string>
 	<key>NotesVisible</key>
@@ -833,7 +833,7 @@
 		<key>NSPaperName</key>
 		<array>
 			<string>string</string>
-			<string>30DF6E7B-611E-489B-871F-895005999CC5</string>
+			<string>AABAF6F7-C843-462F-82F1-744360B196FA</string>
 		</array>
 		<key>NSPaperSize</key>
 		<array>
@@ -897,7 +897,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{32.1784, 16.9635}, {1040.43, 570.161}}</string>
+		<string>{{32.1784, 26.3876}, {1040.43, 570.161}}</string>
 		<key>Zoom</key>
 		<real>1.0611029863357544</real>
 		<key>ZoomValues</key>

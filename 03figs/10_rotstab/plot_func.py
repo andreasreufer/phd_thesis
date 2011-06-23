@@ -11,8 +11,11 @@ def plotFunc(sim):
   #ToW = abs(-res.Erotm[1] / sim.gi.Ered)
 
   ToW = 0.
-  if len(res.Erotclmp) > 0:
+  if len(res.Erotclmp) > 1:
     ToW = abs(-res.Erotclmp[1] / res.Epotclmp[1])
+  else:
+    ToW = nan
+  
   if ToW  > 10.:
     ToW  = nan
 
