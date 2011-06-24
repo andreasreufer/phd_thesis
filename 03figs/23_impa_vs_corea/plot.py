@@ -60,7 +60,10 @@ if ssname == "i1":
   params = [ \
       ( SimParam(0.200, 1.000, nan, nan), [2,0] ),
       ( SimParam(0.020, 0.100, nan, nan), [2,1] ),
-      ( SimParam(0.002, 0.010, nan, nan), [2,2] ) ]
+      ( SimParam(0.002, 0.010, nan, nan), [2,2] ), 
+      ( SimParam(0.200, 1.000, nan, nan), [0,0] ),
+      ( SimParam(0.020, 0.100, nan, nan), [0,1] ),
+      ( SimParam(0.002, 0.010, nan, nan), [0,2] ) ]
 
 if ssname == "r3":
   params = [ \
@@ -108,12 +111,15 @@ for ( sparm, axv ) in params:
 
   thetagrazFe = np.arcsin( 1. / ratFe )
   thetagrazSi = np.arcsin( 1. / ratSi )
-
-  ax.plot( rad2deg*thetaimp, rad2deg*thetaFe, 'b-' )
-  ax.vlines( rad2deg*thetagrazFe, 0., 90., colors='blue', linestyles='dashed' )
-  if ( rimpIc > 0. ) and ( rtarIc > 0. ):
+ 
+  #if ( rimpIc > 0. ) and ( rtarIc > 0. ):
+  if ssname == "i1" and axv[0] == 0:
     ax.plot( rad2deg*thetaimp, rad2deg*thetaSi, 'r-' )
     ax.vlines( rad2deg*thetagrazSi, 0., 90., colors='red', linestyles='dashed' )
+  else:
+    ax.plot( rad2deg*thetaimp, rad2deg*thetaFe, 'b-' )
+    ax.vlines( rad2deg*thetagrazFe, 0., 90., colors='blue', linestyles='dashed' )
+
 
   #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
@@ -159,9 +165,16 @@ if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":
   axselect = (0,1,2)
+
 for i in axselect:
   axs[i].yaxis.set_major_formatter(yfmt)
   axs[i].set_ylabel(ylbl)
+
+if ssname == "i1":
+  for i in (3,4,5):
+    axs[i].yaxis.set_major_formatter(yfmt)
+    axs[i].set_ylabel(r"$\theta_{SiO_2} [^\circ]$")
+
 
 
 if ssname == "c1":
@@ -174,6 +187,7 @@ if ssname == "c1":
   bgax.text( 0.03, y0 + (2+0.7)*dy, r"$M_{tar} = 0.01 M_{\oplus}$", rotation='vertical')
   
 if ssname == "i1":
+  bgax.text( x0 + 0*dx + 0.07, 0.93, r"$\gamma = 0.20 $" )
   bgax.text( x0 + 2*dx + 0.07, 0.93, r"$\gamma = 0.20 $" )
   bgax.text( 0.03, y0 + (0+0.7)*dy, r"$M_{tar} = 1.0 M_{\oplus}$", rotation='vertical')
   bgax.text( 0.03, y0 + (1+0.7)*dy, r"$M_{tar} = 0.1 M_{\oplus}$", rotation='vertical')
