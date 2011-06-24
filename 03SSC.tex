@@ -88,7 +88,7 @@ as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 
 
 
-
+impact angle of $30\deg$
 
 
 
@@ -142,7 +142,7 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_c1.pdf}
-\caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set with bodies of chondritic composition (compare figure \ref{ch03_fig08a}. Each shows a different magnitude of target mass, each column a different mass ratio.}
+\caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set with bodies of chondritic composition (compare figure \ref{ch03_fig08a}. Each row shows a different magnitude of target mass, each column a different mass ratio.}
 \label{ch03_fig08b}
 \end{center}
 \end{figure}
@@ -154,7 +154,6 @@ mention problems with slow accretion producing secondary impacts, show example w
 \label{ch03_fig08c}
 \end{center}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \begin{center}
@@ -180,44 +179,31 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{center}
 \end{figure}
 
-
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{15_QQRD_c1.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as defined in \cite{Stewart:2009p3265} and using the parameters for $Q^*_{RD}$ as in \cite{2010ApJ...712L..73M}. The coloured lines solid lines show the simulation values for the \emph{c1} simulation set and the dashed black line shows the predicted value from the scaling law.}
+\includegraphics[scale=1.0]{15_QQRD_r3.pdf}
+\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as defined in \cite{Stewart:2009p3265} and using the parameters for $Q^*_{RD}$ as in \cite{2010ApJ...712L..73M}. The coloured lines solid lines show the simulation values for the \emph{r3} simulation set and the dashed black line shows the predicted value from the scaling law.}
 \label{ch03_fig15a}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{15_QQRD_i1.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{i0} simulation set.}
+\includegraphics[scale=1.0]{15_QQRD_c1.pdf}
+\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{c1} simulation set.}
 \label{ch03_fig15b}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{15_QQRD_r3.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{r3} simulation set.}
+\includegraphics[scale=1.0]{15_QQRD_i1.pdf}
+\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{i1} simulation set.}
 \label{ch03_fig15c}
 \end{center}
 \end{figure}
-
 \end{landscape}
 
-
-
-
-
-
-
-
-\begin{landscape}
-
-
-\end{landscape}
 
 
 
@@ -226,8 +212,7 @@ mention problems with slow accretion producing secondary impacts, show example w
 %% 
 \subsection{secondary remnants}
 \cite{Agnor:2004p3329} compare with figure 2\\
-% TODOPLOT: plot all mass not in largest or second remannts compared to total mass
-
+% TODOPLOT: plot all mass not in largest or second remants compared to total mass
 
 %%
 % rotation stuff
@@ -241,12 +226,14 @@ T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
 \end{equation}
 shedding of material due to rotational ejection \\
 $L_{bound}$ vs. $L_{imp}$ \\
+$t = \frac{T}{|W|}$
+$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
 
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
-\caption{I}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
 \label{ch03_fig19a}
 \end{center}
 \end{figure}
@@ -254,24 +241,40 @@ $L_{bound}$ vs. $L_{imp}$ \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{10_rotstab_c1.pdf}
-\caption{I}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
 \label{ch03_fig10a}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
-\caption{I}
+\includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
 \label{ch03_fig19b}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
+\includegraphics[scale=1.0]{10_rotstab_c1.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
+\label{ch03_fig10b} 
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
+\label{ch03_fig19c}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
 \includegraphics[scale=1.0]{10_rotstab_i1.pdf}
-\caption{I}
-\label{ch03_fig10b}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
+\label{ch03_fig10c}
 \end{center}
 \end{figure}
 \end{landscape}
@@ -291,7 +294,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
-\caption{I}
+\caption{Change in internal energy $\Delta U$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
 \label{ch03_fig11a}
 \end{center}
 \end{figure}
@@ -299,7 +302,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_c1.pdf}
-\caption{I}
+\caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{c1}.}
 \label{ch03_fig11b}
 \end{center}
 \end{figure}
@@ -307,7 +310,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_i1.pdf}
-\caption{I}
+\caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{i1}.}
 \label{ch03_fig11c}
 \end{center}
 \end{figure}
@@ -315,7 +318,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
-\caption{I}
+\caption{Change in potential energy $\Delta W$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
 \label{ch03_fig12a}
 \end{center}
 \end{figure}
@@ -323,7 +326,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_c1.pdf}
-\caption{I}
+\caption{Change in potential energy $\Delta W$ as in figure \ref{ch03_fig12a}, but for the simulation set \emph{c1}.}
 \label{ch03_fig12b}
 \end{center}
 \end{figure}
@@ -331,7 +334,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_i1.pdf}
-\caption{I}
+\caption{Change in potential energy $\Delta W$ as in figure \ref{ch03_fig12a}, but for the simulation set \emph{i1}.}
 \label{ch03_fig12c}
 \end{center}
 \end{figure}
@@ -343,7 +346,6 @@ $\Delta U$, accretion vs. non-accretion \\
 % compositional changes
 %% 
 \subsection{Compositional changes, mixing}
-% TODOPLOT: plot theta_imp vs. theta_imp,core for chondritic and icy composition
 mainly for next largest bodies\\
 mantle striping\\
 impactor perspective\\
@@ -361,7 +363,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
-\caption{I}
+\caption{Difference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) as a function of impact angle for the \emph{c1} simulation set.}
 \label{ch03_fig18a}
 \end{center}
 \end{figure}
@@ -369,11 +371,29 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
-\caption{I}
+\caption{DIfference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) and for water ice and silicate ($\delta_{H_2 O} - \delta_{\silc}$) as a function of impact angle for the \emph{i1} simulation set.}
 \label{ch03_fig19a}
 \end{center}
 \end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{23_impa_vs_corea_c1.pdf}
+\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{c1} simulation set.}
+\label{ch03_fig23a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{23_impa_vs_corea_i1.pdf}
+\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ and the silicate layers of the two bodies $\theta_{\silc}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{i1} simulation set.}
+\label{ch03_fig23b}
+\end{center}
+\end{figure}
 \end{landscape}
+
+
 
 
 %%
@@ -389,7 +409,7 @@ satellite formation in second \\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{13_mdisk_impa_r3.pdf}
-\caption{Largest remnant total disk mass as a function of impact angle for different impact velocities for the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\caption{Largest remnant total disk mass as a function of impact angle for different impact velocities for the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_{tot}$ are omitted.}
 \label{ch03_fig13a}
 \end{center}
 \end{figure}
@@ -413,7 +433,7 @@ satellite formation in second \\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{14_edisk_impa_r3.pdf}
-\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_{tot}$ are omitted.}
 \label{ch03_fig14a}
 \end{center}
 \end{figure}
@@ -433,9 +453,7 @@ satellite formation in second \\
 \label{ch03_fig14c}
 \end{center}
 \end{figure}
-
 \end{landscape}
-
 
 
 %%
@@ -459,7 +477,7 @@ bouncing vs. shearing \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
-\caption{I}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simultion set \emph{c1}.}
 \label{ch03_fig21a}
 \end{center}
 \end{figure}
@@ -467,7 +485,7 @@ bouncing vs. shearing \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
-\caption{I}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simultion set \emph{i1}.}
 \label{ch03_fig21b}
 \end{center}
 \end{figure}
@@ -475,7 +493,7 @@ bouncing vs. shearing \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{22_SR_vartheta_c1.pdf}
-\caption{I}
+\caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{c1}. Only points }
 \label{ch03_fig22a}
 \end{center}
 \end{figure}
@@ -483,11 +501,10 @@ bouncing vs. shearing \\
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{22_SR_vartheta_i1.pdf}
-\caption{I}
+\caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{i1}}
 \label{ch03_fig22b}
 \end{center}
 \end{figure}
-
 \end{landscape}
 
 
@@ -540,6 +557,7 @@ discuss topics in the light of the results. for example for Moon formation
 \label{ch03_fig06}
 \end{center}
 \end{figure}
+
 
 
 

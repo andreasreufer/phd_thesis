@@ -15,8 +15,8 @@ def plotFunc(sim):
   #  y = nan
   #y = dvinf / sim.gi.vesc
   #y = dvinf / sim.gi.vinf
-  #y = 360.*(res.dblvarthetam[2] - 2.*sim.gi.vartheta)/(2.*pi)
-  y = 360.*(res.dblvarthetam[2])/(2.*pi)
+  y = 360.*(res.dblvarthetam[2] - 2.*sim.gi.vartheta)/(2.*pi)
+  #y = 360.*(res.dblvarthetam[2])/(2.*pi)
   #y = 360.*(- 2.*sim.gi.vartheta)/(2.*pi)
   #y = (res.dblvarthetam[2] - 2.*sim.gi.vartheta)/( 2.*sim.gi.vartheta )
   #y = (res.dblvarthetam[2])/(2.*sim.gi.vartheta)
