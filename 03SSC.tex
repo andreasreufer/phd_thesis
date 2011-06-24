@@ -28,6 +28,13 @@ In similar-sized collisions, where the target has a mass in the same order of ma
 Whilst for a small $\gamma$ the function becomes a step function with a sharp drop-off at $90^\circ$, already for a $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30^\circ$. 
 
 
+
+
+
+
+
+
+
 The target is altered on it entire scale and the outcome of the collision depends on the geometry of the 
 
 The target is only altered on a scale a few times bigger than the impactor. In a similar-sized collision (\SSC), craters 
@@ -75,11 +82,12 @@ basic process of cratering collisions: contact and compression stage, excavation
 \section{Setup and parameters used}
 describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
 how long a simulation is integrated \\
-problems: 
+problems: timescales too long\\
 post-processing \\
 r3, c1, i1 \\
 resolution, number of particles, particles per body diameter \\
 initial temperature not important, show profiles nevertheless \\
+give an overview of the result parameters\\
 
 as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 
@@ -226,6 +234,7 @@ $L_{bound}$ vs. $L_{imp}$ \\
 $t = \frac{T}{|W|}$
 $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
 
+% TODO: change to r3
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -245,6 +254,15 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 
 \begin{figure}[htbp]
 \begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_r3.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
+\label{ch03_fig25a}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
 \label{ch03_fig19b}
@@ -261,6 +279,15 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 
 \begin{figure}[htbp]
 \begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_c1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
+\label{ch03_fig25b}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[htbp]
+\begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
 \label{ch03_fig19c}
@@ -274,6 +301,15 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig10c}
 \end{center}
 \end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_i1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
+\label{ch03_fig25c}
+\end{center}
+\end{figure}
+
 \end{landscape}
 
 
