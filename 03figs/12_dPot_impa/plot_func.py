@@ -22,6 +22,6 @@ yaxis = [-2.5, 0.9]
 ylog  = False
 ylbl  = r"$\Delta E_{pot} / E_{imp}$"
 yfmt  = math_formatter
-ytik = ( -2., -1., 0.)
+ytik = ( -2., -1., 0., 0.5)
 
 

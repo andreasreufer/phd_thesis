@@ -121,41 +121,16 @@ as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 compare with previous work\\
 \cite{Benz:1988p3336} 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding\\
 \cite{Benz1999Icar..142....5B}: MLR / Mtarg ~ Q / Q*, parabolic fit \\
-
-
-
 \cite{Agnor:2004p3329}  two 0.1Mearth mass bodies, chondritic, Tillotson \\
-
-
-
-
 \cite{Stewart:2009p3265} catastrophic disruption criteria, Mlr / Mtarg replaced by Mlr / Mtot, Q* scaled to reduced mass in kinetic energy \\ 
-
-
-
-
 \cite{2010ApJ...714L..21K} ,mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth, defined $v_{cr}$ \\
 try volumetric scaling for oblique impacts \\
-
-
-
 show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
-
 check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
-
 volumetric scaling (Canup 2005, Leinhardt) \\
-
-
 mention problems with slow accretion producing secondary impacts, show example with very large timescales, problem to estimate result due to pre-rotation\\
-% TODOPLOT: plot accretion efficiency as a function of impact angle and compare with volumetric guess
-
-% TODOPLOT: Q_D plot
-
-
-
 
 \begin{landscape}
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_r3.pdf}
@@ -230,23 +205,44 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
-\caption{I}
-\label{ch03_fig18a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
-\caption{I}
-\label{ch03_fig19a}
-\end{center}
-\end{figure}
+\end{landscape}
 
 
+
+
+
+
+
+
+\begin{landscape}
+
+
+\end{landscape}
+
+
+
+%%
+% secondary remnants 
+%% 
+\subsection{secondary remnants}
+\cite{Agnor:2004p3329} compare with figure 2\\
+% TODOPLOT: plot all mass not in largest or second remannts compared to total mass
+
+
+%%
+% rotation stuff
+%% 
+\subsection{Spin-up, critical angular momentum}
+\cite{Canup:2000p3542}: critical ang. momentum\\
+critical T / W \\
+how to get from Erot and I to a rotation rate:
+\begin{equation}
+T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
+\end{equation}
+shedding of material due to rotational ejection \\
+$L_{bound}$ vs. $L_{imp}$ \\
+
+\begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
@@ -263,8 +259,6 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{center}
 \end{figure}
 
-
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
@@ -280,10 +274,117 @@ mention problems with slow accretion producing secondary impacts, show example w
 \label{ch03_fig10b}
 \end{center}
 \end{figure}
-
-
-
 \end{landscape}
+
+
+
+%%
+% energy partition
+%% 
+\subsection{Energy partition}
+potential, internal and rotational energy\\
+energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
+$\Delta U$, accretion vs. non-accretion \\
+
+
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
+\caption{I}
+\label{ch03_fig11a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_c1.pdf}
+\caption{I}
+\label{ch03_fig11b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_i1.pdf}
+\caption{I}
+\label{ch03_fig11c}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
+\caption{I}
+\label{ch03_fig12a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{12_dPot_impa_c1.pdf}
+\caption{I}
+\label{ch03_fig12b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{12_dPot_impa_i1.pdf}
+\caption{I}
+\label{ch03_fig12c}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+
+%%
+% compositional changes
+%% 
+\subsection{Compositional changes, mixing}
+% TODOPLOT: plot theta_imp vs. theta_imp,core for chondritic and icy composition
+mainly for next largest bodies\\
+mantle striping\\
+impactor perspective\\
+accr. efficiencies for individual components \\
+compositional changes for h\&r \\
+introduce alternative impact angles $\theta_{core}$ \\
+give volumetric estimate \\
+compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
+
+\begin{equation}
+\delta_X = \frac{M_{SR} - M_{imp}}{M_{imp}} \Bigg|_{X}
+\end{equation}
+
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
+\caption{I}
+\label{ch03_fig18a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
+\caption{I}
+\label{ch03_fig19a}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+%%
+% disk formation
+%% 
+\subsection{Satellite and disk formation}
+crucial for life? (Laskar paper, E)\\
+analyze disk masses, angular momentum \& composition \\
+mean a and mean e, compare with roche limit \\
+satellite formation in second \\
+
 \begin{landscape}
 \begin{figure}
 \begin{center}
@@ -309,9 +410,6 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{center}
 \end{figure}
 
-
-
-
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{14_edisk_impa_r3.pdf}
@@ -319,7 +417,6 @@ mention problems with slow accretion producing secondary impacts, show example w
 \label{ch03_fig14a}
 \end{center}
 \end{figure}
-
 
 \begin{figure}
 \begin{center}
@@ -337,68 +434,13 @@ mention problems with slow accretion producing secondary impacts, show example w
 \end{center}
 \end{figure}
 
-
-
 \end{landscape}
 
 
 
 %%
-% secondary remnants 
+% dynamical effects 
 %% 
-\subsection{secondary remnants}
-\cite{Agnor:2004p3329} compare with figure 2\\
-% TODOPLOT: plot all mass not in largest or second remannts compared to total mass
-
-
-%%
-% rotation stuff
-%% 
-\subsection{Spin-up, critical angular momentum}
-\cite{Canup:2000p3542}: critical ang. momentum\\
-critical T / W \\
-how to get from Erot and I to a rotation rate:
-\begin{equation}
-T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
-\end{equation}
-\\
-shedding of material due to rotational ejection \\
-$L_{bound}$ vs. $L_{imp}$ \\
-
-%%
-% energy partition
-%% 
-\subsection{Energy partition}
-potential, internal and rotational energy\\
-energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
-$\Delta U$, accretion vs. non-accretion \\
-
-%%
-% compositional changes
-%% 
-\subsection{Compositional changes, mixing}
-% TODOPLOT: plot theta_imp vs. theta_imp,core for chondritic and icy composition
-mainly for next largest bodies\\
-mantle striping\\
-impactor perspective\\
-accr. efficiencies for individual components \\
-compositional changes for h\&r \\
-introduce alternative impact angles $\theta_{core}$ \\
-give volumetric estimate \\
-compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
-
-
-\begin{equation}
-\delta_X = \frac{M_{SR} - M_{imp}}{M_{imp}} \Bigg|_{X}
-\end{equation}
-
-
-\subsection{Satellite and disk formation}
-crucial for life? (Laskar paper, E)\\
-analyze disk masses, angular momentum \& composition \\
-mean a and mean e, compare with roche limit \\
-satellite formation in second \\
-
 \subsection{Dynamical effects}
 vinf and deflection of impactor for non-accreting case\\
 deflection angles for h\&r \\
@@ -412,12 +454,77 @@ bouncing vs. shearing \\
 \end{center}
 \end{figure}
 
+\begin{landscape}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
+\caption{I}
+\label{ch03_fig21a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
+\caption{I}
+\label{ch03_fig21b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{22_SR_vartheta_c1.pdf}
+\caption{I}
+\label{ch03_fig22a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{22_SR_vartheta_i1.pdf}
+\caption{I}
+\label{ch03_fig22b}
+\end{center}
+\end{figure}
+
+\end{landscape}
 
 
+%%
+% ejecta 
+%% 
 \subsection{Ejecta}
 cite Lisse\\
 analyze ejecta, entropy and energy of ejecta \\
 show decay of shock wave plot\\ % TODOPLOT
+
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{20_ejecta_r3.pdf}
+\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\label{ch03_fig20a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{20_ejecta_c1.pdf}
+\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\label{ch03_fig20b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{20_ejecta_i1.pdf}
+\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\label{ch03_fig20c}
+\end{center}
+\end{figure}
+\end{landscape}
+
 
 
 \section{Discussion}

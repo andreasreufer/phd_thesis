@@ -18,10 +18,10 @@ def filterFunc(sim):
 #xvar = "vimp"
 xvar = "angle"
 
-yaxis = [  1.e-2, 2.1 ]
+yaxis = [  1.e-2, 5.1 ]
 ylog  = True 
 ylbl  = r"$\Delta U / E_{imp}$"
 yfmt  = math_formatter
-ytik = ( 0.1, 1., 2.)
+ytik = ( 0.1, 1., 2., 5.)
 
 

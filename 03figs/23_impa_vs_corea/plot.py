@@ -79,38 +79,41 @@ for ( sparm, axv ) in params:
 
   sct2arr = ScatterToArray()
   valsims = 0
-  for sim in sims:
-    x = 0
-    z = 0
-    if xvar == "vimp":
-      x = sim.params.vimprel
-      z = sim.params.impa
-    else:
-      x = sim.params.impa
-      z = sim.params.vimprel
+  
+  refsim = sims[0]
 
-    if filterFunc(sim):
-      sct2arr.newPoint(z, x, plotFunc(sim) )
-      zset[z] = []
-      
-      valsims += 1
+  impb = refsim.impb
+  tarb = refsim.tarb
 
-  scta = sct2arr
+  rimp  = impb.r
+  rtar  = impb.r
 
-  print len(sims), valsims, axv[0], axv[1]
-  (zl, xll, resll) = sct2arr.getArray()
+  rimpSi  = impb.rmat[1]
+  rimpIc  = impb.rmat[2]
+  rimpFe  = impb.rmat[5]
+  
+  rtarSi  = tarb.rmat[1]
+  rtarIc  = tarb.rmat[2]
+  rtarFe  = tarb.rmat[5]
 
-  for i in range(0, len(zl) ):
-    (col, ls) = ("black", "+-") 
-    if xvar == "vimp":
-      (col, ls) = getAngleColor(zl[i])
-    else:
-      (col, ls) = getVimpColor(zl[i])
+  rad2deg = 360./(2.*np.pi)
 
-    if ylog:
-      ax.semilogy( xll[i], resll[i], ls, color=col, markersize=6)
-    else:
-      ax.plot( xll[i], resll[i], ls, color=col, markersize=6)
+  ratFe   = ( rimp + rtar ) / ( rimpFe + rtarFe )
+  ratSi   = ( rimp + rtar ) / ( rimpSi + rtarSi )
+
+  thetaimp = np.linspace( 0., np.pi/2., 1000)
+
+  thetaFe  = np.arcsin( ratFe*np.sin(thetaimp) )
+  thetaSi  = np.arcsin( ratSi*np.sin(thetaimp) )
+
+  thetagrazFe = np.arcsin( 1. / ratFe )
+  thetagrazSi = np.arcsin( 1. / ratSi )
+
+  ax.plot( rad2deg*thetaimp, rad2deg*thetaFe, 'b-' )
+  ax.vlines( rad2deg*thetagrazFe, 0., 90., colors='blue', linestyles='dashed' )
+  if ( rimpIc > 0. ) and ( rtarIc > 0. ):
+    ax.plot( rad2deg*thetaimp, rad2deg*thetaSi, 'r-' )
+    ax.vlines( rad2deg*thetagrazSi, 0., 90., colors='red', linestyles='dashed' )
 
   #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
@@ -135,7 +138,9 @@ for ( sparm, axv ) in params:
   axs.append(ax)
 
 axselect = ()
-if ssname == "c1" or ssname == "r3":
+if ssname == "c1":
+  axselect = (0,1)
+if ssname == "r3":
   axselect = (0,1,2)
 if ssname == "i1":
   axselect = (0,)
@@ -149,7 +154,7 @@ for i in axselect:
 
 axselect = ()
 if ssname == "r3":
-  axselect = (0,1)
+  axselect = (0,1,2)
 if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":
@@ -209,7 +214,7 @@ if xvar == "vimp":
 else:
   legtit = r"$v_{imp} / v_{esc}$"
 
-bgax.legend(loc=(0.80, 0.06), frameon=False, numpoints=1, ncol=2, columnspacing=0.5, prop=FontProperties(size=8), title=legtit)
+#bgax.legend(loc=(0.80, 0.06), frameon=False, numpoints=1, ncol=2, columnspacing=0.5, prop=FontProperties(size=8), title=legtit)
 
 bgax.xaxis.set_ticks( () )
 bgax.yaxis.set_ticks( () )

@@ -149,7 +149,7 @@ for i in axselect:
 
 axselect = ()
 if ssname == "r3":
-  axselect = (0,1)
+  axselect = (0,1,2)
 if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":
