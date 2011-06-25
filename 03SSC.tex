@@ -4,13 +4,11 @@
 
 A collision is cratering, when the impactor is much smaller than the target. In this case, the impactor hits the target completely and comes to a full stop, the result is a crater. Such a collision corresponds to a point source energy input into the target and can be treated like an explosion \citep{Melosh:2007p3502}. Scaling laws exist for the resulting crater depth and shape \citep{Holsapple:1993p3018}. 
 
-In cratering collisions  the impactor partly misses the target only for very grazing impact angles $\thimp \approx 90 \deg$ and the result deviates from pure cratering and becomes none-trivial. Such a case is shown in figure \label{ch03_fig03} on the right side where $\Rimp \ll \Rtar$. If on the other hand the target and the impactor are similar in size, this critical angle becomes much smaller than $90 \deg$ and the collision is called similar-sized, this is depicted on the left side of the figure. This grazing angle where roughly half of the impactor misses the target yields
+In cratering collisions the impactor partly misses the target only for very grazing impact angles $\thimp \approx 90 \deg$ and the result deviates from pure cratering and becomes none-trivial. Such a case is shown in figure \label{ch03_fig03} on the right side where $\Rimp \ll \Rtar$. So a cratering collision results either in a complete hit or a complete miss. If on the other hand the target and the impactor are similar in size, this critical angle becomes much smaller than $90 \deg$ and the collision is called similar-sized, this is depicted on the left side of the figure in which case $\theta_{graz} \approx 45^\circ$. This grazing angle where roughly half of the impactor misses the target yields
 \begin{equation}
 \label{ch03_eq001}
 \cos{ \theta_{graz} }= \frac{\Rtar}{\Rtar + \Rimp}
 \end{equation}
-
-
 
 \begin{figure}[htbp]
 \begin{center}
@@ -28,43 +26,10 @@ In cratering collisions  the impactor partly misses the target only for very gra
 \end{center}
 \end{figure}
 
-Assuming the impactor follows a straight trajectory, the volume missing the target can be calculated by integrating the cross section along the target volume (Compare appendix \ref{ch07_sec01} for the derivation). Figure \ref{ch03_fig05} on the left side shows the relative volume of the impactor missing the target ($V_{hit, imp}$) as a function of impact angle for different mass ratios $\gamma$ assuming constant and equal density spheres as bodies. The volume follows a step-function for very small impactors (small $\gamma$) with a sharp drop-off to zero near $90 \deg$. For similar-sized collisions with $\gamma = 0.1 \dots 1.0$ the relative volume smoothly increases for smaller impact angles. 
+Assuming the impactor follows a straight trajectory, the volume missing the target can be calculated by integrating the cross section along the target volume (Compare appendix \ref{ch07_sec01} for the derivation). Figure \ref{ch03_fig05} on the left side shows the relative volume of the impactor missing the target ($V_{hit, imp}$) as a function of impact angle for different mass ratios $\gamma$ assuming constant and equal density spheres as bodies. The volume follows a step-function for very small impactors (small $\gamma$) with a sharp drop-off to zero near $90 \deg$. For similar-sized collisions with $\gamma = 0.1 \dots 1.0$ the relative volume smoothly increases for smaller impact angles opens the possibility for a variety of collisional outcomes between a total hit and a total miss. For example even for a rather small $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30 \deg$.
 
-The outcome of a similar-sized collision is non trivial. Part of the impactor miss the target depending on the impact angle. Because the target has a mass in the same order of magnitude as the impactor, it can be altered on its own scale while stopping the impactor up to total disruption of the target body. 
-
-
-
-
-In similar-sized collisions, where the target has a mass in the same order of magnitude as the impactor, the collision becomes more complex. Whilst being stopped, the target itself is altered and parts of the impactor miss the target completely depending on the impact angle. The left part of figure \label{ch03_fig03} shows an example of a similar-sized collision for which $\theta_{graz} \approx 45^\circ$. Assuming the impactor follows a straight trajectory and is not tidally deformed, the relative volume of either the impactor hitting the target $V_{hit, imp}$ or vice versa $V_{hit, tar}$, can be calculated numerically (see appendix section \label{ch07_sec01}). Figure shows these two variables as a function of $\gamma = \Mimp / \Mtar$ and the impact angle.
-
-Whilst for a small $\gamma$ the function becomes a step function with a sharp drop-off at $90^\circ$, already for a $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30^\circ$. 
-
-
-
-
-
-
-
-
-
-The target is altered on it entire scale and the outcome of the collision depends on the geometry of the 
-
-The target is only altered on a scale a few times bigger than the impactor. In a similar-sized collision (\SSC), craters 
-
-%Similar-sized collision ( \SSC ) distinct themselves in the break down of certain simplifying aspects of cratering impacts, where the 
-
-
-Similar sized collisions are a complex process involving gravity, hydro- and thermodynamics and lead to non-trivial post-collision outcomes. This chapters shows the results of a small parameter study, which analyses various interesting parameters which describe those collision outcomes.
-
-
-The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales.
-
-In a second section, the detailed setup of the simulations and the used parameters are described.
-
-The actual results are presented in the third and discussed in the fourth section.
-
-Broad range of phenomena from almost two body mechanics to total disruption
-
+% TODO: give ref Wetherill 1985?
+Similar sized collisions are interesting, because bodies in planetary systems grow mainly by big accretionary events. Or in other words, the evolution of the largest bodies is dominated by similar-sized collisions. Compared to cratering collisions the interplay of the governing physics is more complex and there are only very basic scaling laws predicting the outcomes of similar-sized collisions. Hydrodynamics, gravity and thermodynamics interact in a interacted way and need to be simulated explicitly. The goal of this chapter is to perform a small parameter study in the regime of similar-sized collisions by performing a large number of impact simulations and then looking at various characteristic parameters describing the outcome of the collisions. The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales. In a second section, the detailed setup of the simulations and the used parameters are described. The actual results are presented in the third and discussed in the fourth section.
 
 
 \section{Introduction}
