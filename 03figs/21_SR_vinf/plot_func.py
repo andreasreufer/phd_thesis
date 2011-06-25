@@ -31,7 +31,7 @@ xvar = "angle"
 
 yaxis = [ 0.9e-1, 5.0]
 ylog  = True
-ylbl  = r"$\xi$"
+ylbl  = r"$v_{+ \infty} / v_{esc}$"
 yfmt  = math_formatter
 ytik = (1.e-1, 1.e0, 2., 4.)
 #ytik = (0.1, 1.)

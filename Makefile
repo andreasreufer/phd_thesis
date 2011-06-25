@@ -2,7 +2,7 @@ all:
 	rm *.aux; true
 	xelatex thesis
 	#bibtex 01intro
-	bibtex 02code
+	#bibtex 02code
 	bibtex 03ssc 
 	#bibtex 04mars 
 	#bibtex 05moon
@@ -19,10 +19,9 @@ complete:
 	bibtex 02code
 	bibtex 03ssc 
 	bibtex 04mars 
-	#bibtex 05moon
-	#bibtex 06fluffy
-	#bibtex 07appendix
-	bibtex thesis
+	bibtex 05moon
+	bibtex 07appendix
+	#bibtex thesis
 	xelatex thesis
 	xelatex thesis
 

@@ -28,18 +28,38 @@ In cratering collisions the impactor partly misses the target only for very graz
 
 Assuming the impactor follows a straight trajectory, the volume missing the target can be calculated by integrating the cross section along the target volume (Compare appendix \ref{ch07_sec01} for the derivation). Figure \ref{ch03_fig05} on the left side shows the relative volume of the impactor missing the target ($V_{hit, imp}$) as a function of impact angle for different mass ratios $\gamma$ assuming constant and equal density spheres as bodies. The volume follows a step-function for very small impactors (small $\gamma$) with a sharp drop-off to zero near $90 \deg$. For similar-sized collisions with $\gamma = 0.1 \dots 1.0$ the relative volume smoothly increases for smaller impact angles opens the possibility for a variety of collisional outcomes between a total hit and a total miss. For example even for a rather small $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30 \deg$.
 
-% TODO: give ref Wetherill 1985?
-Similar sized collisions are interesting, because bodies in planetary systems grow mainly by big accretionary events. Or in other words, the evolution of the largest bodies is dominated by similar-sized collisions. Compared to cratering collisions the interplay of the governing physics is more complex and there are only very basic scaling laws predicting the outcomes of similar-sized collisions. Hydrodynamics, gravity and thermodynamics interact in a interacted way and need to be simulated explicitly. The goal of this chapter is to perform a small parameter study in the regime of similar-sized collisions by performing a large number of impact simulations and then looking at various characteristic parameters describing the outcome of the collisions. The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales. In a second section, the detailed setup of the simulations and the used parameters are described. The actual results are presented in the third and discussed in the fourth section.
+Similar sized collisions are interesting, because bodies in planetary systems grow mainly by big accretionary events. Or in other words, the evolution of the largest bodies is dominated by similar-sized collisions. Important phenomenon like satellite formation are a direct result of similar sized collisions 
+
+
+
+Compared to cratering collisions the interplay of the governing physics is more complex and there are only very basic scaling laws predicting the outcomes of similar-sized collisions. Hydrodynamics, gravity and thermodynamics interact in a interacted way and need to be simulated explicitly. The goal of this chapter is to perform a small parameter study in the regime of similar-sized collisions by performing a large number of impact simulations and then looking at various characteristic parameters describing the outcome of the collisions. The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales. In a second section, the detailed setup of the simulations and the used parameters are described. The actual results are presented in the third and discussed in the fourth section.
+
+
+\section{Physics of similar-sized collisions}
+% TODOPLOT: compare timescales as a function of size
+what do we simplify? give arguments why this is alright
+
+scale-invariant physics: collision timescale (if vimp scaled to vesc)
+collapse
+basics hydro without viscosity and trivial EOS
+
+
+scale variant physics:
+viscosity
+EOS (small effect)
+shocks
+strength (negligible)
+
+
+radiation transfer:
+not important because of short timescales (everything in opaque thermal equilibrium)
 
 
 \section{Introduction}
 motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation, no big study before \\
 small impactor: size of impactor vs. central body field gradient small -> almost no torques \\
 define grazing angle for each mass ratio (radii ratio) \\
-why are SSC non-trivial? \\
 lot of spill-over for similar sizes \\
-target gets changed \\
-Section \ref{ch07_sec01} in the appendix hababa \\
 
 
 \section{Collision physics}
@@ -47,9 +67,9 @@ compare timescales\\
 viscous timescale $t = R^2 / \nu$ \\
 collisional timescale $t = 2 R / \vimp$ \\
 self-gravitational timescale $t = \sqrt{3\pi / G \rho}$ \\
-orbital time scale in solar system \\
-local gravity, free fall time \\
 impact vs. shock velocity (super-sonic), shock waves $t = R / c_S $ \\
+orbital time scale in solar system (change of background gravity)\\
+local gravity, free fall time \\
 surface tension (Walker and Mullins 1981) vs. shearing forces, approximation of fluid bodies \\
 compare central potential of a planetary system with local gravity, compare timescales \\
 %TODOPLOT: show phenomena in the angle vs. vimp plot
@@ -66,12 +86,8 @@ resolution, number of particles, particles per body diameter \\
 initial temperature not important, show profiles nevertheless \\
 give an overview of the result parameters\\
 
+how to setup
 as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
-
-
-
-impact angle of $30\deg$
-
 
 
 \begin{figure}[htbp]
@@ -229,6 +245,33 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \includegraphics[scale=1.0]{26_SR_M_i1.pdf}
 \caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
 \label{ch03_fig26c}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{27_TR_M_r3.pdf}
+\caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{r3} simulation set.}
+\label{ch03_fig27a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{27_TR_M_c1.pdf}
+\caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{c1} simulation set.}
+\label{ch03_fig27b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{27_TR_M_i1.pdf}
+\caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{i1} simulation set.}
+\label{ch03_fig27c}
 \end{center}
 \end{figure}
 \end{landscape}
