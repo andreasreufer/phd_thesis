@@ -95,7 +95,6 @@ impact angle of $30\deg$
 % TODOPLOT: insert a summary.pdf example
 
 \section{Results}
-
 %%
 % Largest remnant
 %% 
@@ -194,7 +193,84 @@ mention problems with slow accretion producing secondary impacts, show example w
 %% 
 \subsection{secondary remnants}
 \cite{Agnor:2004p3329} compare with figure 2\\
-% TODOPLOT: plot all mass not in largest or second remants compared to total mass
+
+mainly for next largest bodies\\
+mantle striping\\
+impactor perspective\\
+accr. efficiencies for individual components \\
+compositional changes for h\&r \\
+introduce alternative impact angles $\theta_{core}$ \\
+give volumetric estimate \\
+compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
+
+\begin{equation}
+\delta_X = \frac{M_{SR} - M_{imp}}{M_{imp}} \Bigg|_{X}
+\end{equation}
+
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{26_SR_M_r3.pdf}
+\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
+\label{ch03_fig26a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{26_SR_M_c1.pdf}
+\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
+\label{ch03_fig26b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{26_SR_M_i1.pdf}
+\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
+\label{ch03_fig26c}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
+\caption{Difference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) as a function of impact angle for the \emph{c1} simulation set.}
+\label{ch03_fig18a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
+\caption{DIfference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) and for water ice and silicate ($\delta_{H_2 O} - \delta_{\silc}$) as a function of impact angle for the \emph{i1} simulation set.}
+\label{ch03_fig19a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{23_impa_vs_corea_c1.pdf}
+\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{c1} simulation set.}
+\label{ch03_fig23a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{23_impa_vs_corea_i1.pdf}
+\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ and the silicate layers of the two bodies $\theta_{\silc}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{i1} simulation set.}
+\label{ch03_fig23b}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+
+
 
 %%
 % rotation stuff
@@ -261,7 +337,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig25b}
 \end{center}
 \end{figure}
-
 
 \begin{figure}[htbp]
 \begin{center}
@@ -349,61 +424,6 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 \end{landscape}
-
-
-
-%%
-% compositional changes
-%% 
-\subsection{Compositional changes, mixing}
-mainly for next largest bodies\\
-mantle striping\\
-impactor perspective\\
-accr. efficiencies for individual components \\
-compositional changes for h\&r \\
-introduce alternative impact angles $\theta_{core}$ \\
-give volumetric estimate \\
-compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
-
-\begin{equation}
-\delta_X = \frac{M_{SR} - M_{imp}}{M_{imp}} \Bigg|_{X}
-\end{equation}
-
-\begin{landscape}
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
-\caption{Difference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) as a function of impact angle for the \emph{c1} simulation set.}
-\label{ch03_fig18a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
-\caption{DIfference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) and for water ice and silicate ($\delta_{H_2 O} - \delta_{\silc}$) as a function of impact angle for the \emph{i1} simulation set.}
-\label{ch03_fig19a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{23_impa_vs_corea_c1.pdf}
-\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{c1} simulation set.}
-\label{ch03_fig23a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{23_impa_vs_corea_i1.pdf}
-\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ and the silicate layers of the two bodies $\theta_{\silc}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{i1} simulation set.}
-\label{ch03_fig23b}
-\end{center}
-\end{figure}
-\end{landscape}
-
-
 
 
 %%
