@@ -1,22 +1,25 @@
 \newpage
 \chapter{Similar-sized collisions: A parameter study}
 \graphicspath{{./03figs/}}
-In cratering collisions, where the impactor is much smaller than the target, the impactor hits the target completely and is fully stopped. The critical impact angle for which only half the impactor volume is being hit is roughly
+
+A collision is cratering, when the impactor is much smaller than the target. In this case, the impactor hits the target completely and comes to a full stop, the result is a crater. Such a collision corresponds to a point source energy input into the target and can be treated like an explosion \citep{Melosh:2007p3502}. Scaling laws exist for the resulting crater depth and shape \citep{Holsapple:1993p3018}. 
+
+In cratering collisions  the impactor partly misses the target only for very grazing impact angles $\thimp \approx 90 \deg$ and the result deviates from pure cratering and becomes none-trivial. Such a case is shown in figure \label{ch03_fig03} on the right side where $\Rimp \ll \Rtar$. If on the other hand the target and the impactor are similar in size, this critical angle becomes much smaller than $90 \deg$ and the collision is called similar-sized, this is depicted on the left side of the figure. This grazing angle where roughly half of the impactor misses the target yields
 \begin{equation}
 \label{ch03_eq001}
 \cos{ \theta_{graz} }= \frac{\Rtar}{\Rtar + \Rimp}
 \end{equation}
 
-One can directly see that for cratering collisions where $\Rimp \ll \Rtar$ this angle is nearly $90^\circ$ and the impactor is efficiently stopped for $\thimp < \theta_{graz}$. Figure \label{ch03_fig03} shows on the right side an illustration of $\theta_{graz}$. Such cratering collisions can be reduced to a point source of energy, comparable to an explosion \citep{Melosh:2007p3502}. Scaling laws exist for the resulting crater depth and shape \citep{Holsapple:1993p3018}.
+
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.4]{03_grazing}
-\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
+\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target.}
 \label{ch03_fig03}
 \end{center}
 \end{figure}
 
-In similar-sized collisions, where the target has a mass in the same order of magnitude as the impactor, the collision becomes more complex. Whilst being stopped, the target itself is altered and parts of the impactor miss the target completely depending on the impact angle. The left part of figure \label{ch03_fig03} shows an example of a similar-sized collision for which $\theta_{graz} \approx 45^\circ$. Assuming the impactor follows a straight trajectory and is not tidally deformed, the relative volume of either the impactor hitting the target $V_{hit, imp}$ or vice versa $V_{hit, tar}$, can be calculated numerically (see appendix section \label{ch07_sec01}). Figure shows these two variables as a function of $\gamma = \Mimp / \Mtar$ and the impact angle.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{05_Mhit}
@@ -24,6 +27,15 @@ In similar-sized collisions, where the target has a mass in the same order of ma
 \label{ch03_fig05}
 \end{center}
 \end{figure}
+
+Assuming the impactor follows a straight trajectory, the volume missing the target can be calculated by integrating the cross section along the target volume (Compare appendix \ref{ch07_sec01} for the derivation). Figure \ref{ch03_fig05} on the left side shows the relative volume of the impactor missing the target ($V_{hit, imp}$) as a function of impact angle for different mass ratios $\gamma$ assuming constant and equal density spheres as bodies. The volume follows a step-function for very small impactors (small $\gamma$) with a sharp drop-off to zero near $90 \deg$. For similar-sized collisions with $\gamma = 0.1 \dots 1.0$ the relative volume smoothly increases for smaller impact angles. 
+
+The outcome of a similar-sized collision is non trivial. Part of the impactor miss the target depending on the impact angle. Because the target has a mass in the same order of magnitude as the impactor, it can be altered on its own scale while stopping the impactor up to total disruption of the target body. 
+
+
+
+
+In similar-sized collisions, where the target has a mass in the same order of magnitude as the impactor, the collision becomes more complex. Whilst being stopped, the target itself is altered and parts of the impactor miss the target completely depending on the impact angle. The left part of figure \label{ch03_fig03} shows an example of a similar-sized collision for which $\theta_{graz} \approx 45^\circ$. Assuming the impactor follows a straight trajectory and is not tidally deformed, the relative volume of either the impactor hitting the target $V_{hit, imp}$ or vice versa $V_{hit, tar}$, can be calculated numerically (see appendix section \label{ch07_sec01}). Figure shows these two variables as a function of $\gamma = \Mimp / \Mtar$ and the impact angle.
 
 Whilst for a small $\gamma$ the function becomes a step function with a sharp drop-off at $90^\circ$, already for a $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30^\circ$. 
 
