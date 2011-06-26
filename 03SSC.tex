@@ -28,16 +28,12 @@ In cratering collisions the impactor partly misses the target only for very graz
 
 Assuming the impactor follows a straight trajectory, the volume missing the target can be calculated by integrating the cross section along the target volume (Compare appendix \ref{ch07_sec01} for the derivation). Figure \ref{ch03_fig05} on the left side shows the relative volume of the impactor missing the target ($V_{hit, imp}$) as a function of impact angle for different mass ratios $\gamma$ assuming constant and equal density spheres as bodies. The volume follows a step-function for very small impactors (small $\gamma$) with a sharp drop-off to zero near $90 \deg$. For similar-sized collisions with $\gamma = 0.1 \dots 1.0$ the relative volume smoothly increases for smaller impact angles opens the possibility for a variety of collisional outcomes between a total hit and a total miss. For example even for a rather small $\gamma = 0.1$, the relative volume hit by the impactor varies between 0 and 1 over an impact angle range of $30 \deg$.
 
-Similar sized collisions are interesting, because bodies in planetary systems grow mainly by big accretionary events. Or in other words, the evolution of the largest bodies is dominated by similar-sized collisions. Important phenomenon like satellite formation are a direct result of similar sized collisions 
-
-
+Similar sized collisions are interesting, because bodies in planetary systems grow mainly by big accretionary events. Or in other words, the evolution of the largest bodies is dominated by similar-sized collisions. Many phenomena in planetary systems can best be explained as direct results of similar-sized collisions. Examples are the formation of the Earths Moon \citep{Benz:1985p1755}, Plutos companion Charon \cite{Canup:2005p1987} or also the anomalously high density of Mercury \cite{Benz:1988p3336}. Understanding similar-sized collisions is therefore key for understanding planet formation in general.
 
 Compared to cratering collisions the interplay of the governing physics is more complex and there are only very basic scaling laws predicting the outcomes of similar-sized collisions. Hydrodynamics, gravity and thermodynamics interact in a interacted way and need to be simulated explicitly. The goal of this chapter is to perform a small parameter study in the regime of similar-sized collisions by performing a large number of impact simulations and then looking at various characteristic parameters describing the outcome of the collisions. The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales. In a second section, the detailed setup of the simulations and the used parameters are described. The actual results are presented in the third and discussed in the fourth section.
 
-
 \section{Physics of similar-sized collisions}
-Looking at the associated timescales of physics gives us a feeling on what are the most important effects:
-
+Looking at the associated timescales of physics gives a feeling on what are the important aspect of physics in similar-sized collisions. If the 
 
 % TODOPLOT: compare timescales as a function of size
 what do we simplify? give arguments why this is alright
@@ -48,6 +44,7 @@ basics hydro without viscosity and trivial EOS
 
 
 scale variant physics:
+compressibility
 viscosity
 EOS (small effect)
 shocks
@@ -57,7 +54,7 @@ pressure
 radiation transfer:
 not important because of short timescales (everything in opaque thermal equilibrium)
 
-viscosity: Asphaug $\sigma \sim P_0 \sim G \rho^2 \R^2$ -> $\nu = \sigma / \epsilon$ -> 
+viscosity: Asphaug $\sigma \sim P_0 \sim G \rho^2 R^2$ -> $\nu = \sigma / \epsilon$ -> 
 
 \section{Introduction}
 motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation, no big study before \\
