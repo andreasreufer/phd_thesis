@@ -57,37 +57,10 @@ The strain which can develop over a gravitational timescale under viscosity is t
 \begin{equation}
 \epsilon = \frac{\dot{\epsilon}}{\tau_{grav}}
 \end{equation}
-Viscosity becomes an important effect, if the maximal strain which can develop over a gravitational timescale is only around unity. Or in other words, when the timescale for a strain of around unity becomes the same order of magnitude as the gravitational timescale, then viscosity is an important effect. Viscosity in the mantle of the early Earth was around $\nu \approx 10^9 \textrm{poise}$ \citep{2004Tectp.384...55W}, whereas for completely molten rock even lower values of around $\nu \approx 10^8 \textrm{poise}$ expected. \cite{Asphaug:2010p3539} gives a lower limit of a few $100km$ for solid and around $10km$ for partially molten bodies for which viscosity can be neglected and using a inviscid hydrodynamics solver is valid.
+Viscosity becomes an important effect, if the maximal strain which can develop over a gravitational timescale is only around unity. Or in other words, when the timescale for a strain of around unity becomes the same order of magnitude as the gravitational timescale, then viscosity is an important effect. Viscosity in the mantle of the early Earth was around $\nu \approx 10^9 \textrm{poise}$ \citep{2004Tectp.384...55W}, whereas for completely molten rock even lower values of around $\nu \approx 10^8 \textrm{poise}$ expected. \cite{Asphaug:2010p3539} gives a lower limit of a few $100km$ for solid and around $10km$ for partially molten bodies for which viscosity can be neglected and using a inviscid hydrodynamics solver is valid. Large bodies can be assumed to be molten during the early stages of planet formation 
 
 
 
-\cite{Thompson:1988p3451}
-
-
-\begin{align}
-\tau_{cool} = \frac{c^2 \sigma}{ 2 \sigma_{SB} T^4}
-\end{align}
-
-% BUZZWORD: gravitational restitution
-
-% TODOPLOT: compare timescales as a function of size
-what do we simplify? give arguments why this is alright
-
-scale-invariant physics: collision timescale (if vimp scaled to vesc)
-collapse
-basics hydro without viscosity and trivial EOS
-
-
-scale variant physics:
-compressibility
-viscosity
-EOS (small effect)
-shocks
-strength (negligible)
-pressure
-radiation transfer: not important because of short timescales (everything in opaque thermal equilibrium): compare stefan boltzmann cooling power (Pahlevan?)
-
-viscosity: Asphaug $\sigma \sim P_0 \sim G \rho^2 R^2$ -> $\nu = \sigma / \epsilon$ -> 
 
 \section{Introduction}
 motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation, no big study before \\
@@ -144,8 +117,6 @@ as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 \end{figure}
 
 
-
-% TODOPLOT: insert a summary.pdf example
 
 \section{Results}
 %%
@@ -620,6 +591,15 @@ bouncing vs. shearing \\
 % ejecta 
 %% 
 \subsection{Ejecta}
+% radiation transfer
+Shocks in similar-sized collisions are another departure from 
+\begin{align}
+\tau_{cool} = \frac{c^2 \sigma}{ 2 \sigma_{SB} T^4}
+\end{align}
+\cite{Thompson:1988p3451}
+radiation transfer: not important because of short timescales (everything in opaque thermal equilibrium): compare stefan boltzmann cooling power (Pahlevan?)
+
+
 cite Lisse\\
 analyze ejecta, entropy and energy of ejecta \\
 show decay of shock wave plot\\ % TODOPLOT
