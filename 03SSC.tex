@@ -39,7 +39,7 @@ The collisional timescale is an estimate on how long it takes for the impactor t
 \begin{align}
 \tau_{coll} = \frac{2 (\Rimp + \Rtar)}{\vimp} \sim \frac{\vesc}{\vimp} \frac{2 R_{tot}}{\vesc} \sim \frac{\vesc}{\vimp}  \frac{2 R_{tot}}{\sqrt{G \rho} R_{tot}} \sim \frac{\vesc}{\vimp} \frac{1}{\sqrt{\rho}}
 \end{align}
-where the escape velocity is given by $\vesc = \sqrt{ 2 G \frac{\Mtar + \Mimp}{\Rtar + \Rimp} }$ and constant density bodies are assumed. Gravitational restitution happens on the gravitational timescale given by
+where the mutual escape velocity is given by $\vesc = \sqrt{ 2 G \frac{\Mtar + \Mimp}{\Rtar + \Rimp} }$ and constant density bodies are assumed. Gravitational restitution happens on the gravitational timescale given by
 \begin{align}
 \tau_{grav} = \sqrt{\frac{3 \pi }{G \rho} } \sim \frac{1}{\sqrt{\rho}}
 \end{align}
@@ -47,7 +47,7 @@ and is in the same order of magnitude as the collisional timescale. Both timesca
 
 Other physical effects are not scale-invariant, for example viscosity. \cite{Asphaug:2010p3539} argues as follows, that viscosity can be neglected in similar-sized collisions for bodies of at least a certain size: Characteristic stresses due to gravity are 
 \begin{equation}
-\sigma_{grav} \sim P_0 ~ G \rho^2 R^2
+\sigma_{grav} \sim P_0 \sim G \rho^2 R^2
 \end{equation}
 where $P_0$ is the pressure inside the body with radius $R$. The strain rate $\dot{\epsilon}$ for a given Newtonian viscosity $\nu$ is then
 \begin{equation}
@@ -57,35 +57,20 @@ The strain which can develop over a gravitational timescale under viscosity is t
 \begin{equation}
 \epsilon = \frac{\dot{\epsilon}}{\tau_{grav}}
 \end{equation}
-Viscosity becomes an important effect, if the maximal strain which can develop over a gravitational timescale is only around unity. Or in other words, when the timescale for a strain of around unity becomes the same order of magnitude as the gravitational timescale, then viscosity is an important effect. Viscosity in the mantle of the early Earth was around $\nu \approx 10^9 \textrm{poise}$ \citep{2004Tectp.384...55W}, whereas for completely molten rock even lower values of around $\nu \approx 10^8 \textrm{poise}$ expected. \cite{Asphaug:2010p3539} gives a lower limit of a few $100km$ for solid and around $10km$ for partially molten bodies for which viscosity can be neglected and using a inviscid hydrodynamics solver is valid. Large bodies can be assumed to be molten during the early stages of planet formation 
+Viscosity becomes an important effect, if the maximal strain which can develop over a gravitational timescale is only around unity. Or in other words, when the timescale for a strain of around unity becomes the same order of magnitude as the gravitational timescale, then viscosity is an important effect. Viscosity in the mantle of the early Earth was around $\nu \approx 10^9~\textrm{poise}$ \citep{2004Tectp.384...55W}, whereas for completely molten rock even lower values of around $\nu \approx 10^8~\textrm{poise}$ expected. \cite{Asphaug:2010p3539} gives a lower limit of a few $100km$ for solid and around $10km$ for partially molten bodies for which viscosity can be neglected and using a inviscid hydrodynamics solver is valid. Large bodies can be assumed to be molten during the early stages of planet formation 
 
+Shocks are another effects where similar-sized collisions deviate from scale-invariance: The escape velocity scales $\vesc \sim M^\frac{1}{3}$ for constant density bodies \footnote{$\vesc = \sqrt[6]{8 \pi G^3 \rho} M^\frac{1}{3} \sim M^\frac{1}{3}$} and is around $1km/s$ for a density of $4g/cm^3$ and a mass of $10^{-3} \ME$. This is below the speed of sound in silicates ($\approx 3 km/s$, \cite{Melosh:2007p3502}), so that a collision with an impact velocity on the order of the escape velocity will produce acoustic waves but no strong shocks. For bodies with masses higher than a few Moon masses, the impact velocity comes into the same range as the speed of sound. Collisions now are in the hypervelocity regime and produce strong shock, leading to a considerable heating. 
 
-
-
-\section{Introduction}
-motivation: moon formation, Lisse stuff, disks \& moons, importance for simulations of terrestrial planet and giant planet core formation, no big study before \\
-small impactor: size of impactor vs. central body field gradient small -> almost no torques \\
-define grazing angle for each mass ratio (radii ratio) \\
-lot of spill-over for similar sizes \\
-
-
-\section{Collision physics}
-
-
-compare timescales\\
-viscous timescale $t = R^2 / \nu$ \\
-collisional timescale $t = 2 R / \vimp$ \\
-self-gravitational timescale $t = \sqrt{3\pi / G \rho}$ \\
-impact vs. shock velocity (super-sonic), shock waves $t = R / c_S $ \\
-orbital time scale in solar system (change of background gravity)\\
-local gravity, free fall time \\
-surface tension (Walker and Mullins 1981) vs. shearing forces, approximation of fluid bodies \\
-compare central potential of a planetary system with local gravity, compare timescales \\
-%TODOPLOT: show phenomena in the angle vs. vimp plot
-basic process of cratering collisions: contact and compression stage, excavation stage \cite{Melosh:2007p3502} \\
+The goal of this parameter study is now to get quantitative results for various quantities and to check whether they are scale-invariant or not.
 
 
 \section{Setup and parameters used}
+A similar-sized collisions 
+
+
+The parameter space 
+
+
 % TODOPLOT: show config matrix with all the parameters used (initial temperature, nop, mass)
 describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
 how long a simulation is integrated \\
