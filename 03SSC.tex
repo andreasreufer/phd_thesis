@@ -72,7 +72,7 @@ Additional parameters are the pre-impact rotation of both the impactor and the t
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=0.7]{01_overview_params.pdf}
-\caption{Overview of the sampling points in the 4-dimensional parameter space spanned by $\big\{ \Mtar, \Mimp, \thimp, \vimp / \vesc \big\}$. The left plot shows the mass pairs for both bodies. Grey points denote \emph{r3} bodies (pure silicate), red points \emph{c1} bodies (chondritic, differentiated) and blue points \emph{i1} bodies (icy, differentiated). For each mass pair a total of 105 simulations sample the $\big\{ \thimp, \vimp / \vesc \big\}$ sub-space. Points in this sub-space are }
+\caption{Overview of the sampling points in the 4-dimensional parameter space spanned by $\big\{ \Mtar, \Mimp, \thimp, \vimp / \vesc \big\}$. The left plot shows the mass pairs for both bodies. Grey points denote \emph{r3} bodies (pure silicate), red points \emph{c1} bodies (chondritic, differentiated) and blue points \emph{i1} bodies (icy, differentiated). For each mass pair a total of 105 simulations sample the $\big\{ \thimp, \vimp / \vesc \big\}$ sub-space. Points in this sub-space are chosen so that regions of interest are sampled more accurately, for example in case of slow impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$).}
 \label{ch03_fig01}
 \end{center}
 \end{figure}
@@ -86,7 +86,10 @@ Additional parameters are the pre-impact rotation of both the impactor and the t
 
 The strategy for sampling the parameter space goes as follows: For three different types of body composition sets of simulations are performed. Simulation set \emph{r3} uses homogeneous bodies made up of $100 \wtp~\silc$, simulation set \emph{c1} differentiated bodies with a chondritic composition of $70 \wtp~\silc$ and $30 \wtp~\iron$ and simulation set \emph{i1} uses differentiated bodies with a composition typical beyond the snow line of of $50 \wtp~\watr$, $35 \wtp~\silc$ and $15 \wtp~\iron$. Figure \ref{ch03_fig07} shows the internal structures for this three different types of bodies.
 
-Target masses 
+The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$.
+
+
+
 
 % TODOPLOT: show config matrix with all the parameters used (initial temperature, nop, mass)
 describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
