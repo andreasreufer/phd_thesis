@@ -45,6 +45,9 @@ c1masses = [ ( 0.007, 0.01),
            ( 0.035, 0.10),
            ( 0.200, 1.00) ]
 
+r3masses = [ (0.10, 0.20), 
+           ( 0.100, 0.50),
+           ( 0.100, 1.00) ]
 
 from plot_helpers import *
 #plt.rc('savefig', dpi=450)
@@ -56,19 +59,22 @@ ax2 = plt.subplot(122)
 for (impa, vimp) in vimpimpaa:
   ax2.plot( vimp, impa, 'k.' )
 
-for (mimp, mtar) in c1masses:
-  ax1.loglog( mtar, mimp, 'o', color="brown", markersize=12)
+for (mimp, mtar) in r3masses:
+  ax1.loglog( mtar, mimp, 'o', color="grey", markersize=8 )
 
 for (mimp, mtar) in i1masses:
-  ax1.loglog( mtar, mimp, 'o', color="lightblue", markersize=6)
+  ax1.loglog( mtar, mimp, 'o', color="lightblue", markersize=16)
+
+for (mimp, mtar) in c1masses:
+  ax1.loglog( mtar, mimp, 'o', color="brown", markersize=8 )
 
 axs = [ax1, ax2]
 for ax in axs:
   ax.xaxis.set_major_formatter(tex_formatter)
   ax.yaxis.set_major_formatter(int_formatter)
 
-ax1.set_xlabel("$M_{tar} / M_{Earth}$")
-ax1.set_ylabel("$M_{imp} / M_{Earth}$")
+ax1.set_xlabel("$M_{tar} / M_{\oplus}$")
+ax1.set_ylabel("$M_{imp} / M_{\oplus}$")
 ax1.axis( [0.003, 2.0, 0.0007, 2.0] )
 ax1.yaxis.set_major_formatter(tex_formatter)
 ax1.grid(True)

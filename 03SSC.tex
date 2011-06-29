@@ -65,11 +65,28 @@ The goal of this parameter study is now to get quantitative results for various 
 
 
 \section{Setup and parameters used}
-A similar-sized collisions 
+A similar-sized collisions encompasses many parameters, the most important ones being target mass $\Mtar$, impactor mass $\Mimp$, impact velocity $\vimp$ and impact angle $\thimp$. Often the scaled impact parameter $b'=\sin{\thimp}$ is used instead of the impact angle. These parameters span a 4-dimensional parameter space which will be explored in this parameter study. 
 
+Additional parameters are the pre-impact rotation of both the impactor and the target, which in principle spans another 6-dimensions into the parameter space. Another parameter study concerning the formation of the Earths Moon by \cite{Canup:2008p3551} analyzed the effect of pre-impact rotation of the two bodies onto disk formation after the collision and found it to be non-negligible. The composition and interior thermal profiles of both bodies are also inform parameters. They both determine the density distribution inside the bodies and therefore also the dynamics of the collision. The internal profile furthermore determines the radius of the body and therefore the impact geometry, the mutual escape velocity and accordingly the actual impact velocity. These additional parameters are not further explored in this study.
 
-The parameter space 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.7]{01_overview_params.pdf}
+\caption{Overview of the sampling points in the 4-dimensional parameter space spanned by $\big\{ \Mtar, \Mimp, \thimp, \vimp / \vesc \big\}$. The left plot shows the mass pairs for both bodies. Grey points denote \emph{r3} bodies (pure silicate), red points \emph{c1} bodies (chondritic, differentiated) and blue points \emph{i1} bodies (icy, differentiated). For each mass pair a total of 105 simulations sample the $\big\{ \thimp, \vimp / \vesc \big\}$ sub-space. Points in this sub-space are }
+\label{ch03_fig01}
+\end{center}
+\end{figure}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.8]{07_strucs.pdf}
+\caption{Isentropic internal structures of the bodies used in the simulations. The first row of plots shows the density profiles, the second row the pressure and the third row the temperatures. The first column of plots shows silicate bodies with a $100 wt\%$ $\silc$ composition with the following masses from left to right: 0.1 (blue curve), 0.2 (red), 0.5 $\ME$ (magenta). The second column shows structures of differentiated bodies of chondritic composition with a $70 wt\%$ $\silc$ mantle and a $30 wt\%$ iron core: 0.002 (red), 0.007 (green), 0.01 (blue), 0.02 (red), 0.035 (black), 0.07 (green), 0.1 (blue), 0.2 (red), 0.7 (green) and 1.0 $\ME$ (blue). The last column on the right shows a few structures with a composition typical to regions beyond the snow line with $50 wt\%$ water ice, $35 wt\%$ $\silc$ and $15 wt\%$ iron. Masses range from 0.002 (red), 0.01 (blue), 0.02 (red), 0.1 (blue), 0.2 (red) and 1.0 $\ME$ (blue) from left to right. The radius of the structures depends on the average density and therefore also on the composition of the bodies. Icy bodies have low average densities compared to chondritic bodies. Note that the bodies entirely composed of $\silc$ have a higher average density than equally massive bodies with a chondritic composition, due to the higher compressibility of $\silc$ compared to iron. In the core of the pure silicate bodies, the density reached more than twice the reference density of $\silc$, while the iron cores of the chondritic bodies is only slightly compressed.}
+\label{ch03_fig07}
+\end{center}
+\end{figure}
 
+The strategy for sampling the parameter space goes as follows: For three different types of body composition sets of simulations are performed. Simulation set \emph{r3} uses homogeneous bodies made up of $100 \wtp~\silc$, simulation set \emph{c1} differentiated bodies with a chondritic composition of $70 \wtp~\silc$ and $30 \wtp~\iron$ and simulation set \emph{i1} uses differentiated bodies with a composition typical beyond the snow line of of $50 \wtp~\watr$, $35 \wtp~\silc$ and $15 \wtp~\iron$. Figure \ref{ch03_fig07} shows the internal structures for this three different types of bodies.
+
+Target masses 
 
 % TODOPLOT: show config matrix with all the parameters used (initial temperature, nop, mass)
 describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
@@ -85,21 +102,6 @@ how to setup
 as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 
 
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.7]{01_overview_params.pdf}
-\caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target. Note }
-\label{ch03_fig01}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=0.8]{07_strucs.pdf}
-\caption{Isentropic internal structures of the bodies used in the simulations. The first row of plots shows the density profiles, the second row the pressure and the third row the temperatures. The first column of plots shows silicate bodies with a $100 wt\%$ $\silc$ composition with the following masses from left to right: 0.1 (blue curve), 0.2 (red), 0.5 $\ME$ (magenta). The second column shows structures of differentiated bodies of chondritic composition with a $70 wt\%$ $\silc$ mantle and a $30 wt\%$ iron core: 0.002 (red), 0.007 (green), 0.01 (blue), 0.02 (red), 0.035 (black), 0.07 (green), 0.1 (blue), 0.2 (red), 0.7 (green) and 1.0 $\ME$ (blue). The last column on the right shows a few structures with a composition typical to regions beyond the snow line with $50 wt\%$ water ice, $35 wt\%$ $\silc$ and $15 wt\%$ iron. Masses range from 0.002 (red), 0.01 (blue), 0.02 (red), 0.1 (blue), 0.2 (red) and 1.0 $\ME$ (blue) from left to right. The radius of the structures depends on the average density and therefore also on the composition of the bodies. Icy bodies have low average densities compared to chondritic bodies. Note that the bodies entirely composed of $\silc$ have a higher average density than equally massive bodies with a chondritic composition, due to the higher compressibility of $\silc$ compared to iron. In the core of the pure silicate bodies, the density reached more than twice the reference density of $\silc$, while the iron cores of the chondritic bodies is only slightly compressed.}
-\label{ch03_fig07}
-\end{center}
-\end{figure}
 
 
 
