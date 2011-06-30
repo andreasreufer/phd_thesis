@@ -86,7 +86,7 @@ Additional parameters are the pre-impact rotation of both the impactor and the t
 
 The strategy for sampling the parameter space goes as follows: For three different types of body composition sets of simulations are performed. Simulation set \emph{r3} uses homogeneous bodies made up of $100 \wtp~\silc$, simulation set \emph{c1} differentiated bodies with a chondritic composition of $70 \wtp~\silc$ and $30 \wtp~\iron$ and simulation set \emph{i1} uses differentiated bodies with a composition typical beyond the snow line of of $50 \wtp~\watr$, $35 \wtp~\silc$ and $15 \wtp~\iron$. Figure \ref{ch03_fig07} shows the internal structures for this three different types of bodies.
 
-The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set.
+The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set. The number of particles is around $100'000$ in the target body, so that shocks can be resolved sufficiently well.
 
 For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\big\{ \thimp, \vimp / \vesc \big\}$ is sampled. Figure \ref{ch03_fig01} shows on the right plot the used data points. The distribution covers areas of interest with more data points, for example for small impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$). In total a 105 individual simulations are performed for each body pair. The bodies used in the simulations are prepared as described in section \ref{ch02_sec04_ss02} and set up as described in\ref{ch02_sec04_ss04}. The initial separation $r_0$ is set to $5 (\Rimp + \Rtar)$ and simulations are integrated for $50 \tau_{coll}$. This is long enough in almost any case to get converging values for the interesting quantities in collisions. Figure \ref{ch03_fig31} shows various interesting quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. All of the quantities converge on a much smaller timescale than $50 \tau_{coll}$.
 \begin{figure}[htbp]
@@ -96,25 +96,18 @@ For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\b
 \label{ch03_fig31}
 \end{center}
 \end{figure}
-The only problematic cases are when the impactor is slowed down to a velocity too small for an escape and then gets on a highly elliptical orbit with a long orbital time. This is the case for a small part of the parameter space with slow impact velocities and grazing impact angles. Figure shows 
-
+The only problematic cases are when the impactor is slowed down to a velocity too small for an escape and then gets on a highly elliptical orbit with a long orbital time. This is the case for a small part of the parameter space with slow impact velocities and grazing impact angles. Figure \ref{ch03_fig30} shows such an example with the parameters $\{0.1 \ME, 0.01 \ME, 1.05 \vesc, 60 \deg \}$.
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=2.0]{30_elliptic_sim_out2.png}
 \includegraphics[scale=2.0]{30_elliptic_sim_out3.png}
 \includegraphics[scale=2.0]{30_elliptic_sim_out4.png}
-\caption{Simulation $\{0.1 \ME, 0.01 \ME, 1.05 \vesc, 60 \deg \}$ of simulation set \css . The impactor (orange and light blue parts) is put on a highly eccentric orbit with an orbital time much longer than $50 \tau_{coll} = 30.43h$.}
+\caption{Three successive snapshots along the impact plane of simulation $\{0.1 \ME, 0.01 \ME, 1.05 \vesc, 60 \deg \}$ of simulation set \css. The impactor (orange and light blue parts) is put on a highly eccentric orbit with an orbital time much longer than $50 \tau_{coll} = 30.43h$ (last snapshot).}
 \label{ch03_fig30}
 \end{center}
 \end{figure}
 
-post-processing \\
-r3, c1, i1 \\
-resolution, number of particles, particles per body diameter \\
-initial temperature not important, show profiles nevertheless \\
-give an overview of the result parameters\\
-
-how to setup
+The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \ref{ch02_sec04_ss07} are run every $0.1 \tau_{coll}$ in order to get continuous evolutions of the various quantities.
 
 \begin{landscape}
 \begin{figure}[htbp]
@@ -141,7 +134,6 @@ how to setup
 \end{center}
 \end{figure}
 \end{landscape}
-
 
 
 \section{Results}
