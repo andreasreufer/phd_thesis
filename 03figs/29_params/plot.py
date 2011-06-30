@@ -49,26 +49,26 @@ dy = 0.27
 params = []
 if ssname == "c1":
   params = [ \
-      ( SimParam(0.200, 1.000, nan, nan), [2,0] ),
-      ( SimParam(0.700, 1.000, nan, nan), [0,0] ),
-      ( SimParam(0.010, 0.100, nan, nan), [3,1] ),
-      ( SimParam(0.020, 0.100, nan, nan), [2,1] ),
-      ( SimParam(0.035, 0.100, nan, nan), [1,1] ),
-      ( SimParam(0.070, 0.100, nan, nan), [0,1] ),
-      ( SimParam(0.002, 0.010, nan, nan), [2,2] ),
-      ( SimParam(0.007, 0.010, nan, nan), [0,2] ) ]
+      ( SimParam(0.200, 1.000, nan, 1.0), [2,0] ),
+      ( SimParam(0.700, 1.000, nan, 1.0), [0,0] ),
+      ( SimParam(0.010, 0.100, nan, 1.0), [3,1] ),
+      ( SimParam(0.020, 0.100, nan, 1.0), [2,1] ),
+      ( SimParam(0.035, 0.100, nan, 1.0), [1,1] ),
+      ( SimParam(0.070, 0.100, nan, 1.0), [0,1] ),
+      ( SimParam(0.002, 0.010, nan, 1.0), [2,2] ),
+      ( SimParam(0.007, 0.010, nan, 1.0), [0,2] ) ]
 
 if ssname == "i1":
   params = [ \
-      ( SimParam(0.200, 1.000, nan, nan), [2,0] ),
-      ( SimParam(0.020, 0.100, nan, nan), [2,1] ),
-      ( SimParam(0.002, 0.010, nan, nan), [2,2] ) ]
+      ( SimParam(0.200, 1.000, nan, 1.0), [2,0] ),
+      ( SimParam(0.020, 0.100, nan, 1.0), [2,1] ),
+      ( SimParam(0.002, 0.010, nan, 1.0), [2,2] ) ]
 
 if ssname == "r3":
   params = [ \
-      ( SimParam(0.100, 0.200, nan, nan), [0,2] ),
-      ( SimParam(0.100, 0.500, nan, nan), [1,1] ),
-      ( SimParam(0.100, 1.000, nan, nan), [2,0] ) ]
+      ( SimParam(0.100, 0.200, nan, 1.0), [0,2] ),
+      ( SimParam(0.100, 0.500, nan, 1.0), [1,1] ),
+      ( SimParam(0.100, 1.000, nan, 1.0), [2,0] ) ]
 
 
 bgax = plt.axes( [0.0, 0.0, 1.0, 1.0], frameon=False)
@@ -95,6 +95,7 @@ for ( sparm, axv ) in params:
 
   tarnop = refsim.tarb.nop
   impnop = refsim.impb.nop
+  tau50  = refsim.tcol * 50. / 3600.
 
   ax = plt.axes( [x0 + axv[0]*dx, y0 + axv[1]*dy, dx, dy] )
   ax.xaxis.set_ticks(())
@@ -113,6 +114,7 @@ for ( sparm, axv ) in params:
   ax.text( 0.30, 0.45, r"$\bar{\rho} = " + ("%3.2f" % imprho) + " g/cm^3$")
   ax.text( 0.30, 0.33, r"$\bar{h} = " + (latexExp10( '%4.2e' % imph) ) + " cm$")
   ax.text( 0.30, 0.21, r"$" + str(impnop) + r"~\mathrm{particles}$" )
+  ax.text( 0.05, 0.05, r"$ 50 \tau_{coll} = " + ('%4.2f' % tau50 ) + " h~~@~v_{esc}$")
   print imph, (latexExp10( '%4.2e' % imph) )
   axs.append(ax)
 

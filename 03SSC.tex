@@ -98,26 +98,16 @@ For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\b
 \end{figure}
 The only problematic cases are when the impactor is slowed down to a velocity too small for an escape and then gets on a highly elliptical orbit with a long orbital time. This is the case for a small part of the parameter space with slow impact velocities and grazing impact angles. Figure shows 
 
-
-$\big\{ \Mtar, \Mimp, \thimp, \vimp / \vesc \big\}$.
-In most cases 
-
-
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=2.0]{30_elliptic_sim_out2.png}
 \includegraphics[scale=2.0]{30_elliptic_sim_out3.png}
 \includegraphics[scale=2.0]{30_elliptic_sim_out4.png}
-\caption{Simulation $\{0.1 \ME, 0.01 \ME, 1.60 \vesc, 38 \deg \}$}
+\caption{Simulation $\{0.1 \ME, 0.01 \ME, 1.05 \vesc, 60 \deg \}$ of simulation set \css . The impactor (orange and light blue parts) is put on a highly eccentric orbit with an orbital time much longer than $50 \tau_{coll} = 30.43h$.}
 \label{ch03_fig30}
 \end{center}
 \end{figure}
 
-
-% TODOPLOT: show config matrix with all the parameters used (initial temperature, nop, mass)
-describe parameter space: fixed target mass and mass ratio, then vary relative impact velocity and impact angle. hit\&run are not considered. \\
-how long a simulation is integrated \\
-problems: timescales too long\\
 post-processing \\
 r3, c1, i1 \\
 resolution, number of particles, particles per body diameter \\
@@ -130,15 +120,15 @@ how to setup
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{29_params_r3.pdf}
-\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \rss simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies and $50 \tau_{coll}$ for a $\vimp = \vesc$ collision in the \rss simulation set.}
 \label{ch03_fig29a}
 \end{center}
 \end{figure}
-
 \begin{figure}[htbp]
+
 \begin{center}
 \includegraphics[scale=1.0]{29_params_c1.pdf}
-\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \css simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies and $50 \tau_{coll}$ for a $\vimp = \vesc$ collision in the \css simulation set.}
 \label{ch03_fig29b}
 \end{center}
 \end{figure}
@@ -146,7 +136,7 @@ how to setup
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{29_params_i1.pdf}
-\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \iss simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies and $50 \tau_{coll}$ for a $\vimp = \vesc$ collision in the \iss simulation set.}
 \label{ch03_fig29c}
 \end{center}
 \end{figure}
