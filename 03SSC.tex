@@ -86,7 +86,32 @@ Additional parameters are the pre-impact rotation of both the impactor and the t
 
 The strategy for sampling the parameter space goes as follows: For three different types of body composition sets of simulations are performed. Simulation set \emph{r3} uses homogeneous bodies made up of $100 \wtp~\silc$, simulation set \emph{c1} differentiated bodies with a chondritic composition of $70 \wtp~\silc$ and $30 \wtp~\iron$ and simulation set \emph{i1} uses differentiated bodies with a composition typical beyond the snow line of of $50 \wtp~\watr$, $35 \wtp~\silc$ and $15 \wtp~\iron$. Figure \ref{ch03_fig07} shows the internal structures for this three different types of bodies.
 
-The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$.
+The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set.
+
+For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\big\{ \thimp, \vimp / \vesc \big\}$ is sampled. Figure \ref{ch03_fig01} shows on the right plot the used data points. The distribution covers areas of interest with more data points, for example for small impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$). In total a 105 individual simulations are performed for each body pair. The bodies used in the simulations are prepared as described in section \ref{ch02_sec04_ss02} and set up as described in\ref{ch02_sec04_ss04}. The initial separation $r_0$ is set to $5 (\Rimp + \Rtar)$ and simulations are integrated for $50 \tau_{coll}$. This is long enough in almost any case to get converging values for the interesting quantities in collisions. Figure \ref{ch03_fig31} shows various interesting quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. All of the quantities converge on a much smaller timescale than $50 \tau_{coll}$.
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.6]{31_sim_summary.pdf}
+\caption{A summary for various quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. The x-axis in all plots denotes time in hours relative to the time of impact. One can see that all quantities converge much earlier than $50 \tau_{coll} = 22.76h$. The quantities shown in the top row are from left to right: Accretion efficiency $\xi$ (blue curve for iron, red for silicate and green for overall accretion), striping efficiency with the same color coding, change in potential (green) and internal energy (red) scaled to the reduced impact energy and finally on the far right the ratio of rotational to potential energy for the largest (black) and second remnant (red) as a measure for rotational stability. The middle row shows from the left: Remnant masses scaled to the impactor mass, relative velocity between the largest and the second remnant at infinity compared to the theoretical value expected from pure two-body interaction (dashed line), deflection angle of the second remnant compared to the theoretical two-body value (dashed line) and on the far right the composition of the remnant bodies and the ejecta. The bottom row shows from left to right: Mean specific internal energy ($erg/g$) for the largest (black) and the second remnant (red), angular momentum of the largest (black) and the second remnant (red) in $g~cm^2 / s$, mass partition into ejecta (grey), largest remnant (black), second remnant (red) and tertiary remnants (other colors). The far right shows the relative change in total energy over time as a measure for energy conservation. Errors in energy conservation mainly come from the removal of escaping particles at large distances. All the quantities will be explained below.}
+\label{ch03_fig31}
+\end{center}
+\end{figure}
+The only problematic cases are when the impactor is slowed down to a velocity too small for an escape and then gets on a highly elliptical orbit with a long orbital time. This is the case for a small part of the parameter space with slow impact velocities and grazing impact angles. Figure shows 
+
+
+$\big\{ \Mtar, \Mimp, \thimp, \vimp / \vesc \big\}$.
+In most cases 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=2.0]{30_elliptic_sim_out2.png}
+\includegraphics[scale=2.0]{30_elliptic_sim_out3.png}
+\includegraphics[scale=2.0]{30_elliptic_sim_out4.png}
+\caption{Simulation $\{0.1 \ME, 0.01 \ME, 1.60 \vesc, 38 \deg \}$}
+\label{ch03_fig30}
+\end{center}
+\end{figure}
 
 
 % TODOPLOT: show config matrix with all the parameters used (initial temperature, nop, mass)
@@ -100,13 +125,12 @@ initial temperature not important, show profiles nevertheless \\
 give an overview of the result parameters\\
 
 how to setup
-as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{29_params_r3.pdf}
-\caption{Accretion efficiency $\xi$ as a function of impact velocity $\vimp$ for different impact angles as in figure \ref{ch03_fig09a} for the \emph{i1} simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \rss simulation set.}
 \label{ch03_fig29a}
 \end{center}
 \end{figure}
@@ -114,7 +138,7 @@ as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{29_params_c1.pdf}
-\caption{Accretion efficiency $\xi$ as a function of impact velocity $\vimp$ for different impact angles as in figure \ref{ch03_fig09a} for the \emph{i1} simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \css simulation set.}
 \label{ch03_fig29b}
 \end{center}
 \end{figure}
@@ -122,7 +146,7 @@ as shown in \ref{ch02_sec04_ss02} and \label{ch02_sec04_ss04}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{29_params_i1.pdf}
-\caption{Accretion efficiency $\xi$ as a function of impact velocity $\vimp$ for different impact angles as in figure \ref{ch03_fig09a} for the \emph{i1} simulation set.}
+\caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies in the \iss simulation set.}
 \label{ch03_fig29c}
 \end{center}
 \end{figure}
