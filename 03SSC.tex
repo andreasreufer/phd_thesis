@@ -43,7 +43,7 @@ where the mutual escape velocity is given by $\vesc = \sqrt{ 2 G \frac{\Mtar + \
 \begin{align}
 \tau_{grav} = \sqrt{\frac{3 \pi }{G \rho} } \sim \frac{1}{\sqrt{\rho}}
 \end{align}
-and is in the same order of magnitude as the collisional timescale. Both timescales depend on the bodies density. The collisional timescale also weakly depends on the mass ratio ($\sim \sqrt[3]{\gamma}$), but stays still in the same order of magnitude for the similar sized collisions mass ratios of $\gamma = 0.1 \dots 1$. For a collisions between with $\Mimp = \Mtar = 0.1\ME$ and $\Rimp = \Rtar = 0.55 \RE$ at their mutual escape velocity, the collisional timescale yields $50$ min, whilst the gravitational timescale for a mean-density of $4g/cm^3$ is around $100$ mins. 
+and is in the same order of magnitude as the collisional timescale. Both timescales depend on the bodies density. The collisional timescale also weakly depends on the mass ratio ($\sim \sqrt[3]{\gamma}$), but stays still in the same order of magnitude for the similar sized collisions mass ratios of $\gamma = 0.1 \dots 1$. For a collisions between with $\Mimp = \Mtar = 0.1\ME$ and $\Rimp = \Rtar = 0.55 \RE$ at their mutual escape velocity, the collisional timescale yields $50$ min, whilst the gravitational timescale for a mean-density of $4g/cm^3$ is around $100$ mins. Collisions for which the collisional timescale is on the same order of magnitude as the gravitational timescale is also called \emph{gravity dominated}, because the collision happens over a timescale in which gravity affects the whole system. If $\vimp \gg \vesc$, gravitational interacting during the collision process can be neglected and only plays a role for eventual re-accretion  of the remnants, although due to their high relative velocities the remnants will simply be dispersed.
 
 Other physical effects are not scale-invariant, for example viscosity. \cite{Asphaug:2010p3539} argues as follows, that viscosity can be neglected in similar-sized collisions for bodies of at least a certain size: Characteristic stresses due to gravity are 
 \begin{equation}
@@ -107,7 +107,7 @@ The only problematic cases are when the impactor is slowed down to a velocity to
 \end{center}
 \end{figure}
 
-The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \ref{ch02_sec04_ss07} are run every $0.1 \tau_{coll}$ in order to get continuous evolutions of the various quantities.
+The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \ref{ch02_sec04_ss07} are run every $0.1 \tau_{coll}$ in order to get continuous evolutions of the various quantities as shown in figure \ref{ch03_fig31}. A number of python scripts is used to run a simulation set from setting up the individual simulations, running them up to cleaning up the data and storing the results of the post-processing.
 
 \begin{landscape}
 \begin{figure}[htbp]
@@ -137,21 +137,43 @@ The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \
 
 
 \section{Results}
+In this section we discuss several quantities which parametrize the outcome of simulated similar-sized collisions. Previous work is compared with the results of this parameter study and the differences are discussed. 
 %%
 % Largest remnant
 %% 
-\subsection{Largest remnant mass, accretion efficiency $\xi$ and $Q_D$}
-compare with previous work\\
-\cite{Benz:1988p3336} 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding\\
-\cite{Benz1999Icar..142....5B}: MLR / Mtarg ~ Q / Q*, parabolic fit \\
-\cite{Agnor:2004p3329}  two 0.1Mearth mass bodies, chondritic, Tillotson \\
-\cite{Stewart:2009p3265} catastrophic disruption criteria, Mlr / Mtarg replaced by Mlr / Mtot, Q* scaled to reduced mass in kinetic energy \\ 
-\cite{2010ApJ...714L..21K} ,mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth, defined $v_{cr}$ \\
-try volumetric scaling for oblique impacts \\
-show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
-check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
-volumetric scaling (Canup 2005, Leinhardt) \\
-mention problems with slow accretion producing secondary impacts, show example with very large timescales, problem to estimate result due to pre-rotation\\
+\subsection{Largest remnant mass, accretion efficiency $\xi$, $Q_D$ and $v_{cr}$}
+Maybe the most important quantity of a similar-sized collisions is the mass of the largest collision remnant $\Mlr$. While most of the mass of the largest remnant naturally comes from the collision target, it can either accrete mass from the impactor or in high-energy events loose mass through erosion. A useful parameter related to $\Mlr$ is the accretion efficiency
+\begin{equation}
+\xi = \frac{\Mlr - \Mtar}{\Mimp}
+\end{equation}
+which gives us the change in mass from the target to the largest remnant normalized to the impactor mass $\Mimp$. If the impactor is accreted perfectly $\xi = 1$, if no mass is accreted or lost $\xi = 0$ and in case of target erosion where the target looses mass $\xi < 0$.
+
+Figures \ref{ch03_fig08a} to \ref{ch03_fig08c} give the accretion efficiency for the three simulation sets as a function of the impact angle $\thimp$ for different impact velocities. For all three types of bodies and all mass ratios, the same characteristics can be observed: For very slow impact velocities of $\vimp = 1.00 \dots 1.05 \vesc$ (red and orange curves, x marker), the impactor is fully accreted independent of the impact angle. For very grazing impact angles a small fraction of the impactor is accelerated to an escaping velocity and escapes the remnant, so that the accretion efficiency is slightly below 1. This effect can be seen for $\thimp > 60 \deg$, especially for the $1.05 \vesc$ cases. A slight increase in impact velocity to $1.10 \vesc$ (green curve, x marker) lets the impactor miss the target almost unaltered if the impact angle is above a critical value, which seems to be mainly dependent on the mass ratio $\gamma$. Independent of type of body or the magnitude of the targets mass, this critical angle is between $60 \dots 75 \deg$ for $\gamma = 0.7$,  around $60 \deg$ for $\gamma = 0.2$ and slightly below $60 \deg$ for $\gamma = 0.1$. Above this critical angle, $\xi$ goes almost to 0. This is consistent with the results from \cite{Agnor:2004p3329} (compare figure 1) which finds a critical angle above $60 \deg$ for $\gamma = 1.0$. Additional simulations with $\gamma = 0.1$ and $0.5$ shown in figure 8 of \cite{Asphaug:2010p3539} also show critical impact angles for consistent with the results of this study (for a conversion between $\vinf$ and $\vimp$ check table \ref{ch03_tbl01}).
+\begin{table}[htdp]
+\begin{center}
+\begin{tabular}{l|r|r|r|r|r|r|r|r}
+$\vimp / \vesc$ & 1.00 & 1.05 & 1.10 & 1.15 & 1.20 & 1.30 & 1.40 & 1.50 \\
+\hline
+$\vinf / \vesc$ & 0.00 & 0.32 & 0.46 & 0.57 & 0.66 & 0.83 & 0.98 & 1.12\\
+\hline
+\hline
+$\vimp / \vesc$ & 1.60 & 1.70 & 1.80 & 2.00 & 2.50 & 3.00 & 3.50 & 4.00\\
+\hline
+$\vinf / \vesc$ & 1.25 & 1.37 & 1.50 & 1.73 & 2.29 & 2.83 & 3.35 & 3.87\\
+\end{tabular}
+\end{center}
+\caption{Conversion table $\vinf \leftrightarrow \vesc$}
+\label{ch03_tbl01}
+\end{table} 
+Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical angle to smaller values and transforms the abrupt change from $\xi \approx 1$ to $\xi \approx 0$ into a smoother transition over a larger span of impact angle. For small mass ratios like $\gamma = 0.1$ in the \css or the simulation set or the $\gamma = 0.1$ and $0.2$ simulations in set \rss, the accretion efficiency follows a curve similar to the relative volume of the impactor hitting the target (black dashed line in all figures \ref{ch03_fig08a} to \ref{ch03_fig08c}). The impact velocity where the two quantities correlate best is between $1.20 \dots 1.40 \vesc$. The reason why this correlation gets weaker for higher mass ratios, is because the simple volumetric guess assumes that the target is not changed considerably and simply cuts through the impactor. The alteration of the target increases with higher mass ratios and model breaks down. Another complication is that equating the cross-section volume with the accreted mass only works for constant-density bodies. While this is roughly the case in simulation set \rss with its pure silicate bodies, this assumption breaks down in \css and \iss, where the heavier cores carry more kinetic energy per volume than the mantle material. So is makes a difference, whether the core intersects the target or not.
+
+
+
+\ref{ch03_fig09a} to \ref{ch03_fig09c}
+
+The black dashed line shows the relative amount of impactor volume hitting the target, as in figure \ref{ch03_fig05}.
+
+
 
 \begin{landscape}
 \begin{figure}[htbp]
@@ -205,7 +227,7 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_r3.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as defined in \cite{Stewart:2009p3265} and using the parameters for $Q^*_{RD}$ as in \cite{2010ApJ...712L..73M}. The coloured lines solid lines show the simulation values for the \emph{r3} simulation set and the dashed black line shows the predicted value from the scaling law.}
+\caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as defined in \cite{Stewart:2009p3265} and using the parameters for $Q^*_{RD}$ as in \cite{2010ApJ...712L..73M}. The coloured lines solid lines show the simulation values for the \emph{r3} simulation set and the dashed black line shows the predicted value from the scaling law.}
 \label{ch03_fig15a}
 \end{center}
 \end{figure}
@@ -213,7 +235,7 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_c1.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{c1} simulation set.}
+\caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{c1} simulation set.}
 \label{ch03_fig15b}
 \end{center}
 \end{figure}
@@ -221,11 +243,25 @@ mention problems with slow accretion producing secondary impacts, show example w
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_i1.pdf}
-\caption{Scaled largest remnant masses $M_{LR} / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{i1} simulation set.}
+\caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{i1} simulation set.}
 \label{ch03_fig15c}
 \end{center}
 \end{figure}
 \end{landscape}
+
+
+
+compare with previous work\\
+\cite{Benz:1988p3336} 0.1 Mearth target, 1:6 mass ratio, vimp = 2.5-8 vesc, all eroding\\
+\cite{Benz1999Icar..142....5B}: MLR / Mtarg ~ Q / Q*, parabolic fit \\
+\cite{Agnor:2004p3329}  two 0.1Mearth mass bodies, chondritic, Tillotson \\
+\cite{Stewart:2009p3265} catastrophic disruption criteria, Mlr / Mtarg replaced by Mlr / Mtot, Q* scaled to reduced mass in kinetic energy \\ 
+\cite{2010ApJ...714L..21K} ,mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth, defined $v_{cr}$ \\
+try volumetric scaling for oblique impacts \\
+show 4 main categories: accretion, partial accretion, erosion and hit \& run \\
+check Benz 1999, Angor \& Asphaug 2004, Stewart \& Leinhardt 2009, Marcus 2009, Marcus 2010 \\
+volumetric scaling (Canup 2005, Leinhardt) \\
+mention problems with slow accretion producing secondary impacts, show example with very large timescales, problem to estimate result due to pre-rotation\\
 
 
 
@@ -246,14 +282,14 @@ give volumetric estimate \\
 compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
 
 \begin{equation}
-\delta_X = \frac{M_{SR} - M_{imp}}{M_{imp}} \Bigg|_{X}
+\delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
 \end{equation}
 
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_r3.pdf}
-\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
 \label{ch03_fig26a}
 \end{center}
 \end{figure}
@@ -261,7 +297,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_c1.pdf}
-\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
 \label{ch03_fig26b}
 \end{center}
 \end{figure}
@@ -269,7 +305,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_i1.pdf}
-\caption{Second remnant mass $M_{SR}$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
 \label{ch03_fig26c}
 \end{center}
 \end{figure}
@@ -740,6 +776,7 @@ discuss topics in the light of the results. for example for Moon formation
 \cite{Lissauer:1993p56}
 \cite{Wetherill:1993p3351}
 
+\cite{Leinhardt:2011p4060}
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
