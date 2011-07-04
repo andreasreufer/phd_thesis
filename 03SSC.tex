@@ -167,20 +167,7 @@ $\vinf / \vesc$ & 1.25 & 1.37 & 1.50 & 1.73 & 2.29 & 2.83 & 3.35 & 3.87\\
 \end{table} 
 Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical angle to smaller values and transforms the abrupt change from $\xi \approx 1$ to $\xi \approx 0$ into a smoother transition over a larger span of impact angle. For small mass ratios like $\gamma = 0.1$ in the \css or the simulation set or the $\gamma = 0.1$ and $0.2$ simulations in set \rss, the accretion efficiency follows a curve similar to the relative volume of the impactor hitting the target (black dashed line in all figures \ref{ch03_fig08a} to \ref{ch03_fig08c}). The impact velocity where the two quantities correlate best is between $1.20 \dots 1.40 \vesc$. The reason why this correlation gets weaker for higher mass ratios, is because the simple volumetric guess assumes that the target is not changed considerably and simply cuts through the impactor. The alteration of the target increases with higher mass ratios and model breaks down. Another complication is that equating the cross-section volume with the accreted mass only works for constant-density bodies. While this is roughly the case in simulation set \rss with its pure silicate bodies, this assumption breaks down in \css and \iss, where the heavier cores carry more kinetic energy per volume than the mantle material. In this case it makes a difference whether the core misses or hits the target. 
 
-By further increasing the impact velocity, the accretion efficiency goes below $1$ even for $0 \deg$ head-on impacts. For high enough velocities it becomes negative so that the target is being eroded. While for hight impact velocities $\vesc > 3.00 \vesc$, the accretion efficiency becomes smaller for a smaller impact angle at a fixed 
-
-
- and becomes even negative. The target is then eroded. 
-
-
-no longer reaches a value of $1$ for a head-on impact. For a 
-
-
-If the impact energy becomes high enough, the target looses mass and is being eroded. 
-
-
-Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show again the accretion efficiency but as a function of the impact velocity for different impact angles. 
-
+By further increasing the impact velocity, the accretion efficiency goes below $1$ even for $0 \deg$ head-on impacts. For high enough velocities it becomes negative so that the target is being eroded. While for hight impact velocities $\vesc > 3.00 \vesc$, the accretion efficiency becomes smaller for smaller impact angle, the effect reverses in an regime between $2.00 \dots 3.00 \vesc$, where the accretion efficiency actually increases again between for decreasing impact angles between $0 \dots 20 \deg$. This can be explained due to the fact that for a more head-on collision distributes the impact more evenly among the target, so that less mass reaches the required kinetic energy to leave the largest remnant. This effect is more prominent in the simulation sets with differentiated bodies (\css and \iss).
 
 
 \begin{landscape}
@@ -209,6 +196,20 @@ Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show again the accretion efficien
 \end{figure}
 \end{landscape}
 
+Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show the accretion efficiency as a function of the impact velocity for different impact angles. All mass ratios in all simulation sets show the same characteristics: For grazing impact angles ($\thimp \gg \theta_{graz}$, compare figure \ref{ch03_fig03}), the accretion efficiency is a step function of the impact velocity. Either the impactor is almost perfectly accreted or misses the target completely. Target erosion is almost negligible, even for very high impact energies. For smaller impact angles then function then transitions towards a parabolic function. Escaping mass from the largest remnant is the proportional to the impact energy or the impact velocity squared. 
+
+\cite{2010ApJ...714L..21K} performed a similar parameter study and extracted as a characteristic quantitiy the critical impact velocity
+\begin{equation}
+\xi(v_{cr}, \thimp, \Mtar, \Mimp) \doteq 0
+\end{equation}
+for which the accretion efficiency becomes zero as a function of impact angle, target and impactor mass. They performed SPH collision simulations with mass rations of $\gamma =$ 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11 and $M_{tot} = \Mimp + \Mtar = 0.2 \dots 2.0 \ME$ at impact velocities between $\vimp = 1.0 \dots 3.0 \vesc$ at angles between $\thimp = 0 \dots 75 \deg$. Instead of the ANEOS equation of state used here, they used the Tillotson equation of state \cite{Melosh:1989p996} which does not include phase transitions for melting or vaporization. Both the target and the impactor are differentiated bodies with $70 \wtp~\silc$ and $30 \wtp~\iron$ as in our \css simulation set. They found the following empiric fitting function for
+\begin{equation}
+\label{ch03_eq002}
+\vcr / \vimp = c_1 \Bigg( \frac{\Mtar - \Mimp}{\Mtar + \Mimp} \Bigg)^2 \big( 1 - \sin{\thimp} \big)^\frac{5}{2} + c_2 \Bigg( \frac{\Mtar - \Mimp}{\Mtar + \Mimp} \Bigg)^2 + c_3 \big( 1 - \sin{\thimp} \big)^\frac{5}{2}  + c_4
+\end{equation}
+with $c_1 = 2.43, c_2 = - 0.0408, c_3 = 1.86$ and $c_4 = 1.08$. The vertical lines in figure \ref{ch03_fig09a} to \ref{ch03_fig09c} show the predicted value for $\vcr$ for each mass ratio, target mass and impact angle. Our results in simulation set \css (\ref{ch03_fig09b}) match the predicted values quite well for $\thimp \ge 20 \deg$ and $\gamma \ge 0.2$. For $\thimp < 20 \deg$ equation \ref{ch03_eq002} predicts a strong increase in $\vcr$ for small decreases in impact angle, for example for $\gamma = 0.7$ $\vcr$ increase by over 50 \% from $\thimp = 15 \deg$ to $0 \deg$. Although our results also show a small increase in the impact velocity for which $\xi = 0$ for decreases in impact angle at already small values, it is not as large as in the empirical function from above. The main difference between the simulations presented here and the ones from \cite{2010ApJ...714L..21K} is the equation of state or particularly the lack of proper modeling of phase changes in the Tillotson equation of state. The amount of vaporization depends strongly on the impact regime. For gravity dominated collisions in the lunar mass regime ($\Mtar \approx 0.01 \ME$), only weak shocks and therefore no significant melting or vapor production is expected. With target masses in the order of the Earths mass, a significant amount of rock can be vaporized, due to impact velocities above the speed of sound of rock and the associated production of strong shocks. If the difference in the equation of state would be the cause of the disagreement of the critical velocities obtained from our results and the ones from the empiric law above, then our results should show a significant scale-dependence for the accretion efficiency. This is not the case. For a given mass range in a simulation set, the accretion efficiency is relatively scale-independent. The disagreement can best be explained by a  bad fit of equation \ref{ch03_eq002} with simulation results in general, probably also the ones from \cite{2010ApJ...714L..21K}.
+
+Although not intended to be used 
 
 \begin{landscape}
 \begin{figure}[htbp]
