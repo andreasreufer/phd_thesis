@@ -141,8 +141,8 @@ In this section we discuss several quantities which parametrize the outcome of s
 %%
 % Largest remnant
 %% 
-\subsection{Largest remnant mass, accretion efficiency $\xi$, $Q_D$ and $v_{cr}$}
-Maybe the most important quantity of a similar-sized collisions is the mass of the largest collision remnant $\Mlr$. While most of the mass of the largest remnant naturally comes from the collision target, it can either accrete mass from the impactor or in high-energy events loose mass through erosion. A useful parameter related to $\Mlr$ is the accretion efficiency
+\subsection{Largest remnant mass, accretion efficiency $\xi$, $\vcr$, $Q_D$}
+Maybe the most important quantity of a similar-sized collisions is the mass of the largest collision remnant $\Mlr$. It is the defined as the mass of the heaviest gravitationally bound system well after the collision. Note that this is not always just one body. Part of the largest remnant may also be satellites in stable orbits around the largest fragment. For example the Earth-Moon system is considered to be one single largest remnant of the giant impact. While most of the mass of the largest remnant naturally comes from the collision target, it can either accrete mass from the impactor or in high-energy events loose mass through erosion. A useful parameter related to $\Mlr$ is the accretion efficiency
 \begin{equation}
 \xi = \frac{\Mlr - \Mtar}{\Mimp}
 \end{equation}
@@ -207,9 +207,9 @@ for which the accretion efficiency becomes zero as a function of impact angle, t
 \label{ch03_eq002}
 \vcr / \vimp = c_1 \Bigg( \frac{\Mtar - \Mimp}{\Mtar + \Mimp} \Bigg)^2 \big( 1 - \sin{\thimp} \big)^\frac{5}{2} + c_2 \Bigg( \frac{\Mtar - \Mimp}{\Mtar + \Mimp} \Bigg)^2 + c_3 \big( 1 - \sin{\thimp} \big)^\frac{5}{2}  + c_4
 \end{equation}
-with $c_1 = 2.43, c_2 = - 0.0408, c_3 = 1.86$ and $c_4 = 1.08$. The vertical lines in figure \ref{ch03_fig09a} to \ref{ch03_fig09c} show the predicted value for $\vcr$ for each mass ratio, target mass and impact angle. Our results in simulation set \css (\ref{ch03_fig09b}) match the predicted values quite well for $\thimp \ge 20 \deg$ and $\gamma \ge 0.2$. For $\thimp < 20 \deg$ equation \ref{ch03_eq002} predicts a strong increase in $\vcr$ for small decreases in impact angle, for example for $\gamma = 0.7$ $\vcr$ increase by over 50 \% from $\thimp = 15 \deg$ to $0 \deg$. Although our results also show a small increase in the impact velocity for which $\xi = 0$ for decreases in impact angle at already small values, it is not as large as in the empirical function from above. The main difference between the simulations presented here and the ones from \cite{2010ApJ...714L..21K} is the equation of state or particularly the lack of proper modeling of phase changes in the Tillotson equation of state. The amount of vaporization depends strongly on the impact regime. For gravity dominated collisions in the lunar mass regime ($\Mtar \approx 0.01 \ME$), only weak shocks and therefore no significant melting or vapor production is expected. With target masses in the order of the Earths mass, a significant amount of rock can be vaporized, due to impact velocities above the speed of sound of rock and the associated production of strong shocks. If the difference in the equation of state would be the cause of the disagreement of the critical velocities obtained from our results and the ones from the empiric law above, then our results should show a significant scale-dependence for the accretion efficiency. This is not the case. For a given mass range in a simulation set, the accretion efficiency is relatively scale-independent. The disagreement can best be explained by a  bad fit of equation \ref{ch03_eq002} with simulation results in general, probably also the ones from \cite{2010ApJ...714L..21K}.
+with $c_1 = 2.43, c_2 = - 0.0408, c_3 = 1.86$ and $c_4 = 1.08$. The vertical lines in figure \ref{ch03_fig09a} to \ref{ch03_fig09c} show the predicted value for $\vcr$ for each mass ratio, target mass and impact angle. Our results in simulation set \css (\ref{ch03_fig09b}) match the predicted values quite well for $\thimp \ge 20 \deg$ and $\gamma \ge 0.2$. For $\thimp < 20 \deg$ equation \ref{ch03_eq002} predicts a strong increase in $\vcr$ for small decreases in impact angle, for example for $\gamma = 0.7$ $\vcr$ increase by over 50 \% from $\thimp = 15 \deg$ to $0 \deg$. Although our results also show a small increase in the impact velocity for which $\xi = 0$ for decreases in impact angle at already small values, it is not as large as in the empirical function from above. The main difference between the simulations presented here and the ones from \cite{2010ApJ...714L..21K} is the equation of state or particularly the lack of proper modeling of phase changes in the Tillotson equation of state. The amount of vaporization depends strongly on the impact regime. For gravity dominated collisions in the lunar mass regime ($\Mtar \approx 0.01 \ME$), only weak shocks and therefore no significant melting or vapor production is expected. With target masses in the order of the Earths mass, a significant amount of rock can be vaporized, due to impact velocities above the speed of sound of rock and the associated production of strong shocks. If the difference in the equation of state would be the cause of the disagreement of the critical velocities obtained from our results and the ones from the empiric law above, then our results should show a significant scale-dependence for the accretion efficiency. This is not the case. For a given mass range in a simulation set, the accretion efficiency is relatively scale-independent. The disagreement can best be explained by a  bad fit of equation \ref{ch03_eq002} with simulation results in general, probably also the ones from \cite{2010ApJ...714L..21K}. For very grazing angles equation \ref{ch03_eq002} predicts slightly too slow impact velocities, especially for small mass ratios. For instance at $\thimp = 45 \deg$ for $\{ \Mtar = 0.1 \ME, \gamma = 0.1\}$ the accretion efficiency yields $\xi \approx 0.8$ at the predicted critical impact velocity.
 
-Although not intended to be used 
+The simulation sets \iss and \rss with differently composed bodies show similar results for the critical velocity and therefore are also fit equation \ref{ch03_eq002} equally well as in the \css simulation set. \cite{2010ApJ...714L..21K} use equation \ref{ch03_eq002} to determine, whether collisions in terrestrial planet formation simulations are accreting or eroding mass on the target. Considering the disagreement between the fitting function and the simulation results suggest, that expression \ref{ch03_eq002} should not be used for $\thimp < 20 \deg$ and very high impact velocities, otherwise disruptive events while be falsely treated as accretionary.
 
 \begin{landscape}
 \begin{figure}[htbp]
@@ -235,7 +235,35 @@ Although not intended to be used
 \label{ch03_fig09c}
 \end{center}
 \end{figure}
+\end{landscape}
 
+Another quantity associated with the largest remnant is the specific impact energy required for catastrophic disruption, which is defined as a collision where the largest remnant is no more than half of the targets mass. The specific impact energy in its original defintion \cite{Benz1999Icar..142....5B} is the kinetic energy of the impactor 
+\begin{equation}
+Q = \frac{ \frac{1}{2} \vimp^2 \Mimp }{\Mtar} 
+\end{equation}
+The specific impact energy required for catastrophic disruption is denoted $Q^*_D$ and fulfills
+\begin{equation}
+\Mlr(Q^*_D) = 0.5 \Mtar
+\end{equation}
+More recent work \citep{Stewart:2009p3265, 2009ApJ...700L.118M, 2010ApJ...712L..73M, Leinhardt:2011p4060} considers the reduced mass and defines the specific reduced impact energy 
+\begin{equation}
+Q_R = \frac{ \frac{1}{2} \vimp^2 \mu }{\Mtar + \Mimp} ~~~ \mu = \frac{\Mtar \Mimp}{\Mtar + \Mimp} 
+\end{equation}
+and defines catastrophic disruption as a collision where the largest remnant has no more than half of the total mass $\Mtot = \Mtar + \Mimp$ with the reduced catastrophic disruption threshold $Q^*_{RD}$
+\begin{equation}
+\Mlr(Q^*_{RD}) = 0.5 (\Mtar + \Mimp)
+\end{equation}
+\cite{Stewart:2009p3265} propose the simple linear relationship between the largest remnant mass and $Q_R$
+\begin{equation}
+\Mlr / \Mtot = - 0.5 ( Q_R / Q^*_{RD} - 1 ) + 0.5
+\end{equation}
+$Q^*_{RD}$ is a constant depending on the material and scale-dependent physics. A velocity dependent form for this constant in \emph{cgs}-units is given by
+\begin{equation}
+Q^*_{RD} = q_s R^{9\mu/(3-2\phi)}_{C1} \vimp^{2-3\mu} + q_g R^{3 \mu}_{C1} \vimp^{2-3\mu}
+\end{equation}
+where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$.
+
+\begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_r3.pdf}
