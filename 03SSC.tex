@@ -141,7 +141,7 @@ In this section we discuss several quantities which parametrize the outcome of s
 %%
 % Largest remnant
 %% 
-\subsection{Largest remnant mass, accretion efficiency $\xi$, $\vcr$, $Q_D$}
+\subsection{Largest remnant mass, accretion efficiency $\xi$, $\vcr$}
 Maybe the most important quantity of a similar-sized collisions is the mass of the largest collision remnant $\Mlr$. It is the defined as the mass of the heaviest gravitationally bound system well after the collision. Note that this is not always just one body. Part of the largest remnant may also be satellites in stable orbits around the largest fragment. For example the Earth-Moon system is considered to be one single largest remnant of the giant impact. While most of the mass of the largest remnant naturally comes from the collision target, it can either accrete mass from the impactor or in high-energy events loose mass through erosion. A useful parameter related to $\Mlr$ is the accretion efficiency
 \begin{equation}
 \xi = \frac{\Mlr - \Mtar}{\Mimp}
@@ -237,6 +237,8 @@ The simulation sets \iss and \rss with differently composed bodies show similar 
 \end{figure}
 \end{landscape}
 
+
+\subsection{Catastrophic disruption threshold $Q^*_D$, $Q^*_{RD}$}
 Another quantity associated with the largest remnant is the specific impact energy required for catastrophic disruption, which is defined as a collision where the largest remnant is no more than half of the targets mass. The specific impact energy in its original defintion \cite{Benz1999Icar..142....5B} is the kinetic energy of the impactor 
 \begin{equation}
 Q = \frac{ \frac{1}{2} \vimp^2 \Mimp }{\Mtar} 
@@ -247,7 +249,7 @@ The specific impact energy required for catastrophic disruption is denoted $Q^*_
 \end{equation}
 More recent work \citep{Stewart:2009p3265, 2009ApJ...700L.118M, 2010ApJ...712L..73M, Leinhardt:2011p4060} considers the reduced mass and defines the specific reduced impact energy 
 \begin{equation}
-Q_R = \frac{ \frac{1}{2} \vimp^2 \mu }{\Mtar + \Mimp} ~~~ \mu = \frac{\Mtar \Mimp}{\Mtar + \Mimp} 
+Q_R = \frac{ \frac{1}{2} \vimp^2 \mu }{\Mtar + \Mimp} \hspace{2.0cm} \mu = \frac{\Mtar \Mimp}{\Mtar + \Mimp} 
 \end{equation}
 and defines catastrophic disruption as a collision where the largest remnant has no more than half of the total mass $\Mtot = \Mtar + \Mimp$ with the reduced catastrophic disruption threshold $Q^*_{RD}$
 \begin{equation}
@@ -259,9 +261,12 @@ and defines catastrophic disruption as a collision where the largest remnant has
 \end{equation}
 $Q^*_{RD}$ is a constant depending on the material and scale-dependent physics. A velocity dependent form for this constant in \emph{cgs}-units is given by
 \begin{equation}
-Q^*_{RD} = q_s R^{9\mu/(3-2\phi)}_{C1} \vimp^{2-3\mu} + q_g R^{3 \mu}_{C1} \vimp^{2-3\mu}
+Q^*_{RD} = \underbrace{ q_s R^{9\mu/(3-2\phi)}_{C1} \vimp^{2-3\mu} }_{\textrm{strength regime} } + \underbrace{ q_g R^{3 \mu}_{C1} \vimp^{2-3\mu}}_{\textrm{gravity regime}}
 \end{equation}
-where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$.
+where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$. The first part comes from the required energy to overcome material strength, while the second part 
+
+
+\cite{Stewart:2009p3265} find the
 
 \begin{landscape}
 \begin{figure}[htbp]
