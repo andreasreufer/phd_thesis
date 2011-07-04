@@ -165,13 +165,21 @@ $\vinf / \vesc$ & 1.25 & 1.37 & 1.50 & 1.73 & 2.29 & 2.83 & 3.35 & 3.87\\
 \caption{Conversion table $\vinf \leftrightarrow \vesc$}
 \label{ch03_tbl01}
 \end{table} 
-Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical angle to smaller values and transforms the abrupt change from $\xi \approx 1$ to $\xi \approx 0$ into a smoother transition over a larger span of impact angle. For small mass ratios like $\gamma = 0.1$ in the \css or the simulation set or the $\gamma = 0.1$ and $0.2$ simulations in set \rss, the accretion efficiency follows a curve similar to the relative volume of the impactor hitting the target (black dashed line in all figures \ref{ch03_fig08a} to \ref{ch03_fig08c}). The impact velocity where the two quantities correlate best is between $1.20 \dots 1.40 \vesc$. The reason why this correlation gets weaker for higher mass ratios, is because the simple volumetric guess assumes that the target is not changed considerably and simply cuts through the impactor. The alteration of the target increases with higher mass ratios and model breaks down. Another complication is that equating the cross-section volume with the accreted mass only works for constant-density bodies. While this is roughly the case in simulation set \rss with its pure silicate bodies, this assumption breaks down in \css and \iss, where the heavier cores carry more kinetic energy per volume than the mantle material. So is makes a difference, whether the core intersects the target or not.
+Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical angle to smaller values and transforms the abrupt change from $\xi \approx 1$ to $\xi \approx 0$ into a smoother transition over a larger span of impact angle. For small mass ratios like $\gamma = 0.1$ in the \css or the simulation set or the $\gamma = 0.1$ and $0.2$ simulations in set \rss, the accretion efficiency follows a curve similar to the relative volume of the impactor hitting the target (black dashed line in all figures \ref{ch03_fig08a} to \ref{ch03_fig08c}). The impact velocity where the two quantities correlate best is between $1.20 \dots 1.40 \vesc$. The reason why this correlation gets weaker for higher mass ratios, is because the simple volumetric guess assumes that the target is not changed considerably and simply cuts through the impactor. The alteration of the target increases with higher mass ratios and model breaks down. Another complication is that equating the cross-section volume with the accreted mass only works for constant-density bodies. While this is roughly the case in simulation set \rss with its pure silicate bodies, this assumption breaks down in \css and \iss, where the heavier cores carry more kinetic energy per volume than the mantle material. In this case it makes a difference whether the core misses or hits the target. 
+
+By further increasing the impact velocity, the accretion efficiency goes below $1$ even for $0 \deg$ head-on impacts. For high enough velocities it becomes negative so that the target is being eroded. While for hight impact velocities $\vesc > 3.00 \vesc$, the accretion efficiency becomes smaller for a smaller impact angle at a fixed 
 
 
+ and becomes even negative. The target is then eroded. 
 
-\ref{ch03_fig09a} to \ref{ch03_fig09c}
 
-The black dashed line shows the relative amount of impactor volume hitting the target, as in figure \ref{ch03_fig05}.
+no longer reaches a value of $1$ for a head-on impact. For a 
+
+
+If the impact energy becomes high enough, the target looses mass and is being eroded. 
+
+
+Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show again the accretion efficiency but as a function of the impact velocity for different impact angles. 
 
 
 
@@ -199,7 +207,10 @@ The black dashed line shows the relative amount of impactor volume hitting the t
 \label{ch03_fig08c}
 \end{center}
 \end{figure}
+\end{landscape}
 
+
+\begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{09_accreff_vimp_r3.pdf}
