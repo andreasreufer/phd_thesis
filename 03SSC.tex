@@ -169,8 +169,14 @@ Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical ang
 
 By further increasing the impact velocity, the accretion efficiency goes below $1$ even for $0 \deg$ head-on impacts. For high enough velocities it becomes negative so that the target is being eroded. While for hight impact velocities $\vesc > 3.00 \vesc$, the accretion efficiency becomes smaller for smaller impact angle, the effect reverses in an regime between $2.00 \dots 3.00 \vesc$, where the accretion efficiency actually increases again between for decreasing impact angles between $0 \dots 20 \deg$. This can be explained due to the fact that for a more head-on collision distributes the impact more evenly among the target, so that less mass reaches the required kinetic energy to leave the largest remnant. This effect is more prominent in the simulation sets with differentiated bodies (\css and \iss).
 
+The results for the accretion efficiency are in agreement with previous work. \cite{Benz:1988p3336} performed SPH collision simulations with $\Mtar = 0.124 \ME$, $\gamma = 1/6$, $\vimp = 2.2 \dots 8.46 \vesc$ and $\thimp = 0 \dots 32 \deg$. Runs $9 \dots 12$ are comparable with simulations performed in this study here. While we have no data for $\Mtar = 0.124 \ME$ and $\gamma = 1/6$, the results should lie somewhere in between the runs for $\Mtar = 0.1 \ME$ and $\gamma = 0.1$ and $0.2$. 
 
+
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
+
 \begin{figure}[htbp]
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_r3.pdf}
@@ -194,7 +200,9 @@ By further increasing the impact velocity, the accretion efficiency goes below $
 \label{ch03_fig08c}
 \end{center}
 \end{figure}
+
 \end{landscape}
+}
 
 Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show the accretion efficiency as a function of the impact velocity for different impact angles. All mass ratios in all simulation sets show the same characteristics: For grazing impact angles ($\thimp \gg \theta_{graz}$, compare figure \ref{ch03_fig03}), the accretion efficiency is a step function of the impact velocity. Either the impactor is almost perfectly accreted or misses the target completely. Target erosion is almost negligible, even for very high impact energies. For smaller impact angles then function then transitions towards a parabolic function. Escaping mass from the largest remnant is the proportional to the impact energy or the impact velocity squared. 
 
@@ -211,6 +219,8 @@ with $c_1 = 2.43, c_2 = - 0.0408, c_3 = 1.86$ and $c_4 = 1.08$. The vertical lin
 
 The simulation sets \iss and \rss with differently composed bodies show similar results for the critical velocity and therefore are also fit equation \ref{ch03_eq002} equally well as in the \css simulation set. \cite{2010ApJ...714L..21K} use equation \ref{ch03_eq002} to determine, whether collisions in terrestrial planet formation simulations are accreting or eroding mass on the target. Considering the disagreement between the fitting function and the simulation results suggest, that expression \ref{ch03_eq002} should not be used for $\thimp < 20 \deg$ and very high impact velocities, otherwise disruptive events while be falsely treated as accretionary.
 
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -236,9 +246,9 @@ The simulation sets \iss and \rss with differently composed bodies show similar 
 \end{center}
 \end{figure}
 \end{landscape}
+}
 
-
-\subsection{Catastrophic disruption threshold $Q^*_D$, $Q^*_{RD}$}
+\subsection{Catastrophic disruption threshold $Q^*_D$ and $Q^*_{RD}$}
 Another quantity associated with the largest remnant is the specific impact energy required for catastrophic disruption, which is defined as a collision where the largest remnant is no more than half of the targets mass. The specific impact energy in its original defintion \cite{Benz1999Icar..142....5B} is the kinetic energy of the impactor 
 \begin{equation}
 Q = \frac{ \frac{1}{2} \vimp^2 \Mimp }{\Mtar} 
@@ -253,21 +263,25 @@ Q_R = \frac{ \frac{1}{2} \vimp^2 \mu }{\Mtar + \Mimp} \hspace{2.0cm} \mu = \frac
 \end{equation}
 and defines catastrophic disruption as a collision where the largest remnant has no more than half of the total mass $\Mtot = \Mtar + \Mimp$ with the reduced catastrophic disruption threshold $Q^*_{RD}$
 \begin{equation}
-\Mlr(Q^*_{RD}) = 0.5 (\Mtar + \Mimp)
+\Mlr(Q^*_{RD}) = 0.5 \Mtot
 \end{equation}
 \cite{Stewart:2009p3265} propose the simple linear relationship between the largest remnant mass and $Q_R$
 \begin{equation}
+\label{ch03_eq003}
 \Mlr / \Mtot = - 0.5 ( Q_R / Q^*_{RD} - 1 ) + 0.5
 \end{equation}
 $Q^*_{RD}$ is a constant depending on the material and scale-dependent physics. A velocity dependent form for this constant in \emph{cgs}-units is given by
 \begin{equation}
 Q^*_{RD} = \underbrace{ q_s R^{9\mu/(3-2\phi)}_{C1} \vimp^{2-3\mu} }_{\textrm{strength regime} } + \underbrace{ q_g R^{3 \mu}_{C1} \vimp^{2-3\mu}}_{\textrm{gravity regime}}
 \end{equation}
-where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$. The first part comes from the required energy to overcome material strength, while the second part 
+where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$. The first part comes from the required energy to overcome material strength, while the second part accounts for the gravitational binding energy. For small, solid bodies ($R < 1km$), the strength term is dominating, while it becomes negligible for large bodies ($R > 100km$). For the constants, \cite{Stewart:2009p3265} find the following constants for the basalt bodies in \cite{Benz1999Icar..142....5B}: $\mu = 0.5, \phi = 8, q_s = 7 \times 10^4, q_g = 10^{-4}$. In the gravity regime, \cite{2010ApJ...712L..73M} uses the same constant but changes $\mu = 0.4$. Obviously equation \ref{ch03_eq003} does not account for the collision geometry imposed by the impact angle and therefore deviations are expected. \cite{Stewart:2009p3265} state that the relationship \emph{does not hold for conditions that depart from the catastrophic disruption regime}. This excludes explicitly collisions which are merging ($\xi \approx 1$) or collisions in the super-catastrophic regime ($Q_R / Q^*_{RD} > 2$). Note also that the predicted $\Mlr / \Mtot$ is not scale invariant, as $Q^*_{RD}$ depends on the absolute velocity.
 
+Figures \ref{ch03_fig15a} to \ref{ch03_fig15c} show the mass of the largest remnant relative to the total mass as a function of $Q_R / Q^*_{RD}$ for different impact angles. The dashed line shows the linear relationship \ref{ch03_eq003} which us supposed to match the results. As our simulations covered the same range of impact velocities for all mass ratios, the range of $Q_R$ covered is smaller for small mass ratios. For a small mass ratio, the impact velocity needs to be higher to reach the same value of $Q_R$ than for a collision with a larger mass ratio. As expected the value for $\Mlr / \Mtot$ does not match the linear relationship for collisions at the minimal specific impact energy $Q_{R,min} = \frac{ \frac{1}{2} \vesc^2 \mu}{\Mtot}$ which are perfectly accreting for all impact angles and therefore $\Mlr = \Mtot$. 
 
-\cite{Stewart:2009p3265} find the
+For larger values of $Q_R$ collisions become eroding and the relationship presents a reasonable fit for the determined largest remnant masses. The fit becomes better for small mass ratios. The concept of relating the largest remnant mass with the specific impact is based on the assumption, that the impact energy is perfectly coupled into the combined mass and can be used to overcome strength and the gravitational binding energy. But for impact angles above the grazing angle, considerable mass of the impactor misses the target and part of the impact energy can not be used erode the target. This effect can be seen in the results for simulations with impact angles near or above the grazing angle. For very head-on impact angles, the relationship surprisingly also shows a worse agreement, despite the fact that the impact energy is coupled perfectly into the combined mass. In all simulations, the $\Mlr / \Mtot$ decreases faster than linear for $\thimp < 20 \deg$. For small mass ratios ($\gamma = 0.35, 0.2, 0.1$), the impact angle for which the results match the prediction best is between $\thimp = 22 \dots 30 \deg$. For the larger mass ratios of $\gamma = 0.5$ and $0.7$, the slope of $\Mlr / \Mtot$ is best matched for $\thimp = 22 \deg$ for $Q_R > 0.5 Q^*_{RD}$ , but has quite a large offset. For smaller $Q_r$, small impact angles present a better match, but show a non-linear slope as for the small mass ratios. Nevertheless, the relationship \ref{ch03_eq003} predicts the largest remnant mass within a factor of 2 for all cases and much better for most eroding cases, which is in accordance with \cite{2009ApJ...700L.118M}. As the accretion efficiency $\xi$ above, the agreement of the relationship with the results is basically scale-invariant. The differences between different mass regimes show now systematic differences.
 
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -293,7 +307,7 @@ where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/c
 \end{center}
 \end{figure}
 \end{landscape}
-
+}
 
 
 compare with previous work\\
@@ -330,6 +344,9 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
 \end{equation}
 
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -355,8 +372,11 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 \end{landscape}
+}
 
 
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -382,8 +402,11 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 \end{landscape}
+}
 
 
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
@@ -417,7 +440,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 \end{landscape}
-
+}
 
 
 %%
@@ -436,10 +459,12 @@ $t = \frac{T}{|W|}$
 $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
 
 % TODO: change to r3
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
+\includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
 \label{ch03_fig19a}
 \end{center}
@@ -447,7 +472,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{10_rotstab_c1.pdf}
+\includegraphics[scale=1.0]{10_rotstab_r3.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
 \label{ch03_fig10a}
 \end{center}

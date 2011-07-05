@@ -50,6 +50,8 @@
 \usepackage{fontspec}
 \usepackage{xltxtra}
 
+
+
 %--------------
 % Use the fancyhdr-package and redefine headings, page numbers, etc.
 \usepackage{fancyhdr}
@@ -101,6 +103,10 @@
 %\usepackage{lscape}
 \usepackage{pdflscape}
 
+% afterpage for wrapping text around around landscape pages
+\usepackage{afterpage}
+
+
 \usepackage{chapterbib}
 
 \usepackage{aux/aas_macros}
@@ -136,28 +142,28 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 
 %% Chapters
 % title page, declaration
-\include{00title}
+%\include{00title}
 
 % short planetary formation intro
 % motivation for simulating collisions
 % introduce collision basics and terms
 % give examples of collisions
-\include{01intro}
+%\include{01intro}
 
 % all about numerics and SPHLATCH
-\include{02code}
+%\include{02code}
 
 % pmc simulations, Lisse stuff, Eriks small body iron enrichment
 \include{03ssc} 
 
 % the mars paper
-\include{04mars}
+%\include{04mars}
 
 % the moon paper & hires simulations, additional plots for alt moon sims
-\include{05moon}
+%\include{05moon}
 
 \appendix
-\include{07appendix}
+%\include{07appendix}
 
 % Include a bibliography
 %\bibliographystyle{plain}
