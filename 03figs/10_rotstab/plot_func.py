@@ -54,7 +54,7 @@ xvar = "angle"
 
 yaxis = [ 1.e-3, 0.9 ]
 ylog  = True
-ylbl  = r"$T / |W|$"
+ylbl  = r"$T / |W|_{lr}$"
 yfmt  = tex_formatter
 ytik = (1.e-3, 1.e-2, 1.e-1)
 

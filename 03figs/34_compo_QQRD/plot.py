@@ -19,6 +19,7 @@ import numpy as np
 import pylab as pl
 
 from plot_func import *
+from numpy import sin, power
 
 #rcParams['text.usetex']=True
 mp.rc('text', usetex=True)
@@ -65,12 +66,15 @@ if ssname == "i1":
 if ssname == "r3":
   params = [ \
       ( SimParam(0.100, 0.200, nan, nan), [0,2] ),
-      ( SimParam(0.100, 0.500, nan, nan), [1,1] ),
-      ( SimParam(0.100, 1.000, nan, nan), [2,0] ) ]
+      ( SimParam(0.100, 0.500, nan, nan), [1,1] )]#,\
+     #( SimParam(0.100, 1.000, nan, nan), [2,0] ) ]
 
 
 bgax = plt.axes( [0.0, 0.0, 1.0, 1.0], frameon=False)
 axs = []
+
+
+#fitfile = open( "fit_" + ssname + ".txt", "w")
 
 zset = {}
 for ( sparm, axv ) in params:
@@ -82,11 +86,25 @@ for ( sparm, axv ) in params:
   for sim in sims:
     x = 0
     z = 0
+  
+    mtar = sim.tarb.m
+    mimp = sim.impb.m
+    mtot = mtar + mimp
+    mred = sim.gi.mred
+    vesc = sim.gi.vesc
+    RC1  = power( 3.*mtot / (4.*pi ), 1./3. )
+    qg   = 1.e-4
+
     if xvar == "vimp":
-      vimp = sim.params.vimprel
-      x = vimp
-      #vinf = sqrt( vimp*vimp - 1 )
-      #x = vinf
+      vimp = sim.gi.vimp
+      QRQRD = 0.5*mred*(vimp*vimp/mtot)*\
+          (1./(1.e-4*power(RC1, 1.2)*power(vimp, 0.8)) )
+      
+      x = QRQRD
+      
+      print sim.params.vimprel, QRQRD
+      
+      #x = sim.params.vimprel
       z = sim.params.impa
     else:
       x = sim.params.impa
@@ -110,23 +128,31 @@ for ( sparm, axv ) in params:
     else:
       (col, ls) = getVimpColor(zl[i])
 
+    #ls = ls[0]
+
     if ylog:
       ax.semilogy( xll[i], resll[i], ls, color=col, markersize=6)
     else:
-      ax.plot( xll[i], resll[i], ls, color=col, markersize=6)
+      ax.plot( xll[i], resll[i], ls, color=col, markersize=6, linewidth=0.4)
+
+      #print sparm.mtar, gamma, impa, vcritA, vcritB
+      #print >>fitfile, sparm.key, sparm.mtar, sparm.mimp, impa, vcritA
+  
+  QRtheo = np.linspace( 0., 2., 100. )
+  MFeML  = 0.33 + 0.25*np.power( QRtheo, 1.65 )
+  
+  if ylog:
+    ax.plot( QRtheo, MFeML, 'k--' )
+  else:
+    ax.semilogy( QRtheo, MFeML, 'k--' )
+
+  #ax.plot( [0., 2.], [1., 0.], 'k--')
 
   #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
-  
-  if xvar == "vimp":
-    ax.axis( [ 0.0, 4.0, yaxis[0], yaxis[1] ])
-    #ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
-    ax.xaxis.set_ticks( (0., 1.0, 2.0, 3.0, 4.0) )
-    ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
-  else:
-    ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
-    ax.xaxis.set_ticks( (0.,15.,30.,45.,60.,75., 90.) )
-    ax.xaxis.set_ticklabels( ("" , "" , "" , "" , "", "", "" ) )
+  ax.axis( [ 0.0, 1.3, 0.2, 1.05])
+  ax.xaxis.set_ticks( (0.0, 0.5, 1.0 ) )
+  ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   ax.grid(True)
   
   ax.yaxis.set_ticks( ytik )
@@ -140,21 +166,22 @@ for ( sparm, axv ) in params:
 
 axselect = ()
 if ssname == "c1" or ssname == "r3":
-  axselect = (0,1,2)
+  axselect = (0,1)
 if ssname == "i1":
   axselect = (0,)
 for i in axselect:
   if xvar == "vimp":
-    axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
-    #axs[i].set_xlabel(r"$v_{- \infty} / v_{esc}$")
+    axs[i].set_xlabel(r"$Q_{R} / Q_{RD}^*$")
     axs[i].xaxis.set_major_formatter(math_formatter)
   else:
     axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")
     axs[i].xaxis.set_major_formatter(int_formatter)
 
+#fitfile.close()
+
 axselect = ()
 if ssname == "r3":
-  axselect = (0,1,2)
+  axselect = (0,1)
 if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":

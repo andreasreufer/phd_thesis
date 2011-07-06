@@ -83,10 +83,7 @@ for ( sparm, axv ) in params:
     x = 0
     z = 0
     if xvar == "vimp":
-      vimp = sim.params.vimprel
-      x = vimp
-      #vinf = sqrt( vimp*vimp - 1 )
-      #x = vinf
+      x = sim.params.vimprel
       z = sim.params.impa
     else:
       x = sim.params.impa
@@ -119,9 +116,8 @@ for ( sparm, axv ) in params:
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   if xvar == "vimp":
-    ax.axis( [ 0.0, 4.0, yaxis[0], yaxis[1] ])
-    #ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
-    ax.xaxis.set_ticks( (0., 1.0, 2.0, 3.0, 4.0) )
+    ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
+    ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   else:
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
@@ -139,14 +135,15 @@ for ( sparm, axv ) in params:
   axs.append(ax)
 
 axselect = ()
-if ssname == "c1" or ssname == "r3":
+if ssname == "c1":
+  axselect = (0,1)
+if ssname == "r3":
   axselect = (0,1,2)
 if ssname == "i1":
   axselect = (0,)
 for i in axselect:
   if xvar == "vimp":
     axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
-    #axs[i].set_xlabel(r"$v_{- \infty} / v_{esc}$")
     axs[i].xaxis.set_major_formatter(math_formatter)
   else:
     axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")

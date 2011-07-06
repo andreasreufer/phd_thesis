@@ -22,7 +22,7 @@ xvar = "angle"
 
 yaxis = [ 0.9e-3, 1.7]
 ylog  = True
-ylbl  = r"$[L_{LR} / L_{imp}]_z$"
+ylbl  = r"$[L_{lr} / L_{imp}]_z$"
 yfmt  = tex_formatter
 ytik = (1.e-3, 1.e-2, 1.e-1, 1.e-0)
 
