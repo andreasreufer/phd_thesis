@@ -19,7 +19,7 @@ xvar = "vimp"
 
 yaxis = [ 0.0009, 1.1]
 ylog  = True
-ylbl  = r"$M_{ejecta} / M_{tot}$"
+ylbl  = r"$M_{ej} / M_{tot}$"
 yfmt  = tex_formatter
 #ytik = (-2., -1., 0., 1.)
 ytik = (1.e-3, 1.e-2, 1.e-1, 1.0)

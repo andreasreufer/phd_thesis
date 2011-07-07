@@ -83,9 +83,7 @@ for ( sparm, axv ) in params:
     x = 0
     z = 0
     if xvar == "vimp":
-      vimp = sim.params.vimprel
-      vinf = sqrt( vimp*vimp - 1 )
-      x = vinf
+      x = sim.params.vimprel
       z = sim.params.impa
     else:
       x = sim.params.impa
@@ -114,15 +112,14 @@ for ( sparm, axv ) in params:
     else:
       ax.plot( xll[i], resll[i], ls, color=col, markersize=6)
 
-  #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
-  #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   if xvar == "vimp":
-    ax.axis( [ 0.0, 4.0, yaxis[0], yaxis[1] ])
-    #ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
-    ax.xaxis.set_ticks( (0., 1.0, 2.0, 3.0, 4.0) )
+    ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
+    ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   else:
+    Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
+    ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
     ax.xaxis.set_ticks( (0.,15.,30.,45.,60.,75., 90.) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "" , "", "", "" ) )
@@ -134,18 +131,18 @@ for ( sparm, axv ) in params:
     ylbll.append("")
 
   ax.yaxis.set_ticklabels( tuple( ylbll ) )
+  auxplot(ax)
 
   axs.append(ax)
 
 axselect = ()
 if ssname == "c1" or ssname == "r3":
-  axselect = (0,1,2)
+  axselect = (0,1)
 if ssname == "i1":
   axselect = (0,)
 for i in axselect:
   if xvar == "vimp":
-    #axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
-    axs[i].set_xlabel(r"$v_{-\infty} / v_{esc}$")
+    axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
     axs[i].xaxis.set_major_formatter(math_formatter)
   else:
     axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")
@@ -153,7 +150,7 @@ for i in axselect:
 
 axselect = ()
 if ssname == "r3":
-  axselect = (0,1,2)
+  axselect = (0,1)
 if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":
