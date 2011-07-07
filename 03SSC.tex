@@ -10,7 +10,7 @@ In cratering collisions the impactor partly misses the target only for very graz
 \cos{ \theta_{graz} }= \frac{\Rtar}{\Rtar + \Rimp}
 \end{equation}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.4]{03_grazing}
 \caption{Impact geometry for a \SSC on the left side. The right plot shows a collision between a relatively small impactor compared to the target. The grazing impact angle $\theta_{graz}$ is defined as the angle for which half of the impactor simply grazes past the target \citep{Asphaug:2010p3539}. The dashed circles show the largest impact angle for which no impactor material would graze past the target $\theta_A$ and the $90^\circ$ impact angle for which the whole impactor grazes past the target.}
@@ -18,7 +18,7 @@ In cratering collisions the impactor partly misses the target only for very graz
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.7]{05_Mhit}
 \caption{Relative volume of the impactor ($V_{hit, imp}$, left plots) and the target ($V_{hit, tar}$, right plots) hit by the other body as a function of impact angle (top plots) and impact parameter (bottom plots) for different mass ratios $\gamma$. Compare figure \ref{ch07_fig01} for an illustration of those volumes. Note that the ratio of radii scales with the cubic root of the mass ratio: $R_{imp} / R_{tar} \sim \sqrt[3]{\gamma}$. The dotted line shows for which impact angle half of the impactor volume grazes past the target. } 
@@ -68,14 +68,14 @@ A similar-sized collisions encompasses many parameters, the most important ones 
 
 Additional parameters are the pre-impact rotation of both the impactor and the target, which in principle spans another 6-dimensions into the parameter space. Another parameter study concerning the formation of the Earths Moon by \cite{Canup:2008p3551} analyzed the effect of pre-impact rotation of the two bodies onto disk formation after the collision and found it to be non-negligible. The composition and interior thermal profiles of both bodies are also inform parameters. They both determine the density distribution inside the bodies and therefore also the dynamics of the collision. The internal profile furthermore determines the radius of the body and therefore the impact geometry, the mutual escape velocity and accordingly the actual impact velocity. These additional parameters are not further explored in this study.
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.7]{01_overview_params.pdf}
 \caption{Overview of the sampling points in the 4-dimensional parameter space spanned by $\big\{ \Mtar, \gamma, \thimp, \vimp / \vesc \big\}$. The left plot shows the mass pairs for both bodies. Grey points denote \emph{r3} bodies (pure silicate), red points \emph{c1} bodies (chondritic, differentiated) and blue points \emph{i1} bodies (icy, differentiated). For each mass pair a total of 105 simulations sample the $\big\{ \thimp, \vimp / \vesc \big\}$ sub-space. Points in this sub-space are chosen so that regions of interest are sampled more accurately, for example in case of slow impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$).}
 \label{ch03_fig01}
 \end{center}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.8]{07_strucs.pdf}
 \caption{Isentropic internal structures of the bodies used in the simulations. The first row of plots shows the density profiles, the second row the pressure and the third row the temperatures. The first column of plots shows silicate bodies with a $100 wt\%$ $\silc$ composition with the following masses from left to right: 0.1 (blue curve), 0.2 (red), 0.5 $\ME$ (magenta). The second column shows structures of differentiated bodies of chondritic composition with a $70 wt\%$ $\silc$ mantle and a $30 wt\%$ iron core: 0.002 (red), 0.007 (green), 0.01 (blue), 0.02 (red), 0.035 (black), 0.07 (green), 0.1 (blue), 0.2 (red), 0.7 (green) and 1.0 $\ME$ (blue). The last column on the right shows a few structures with a composition typical to regions beyond the snow line with $50 wt\%$ water ice, $35 wt\%$ $\silc$ and $15 wt\%$ iron. Masses range from 0.002 (red), 0.01 (blue), 0.02 (red), 0.1 (blue), 0.2 (red) and 1.0 $\ME$ (blue) from left to right. The radius of the structures depends on the average density and therefore also on the composition of the bodies. Icy bodies have low average densities compared to chondritic bodies. Note that the bodies entirely composed of $\silc$ have a higher average density than equally massive bodies with a chondritic composition, due to the higher compressibility of $\silc$ compared to iron. In the core of the pure silicate bodies, the density reached more than twice the reference density of $\silc$, while the iron cores of the chondritic bodies is only slightly compressed.}
@@ -88,7 +88,7 @@ The strategy for sampling the parameter space goes as follows: For three differe
 The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set. The number of particles is around $100'000$ in the target body, so that shocks can be resolved sufficiently well.
 
 For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\big\{ \thimp, \vimp / \vesc \big\}$ is sampled. Figure \ref{ch03_fig01} shows on the right plot the used data points. The distribution covers areas of interest with more data points, for example for small impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$). In total a 105 individual simulations are performed for each body pair. The bodies used in the simulations are prepared as described in section \ref{ch02_sec04_ss02} and set up as described in\ref{ch02_sec04_ss04}. The initial separation $r_0$ is set to $5 (\Rimp + \Rtar)$ and simulations are integrated for $50 \tau_{coll}$. This is long enough in almost any case to get converging values for the interesting quantities in collisions. Figure \ref{ch03_fig31} shows various interesting quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. All of the quantities converge on a much smaller timescale than $50 \tau_{coll}$.
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{31_sim_summary.pdf}
 \caption{A summary for various quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. The x-axis in all plots denotes time in hours relative to the time of impact. One can see that all quantities converge much earlier than $50 \tau_{coll} = 22.76h$. The quantities shown in the top row are from left to right: Accretion efficiency $\xi$ (blue curve for iron, red for silicate and green for overall accretion), striping efficiency with the same color coding, change in potential (green) and internal energy (red) scaled to the reduced impact energy and finally on the far right the ratio of rotational to potential energy for the largest (black) and second remnant (red) as a measure for rotational stability. The middle row shows from the left: Remnant masses scaled to the impactor mass, relative velocity between the largest and the second remnant at infinity compared to the theoretical value expected from pure two-body interaction (dashed line), deflection angle of the second remnant compared to the theoretical two-body value (dashed line) and on the far right the composition of the remnant bodies and the ejecta. The bottom row shows from left to right: Mean specific internal energy ($erg/g$) for the largest (black) and the second remnant (red), angular momentum of the largest (black) and the second remnant (red) in $g~cm^2 / s$, mass partition into ejecta (grey), largest remnant (black), second remnant (red) and tertiary remnants (other colors). The far right shows the relative change in total energy over time as a measure for energy conservation. Errors in energy conservation mainly come from the removal of escaping particles at large distances. All the quantities will be explained below.}
@@ -96,7 +96,7 @@ For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\b
 \end{center}
 \end{figure}
 The only problematic cases where the quantities do not converge during this timescale, are when the impactor is being slowed enough to enter a closed orbit around the target with a very long orbital timescale. Such highly eccentric orbits lead to a secondary impact, where tidal effects can eject major fractions of the impactor out of the largest remnant. The orbital timescale may be $\gg 50 \tau_{coll}$, so that estimating the various quantities at that point in time leads to false results. In principle one could treat the secondary impact as a new collision scenario, but the problem is that our study does not cover impacts below the escape velocity and with impactor pre-rotation, which usually develops during the first collision. Such problematic cases occur for impact velocities slightly above the escape velocity and grazing impact angles. Figure \ref{ch03_fig30} shows such an example with the parameters $\{0.1 \ME, 0.1, 1.05 \vesc, 60 \deg \}$.
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=2.0]{30_elliptic_sim_out2.png}
 \includegraphics[scale=2.0]{30_elliptic_sim_out3.png}
@@ -111,14 +111,14 @@ The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{29_params_r3.pdf}
 \caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies and $50 \tau_{coll}$ for a $\vimp = \vesc$ collision in the \rss simulation set.}
 \label{ch03_fig29a}
 \end{center}
 \end{figure}
-\begin{figure}[htbp]
+\begin{figure}
 
 \begin{center}
 \includegraphics[scale=1.0]{29_params_c1.pdf}
@@ -127,7 +127,7 @@ The post-processing algorithms described in sections \ref{ch02_sec04_ss05} and \
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{29_params_i1.pdf}
 \caption{Number of particles, mean density $\bar{\rho}$ and mean smoothing length $\bar{h}$ for the target and impactor bodies and $50 \tau_{coll}$ for a $\vimp = \vesc$ collision in the \iss simulation set.}
@@ -177,7 +177,7 @@ The results for the accretion efficiency are in agreement with previous work. \c
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_r3.pdf}
 \caption{Accretion efficiency $\xi$ as a function of the impact angle for different relative impact velocities. Each subplot shows a set of simulations for a given target mass $\Mtar$ and mass ratio $\gamma = \Mimp / \Mtar$. Each point shows the outcome of an individual simulation of the \emph{r3} simulation set involving bodies composed purely of $\silc$. The black dashed line shows the relative volume of the impactor hitting the target for the given mass ratio (compare figure \ref{ch03_fig05}).}
@@ -185,7 +185,7 @@ The results for the accretion efficiency are in agreement with previous work. \c
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_c1.pdf}
 \caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set with bodies of chondritic composition (compare figure \ref{ch03_fig08a}. Each row shows a different magnitude of target mass, each column a different mass ratio.}
@@ -193,7 +193,7 @@ The results for the accretion efficiency are in agreement with previous work. \c
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{08_accreff_i1.pdf}
 \caption{Accretion efficiency $\xi$ for the \emph{i1} simulation set with bodies of icy composition (compare figure \ref{ch03_fig08b}).}
@@ -205,6 +205,10 @@ The results for the accretion efficiency are in agreement with previous work. \c
 }
 
 Figures \ref{ch03_fig09a} to \ref{ch03_fig09c} show the accretion efficiency as a function of the impact velocity for different impact angles. All mass ratios in all simulation sets show the same characteristics: For grazing impact angles ($\thimp \gg \theta_{graz}$, compare figure \ref{ch03_fig03}), the accretion efficiency is a step function of the impact velocity. Either the impactor is almost perfectly accreted or misses the target completely. Target erosion is almost negligible, even for very high impact energies. For smaller impact angles then function then transitions towards a parabolic function. Escaping mass from the largest remnant is the proportional to the impact energy or the impact velocity squared. 
+
+This step-function property of the accretion efficiency induces the notion of categorizing the collisions. \cite{Asphaug:2010p3539} finds four main categories: Slow collisions lead to an \emph{efficient accretion} ($\xi \approx 1$) of the impactor onto the target. The limit 
+
+
 
 \cite{2010ApJ...714L..21K} performed a similar parameter study and extracted as a characteristic quantitiy the critical impact velocity
 \begin{equation}
@@ -222,7 +226,7 @@ The simulation sets \iss and \rss with differently composed bodies show similar 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{09_accreff_vimp_r3.pdf}
 \caption{Accretion efficiency $\xi$ for the \emph{r3} simulation set as a function of impact velocity $\vimp$ for different impact angles. The vertical lines shows the predicted values from \cite{2010ApJ...714L..21K} for the critical impact velocity $v_{cr}$, where $\xi$ becomes negative and the target no longer accretes material but is eroded.}
@@ -230,7 +234,7 @@ The simulation sets \iss and \rss with differently composed bodies show similar 
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{09_accreff_vimp_c1.pdf}
 \caption{Accretion efficiency $\xi$ as a function of impact velocity $\vimp$ for different impact angles as in figure \ref{ch03_fig09a} for the \emph{c1} simulation set.}
@@ -238,7 +242,7 @@ The simulation sets \iss and \rss with differently composed bodies show similar 
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{09_accreff_vimp_i1.pdf}
 \caption{Accretion efficiency $\xi$ as a function of impact velocity $\vimp$ for different impact angles as in figure \ref{ch03_fig09a} for the \emph{i1} simulation set.}
@@ -283,7 +287,7 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_r3.pdf}
 \caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as defined in \cite{Stewart:2009p3265} and using the parameters for $Q^*_{RD}$ as in \cite{2010ApJ...712L..73M}. The coloured lines solid lines show the simulation values for the \emph{r3} simulation set and the dashed black line shows the predicted value from the scaling law.}
@@ -291,7 +295,7 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_c1.pdf}
 \caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{c1} simulation set.}
@@ -299,7 +303,7 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{15_QQRD_i1.pdf}
 \caption{Scaled largest remnant masses $\Mlr / M_{tot}$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ as in figure \ref{ch03_fig15a}, but for the \emph{i1} simulation set.}
@@ -316,6 +320,8 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 \subsection{Second remnant}
 
 \cite{Agnor:2004p3329} compare with figure 2\\
+
+
 
 mainly for next largest bodies\\
 mantle striping\\
@@ -334,7 +340,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_r3.pdf}
 \caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
@@ -342,7 +348,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_c1.pdf}
 \caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
@@ -350,7 +356,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{26_SR_M_i1.pdf}
 \caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
@@ -366,7 +372,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \subsection{Tertiary remnants}
 
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=3.0]{38_pearls.png}
 \caption{A snapshot of simulation $\{ 0.01 \ME, 0.7, 37.5 \deg, 3.00 \vesc\}$ of set \css at $t = 25 \tau_{coll}$. Both the target and the impactor lost considerable mass (14 \% and 27 \%), which goes mainly into an longitudinally expanding arm-like structure between the largest and the second remnant. Whilst being stretched, the arm collapses into individual tertiary remnants.}
@@ -381,7 +387,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{27_TR_M_r3.pdf}
 \caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{r3} simulation set.}
@@ -389,7 +395,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{27_TR_M_c1.pdf}
 \caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{c1} simulation set.}
@@ -397,7 +403,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{27_TR_M_i1.pdf}
 \caption{Tertiary remnant masses $M_{TR} = \sum_{i=3}^N M_i$ as a function of impact angle for the \emph{i1} simulation set.}
@@ -468,7 +474,7 @@ changes to second remnant (striping efficiency)
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{32_LR_compo_c1.pdf}
 \caption{Iron core mass fraction for the largest remnant $M_{lr, Fe} / M_{lr}$ as a function of the impact velocity for different impact angles in simulation set \css. The initial iron core mass fraction is $M_{tar, Fe} / \Mtar = 0.30$.}
@@ -476,7 +482,7 @@ changes to second remnant (striping efficiency)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{32_LR_compo_i1.pdf}
 \caption{Iron core $M_{lr, Fe} / M_{lr}$ and water ice mantle mass fraction $M_{lr, \mathrm{H}_2 \mathrm{O}} / M_{lr}$ for the largest remnant as a function of the impact velocity for different impact angles in simulation set \iss. The initial mass fractions are $M_{tar, Fe} / \Mtar = 0.15$ and $M_{tar, \mathrm{H}_2 \mathrm{O}} / \Mtar = 0.50$}
@@ -484,7 +490,7 @@ changes to second remnant (striping efficiency)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{34_compo_QQRD_c1.pdf}
 \caption{The iron fraction of the largest remnant $M_{lr, Fe} / \Mlr$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ for different impact angles in simulation set \css. The black dashed line shows the power law provided in \cite{2009ApJ...700L.118M}.}
@@ -492,7 +498,7 @@ changes to second remnant (striping efficiency)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{24_strpeff_impa_c1.pdf}
 \caption{Difference of silicate mantle and iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \css.}
@@ -500,7 +506,7 @@ changes to second remnant (striping efficiency)
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{24_strpeff_impa_i1.pdf}
 \caption{Differences of water vs. silicate mantle striping efficiency and silicate mantle vs. iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \iss.}
@@ -531,7 +537,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
@@ -539,7 +545,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{10_rotstab_r3.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
@@ -547,7 +553,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{25_LvsLimp_r3.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
@@ -556,7 +562,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{figure}
 
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
@@ -564,7 +570,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{10_rotstab_c1.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
@@ -572,7 +578,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{25_LvsLimp_c1.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
@@ -580,7 +586,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
@@ -588,7 +594,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{10_rotstab_i1.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
@@ -596,7 +602,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{25_LvsLimp_i1.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
@@ -605,7 +611,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{figure}
 
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{33_SR_rotperiod_r3.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
@@ -613,7 +619,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_r3.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
@@ -621,7 +627,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{36_SR_LvsLimp_r3.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
@@ -629,7 +635,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{33_SR_rotperiod_c1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
@@ -637,7 +643,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_c1.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
@@ -645,7 +651,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{36_SR_LvsLimp_c1.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
@@ -653,7 +659,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{33_SR_rotperiod_i1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
@@ -661,7 +667,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_i1.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
@@ -669,7 +675,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{36_SR_LvsLimp_i1.pdf}
 \caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
@@ -692,7 +698,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
 \caption{Change in internal energy $\Delta U$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
@@ -700,7 +706,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_c1.pdf}
 \caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{c1}.}
@@ -708,7 +714,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{11_dU_impa_i1.pdf}
 \caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{i1}.}
@@ -716,7 +722,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
 \caption{Change in potential energy $\Delta W$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
@@ -724,7 +730,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_c1.pdf}
 \caption{Change in potential energy $\Delta W$ as in figure \ref{ch03_fig12a}, but for the simulation set \emph{c1}.}
@@ -732,7 +738,7 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_i1.pdf}
 \caption{Change in potential energy $\Delta W$ as in figure \ref{ch03_fig12a}, but for the simulation set \emph{i1}.}
@@ -815,7 +821,7 @@ vinf and deflection of impactor for non-accreting case\\
 deflection angles for h\&r \\
 bouncing vs. shearing \\
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{04_vartheta}
 \caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
@@ -824,12 +830,11 @@ bouncing vs. shearing \\
 \end{figure}
 
 
-
 \afterpage{
-\clearpage% To flush out all floats, might not be what you want
+%\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
 \caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simultion set \emph{c1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
@@ -837,7 +842,7 @@ bouncing vs. shearing \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
 \caption{Relative velocity between the largest remnant and the second remnant at infinity as in figure \ref{ch03_fig21a}, but for simulation set \emph{i1}.}
@@ -845,7 +850,7 @@ bouncing vs. shearing \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{22_SR_vartheta_c1.pdf}
 \caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{c1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
@@ -853,7 +858,7 @@ bouncing vs. shearing \\
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{22_SR_vartheta_i1.pdf}
 \caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{i1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
@@ -946,7 +951,7 @@ little toy model population in the early solar system (-> chambers) \\
 % TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
 discuss topics in the light of the results. for example for Moon formation
 
-\begin{figure}[htbp]
+\begin{figure}
 \begin{center}
 \includegraphics[scale=0.7]{06_vimp}
 \caption{An order of magnitude estimation of the random velocities for bodies undergoing collisions in a protoplanetary system with a solar mass central star. The random velocity is roughly the Kepler velocity times the orbital eccentricity. Shown are isolines of velocities for given distance from a star with a solar mass for given eccentricities. The red line shows the speed of sound of for quartz at standard conditions \cite{Melosh:2007p3502}. Note that the actual impact velocity is given by $\vimp = \sqrt{ v_{rand}^2 + \vesc^2}$ and depends on the masses of the two colliding bodies. Due to the high Kepler velocity in the inner parts of the system, even small eccentricities lead to random velocities well above the speed of sound for silicates and therefore to hypervelocity impacts even for small bodies.}
@@ -955,8 +960,11 @@ discuss topics in the light of the results. for example for Moon formation
 \end{figure}
 
 
+
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
+
+
 
 
 
