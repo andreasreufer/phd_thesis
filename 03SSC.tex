@@ -451,7 +451,7 @@ show decay of shock wave plot\\ % TODOPLOT
 \end{center}
 \end{figure}
 \end{landscape}
-
+}
 
 
 
@@ -470,33 +470,17 @@ changes to second remnant (striping efficiency)
 \begin{landscape}
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_c1.pdf}
-\caption{Difference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) as a function of impact angle for the \emph{c1} simulation set.}
-\label{ch03_fig18a}
+\includegraphics[scale=1.0]{32_LR_compo_c1.pdf}
+\caption{Iron core mass fraction for the largest remnant $M_{lr, Fe} / M_{lr}$ as a function of the impact velocity for different impact angles in simulation set \css. The initial iron core mass fraction is $M_{tar, Fe} / \Mtar = 0.30$.}
+\label{ch03_fig32a}
 \end{center}
 \end{figure}
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[scale=1.0]{18_strpeff_vimp_i1.pdf}
-\caption{DIfference of striping efficiency for silicate and iron ($\delta_{\silc} - \delta_{Fe}$) and for water ice and silicate ($\delta_{H_2 O} - \delta_{\silc}$) as a function of impact angle for the \emph{i1} simulation set.}
-\label{ch03_fig19a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{23_impa_vs_corea_c1.pdf}
-\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{c1} simulation set.}
-\label{ch03_fig23a}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-\includegraphics[scale=1.0]{23_impa_vs_corea_i1.pdf}
-\caption{The impact angle of the impactors iron core against the targets iron core $\theta_{Fe}$ and the silicate layers of the two bodies $\theta_{\silc}$ as a function of actual impact angle $\thimp$ of the bodies for the \emph{i1} simulation set.}
-\label{ch03_fig23b}
+\includegraphics[scale=1.0]{32_LR_compo_i1.pdf}
+\caption{Iron core $M_{lr, Fe} / M_{lr}$ and water ice mantle mass fraction $M_{lr, \mathrm{H}_2 \mathrm{O}} / M_{lr}$ for the largest remnant as a function of the impact velocity for different impact angles in simulation set \iss. The initial mass fractions are $M_{tar, Fe} / \Mtar = 0.15$ and $M_{tar, \mathrm{H}_2 \mathrm{O}} / \Mtar = 0.50$}
+\label{ch03_fig32b}
 \end{center}
 \end{figure}
 
@@ -505,6 +489,22 @@ changes to second remnant (striping efficiency)
 \includegraphics[scale=1.0]{34_compo_QQRD_c1.pdf}
 \caption{The iron fraction of the largest remnant $M_{lr, Fe} / \Mlr$ as a function of the relative specific impact energy $Q_R / Q^*_{RD}$ for different impact angles in simulation set \css. The black dashed line shows the power law provided in \cite{2009ApJ...700L.118M}.}
 \label{ch03_fig34}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{24_strpeff_impa_c1.pdf}
+\caption{Difference of silicate mantle and iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \css.}
+\label{ch03_fig24a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{24_strpeff_impa_i1.pdf}
+\caption{Differences of water vs. silicate mantle striping efficiency and silicate mantle vs. iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \iss.}
+\label{ch03_fig24b}
 \end{center}
 \end{figure}
 \end{landscape}
@@ -604,6 +604,79 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_r3.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
+\label{ch03_fig33a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{35_SR_rotstab_r3.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
+\label{ch03_fig35a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_r3.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
+\label{ch03_fig36a}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_c1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
+\label{ch03_fig33b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{35_SR_rotstab_c1.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
+\label{ch03_fig35b} 
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_c1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
+\label{ch03_fig36b}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_i1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
+\label{ch03_fig33c}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{35_SR_rotstab_i1.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
+\label{ch03_fig35c}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_i1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
+\label{ch03_fig36c}
+\end{center}
+\end{figure}
+
 \end{landscape}
 }
 
@@ -668,6 +741,8 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{figure}
 \end{landscape}
 }
+
+
 
 %%
 % disk formation
@@ -787,7 +862,7 @@ bouncing vs. shearing \\
 \end{figure}
 \end{landscape}
 }
-}
+
 
 
 
@@ -869,7 +944,6 @@ bouncing vs. shearing \\
 \section{Discussion}
 little toy model population in the early solar system (-> chambers) \\
 % TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
-
 discuss topics in the light of the results. for example for Moon formation
 
 \begin{figure}[htbp]
@@ -879,10 +953,6 @@ discuss topics in the light of the results. for example for Moon formation
 \label{ch03_fig06}
 \end{center}
 \end{figure}
-
-
-
-
 
 
 \bibliographystyle{plainnat}

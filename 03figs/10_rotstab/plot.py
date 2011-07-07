@@ -65,8 +65,8 @@ if ssname == "i1":
 if ssname == "r3":
   params = [ \
       ( SimParam(0.100, 0.200, nan, nan), [0,2] ),
-      ( SimParam(0.100, 0.500, nan, nan), [1,1] )]#,\
-     #( SimParam(0.100, 1.000, nan, nan), [2,0] ) ]
+      ( SimParam(0.100, 0.500, nan, nan), [1,1] ),
+      ( SimParam(0.100, 1.000, nan, nan), [2,0] ) ]
 
 
 bgax = plt.axes( [0.0, 0.0, 1.0, 1.0], frameon=False)
@@ -135,8 +135,10 @@ for ( sparm, axv ) in params:
   axs.append(ax)
 
 axselect = ()
-if ssname == "c1" or ssname == "r3":
+if ssname == "c1":
   axselect = (0,1)
+if ssname == "r3":
+  axselect = (0,1,2)
 if ssname == "i1":
   axselect = (0,)
 for i in axselect:
@@ -149,7 +151,7 @@ for i in axselect:
 
 axselect = ()
 if ssname == "r3":
-  axselect = (0,1)
+  axselect = (0,1,2)
 if ssname == "c1":
   axselect = (1,5,7)
 if ssname == "i1":
