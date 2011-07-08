@@ -318,21 +318,6 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 \subsection{Second remnant mass $\Msr$}
 In most collisions, the largest remnant is mainly composed from the target. Similarly, the impactor can form a second remnant in case it is not completely accreted during the collision. Figures \ref{ch03_fig26a} to \ref{ch03_fig26c} shows the second remnant masses relative to the impactor mass as a function of the impact velocity, similar to figure 15 in \cite{Asphaug:2010p3539} which shows results from the parameter study by \cite{Agnor:2004p3329}. Although his results $\gamma = 1.0$ cannot be directly compared with our $\gamma = 0.1 \dots 0.7$, the overall characteristics match well our results. For the efficiently accreting collisions with small impact velocities ($\vneginf \lessapprox 0.5 \vesc$), no second remnant is left after the collisions. For higher velocities the impactor either completely or partly misses the target and a gravitationally bound second largest remnant can form. The larger the impact angle, the lower the velocity required to form a second remnant and the steeper is the increase to maximal reached mass for a given impact angle. From the maximum, the mass decreases again parabolically as a function of velocity or linearly to impact energy. The second remnant mass appears to be scale-free, but depends on the mass ratio. While for example for $\gamma = 0.7$, the impactor retains its mass entirely and becomes a second remnant with $\Msr / \Mimp \approx 1$ for angles up to $45 \deg$, the impactor looses considerably mass for low mass ratios (e.g. $\gamma = 1$) already for $\thimp < 60 \deg$. For high velocities and small angles, the second remnant mass becomes scale-dependent: For example in simulation set \css with parameters $\{0.2, \thimp < 35 \deg, 1.0 \vesc < \vneginf < 3.0 \vesc \}$, the second remnant mass decreases for larger mass regimes. While a  second remnant survives the collision for $\{0.01 \ME, 0.2, \thimp > 15 \deg, 1.0 \vesc < \vneginf < 3.0 \vesc \}$ with considerable mass between $0.1 \dots 0.5 \Mimp$, no second remnant is left over for comparable parameters but with $\Mtar = 1.0 \ME$. This can be explained, by disruption of the second remnant due to the much higher impact velocity in the $\Mtar = 1.0 \ME$ case in absolute numbers. The impact velocity us super-sonic and the second remnant is disrupted. The same effect can also be observed by comparing the three different target mass regimes in simulation set \iss.
 
-The second remant
-
-
-
-mainly for next largest bodies\\
-
-
-
-give volumetric estimate \\
-
-\begin{equation}
-\delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
-\end{equation}
-
-
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
@@ -362,6 +347,7 @@ give volumetric estimate \\
 \end{landscape}
 }
 
+Figures \ref{ch03_fig40a} to \ref{ch03_fig40c} show again the second remnant mass, but this time as a function of impact angle. For high enough impact velocities, the fit with the relative impactor volume hit by the target assuming a straight trajectory $V_{hit, imp}$ becomes obvious for simulation set \rss (figure \ref{ch03_fig40a}). The relationship holds for $\vimp > 1.10 \dots 1.15 \vesc$. For this homogenous bodies, the impactor mass hit by the target is proportional to the volume. The fit becomes a bit worse for the differentiated bodies with non-trivial structures, as can be seen with the plots for simulation set \css in figure \ref{ch03_fig40b}. The second remnant mass curves start to fit the relative hit volume for $\vimp > 1.30 \dots 1.40 \vesc$. The curve is a steeper function of the impact angle, which can be explained by considering the density profiles of the impactor bodies. In case only a very small fraction of the impactor is hit by the target, mainly low density mantle material will be abraded. So less mass is lost compared to a constant-density body with the same volume. For an impact angle near $\thgraz$, also the high density core will be affected and a small change in impact angle makes a big difference in the mass loss the impactor suffers.
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -369,24 +355,24 @@ give volumetric estimate \\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{40_SR_M_impa_r3.pdf}
-\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
-\label{ch03_fig26a}
+\caption{Second remnant mass $\Msr$ as a function of impact angle for the \rss simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown. The black dashed line shows the relative volume of the impactor hitting the target $V_{hit, imp}$ (compare figure \ref{ch03_fig05}).}
+\label{ch03_fig40a}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{40_SR_M_impa_c1.pdf}
-\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
-\label{ch03_fig26b}
+\caption{Second remnant mass $\Msr$ as a function of impact angle as in figure \ref{ch03_fig40a}, but for the \css simulation set.}
+\label{ch03_fig40b}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{40_SR_M_impa_i1.pdf}
-\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
-\label{ch03_fig26c}
+\caption{Second remnant mass $\Msr$ as a function of impact angle as in figure \ref{ch03_fig40a}, but for the \iss simulation set.}
+\label{ch03_fig40c}
 \end{center}
 \end{figure}
 \end{landscape}
@@ -499,6 +485,12 @@ inverse plot Meject as argument (of Q?)\\
 \subsection{Compositional changes}
 compare with Marcus 2009, Benz 1988
 changes to largest remnant (mantle striping): compare with Marcus 2009 (\cite{2009ApJ...700L.118M}) and 2010 (\cite{2010ApJ...712L..73M})
+
+\begin{equation}
+\delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
+\end{equation}
+
+
 
 changes to second remnant (striping efficiency)
 mantle striping\\
