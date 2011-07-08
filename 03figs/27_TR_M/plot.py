@@ -84,8 +84,8 @@ for ( sparm, axv ) in params:
     z = 0
     if xvar == "vimp":
       vimp = sim.params.vimprel
+      vinf = sqrt( vimp*vimp - 1 )
       x = vimp
-      #vinf = sqrt( vimp*vimp - 1 )
       #x = vinf
       z = sim.params.impa
     else:
@@ -119,9 +119,9 @@ for ( sparm, axv ) in params:
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   if xvar == "vimp":
-    ax.axis( [ 0.0, 4.0, yaxis[0], yaxis[1] ])
-    #ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
-    ax.xaxis.set_ticks( (0., 1.0, 2.0, 3.0, 4.0) )
+    ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
+    ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
+    #ax.xaxis.set_ticks( (0., 1.0, 2.0, 3.0, 4.0) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   else:
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])

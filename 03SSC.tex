@@ -85,7 +85,7 @@ Additional parameters are the pre-impact rotation of both the impactor and the t
 
 The strategy for sampling the parameter space goes as follows: For three different types of body composition sets of simulations are performed. Simulation set \emph{r3} uses homogeneous bodies made up of $100 \wtp~\silc$, simulation set \emph{c1} differentiated bodies with a chondritic composition of $70 \wtp~\silc$ and $30 \wtp~\iron$ and simulation set \emph{i1} uses differentiated bodies with a composition typical beyond the snow line of of $50 \wtp~\watr$, $35 \wtp~\silc$ and $15 \wtp~\iron$. Figure \ref{ch03_fig07} shows the internal structures for this three different types of bodies.
 
-The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set. The number of particles is around $100'000$ in the target body, so that shocks can be resolved sufficiently well.
+The general idea now is to use the \rss simulation with its simple internal structures to get a feeling for the different collisional effects and the scaling. The more realistic \css and \iss are then used to model actual collisions in planetary systems. Figure \ref{ch03_fig01} shows the sampling of the 4-dimensional parameter space mentioned above for the three different simulation sets.  The \rss simulation set uses three different mass ratios $\gamma = \Mimp / \Mtar$ with an impactor mass of $0.1 \ME$. The simulation sets \css and \iss cover three magnitudes of target masses in the range important for late terrestrial planet formation ($0.01 \dots 1 \ME$). The \css simulation set covers each target mass with at least impactors with a mass ratio of $\gamma = 0.2$ and  $0.7$. For the $0.1 \ME$ target, additional impactos with a mass ratio of $\gamma = 0.35$ and $0.1$ are also used. The \iss simulation set only uses impactors with a mass ratio of $\gamma = 0.2$. Figures \ref{ch03_fig29a} to \ref{ch03_fig29c} show the parameters used for each body pair in each simulation set. Note that in the \rss simulation set a few simulations have not been performed. The number of particles is around $100'000$ in the target body, so that shocks can be resolved sufficiently well with $\approx 50$ particles in a targets diameter.
 
 For each $\{ \Mtar, \Mimp \}$ combination, the parameter subspace spanned by $\big\{ \thimp, \vimp / \vesc \big\}$ is sampled. Figure \ref{ch03_fig01} shows on the right plot the used data points. The distribution covers areas of interest with more data points, for example for small impact velocities ($\vimp < 1.5 \vesc$) and grazing impact angles ($\thimp > 45 \deg$). In total a 105 individual simulations are performed for each body pair. The bodies used in the simulations are prepared as described in section \ref{ch02_sec04_ss02} and set up as described in\ref{ch02_sec04_ss04}. The initial separation $r_0$ is set to $5 (\Rimp + \Rtar)$ and simulations are integrated for $50 \tau_{coll}$. This is long enough in almost any case to get converging values for the interesting quantities in collisions. Figure \ref{ch03_fig31} shows various interesting quantities for the $\{0.1 \ME, 0.035 \ME, 1.60 \vesc, 38 \deg \}$ simulation in simulation set \css as a function of time. All of the quantities converge on a much smaller timescale than $50 \tau_{coll}$.
 \begin{figure}
@@ -150,21 +150,21 @@ Maybe the most important quantity of a similar-sized collisions is the mass of t
 \end{equation}
 which gives us the change in mass from the target to the largest remnant normalized to the impactor mass $\Mimp$. If the impactor is accreted perfectly $\xi = 1$, if no mass is accreted or lost $\xi = 0$ and in case of target erosion where the target looses mass $\xi < 0$.
 
-Figures \ref{ch03_fig08a} to \ref{ch03_fig08c} give the accretion efficiency for the three simulation sets as a function of the impact angle $\thimp$ for different impact velocities. For all three types of bodies and all mass ratios, the same characteristics can be observed: For very slow impact velocities of $\vimp = 1.00 \dots 1.05 \vesc$ (red and orange curves, x marker), the impactor is fully accreted independent of the impact angle. For very grazing impact angles a small fraction of the impactor is accelerated to an escaping velocity and escapes the remnant, so that the accretion efficiency is slightly below 1. This effect can be seen for $\thimp > 60 \deg$, especially for the $1.05 \vesc$ cases. A slight increase in impact velocity to $1.10 \vesc$ (green curve, x marker) lets the impactor miss the target almost unaltered if the impact angle is above a critical value, which seems to be mainly dependent on the mass ratio $\gamma$. Independent of type of body or the magnitude of the targets mass, this critical angle is between $60 \dots 75 \deg$ for $\gamma = 0.7$,  around $60 \deg$ for $\gamma = 0.2$ and slightly below $60 \deg$ for $\gamma = 0.1$. Above this critical angle, $\xi$ goes almost to 0. This is consistent with the results from \cite{Agnor:2004p3329} (compare figure 1) which finds a critical angle above $60 \deg$ for $\gamma = 1.0$. Additional simulations with $\gamma = 0.1$ and $0.5$ shown in figure 8 of \cite{Asphaug:2010p3539} also show critical impact angles for consistent with the results of this study (for a conversion between $\vinf$ and $\vimp$ check table \ref{ch03_tbl01}).
+Figures \ref{ch03_fig08a} to \ref{ch03_fig08c} give the accretion efficiency for the three simulation sets as a function of the impact angle $\thimp$ for different impact velocities. For all three types of bodies and all mass ratios, the same characteristics can be observed: For very slow impact velocities of $\vimp = 1.00 \dots 1.05 \vesc$ (red and orange curves, x marker), the impactor is fully accreted independent of the impact angle. For very grazing impact angles a small fraction of the impactor is accelerated to an escaping velocity and escapes the remnant, so that the accretion efficiency is slightly below 1. This effect can be seen for $\thimp > 60 \deg$, especially for the $1.05 \vesc$ cases. A slight increase in impact velocity to $1.10 \vesc$ (green curve, x marker) lets the impactor miss the target almost unaltered if the impact angle is above a critical value, which seems to be mainly dependent on the mass ratio $\gamma$. Independent of type of body or the magnitude of the targets mass, this critical angle is between $60 \dots 75 \deg$ for $\gamma = 0.7$,  around $60 \deg$ for $\gamma = 0.2$ and slightly below $60 \deg$ for $\gamma = 0.1$. Above this critical angle, $\xi$ goes almost to 0. This is consistent with the results from \cite{Agnor:2004p3329} (compare figure 1) which finds a critical angle above $60 \deg$ for $\gamma = 1.0$. Additional simulations with $\gamma = 0.1$ and $0.5$ shown in figure 8 of \cite{Asphaug:2010p3539} also show critical impact angles for consistent with the results of this study (for a conversion between $\vneginf$ and $\vimp$ check table \ref{ch03_tbl01}).
 \begin{table}[htdp]
 \begin{center}
 \begin{tabular}{l|r|r|r|r|r|r|r|r}
 $\vimp / \vesc$ & 1.00 & 1.05 & 1.10 & 1.15 & 1.20 & 1.30 & 1.40 & 1.50 \\
 \hline
-$\vinf / \vesc$ & 0.00 & 0.32 & 0.46 & 0.57 & 0.66 & 0.83 & 0.98 & 1.12\\
+$\vneginf / \vesc$ & 0.00 & 0.32 & 0.46 & 0.57 & 0.66 & 0.83 & 0.98 & 1.12\\
 \hline
 \hline
 $\vimp / \vesc$ & 1.60 & 1.70 & 1.80 & 2.00 & 2.50 & 3.00 & 3.50 & 4.00\\
 \hline
-$\vinf / \vesc$ & 1.25 & 1.37 & 1.50 & 1.73 & 2.29 & 2.83 & 3.35 & 3.87\\
+$\vneginf / \vesc$ & 1.25 & 1.37 & 1.50 & 1.73 & 2.29 & 2.83 & 3.35 & 3.87\\
 \end{tabular}
 \end{center}
-\caption{Conversion table $\vinf \leftrightarrow \vesc$}
+\caption{Conversion table $\vneginf \leftrightarrow \vesc$ based on the simple energy budget $\vimp^2 = \vneginf^2 + \vesc^2$.}
 \label{ch03_tbl01}
 \end{table} 
 Further increasing the impact velocity ($> 1.10 \vesc$) shifts this critical angle to smaller values and transforms the abrupt change from $\xi \approx 1$ to $\xi \approx 0$ into a smoother transition over a larger span of impact angle. For small mass ratios like $\gamma = 0.1$ in the \css or the simulation set or the $\gamma = 0.1$ and $0.2$ simulations in set \rss, the accretion efficiency follows a curve similar to the relative volume of the impactor hitting the target (black dashed line in all figures \ref{ch03_fig08a} to \ref{ch03_fig08c}). The impact velocity where the two quantities correlate best is between $1.20 \dots 1.40 \vesc$. The reason why this correlation gets weaker for higher mass ratios, is because the simple volumetric guess assumes that the target is not changed considerably and simply cuts through the impactor. The alteration of the target increases with higher mass ratios and model breaks down. Another complication is that equating the cross-section volume with the accreted mass only works for constant-density bodies. While this is roughly the case in simulation set \rss with its pure silicate bodies, this assumption breaks down in \css and \iss, where the heavier cores carry more kinetic energy per volume than the mantle material. In this case it makes a difference whether the core misses or hits the target. 
@@ -315,18 +315,18 @@ For larger values of $Q_R$ collisions become eroding and the relationship presen
 %%
 % second remnant 
 %% 
-\subsection{Second remnant}
-Whilst the largest remnant is in most collisions composed mainly from the previous collision target, the impactor often forms a second remnant, when it is not completely accreted. Figures \ref{ch03_fig26a} to \ref{ch03_fig26c} shows 
+\subsection{Second remnant mass $\Msr$}
+In most collisions, the largest remnant is mainly composed from the target. Similarly, the impactor can form a second remnant in case it is not completely accreted during the collision. Figures \ref{ch03_fig26a} to \ref{ch03_fig26c} shows the second remnant masses relative to the impactor mass as a function of the impact velocity, similar to figure 15 in \cite{Asphaug:2010p3539} which shows results from the parameter study by \cite{Agnor:2004p3329}. Although his results $\gamma = 1.0$ cannot be directly compared with our $\gamma = 0.1 \dots 0.7$, the overall characteristics match well our results. For the efficiently accreting collisions with small impact velocities ($\vneginf \lessapprox 0.5 \vesc$), no second remnant is left after the collisions. For higher velocities the impactor either completely or partly misses the target and a gravitationally bound second largest remnant can form. The larger the impact angle, the lower the velocity required to form a second remnant and the steeper is the increase to maximal reached mass for a given impact angle. From the maximum, the mass decreases again parabolically as a function of velocity or linearly to impact energy. The second remnant mass appears to be scale-free, but depends on the mass ratio. While for example for $\gamma = 0.7$, the impactor retains its mass entirely and becomes a second remnant with $\Msr / \Mimp \approx 1$ for angles up to $45 \deg$, the impactor looses considerably mass for low mass ratios (e.g. $\gamma = 1$) already for $\thimp < 60 \deg$. For high velocities and small angles, the second remnant mass becomes scale-dependent: For example in simulation set \css with parameters $\{0.2, \thimp < 35 \deg, 1.0 \vesc < \vneginf < 3.0 \vesc \}$, the second remnant mass decreases for larger mass regimes. While a  second remnant survives the collision for $\{0.01 \ME, 0.2, \thimp > 15 \deg, 1.0 \vesc < \vneginf < 3.0 \vesc \}$ with considerable mass between $0.1 \dots 0.5 \Mimp$, no second remnant is left over for comparable parameters but with $\Mtar = 1.0 \ME$. This can be explained, by disruption of the second remnant due to the much higher impact velocity in the $\Mtar = 1.0 \ME$ case in absolute numbers. The impact velocity us super-sonic and the second remnant is disrupted. The same effect can also be observed by comparing the three different target mass regimes in simulation set \iss.
 
-compare with plot 15 in \cite{Asphaug:2010p3539} \\
+The second remant
+
+
+
 mainly for next largest bodies\\
-mantle striping\\
-impactor perspective\\
-accr. efficiencies for individual components \\
-compositional changes for h\&r \\
-introduce alternative impact angles $\theta_{core}$ \\
+
+
+
 give volumetric estimate \\
-compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
 
 \begin{equation}
 \delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
@@ -361,6 +361,39 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \end{figure}
 \end{landscape}
 }
+
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{40_SR_M_impa_r3.pdf}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ for the \emph{r3} simulation set. Simulations with a second remnant below 5\% of the impactors mass are not shown.}
+\label{ch03_fig26a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{40_SR_M_impa_c1.pdf}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{c1} simulation set.}
+\label{ch03_fig26b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{40_SR_M_impa_i1.pdf}
+\caption{Second remnant mass $\Msr$ as a function of relative velocity at infinity before impact $\v_{-\infty} / \vesc$ as in figure \ref{ch03_fig26a} but for the \emph{i1} simulation set.}
+\label{ch03_fig26c}
+\end{center}
+\end{figure}
+\end{landscape}
+}
+
+
+
 
 %%
 % Tertiary remnants
@@ -468,6 +501,13 @@ compare with Marcus 2009, Benz 1988
 changes to largest remnant (mantle striping): compare with Marcus 2009 (\cite{2009ApJ...700L.118M}) and 2010 (\cite{2010ApJ...712L..73M})
 
 changes to second remnant (striping efficiency)
+mantle striping\\
+impactor perspective\\
+accr. efficiencies for individual components \\
+compositional changes for h\&r \\
+introduce alternative impact angles $\theta_{core}$ \\
+compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
+
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -822,7 +862,7 @@ bouncing vs. shearing \\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{04_vartheta}
-\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vinf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
+\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vneginf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
 \label{ch03_fig02}
 \end{center}
 \end{figure}
