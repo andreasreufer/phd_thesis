@@ -25,6 +25,8 @@ cfileB  = sdirB + "clumps_sim.h5part"
 dfileA = sdirA + "dump0020001_T02.3993e+04.h5part"
 dfileB = sdirB + "dump0025701_T03.8165e+04.h5part"
 
+dfileC = sdirA + "dump0012080_T09.5210e+02.h5part"
+dfileD = sdirA + "dump0014966_T09.5210e+03.h5part"
 
 axnorm = [-1.6e10, 1.6e10, -0.9e10, 0.9e10]
 axzoom = [-3.2e9 , 3.2e9 , -1.8e9 , 1.8e9 ]
@@ -32,6 +34,7 @@ axmed  = [-6.4e9 , 6.4e9 , -3.6e9 , 3.6e9 ]
 
 axA = [-1.0e10, 1.0e10, -1.0e10, 1.0e10]
 axB = [-1.4e11, 1.4e11, -0.7e11, 0.7e11]
+axC = [-0.5e10, 0.5e10, -0.5e10, 0.5e10]
 
 curcfg = cfg_mat_XY_n
 curcfg.xinch = 2.0
@@ -50,9 +53,22 @@ curcfg.filt = "negzonly"
 curcfg.dpi = 600
 papercolors(curcfg)
 
-curcfg.ax = axA
+#curcfg.ax = axA
+#curplot = GIplot(cfg_mat_XY_n)
+#curplot.doPlot( dfileA, cfileA, "outA.png" )
+
+curcfg.xinch = 1.0
+curcfg.yinch = 1.0
+curcfg.postplot = []
+curcfg.parm_vc = [1.1, 1.1]
+
+curcfg.ax = [-0.1e10, 0.1e10, -0.1e10, 0.1e10]
 curplot = GIplot(cfg_mat_XY_n)
-curplot.doPlot( dfileA, cfileA, "outA.png" )
+curplot.doPlot( dfileC, cfileA, "outC.png" )
+
+curcfg.ax = axC
+curplot = GIplot(cfg_mat_XY_n)
+curplot.doPlot( dfileD, cfileA, "outD.png" )
 
 #curcfg.ax = axB
 #curplot = GIplot(cfg_mat_XY_n)
