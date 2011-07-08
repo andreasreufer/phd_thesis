@@ -22,8 +22,20 @@ def plotFunc(sim):
 
 
 def filterFunc(sim):
-  return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ) and (sim.results.mm[2] > 0.1*sim.impb.m and sim.results.vinfm.shape[1] > 2)
-  #return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. )
+  if not ( sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ) ):
+    return False
+
+  if sim.params.key == "mtar000.100_mimp000.020_impa75.0_vimp1.10" or \
+    sim.params.key == "mtar001.000_mimp000.700_impa00.1_vimp1.40":
+    return False
+
+  if not ( sim.results.mm.shape[0] > 2 ):
+    return False
+
+  if (sim.results.mm[2] > 0.1*sim.impb.m and sim.results.vinfm.shape[1] > 2):
+    return True
+  else:
+    return False
 
 
 #xvar = "vimp"
