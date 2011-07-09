@@ -384,17 +384,18 @@ Comparing the two ratios $\Mlr / \Mtar$ and $\Msr / \Mimp$ shows an interesting 
 % Tertiary remnants
 %%
 \subsection{Tertiary remnants}
-Most collisions produce one or two remnant bodies: A largest remnant as a product of the target and parts of the impactor and a second largest remnant made up of parts from the impactor. Nevertheless, further left-overs in the form of tertiary remnants. 
+Most collisions produce one or two remnant bodies: A largest remnant as a product of the target and parts of the impactor and a second largest remnant made up of parts from the impactor. Further bound leftovers in the form of tertiary remnants nevertheless can form too. Because of the lack of a progenitor like the largest and the second remnant, a single third remnant is unlikely. If tertiary remnants occur, they occur in the form of several bodies. In order to simplify, we define the tertiary remnant mass as the sum of all remnants beyond the largest and the second remnant
+\begin{equation}
+M_{tr} = \sum_{i = 3}^N M_i
+\end{equation}
+where $M_3$ is the mass of the third heaviest, $M_4$ of the fourth heaviest remnant and so on. Note that tertiary remnants are still bound bodies, as defined in section \ref{ch02_sec04_ss05}. Ejecta in the form of unbound SPH particles is therefore not counted as tertiary remnants. Figures \ref{ch03_fig27a} to \ref{ch03_fig27c} shows tertiary remnant mass as a function of impact velocity for different impact angles. Masses down to $1 \% \Mimp$ are shown, which for example for the $\gamma = 0.1$ simulations in set \css are represented by only 100 particles which is at the limit of mass resolution for a bound clump. Such clumps are resolved by only a few particles in diameter.
+
+
+From the \css simulation set it becomes obvious, that tertiary remnant mass is not scale-invariant, therefore simulation set \rss with its limited target mass range does not reveal much about the mechanism responsible for the creation of tertiary remnants. Apart from the mass scale-dependence, tertiary masses also vary with 
+
+
 
 \cite{Agnor:2004p3329} compare with figure 2\\
-
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[scale=2.5]{38_pearls.png}
-\caption{Three snapshots of simulation $\{ 0.01 \ME, 0.7, 37.5 \deg, 3.00 \vesc\}$ of set \css at $t = \{0.5, 5, 25\} \tau_{coll}$. Both the target and the impactor lost considerable mass (14 \% and 27 \%), which goes mainly into an longitudinally expanding arm-like structure between the largest and the second remnant. Whilst being stretched, the arm collapses into individual tertiary remnants.}
-\label{ch03_fig38}
-\end{center}
-\end{figure}
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -424,6 +425,15 @@ Most collisions produce one or two remnant bodies: A largest remnant as a produc
 \end{figure}
 \end{landscape}
 }
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[scale=2.5]{38_pearls.png}
+\caption{Three snapshots of simulation $\{ 0.01 \ME, 0.7, 37.5 \deg, 3.00 \vesc\}$ of set \css at $t = \{0.5, 5, 25\} \tau_{coll}$. Both the target and the impactor lost considerable mass (14 \% and 27 \%), which goes mainly into an longitudinally expanding arm-like structure between the largest and the second remnant. Whilst being stretched, the arm collapses into individual tertiary remnants.}
+\label{ch03_fig38}
+\end{center}
+\end{figure}
+
 
 
 %%
