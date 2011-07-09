@@ -19,6 +19,7 @@ import numpy as np
 import pylab as pl
 
 from plot_func import *
+from numpy import sin, power
 
 #rcParams['text.usetex']=True
 mp.rc('text', usetex=True)
@@ -82,8 +83,21 @@ for ( sparm, axv ) in params:
   for sim in sims:
     x = 0
     z = 0
+
+    mtar = sim.tarb.m
+    mimp = sim.impb.m
+    mtot = mtar + mimp
+    mred = sim.gi.mred
+    vesc = sim.gi.vesc
+    RC1  = power( 3.*mtot / (4.*pi ), 1./3. )
+    qg   = 1.e-4
+    vimp = sim.gi.vimp
+    QRQRD = 0.5*mred*(vimp*vimp/mtot)*\
+    (1./(1.e-4*power(RC1, 1.2)*power(vimp, 0.8)) )
+
     if xvar == "vimp":
-      x = sim.params.vimprel
+      #x = sim.params.vimprel
+      x = QRQRD
       z = sim.params.impa
     else:
       x = sim.params.impa
@@ -116,8 +130,10 @@ for ( sparm, axv ) in params:
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   if xvar == "vimp":
-    ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
-    ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
+    #ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
+    ax.axis( [ 0.0, 1.0, yaxis[0], yaxis[1] ])
+    #ax.xaxis.set_ticks( (1.0, 2.0, 3.0, 4.0) )
+    ax.xaxis.set_ticks( (0.0, 0.5, 1.0) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "") )
   else:
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
@@ -143,7 +159,8 @@ if ssname == "i1":
   axselect = (0,)
 for i in axselect:
   if xvar == "vimp":
-    axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
+    #axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")
+    axs[i].set_xlabel(r"$Q_{R} / Q_{RD}^*$")
     axs[i].xaxis.set_major_formatter(math_formatter)
   else:
     axs[i].set_xlabel(r"$\theta_{imp}  [^\circ]$")
