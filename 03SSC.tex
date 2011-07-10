@@ -388,7 +388,7 @@ Most collisions produce one or two remnant bodies: A largest remnant as a produc
 \begin{equation}
 M_{tr} = \sum_{i = 3}^N M_i
 \end{equation}
-where $M_3$ is the mass of the third heaviest, $M_4$ of the fourth heaviest remnant and so on. Note that tertiary remnants are still bound bodies, as defined in section \ref{ch02_sec04_ss05}. Ejecta in the form of unbound SPH particles is therefore not counted as tertiary remnants. Figures \ref{ch03_fig27a} to \ref{ch03_fig27c} shows tertiary remnant mass as a function of impact velocity for different impact angles. Masses down to $1 \% \Mimp$ are shown, which for example for the $\gamma = 0.1$ simulations in set \css are represented by only 100 particles which is at the limit of mass resolution for a bound clump. Such clumps are resolved by only a few particles in diameter. From the \css simulation set it becomes obvious, that tertiary remnant mass is not scale-invariant, therefore simulation set \rss with its limited target mass range does not reveal much about the mechanism responsible for the creation of tertiary remnants. Apart from the mass scale-dependence, tertiary masses also vary with mass ratio. 
+where $M_3$ is the mass of the third heaviest, $M_4$ of the fourth heaviest remnant and so on. Note that tertiary remnants are still bound bodies, as defined in section \ref{ch02_sec04_ss05}. Ejecta in the form of unbound SPH particles is therefore not counted as tertiary remnants.Figures \ref{ch03_fig27a} to \ref{ch03_fig27c} shows tertiary remnant mass as a function of impact velocity for different impact angles. Masses down to $1 \% \Mimp$ are shown, which for example for the $\gamma = 0.1$ simulations in set \css are represented by only 100 particles which is at the limit of mass resolution for a bound clump. Such clumps are resolved by only a few particles in diameter. From the \css simulation set it becomes obvious, that tertiary remnant mass is not scale-invariant, therefore simulation set \rss with its limited target mass range does not reveal much about the mechanism responsible for the creation of tertiary remnants. Apart from the mass scale-dependence, tertiary masses also vary with mass ratio. 
 
 Two mechanisms can be identified for the formation of tertiary remnants: First, the re-accretion of ejecta from eroding collisions at high impact velocities and small impact angle. Second, re-accretion of arm-like structures created by moderate velocity collisions at impact angles around $30 \deg$. The first mechanism can be seen for the simulations with $\Mtar = 0.01 \ME$ in simulation set \css, which show considerable tertiary remnant mass up to an impactor mass for small impact angles ($< 50 \deg$) and impact velocities higher than $2 \vesc \approx 4 km/s (for \gamma = 0.2)$. The mechanism becomes more efficient for smaller impact angles, as the mass loss of the largest remnant parametrized by smaller values of the accretion efficiency. For very high impact velocities the effect decreases again. In the $\Mtar = 0.1 \ME$ regime, the effect is most efficient for $\gamma = 0.2$, for which up to $30\wtp$ of the impactor mass go in tertiary remnants. The optimal impact velocity range is now $1.5 \dots 3.0 \vesc$ or $6 \dots 12 km/s$ in absolute numbers. The effect decreases again around $8 km/s$. Also note that most tertiary remnant mass is created is now created via the second mechanism for hit \& run impact angles $\approx 30 \deg$. For such an angle, also moderate impact velocities can eject considerable mass apart from the largest and the second remnant by creating an arm-like structure between the target and the impactor after they hit each other. Figure \ref{ch03_fig38} shows three snapshots of such an event at $\thimp = 30 \deg$. The arm structure expands and finally collapses into clumps of material. Depending on the relative velocities of this clumps to the largest and the second remnant, they become individual tertiary remnants or are accreted by the larger bodies. Note that this arm-structure forms for all collisions with a suitable impact geometry given by mass ratio, impact angle and relative impact velocity, but depending on the absolute values of the velocity, the arm does or does not re-accrete into individual clumps.
 
@@ -435,6 +435,8 @@ Another more exotic mechanism to form tertiary remnants are failed satellites. F
 \end{center}
 \end{figure}
 
+We now only considered the total mass of tertiary remnants. It would be interesting to obtain a size distribution, but unfortunately this would not produce any meaningful results by simply analyzing SPH simulations at a fixed, moderate resolution. Re-collapse of expanding structures like the above mentioned arm is often resolution-dependent and very high resolutions would be required to obtain converging results for the size distribution of tertiary remnants. This is beyond the scope of this parameter study.
+
 
 %%
 % ejecta 
@@ -442,20 +444,23 @@ Another more exotic mechanism to form tertiary remnants are failed satellites. F
 \subsection{Ejecta mass $M_{ej}$}
 Ejecta denotes the mass of the particles being ejected and not gravitationally bound to any remnant clump. The physical interpretation of those particles are not straight-forward. Depending on the thermodynamical of the ejecta, it can strengthless solids in the form of debris, a two-phase fluid of liquid and vapor or simply vapor. \cite{Anic:2006p99} modeled the fate of the ejecta in high velocity collisions which probably led to todays Mercury and are in mass regime of $\Mtar = 0.1 \ME$. He found that the ejecta at first consists of a rapidly expanding vapor plume of hot mantle material, which later on condenses into small droplets. 
 
-Although \cite{Stewart:2003p2802}
+
+It is important to note, that for high target masses, radiation transport might become important in the high target mass regime ($\Mtar > 0.1 \ME$), where for high enough impact velocities shock become strong and ejected mantle material can vaporize. The ejection itself is mainly a hydrodynamic process and radiative transport probably can be neglected in the optically thick ejection plume on impact timescales $\tau_{coll}$. But as soon as the ejecta plume becomes optically thin enough, radiation transfer might play a role in the expansion of the plume. \cite{Thompson:1988p3451} gives a cooling timescale for a thin silicate vapor disk 
+\begin{align}
+\tau_{cool} = \frac{c^2 \sigma}{ 2 \sigma_{SB} T^4}
+\end{align}
+A thin disk radiates away internal energy pretty efficiently, so this cooling timescale can be considered a lower limit for more general cases of ejecta plumes, where the volume to surface ratio is much larger. The above expression yields for a $0.01 \ME$ disk with a radius of $2 \RE$ and at a surface temperature of $5000K$ a cooling timescale of 21 days, which is much longer than the collisional timescale of a few hours for a similar-sized collision involving silicate density bodies. Radiation transport can therefore be neglected for the ejecta mass itself, although it most probably influences heavily the further fate of the ejecta.
+
+Figures \ref{ch03_fig20a} to \ref{ch03_fig20c} show the ejecta mass as a function of $Q_{R} / Q_{RD}^*$. It becomes apparent, that in each regime the ejecta mass follows the same dependence on $Q_{R} / Q_{RD}^*$ more or less independent of the mass ratio. For most cases, the ejecta mass increases with decreasing impact angle. 
+
+As mentioned before, the ejecta mass is linked to the second and tertiary remnants masses. For mass to go into the three reservoirs impact energy is required to overcome the potential energy of the largest remnant. When comparing $\Msr$ (figures \ref{ch03_fig26a} to \ref{ch03_fig26c}), $\Mtr$ (figures \ref{ch03_fig27a} to \ref{ch03_fig27c}) and $\M_{ej}$, a transition between these three reservoirs can be observed when changing the impact angle. 
+
+%\cite{Stewart:2003p2802}
 
 It is important to note, that depending on the mass regime considered, radiation transport might become important 
 
 % radiation transfer
 Shocks in similar-sized collisions are another departure from 
-\begin{align}
-\tau_{cool} = \frac{c^2 \sigma}{ 2 \sigma_{SB} T^4}
-\end{align}
-\cite{Thompson:1988p3451}
-radiation transfer: not important because of short timescales (everything in opaque thermal equilibrium): compare stefan boltzmann cooling power (Pahlevan?)
-cite Lisse\\
-analyze ejecta, entropy and energy of ejecta \\
-show decay of shock wave plot\\ % TODOPLOT
 inverse plot Meject as argument (of Q?)\\
 
 \afterpage{
@@ -464,7 +469,7 @@ inverse plot Meject as argument (of Q?)\\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{20_ejecta_r3.pdf}
-\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\caption{Ejecta mass $M_{ej}$ as a function of relative reduced specific impact energy $Q_{R} / Q_{RD}^*$  for different impact angles in simulation set \rss.}
 \label{ch03_fig20a}
 \end{center}
 \end{figure}
@@ -472,7 +477,7 @@ inverse plot Meject as argument (of Q?)\\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{20_ejecta_c1.pdf}
-\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\caption{Ejecta mass $M_{ej}$ as a function of relative reduced specific impact energy $Q_{R} / Q_{RD}^*$  for different impact angles in simulation set \css.}
 \label{ch03_fig20b}
 \end{center}
 \end{figure}
@@ -480,7 +485,7 @@ inverse plot Meject as argument (of Q?)\\
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{20_ejecta_i1.pdf}
-\caption{Mass averaged mean disk eccentricities for the largest remnant disk as a function of impact angle for different impact velocities in the \emph{r3} simulation set. Simulations with a largest remnant disk mass below $0.1\% M_tot$ are omitted.}
+\caption{Ejecta mass $M_{ej}$ as a function of relative reduced specific impact energy $Q_{R} / Q_{RD}^*$  for different impact angles in simulation set \iss.}
 \label{ch03_fig20c}
 \end{center}
 \end{figure}
@@ -1000,6 +1005,9 @@ bouncing vs. shearing \\
 little toy model population in the early solar system (-> chambers) \\
 % TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
 discuss topics in the light of the results. for example for Moon formation
+
+cite Lisse and ejecta\\
+
 
 \begin{figure}
 \begin{center}
