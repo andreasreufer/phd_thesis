@@ -261,6 +261,7 @@ The specific impact energy required for catastrophic disruption is denoted $Q^*_
 \end{equation}
 More recent work \citep{Stewart:2009p3265, 2009ApJ...700L.118M, 2010ApJ...712L..73M, Leinhardt:2011p4060} considers the reduced mass and defines the specific reduced impact energy 
 \begin{equation}
+\label{ch03_eq005}
 Q_R = \frac{ \frac{1}{2} \vimp^2 \mu }{\Mtar + \Mimp} \hspace{2.0cm} \mu = \frac{\Mtar \Mimp}{\Mtar + \Mimp} 
 \end{equation}
 and defines catastrophic disruption as a collision where the largest remnant has no more than half of the total mass $\Mtot = \Mtar + \Mimp$ with the reduced catastrophic disruption threshold $Q^*_{RD}$
@@ -274,6 +275,7 @@ and defines catastrophic disruption as a collision where the largest remnant has
 \end{equation}
 $Q^*_{RD}$ is a constant depending on the material and scale-dependent physics. A velocity dependent form for this constant in \emph{cgs}-units is given by
 \begin{equation}
+\label{ch03_eq004}
 Q^*_{RD} = \underbrace{ q_s R^{9\mu/(3-2\phi)}_{C1} \vimp^{2-3\mu} }_{\textrm{strength regime} } + \underbrace{ q_g R^{3 \mu}_{C1} \vimp^{2-3\mu}}_{\textrm{gravity regime}}
 \end{equation}
 where $R_{C1}$ is the radius of a body with mass $\Mtot$ and a density of $1 g/cm^3$. The first part comes from the required energy to overcome material strength, while the second part accounts for the gravitational binding energy. For small, solid bodies ($R < 1km$), the strength term is dominating, while it becomes negligible for large bodies ($R > 100km$). For the constants, \cite{Stewart:2009p3265} find the following constants for the basalt bodies in \cite{Benz1999Icar..142....5B}: $\mu = 0.5, \phi = 8, q_s = 7 \times 10^4, q_g = 10^{-4}$. In the gravity regime, \cite{2010ApJ...712L..73M} uses the same constant but changes $\mu = 0.4$. Obviously equation \ref{ch03_eq003} does not account for the collision geometry imposed by the impact angle and therefore deviations are expected. \cite{Stewart:2009p3265} state that the relationship \emph{does not hold for conditions that depart from the catastrophic disruption regime}. This excludes explicitly collisions which are merging ($\xi \approx 1$) or collisions in the super-catastrophic regime ($Q_R / Q^*_{RD} > 2$). Note also that the predicted $\Mlr / \Mtot$ is not scale invariant, as $Q^*_{RD}$ depends on the absolute velocity.
@@ -379,6 +381,8 @@ Figures \ref{ch03_fig40a} to \ref{ch03_fig40c} show again the second remnant mas
 }
 
 Comparing the two ratios $\Mlr / \Mtar$ and $\Msr / \Mimp$ shows an interesting property of similar-sized collisions: The smaller the mass ratio, the bigger the relative change to the impactor compared to the target. While for small ratios it requires a very high specific impact energy for the impactor to alter the mass of the target considerable, the impactor itself is altered easily ranging from complete accretion up to keeping its entire mass. This impactor perspective is an interesting aspect for planet formation models, as largest bodies in a planetary system might act as \emph{catalysts} altering a class of \emph{next-largest bodies} \cite{Asphaug:2010p3539} considerably.
+
+A probably trivial but nevertheless important property of the second remnant mass is, that it is never larger than the impactor mass. So mass transfer during a collisions always goes from the lighter impactor to the heavier target. This is simply a gravity effect: The target sits deeper in the gravitational potential, so it is easier for the target to accrete parts of the impactor than the other way round.
 
 %%
 % Tertiary remnants
@@ -516,27 +520,25 @@ An evident result is that compositional changes are not that dramatic to the lar
 \end{landscape}
 }
 
-Previous work studied this mantle striping effect in eroding collisions. 
-For example \cite{Benz:1988p3336} gives for his SPH simulations of Mercury's formation using the same composition for the target and the impactor also the largest remnant iron core mass fractions. Run 9 in his work gives an iron core fraction of $46 \wtp$ and agrees well with the same value obtained in our simulation $\{ 0.1 \ME, 0.2,  0 \deg, 3.50 \vesc \}$. Run 10 gives almost no enrichment with a iron core mass fraction of $35 \wtp$, which lies in between simulation $\{ 0.1 \ME, 0.2,  0 \deg, 2.00 \vesc \}$ yielding $32 \wtp$ and  $\{ 0.1 \ME, 0.2,  0 \deg, 2.50 \vesc \}$ yielding $38 \wtp$ iron core in the largest remnant. Runs 10 and 11 with iron fractions of $37 \wtp$ and $45 \wtp$ show a slightly worse agreement with our results of $34 \wtp$ for simulation $\{ 0.1 \ME, 0.2,  30 \deg, 3.50 \vesc \}$ and $36 \wtp$ with parameters $\{ 0.1 \ME, 0.2,  30 \deg, 4.00 \vesc \}$.
+Figure \ref{ch03_fig32b} additionally shows for icy bodies the water ice mantle mass ratio $M_{lr, \mathrm{H}_2 \mathrm{O}} / M_{lr}$. The efficiency for mantle striping again increases with higher impact velocities and smaller impact angles. Additionally a scale-dependence is again noticeable, which increases mantle striping efficiency for higher target masses for comparable impact velocities relative to the escape velocity.
 
+Previous work studied this mantle striping effect in eroding collisions. For example \cite{Benz:1988p3336} gives for his SPH simulations of Mercury's formation using the same composition for the target and the impactor also the largest remnant iron core mass fractions. Run 9 in their work gives an iron core fraction of $46 \wtp$ and agrees well with the same value obtained in our simulation $\{ 0.1 \ME, 0.2,  0 \deg, 3.50 \vesc \}$. Run 10 gives almost no enrichment with a iron core mass fraction of $35 \wtp$, which lies in between simulation $\{ 0.1 \ME, 0.2,  0 \deg, 2.00 \vesc \}$ yielding $32 \wtp$ and  $\{ 0.1 \ME, 0.2,  0 \deg, 2.50 \vesc \}$ yielding $38 \wtp$ iron core in the largest remnant. Runs 10 and 11 with iron fractions of $37 \wtp$ and $45 \wtp$ show a slightly worse agreement with our results of $34 \wtp$ for simulation $\{ 0.1 \ME, 0.2,  30 \deg, 3.50 \vesc \}$ and $36 \wtp$ with parameters $\{ 0.1 \ME, 0.2,  30 \deg, 4.00 \vesc \}$.
 
-compare with Marcus 2009, Benz 1988
-changes to largest remnant (mantle striping): compare with Marcus 2009 (\cite{2009ApJ...700L.118M}) and 2010 (\cite{2010ApJ...712L..73M})
+Other work by \cite{2009ApJ...700L.118M} and \cite{2010ApJ...712L..73M} finds the following scaling law for the iron core mass fraction for bodies with an initial chondritic composition 
+\begin{align}
+M_{lr, Fe} / M_{lr} = 0.33 + 0.25 ( Q_R / Q^*_{RD} )^{1.65}
+\end{align}
+where $Q_R$ and $Q^*_{RD}$ are defined as in equations \ref{ch03_eq005} and \ref{ch03_eq004}. Figure \ref{ch03_fig34} shows the proposed scaling law together with our results. The scaling law reproduces well the results for impact with $Q_R > 0.5 Q^*_{RD}$ at an impact angle around $15 \deg$, but underestimates the iron core mass fraction for the more head-on $0\deg$ collisions and over-estimates it for $\thimp > 15 \deg$ and low velocity collisions.
 
-\begin{equation}
-\delta_X = \frac{\Msr - M_{imp}}{M_{imp}} \Bigg|_{X}
-\end{equation}
+Similarly as when comparing the range of largest remnant and second remnant masses, the change in composition can be much more radical for the second remnant than for the largest remnant. Analogously to the accretion efficiency $\xi$, a striping efficiency for the second remnant can be defined
+\begin{align}
+\delta = \frac{\Mimp - \Msr}{\Mimp}
+\end{align}
+A striping efficiency $\delta = 0$ describes the case, where the impactor looses no mass during the collision and forms a second remnant of the same mass. A $\delta = 1$ means, that the impactor has been striped of its mass completely and $\Msr = 0$. As the second remnant does not accrete mass during a collision, compositional changes from the impactor to the second remnant can only by achieved by different mass losses for different material or in other words by different striping efficiencies for different materials. Figures \ref{ch03_fig24a} and \ref{ch03_fig24b} show the difference in the striping efficiency for the second remnant for different materials. In order to yield mostly positive values, the striping efficiency of more dense material is subtracted from the one of the less dense material. Two possible possible outcomes can be observed: For impact velocities high enough ($ > 1.30 \vesc$), the impactor form a second remnant with parts of its mantle removed. The difference of the striping efficiency of the materials reaches a maximum for a certain impact angle and decreases again. This angle depends on the geometry of the collision and how the different material layers pass each other. Therefore the mass ratio but also the composition determines this angle. For simulation set \css this angle is roughly $30 \deg$ for $\gamma = 0.7$, $\approx 38 \deg$ for $\gamma = 0.35$, $\approx 45 \deg$ for $\gamma = 0.2$ and $\approx 60 \deg$ for $\gamma = 0.1$. If the impact angle becomes again smaller than this angle, the impactor core also looses mass efficiently and the difference of the striping efficiency becomes smaller again. The same effect can be seen for the icy body simulations. For $\gamma = 0.2$, the difference in silicate versus iron striping efficiency reaches the largest difference around $30 \deg$, whereas for the difference between water ice and silicate is largest around $45 \deg$. In all this cases, the impactors tends to loose its lighter material which are nearer to the surface.
 
+The opposite effect occurs for a different class of slow and grazing collisions, where the impactor looses its core and retains its mantle. This can be seen for the $\gamma = 0.20$ and $\gamma = 0.35$ collisions at impact velocities $1.00 \dots 1.05 \vesc$. Such collisions are similar to the Moon forming giant impact, where the impactor lost its iron core into the Earth and forms a moon. The difference in this cases shown here is, that the impactor actually forms an independent second remnant after losing its core. 
 
-
-changes to second remnant (striping efficiency)
-mantle striping\\
-impactor perspective\\
-accr. efficiencies for individual components \\
-compositional changes for h\&r \\
-introduce alternative impact angles $\theta_{core}$ \\
-compare sound speed with impact velocity to check for shocking (vimp vs. vsound), define vimprel which becomes supersonic \\
-
+This compositional changes due to impact geometry can also be understood by considering for example the interaction of the iron core as similar-sized collisions of their own with a new impact angle $\theta_{Fe}$, which describes their impact geometry. Figure \ref{ch03_fig23} shows this impact angles for the individual layers for the icy body simulations of set \iss. Especially for the relatively small iron cores, most collisions are grazing for the cores, therefore also the tendency not to loose the cores during hit \& run collisions. 
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -552,7 +554,7 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{24_strpeff_impa_c1.pdf}
-\caption{Difference of silicate mantle and iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \css.}
+\caption{Difference of silicate mantle and iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \css. Only simulations with a second remnant mass $\Msr > 0.05 \Mimp$ are shown. The black dashed line gives the relative impactor volume hit by the target, assuming a straight trajectory of the impactor after the time of impact.}
 \label{ch03_fig24a}
 \end{center}
 \end{figure}
@@ -560,18 +562,28 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{24_strpeff_impa_i1.pdf}
-\caption{Differences of water vs. silicate mantle striping efficiency and silicate mantle vs. iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \iss.}
+\caption{Differences of water vs. silicate mantle striping efficiency and silicate mantle vs. iron core striping efficiency as a function of the impact angle for different impact velocities in simulation set \iss. Only simulations with a second remnant mass $\Msr > 0.05 \Mimp$ are shown. The black dashed line gives the relative impactor volume hit by the target, assuming a straight trajectory of the impactor after the time of impact.}
 \label{ch03_fig24b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{23_impa_vs_corea_i1}
+\caption{Impact angle of the silicate layers $\theta_{\silc}$ and the iron core $\theta_{Fe}$ of the target and the impactor against each other assuming straight trajectories after the time of impact as a function of effective impact angle for simulation set \iss. The iron cores miss each other for impact angles $> 25 \deg$ and the silicate layers for impact angles $> 50 \dots 60 \deg$.}
+\label{ch03_fig23}
 \end{center}
 \end{figure}
 \end{landscape}
 }
 
-
 %%
 % rotation stuff
 %% 
 \subsection{Spin-up, critical angular momentum}
+Another important consequence of similar-sized collisions is the build-up or change of rotation. As we do not consider pre-rotating bodies in this parameter study for simplicity reasons, we only have data 
+
+
 \cite{Canup:2000p3542}: critical ang. momentum\\
 critical T / W for largest remnant\\
 critical T / W for second remnant at large $\thimp$ (get data)\\
@@ -733,7 +745,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig36c}
 \end{center}
 \end{figure}
-
 \end{landscape}
 }
 
@@ -863,6 +874,8 @@ plot Roche limit for mdisk plots
 \end{figure}
 \end{landscape}
 }
+
+haba
 
 \begin{figure}[h!]
 \begin{center}

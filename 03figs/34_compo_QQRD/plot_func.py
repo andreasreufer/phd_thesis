@@ -21,7 +21,7 @@ xvar = "vimp"
 yaxis = [ -0.05, 1.05 ]
 ylog  = True
 ylbl  = r"$M_{LR, Fe} / M_{LR}$"
-yfmt  = math_formatter
+yfmt  = tex_formatter
 ytik = (0.3, 0.4, 0.5, 0.75, 1.)
 
 

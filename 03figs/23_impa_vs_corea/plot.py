@@ -149,7 +149,7 @@ if ssname == "c1":
 if ssname == "r3":
   axselect = (0,1,2)
 if ssname == "i1":
-  axselect = (0,)
+  axselect = (0,3)
 for i in axselect:
   if xvar == "vimp":
     axs[i].set_xlabel(r"$v_{imp} / v_{esc}$")

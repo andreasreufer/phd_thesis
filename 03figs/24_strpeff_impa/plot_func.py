@@ -41,11 +41,11 @@ def auxplot(ax):
 xvar = "angle"
 
 #yaxis = [ -.30, 1.10 ]
-yaxis = [ -0.1, 1.10 ]
+yaxis = [ -0.35, 1.10 ]
 ylog  = False
 ylbl  = r"$\delta_{SiO_2} - \delta_{Fe}$"
 yfmt  = math_formatter
 #ytik = (0., 0.5 , 1.0 )  
-ytik = (0.0, 0.25, 0.5, 0.75, 1.0 )
+ytik = (-0.25, 0.0, 0.25, 0.5, 0.75, 1.0 )
 
 
