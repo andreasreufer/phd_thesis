@@ -534,7 +534,7 @@ Similarly as when comparing the range of largest remnant and second remnant mass
 \begin{align}
 \delta = \frac{\Mimp - \Msr}{\Mimp}
 \end{align}
-A striping efficiency $\delta = 0$ describes the case, where the impactor looses no mass during the collision and forms a second remnant of the same mass. A $\delta = 1$ means, that the impactor has been striped of its mass completely and $\Msr = 0$. As the second remnant does not accrete mass during a collision, compositional changes from the impactor to the second remnant can only by achieved by different mass losses for different material or in other words by different striping efficiencies for different materials. Figures \ref{ch03_fig24a} and \ref{ch03_fig24b} show the difference in the striping efficiency for the second remnant for different materials. In order to yield mostly positive values, the striping efficiency of more dense material is subtracted from the one of the less dense material. Two possible possible outcomes can be observed: For impact velocities high enough ($ > 1.30 \vesc$), the impactor form a second remnant with parts of its mantle removed. The difference of the striping efficiency of the materials reaches a maximum for a certain impact angle and decreases again. This angle depends on the geometry of the collision and how the different material layers pass each other. Therefore the mass ratio but also the composition determines this angle. For simulation set \css this angle is roughly $30 \deg$ for $\gamma = 0.7$, $\approx 38 \deg$ for $\gamma = 0.35$, $\approx 45 \deg$ for $\gamma = 0.2$ and $\approx 60 \deg$ for $\gamma = 0.1$. If the impact angle becomes again smaller than this angle, the impactor core also looses mass efficiently and the difference of the striping efficiency becomes smaller again. The same effect can be seen for the icy body simulations. For $\gamma = 0.2$, the difference in silicate versus iron striping efficiency reaches the largest difference around $30 \deg$, whereas for the difference between water ice and silicate is largest around $45 \deg$. In all this cases, the impactors tends to loose its lighter material which are nearer to the surface.
+A striping efficiency $\delta = 0$ describes the case, where the impactor looses no mass during the collision and forms a second remnant of the same mass. A $\delta = 1$ means, that the impactor has been striped of its mass completely and $\Msr = 0$. As the second remnant does not accrete mass during a collision, compositional changes from the impactor to the second remnant can only by achieved by different mass losses for different material or in other words by different striping efficiencies for different materials. Figures \ref{ch03_fig24a} and \ref{ch03_fig24b} show the difference in the striping efficiency for the second remnant for different materials. In order to yield mostly positive values, the striping efficiency of more dense material is subtracted from the one of the less dense material. Two possible possible outcomes can be observed: For impact velocities high enough ($ > 1.30 \vesc$), the impactor form a second remnant with parts of its mantle removed. The difference of the striping efficiency of the materials reaches a maximum for a certain impact angle and decreases again. This angle depends on the geometry of the collision and how the different material layers pass each other. Therefore the mass ratio but also the composition determines this angle. For simulation set \css this angle is roughly $30 \deg$ for $\gamma = 0.7$, $\approx 38 \deg$ for $\gamma = 0.35$, $\approx 45 \deg$ for $\gamma = 0.2$ and $\approx 60 \deg$ for $\gamma = 0.1$. If the impact angle becomes again smaller than this angle, the impactor core also looses mass efficiently and the difference of the striping efficiency becomes smaller again. The same effect can be seen for the icy body simulations. For $\gamma = 0.2$, the difference in silicate versus iron striping efficiency reaches the largest difference around $30 \deg$, whereas for the difference between water ice and silicate is largest around $45 \deg$. In all this cases, the impactors tends to loose its lighter material which are nearer to the surface. This effect appears to be scale-independent, although in the larger target regime, the difference in striping efficiencies tends to have slightly higher value at the maximum. This can be explained by stronger shocks and by low-density surface material to be ejected from the impactors surface. 
 
 The opposite effect occurs for a different class of slow and grazing collisions, where the impactor looses its core and retains its mantle. This can be seen for the $\gamma = 0.20$ and $\gamma = 0.35$ collisions at impact velocities $1.00 \dots 1.05 \vesc$. Such collisions are similar to the Moon forming giant impact, where the impactor lost its iron core into the Earth and forms a moon. The difference in this cases shown here is, that the impactor actually forms an independent second remnant after losing its core. 
 
@@ -581,7 +581,17 @@ This compositional changes due to impact geometry can also be understood by cons
 % rotation stuff
 %% 
 \subsection{Spin-up, critical angular momentum}
-Another important consequence of similar-sized collisions is the build-up or change of rotation. As we do not consider pre-rotating bodies in this parameter study for simplicity reasons, we only have data 
+Another important consequence of similar-sized collisions is the build-up or change of rotation. As we do not consider pre-rotating bodies in this parameter study for simplicity reasons, we only have data on the initial build-up of rotation from non-rotating bodies.
+
+Every collision has an inherent impact angular momentum 
+\begin{align}
+L_{imp} = L_{graz} \sin{ \thimp } \hspace{2.0cm} L_{graz} = \vimp \frac{\Mtar \Mimp}{\Mtar + \Mimp} (\Rtar + \Rimp)
+\end{align}
+which is conserved throughout the collision and where $L_{graz}$ is the grazing angular momentum for $\thimp = 90 \deg$. Due to tidal deformation of the target and impactor body, torques act on them and re-distribute this angular momentum, leading to rotation of the bodies except for perfectly head-on collisions. 
+
+Figures \ref{ch03_fig25c} to \ref{ch03_fig25c} give $z$-component of the angular momentum of the largest remnant $L_{lr}$ as a function of the impact angle for different impact velocities. The impact plane in which the center of masses of the target and impactor move is perpendicular to the $z$-direction in our simulations, so that the full angular momentum vector is given by $\Limpv = [0, 0, L_{imp} ]$. Angular momentum can only be carried by mass, so the bound angular momentum of the largest remnant is connected to the accretion efficiency or in other words how much mass is lost during the collision. For perfectly accreting collisions at slow impact velocities or at small angles and moderate velocities, practically the entire impact angular momentum goes into the largest remnant angular momentum ( $L_{lr} \approx L_{imp}$ ). For large impact angles, this does not happen instantly at the time of impact, but slowly by the impactor wrapping around the target and dragging the largest remnant into a rotating motion.
+
+For slightly higher impact velocities around $1.10 \vesc$, the impactor forms a second remnant and most of the angular momentum is carried away as orbital angular momentum. Only a small fraction of the angular momentum remains in the largest remnant. 
 
 
 \cite{Canup:2000p3542}: critical ang. momentum\\
@@ -602,6 +612,57 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \begin{landscape}
 \begin{figure}
 \begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_r3.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set. Simulations with $\thimp < 15 \deg$ are omitted because of the lack of initial angular momentum.}
+\label{ch03_fig25a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_c1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set. Simulations with $\thimp < 15 \deg$ are omitted because of the lack of initial angular momentum.}
+\label{ch03_fig25b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{25_LvsLimp_i1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set. Simulations with $\thimp < 15 \deg$ are omitted because of the lack of initial angular momentum.}
+\label{ch03_fig25c}
+\end{center}
+\end{figure}
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_r3.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
+\label{ch03_fig36a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_c1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
+\label{ch03_fig36b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{36_SR_LvsLimp_i1.pdf}
+\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
+\label{ch03_fig36c}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}
+\begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
 \label{ch03_fig19a}
@@ -610,42 +671,9 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{10_rotstab_r3.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
-\label{ch03_fig10a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{25_LvsLimp_r3.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
-\label{ch03_fig25a}
-\end{center}
-\end{figure}
-
-
-\begin{figure}
-\begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
 \caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
 \label{ch03_fig19b}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{10_rotstab_c1.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
-\label{ch03_fig10b} 
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{25_LvsLimp_c1.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
-\label{ch03_fig25b}
 \end{center}
 \end{figure}
 
@@ -659,17 +687,25 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{10_rotstab_i1.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
-\label{ch03_fig10c}
+\includegraphics[scale=1.0]{10_rotstab_r3.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
+\label{ch03_fig10a}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{25_LvsLimp_i1.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
-\label{ch03_fig25c}
+\includegraphics[scale=1.0]{10_rotstab_c1.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
+\label{ch03_fig10b} 
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{10_rotstab_i1.pdf}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
+\label{ch03_fig10c}
 \end{center}
 \end{figure}
 
@@ -689,15 +725,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig35a}
 \end{center}
 \end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{36_SR_LvsLimp_r3.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{r3} simulation set.}
-\label{ch03_fig36a}
-\end{center}
-\end{figure}
-
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{33_SR_rotperiod_c1.pdf}
@@ -714,13 +741,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{36_SR_LvsLimp_c1.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{c1} simulation set.}
-\label{ch03_fig36b}
-\end{center}
-\end{figure}
 
 \begin{figure}
 \begin{center}
@@ -735,14 +755,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \includegraphics[scale=1.0]{35_SR_rotstab_i1.pdf}
 \caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
 \label{ch03_fig35c}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{36_SR_LvsLimp_i1.pdf}
-\caption{Angular momentum of the largest remnant perpendicular to the impact plane $[L_{LR}]_z$ relative to the impact angular momentum $L_{imp}$ as a function of impact angle for the \emph{i1} simulation set.}
-\label{ch03_fig36c}
 \end{center}
 \end{figure}
 \end{landscape}
@@ -1017,8 +1029,6 @@ cite Lisse and ejecta\\
 \cite{Wetherill:1993p3351}
 
 \cite{Leinhardt:2011p4060}
-
-
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
