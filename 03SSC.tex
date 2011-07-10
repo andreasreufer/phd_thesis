@@ -491,8 +491,33 @@ Although not shown here, it is important to note that the composition of ejecta 
 % compositional changes
 %% 
 \subsection{Compositional changes}
-The previous sections discussed how the mass from the target and the impactors is re-distributed into remnants and ejecta. For 
+The previous sections discussed how the mass from the target and the impactors is re-distributed into remnants and ejecta. The composition of the remnant bodies does not necessarily co-incide with the composition of the target and the impactor, it is therefore interesting to discuss how and which kind of similar-sized collisions can alter the composition of bodies. Figure \ref{ch03_fig32a} shows the iron core fraction of the largest remnant for the \css simulation set, while figure \ref{ch03_fig32b} additionally shows the water ice mantle fraction for simulation set \iss with icy bodies.
 
+An evident result is that compositional changes are not that dramatic to the largest remnant, except for high velocity collisions. Compositional changes are a result of two processes: Different accretion efficiencies for different material and different mass losses for different materials. The compositional change due to differential accretion can obviously not be that big: Considering the iron core fraction, even in the extreme case of $\gamma = 1.0$ and assuming that for example the impactors iron core is perfectly accreted while no mantle material is accreted, the largest remnant iron core fraction is only doubled. Much more dramatic changes to the composition can be achieved by differential losses. This can be seen in the \css simulation set, where for high impact velocities the iron core mass fraction $M_{lr, Fe} / M_{lr}$ reaches values of up to $95 \%$ from the initial $30\%$, for high impact velocities, high mass ratios and a high target mass. In such cases, the mantle of the target is simply ejected and mainly core material from the target and the impactor re-accrete into the largest remnant. 
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{32_LR_compo_c1.pdf}
+\caption{Iron core mass fraction for the largest remnant $M_{lr, Fe} / M_{lr}$ as a function of the impact velocity for different impact angles in simulation set \css. The initial iron core mass fraction is $M_{tar, Fe} / \Mtar = 0.30$.}
+\label{ch03_fig32a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{32_LR_compo_i1.pdf}
+\caption{Iron core $M_{lr, Fe} / M_{lr}$ and water ice mantle mass fraction $M_{lr, \mathrm{H}_2 \mathrm{O}} / M_{lr}$ for the largest remnant as a function of the impact velocity for different impact angles in simulation set \iss. The initial mass fractions are $M_{tar, Fe} / \Mtar = 0.15$ and $M_{tar, \mathrm{H}_2 \mathrm{O}} / \Mtar = 0.50$}
+\label{ch03_fig32b}
+\end{center}
+\end{figure}
+\end{landscape}
+}
+
+Previous work studied this mantle striping effect in eroding collisions. 
+For example \cite{Benz:1988p3336} gives for his SPH simulations of Mercury's formation using the same composition for the target and the impactor also the largest remnant iron core mass fractions. Run 9 in his work gives an iron core fraction of $46 \wtp$ and agrees well with the same value obtained in our simulation $\{ 0.1 \ME, 0.2,  0 \deg, 3.50 \vesc \}$. Run 10 gives almost no enrichment with a iron core mass fraction of $35 \wtp$, which lies in between simulation $\{ 0.1 \ME, 0.2,  0 \deg, 2.00 \vesc \}$ yielding $32 \wtp$ and  $\{ 0.1 \ME, 0.2,  0 \deg, 2.50 \vesc \}$ yielding $38 \wtp$ iron core in the largest remnant. Runs 10 and 11 with iron fractions of $37 \wtp$ and $45 \wtp$ show a slightly worse agreement with our results of $34 \wtp$ for simulation $\{ 0.1 \ME, 0.2,  30 \deg, 3.50 \vesc \}$ and $36 \wtp$ with parameters $\{ 0.1 \ME, 0.2,  30 \deg, 4.00 \vesc \}$.
 
 
 compare with Marcus 2009, Benz 1988
@@ -516,22 +541,6 @@ compare sound speed with impact velocity to check for shocking (vimp vs. vsound)
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{32_LR_compo_c1.pdf}
-\caption{Iron core mass fraction for the largest remnant $M_{lr, Fe} / M_{lr}$ as a function of the impact velocity for different impact angles in simulation set \css. The initial iron core mass fraction is $M_{tar, Fe} / \Mtar = 0.30$.}
-\label{ch03_fig32a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{32_LR_compo_i1.pdf}
-\caption{Iron core $M_{lr, Fe} / M_{lr}$ and water ice mantle mass fraction $M_{lr, \mathrm{H}_2 \mathrm{O}} / M_{lr}$ for the largest remnant as a function of the impact velocity for different impact angles in simulation set \iss. The initial mass fractions are $M_{tar, Fe} / \Mtar = 0.15$ and $M_{tar, \mathrm{H}_2 \mathrm{O}} / \Mtar = 0.50$}
-\label{ch03_fig32b}
-\end{center}
-\end{figure}
-
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{34_compo_QQRD_c1.pdf}
@@ -919,25 +928,28 @@ bouncing vs. shearing \\
 \end{landscape}
 }
 
+\section{Summary}
+little toy model population in the early solar system (-> chambers) \\
+% TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
+discuss topics in the light of the results. for example for Moon formation
+
+cite Lisse and ejecta\\
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.7]{06_vimp}
+\caption{An order of magnitude estimation of the random velocities for bodies undergoing collisions in a protoplanetary system with a solar mass central star. The random velocity is roughly the Kepler velocity times the orbital eccentricity. Shown are isolines of velocities for given distance from a star with a solar mass for given eccentricities. The red line shows the speed of sound of for quartz at standard conditions \cite{Melosh:2007p3502}. Note that the actual impact velocity is given by $\vimp = \sqrt{ v_{rand}^2 + \vesc^2}$ and depends on the masses of the two colliding bodies. Due to the high Kepler velocity in the inner parts of the system, even small eccentricities lead to random velocities well above the speed of sound for silicates and therefore to hypervelocity impacts even for small bodies.}
+\label{ch03_fig06}
+\end{center}
+\end{figure}
 
 
 
-
-
-	
-\cite{Agnor:2004p3329}
-%Agnor \& Asphaug 2004: accretion efficiency during planetary collisions
-%- impact probability of eps: dP = 2*sin(eps)*cos(eps)*deps (Shoemaker 1962)
-%- non-disruption doesn't mean merging
-%- M1: largest remnant, M2: largest escaping remnant
-%- M2 / Mesc < 0.8 for 30deg -> chains
-%- two 0.1Mearth mass bodies, chondritic, Tillotson
-%- non-accretionary collisions are the norm
 
 \cite{Asphaug:2006p3729}
 %Asphaug 2006: h\&r planetary collisions
 %- 0deg: shocks dominate, 90deg gravity (tides, stresses) dominates
-%- "strings of pearls"
 %- for large bodies, the impactor, not the target, are destroyed
 %- tidal vs. self-gravity stress inversely proportional to mass
 %- relativ energy deposition 
@@ -979,10 +991,6 @@ bouncing vs. shearing \\
 \cite{2010ApJ...714L..21K}
 %Kokubo \& Genda 2010:
 %- about half the collisions do not accrete
-%- orbit integration of 16 bodies, total mass 2.3MEarth
-%- mass ratios: 1.0, 0.66, 0.50, 0.33, 0.25, 0.17, 0.11, Mtot = 0.2-2.0MEarth
-%- impact velocities: 1.0-3.0 v_esc, angles: 0-75deg
-%- criteria for critical impact velocity v_cr / v_esc for which accretion occurs
 %- critical spin angular velocity
 
 \cite{2011arXiv1105.4616E}
@@ -997,26 +1005,11 @@ bouncing vs. shearing \\
 
 \cite{Leinhardt:2011p4060}
 
-\section{Discussion}
-little toy model population in the early solar system (-> chambers) \\
-% TODO: a little estimate for a toy model population in the early solar system: take 4 different sized bodies and analyze collisions into each other. make a plot with transition probabilities?
-discuss topics in the light of the results. for example for Moon formation
-
-cite Lisse and ejecta\\
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.7]{06_vimp}
-\caption{An order of magnitude estimation of the random velocities for bodies undergoing collisions in a protoplanetary system with a solar mass central star. The random velocity is roughly the Kepler velocity times the orbital eccentricity. Shown are isolines of velocities for given distance from a star with a solar mass for given eccentricities. The red line shows the speed of sound of for quartz at standard conditions \cite{Melosh:2007p3502}. Note that the actual impact velocity is given by $\vimp = \sqrt{ v_{rand}^2 + \vesc^2}$ and depends on the masses of the two colliding bodies. Due to the high Kepler velocity in the inner parts of the system, even small eccentricities lead to random velocities well above the speed of sound for silicates and therefore to hypervelocity impacts even for small bodies.}
-\label{ch03_fig06}
-\end{center}
-\end{figure}
-
 
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
+
 
 
 
