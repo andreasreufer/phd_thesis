@@ -583,18 +583,32 @@ This compositional changes due to impact geometry can also be understood by cons
 \subsection{Spin-up, critical angular momentum}
 Another important consequence of similar-sized collisions is the build-up or change of rotation. As we do not consider pre-rotating bodies in this parameter study for simplicity reasons, we only have data on the initial build-up of rotation from non-rotating bodies.
 
-Every collision has an inherent impact angular momentum 
+Every collision has an inherent angular momentum 
 \begin{align}
 L_{imp} = L_{graz} \sin{ \thimp } \hspace{2.0cm} L_{graz} = \vimp \frac{\Mtar \Mimp}{\Mtar + \Mimp} (\Rtar + \Rimp)
 \end{align}
-which is conserved throughout the collision and where $L_{graz}$ is the grazing angular momentum for $\thimp = 90 \deg$. Due to tidal deformation of the target and impactor body, torques act on them and re-distribute this angular momentum, leading to rotation of the bodies except for perfectly head-on collisions. 
+which is conserved throughout the collision and where $L_{graz}$ is the grazing angular momentum for $\thimp = 90 \deg$. Due to tidal deformation of the target and impactor body, torques act on them and re-distribute this angular momentum, leading to rotation of the bodies except for perfectly head-on collisions.
 
-Figures \ref{ch03_fig25c} to \ref{ch03_fig25c} give $z$-component of the angular momentum of the largest remnant $L_{lr}$ as a function of the impact angle for different impact velocities. The impact plane in which the center of masses of the target and impactor move is perpendicular to the $z$-direction in our simulations, so that the full angular momentum vector is given by $\Limpv = [0, 0, L_{imp} ]$. Angular momentum can only be carried by mass, so the bound angular momentum of the largest remnant is connected to the accretion efficiency or in other words how much mass is lost during the collision. For perfectly accreting collisions at slow impact velocities or at small angles and moderate velocities, practically the entire impact angular momentum goes into the largest remnant angular momentum ( $L_{lr} \approx L_{imp}$ ). For large impact angles, this does not happen instantly at the time of impact, but slowly by the impactor wrapping around the target and dragging the largest remnant into a rotating motion.
+Figures \ref{ch03_fig25c} to \ref{ch03_fig25c} give $z$-component of the angular momentum of the largest remnant $L_{lr}$ relative to the impact angular momentum $L_{imp}$ as a function of the impact angle for different impact velocities. The impact plane in which the center of masses of the target and impactor move is perpendicular to the $z$-direction in our simulations, so that the full angular momentum vector is given by $\Limpv = [0, 0, L_{imp} ]$. Angular momentum can only be carried by mass, so the bound angular momentum of the largest remnant is connected to the accretion efficiency or in other words how much mass is lost during the collision. For perfectly accreting collisions at slow impact velocities or at small angles and moderate velocities, practically the entire impact angular momentum goes into the largest remnant angular momentum ( $L_{lr} \approx L_{coll}$ ). For large impact angles, this does not happen instantly at the time of impact, but slowly by the impactor wrapping around the target and dragging the largest remnant into a rotating motion.
+
+As soon as second remnant formation kicks in, most of the impact angular momentum is carried away by the second remnant in the form of orbital angular momentum. This is the case for large enough impact angles in all collisions for $\vimp = 1.10 \dots 1.15 \vesc$ (compare $\vneginf = 0.46 \dots 0.57 \vesc$ in figures \ref{ch03_fig26a} to \ref{ch03_fig26c}). 
+
+
+Only a small fraction remains in the largest remnant. For all simulations 
+
 
 For slightly higher impact velocities around $1.10 \vesc$, the impactor forms a second remnant and most of the angular momentum is carried away as orbital angular momentum. Only a small fraction of the angular momentum remains in the largest remnant. 
 
 
-\cite{Canup:2000p3542}: critical ang. momentum\\
+
+Self-gravitating bodies have an upper limit for the angular momentum they can retain. For 
+
+
+\cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 
+
+
+
+ critical ang. momentum\\
 critical T / W for largest remnant\\
 critical T / W for second remnant at large $\thimp$ (get data)\\
 how to get from Erot and I to a rotation rate:
