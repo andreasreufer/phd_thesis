@@ -595,34 +595,9 @@ Angular momentum is carried by mass, so the bound angular momentum of the larges
 
 As soon as the accretion efficiency approaches zero and becomes negative, $L_{lr} / L_{coll}$ immediately goes down by an order of magnitude. For hit \& run collisions $L_{lr} / L_{coll}$ lies between $0.1\% \dots 10\%$ and becomes smaller for high impact velocities. In this cases angular momentum is mainly transferred through torques via the tidally deformed bodies. The amount of tidal deformation decreases for higher impact velocities, because $\tau_{coll}$ becomes smaller for a constant $\tau_{grav}$. Additionally, the time for which these torques can build up angular momentum decreases for higher impact velocities.
 
-% SR
 Figures \ref{ch03_fig36a} to \ref{ch03_fig36c} show the angular momentum in the second remnant relative to the impact angular momentum, for cases where $\Msr > 0.1 \Mimp$. For all compositions, target masses and mass ratios, no more than $5\%$ of $L_{imp}$ goes into the second remnant. Similar to the largest remnant, most angular momentum goes into the second remnant for slow collisions. 
 
 The most efficient cases are for impact velocities starting at $1.10 \dots 1.15 \vimp$, where efficient accretion stops and second remnants form for large enough impact angles. For higher impact velocities and smaller impact angles at or below the grazing angle, a dependence on the mass ratio develops. For smaller mass ratios, the $L_{sr} / L_{imp}$ goes down faster as a function of impact angle for a fixed and low impact velocity. For higher impact velocities above $1.70 \vesc$, a similar dependence on the impact angle can be observed like for $L_{lr} / L_{imp}$.  Overall, neither $L_{lr}$ nor $L_{sr}$ show a considerable scale dependence. This is because, the drivers behind angular momentum transfers are tidal deformations and gravitational interaction, which are scale-independent effects. Small differences only develop due to compressibility and the slightly different mass distributions for different mass regimes. The composition of the bodies seems to have a negligible effect, as can be seen by comparing the $\gamma = 0.2$ simulations from set \css with the simulations for the same mass ratio from simulation set \iss.
-
-The values of $L_{lr} / L_{coll}$ and only serve as measures for how efficiently the impact angular momentum is transferred into angular momentum of the remnants, but does not say much about the rotation of the bodies itself, as $\L_{imp}$ can vary considerably. 
-
-
-
-Self-gravitating bodies have an upper limit for the angular momentum they can retain. For 
-
-
-\cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 
-
-
-
- critical ang. momentum\\
-critical T / W for largest remnant\\
-critical T / W for second remnant at large $\thimp$ (get data)\\
-how to get from Erot and I to a rotation rate:
-\begin{equation}
-T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
-\end{equation}
-shedding of material due to rotational ejection well before stability limits given in the literature. why? departure from solid body rotation.\\
-$L_{bound}$ vs. $L_{imp}$ \\
-$t = \frac{T}{|W|}$
-$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
-
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -651,7 +626,6 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \end{center}
 \end{figure}
 
-
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{36_SR_LvsLimp_r3.pdf}
@@ -675,33 +649,51 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig36c}
 \end{center}
 \end{figure}
+\end{landscape}
+}
+
+The values of $L_{lr} / L_{coll}$ and only serve as measures for how efficiently the impact angular momentum is transferred into angular momentum of the remnants, but does not say much about the rotation of the bodies itself, as $\L_{imp}$ can vary considerably. A more interesting quantity is the rotation period $T$, which can be defined when assuming the a body rotates rigidly and has the same rotation rate $\omega$ for all radii. Strengthless, self-gravitating bodies have an upper limit for the rotation rate. When introducing rotation, rotation energy $\frac{1}{2} L^2 / I$ is added up to the total energy of the body. $I$ denotes the moment of inertia and depends on the shape and the mass distribution of the body. When rotating, the body is being deformed from a perfect sphere to an ellipsoidal shape, which changes both the moment of inertia and therefore both the rotation energy and potential energy $T$ terms, such as that the total energy of the body is being minimized. Above a critical value, a further increase of angular momentum changes the moment of inertia such that the decrease of rotation energy does no longer compensate the increase of potential energy. The body becomes secularly unstable and loses mass. A measure for the stability of a rotating body is the ratio of rotation $T$ versus potential energy $W$
+\begin{align}
+t = \frac{T}{|W|}
+\end{align}
+The critical value for $t$ can be analytically determined for constant-density bodies and is $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B}. Figures 
+
+
+changing the shape of the body does 
 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
-\label{ch03_fig19a}
-\end{center}
-\end{figure}
+ body gains rotation energy which
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
-\label{ch03_fig19b}
-\end{center}
-\end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
-\label{ch03_fig19c}
-\end{center}
-\end{figure}
+Above a critical value, the 
 
+
+
+Self-gravitating bodies have an upper limit for the angular momentum they can retain. For 
+
+
+\cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 
+
+
+
+ critical ang. momentum\\
+critical T / W for largest remnant\\
+critical T / W for second remnant at large $\thimp$ (get data)\\
+how to get from Erot and I to a rotation rate:
+\begin{equation}
+T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
+\end{equation}
+shedding of material due to rotational ejection well before stability limits given in the literature. why? departure from solid body rotation.\\
+$L_{bound}$ vs. $L_{imp}$ \\
+$t = \frac{T}{|W|}$
+$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
+
+
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{10_rotstab_r3.pdf}
@@ -725,7 +717,35 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{ch
 \label{ch03_fig10c}
 \end{center}
 \end{figure}
+\end{landscape}
+}
 
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
+\label{ch03_fig19a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{19_rotperiod_c1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
+\label{ch03_fig19b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{19_rotperiod_i1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
+\label{ch03_fig19c}
+\end{center}
+\end{figure}
 
 \begin{figure}
 \begin{center}
