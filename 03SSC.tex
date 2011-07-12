@@ -806,6 +806,15 @@ In summary, one can say that build up of spin is not efficient for the second re
 % energy partition
 %% 
 \subsection{Energy partition}
+In early planetary systems, the energy freed by accretion and hence the decrease of gravitational binding energy is still the largest source of energy. It is therefore important to look at the energy budget for similar-sized collisions and where the impact energy goes to. The impact energy is defined as the kinetic energy of both bodies in a center of mass frame of reference and yields
+\begin{align}
+E_{imp} = \frac{1}{2} \mu \vimp
+\end{align}
+where the reduced mass yields $\mu = \Mtar \Mimp / ( \Mtar + \Mimp )$. The impact energy scales $E_{imp} \sim M_{tot}^\frac{4}{3}$ for impact velocities on the order of the mutual escape velocity. For the Earth mass regime, it can easily yield specific values on the order energy release when detonating TNT \footnote{For example in simulation $\{ 1.0 \ME, 0.2, 0 \deg, 1.00 \vesc \}$ of set \css, the specific impact energy $Q = E_{imp} / ( \Mtar + \Mimp ) = 6 394 J / g \approx 1.5 \textrm{ TNT equivalents / ton}$. When scaling half the energy to $\Mimp$, the specific energy even yields $Q \approx 4.6 \textrm{ TNT equivalents / ton}$!}
+
+
+for fluid bodies, a lot more energy can be gained by merging
+
 potential, internal and rotational energy\\
 energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
 $\Delta U$, accretion vs. non-accretion \\
@@ -818,6 +827,14 @@ $\Delta U$, accretion vs. non-accretion \\
 \includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
 \caption{Change in internal energy $\Delta U$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
 \label{ch03_fig11a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
+\caption{Change in potential energy $\Delta W$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
+\label{ch03_fig12a}
 \end{center}
 \end{figure}
 
@@ -837,13 +854,6 @@ $\Delta U$, accretion vs. non-accretion \\
 \end{center}
 \end{figure}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
-\caption{Change in potential energy $\Delta W$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
-\label{ch03_fig12a}
-\end{center}
-\end{figure}
 
 \begin{figure}
 \begin{center}
