@@ -674,34 +674,12 @@ The rotation rate is another important property. All the central bodies of the l
 \omega = \frac{L}{I} \sim \frac{L_{imp}}{M R^2} \sim \frac{\vesc}{R} \sim \frac{M^{\frac{1}{3}}}{R} \sim \mathrm{const.}
 \end{align} 
 
-Figures
+Figures \ref{ch03_fig19a} to \ref{ch03_fig19c} show the rotation period of the largest remnant central body calculatedwith 
+\begin{align}
+t_{spin, lr} = 2 \pi \sqrt{ \frac{I}{2 T} }
+\end{align}
+assuming rigid body rotation. The values show similar characterstics as for the $t$-factor: The shortest rotation periods, for which the ratio of rotation energy vs. potential energy becomes the largest, occurs for slow ($\vimp = 1.00 \dots 1.10 \vesc$) and grazing angles $> 45 \deg$. The period is again mainly dependent on the mass ratio $\gamma$ and only weakly on the mass regime. The shortest periods can be observed for the dense and heavy \css simulations with a minimal value of $t_{spin, lr} \approx 3h$ for $\{1.0 \ME, 0.7, > 45 \deg, 1.00 \vesc \}$. For smaller mass ratios $\gamma = 0.1 \dots 0.35$ and $\vimp = 1.00 \dots 1.10 \vesc$, the rotation period increases again as a function of impact angle $> 45 \deg$, althoug the bound angular momentum $L_{lr}$ increases. This indicates again, that a process like disk or satellite formation slows down the rotation of the central body similar to cases where a second remnant forms an carries away the excess angular momentum. For such simulations with second remnant formation, an increase in the rotation period on the order of $12 \dots 24h$ can be observed, with even larger values for very small impact angles. Similarly as for the rotational to potential energy ratio, the central body rotation period of the largest remnant is basically scale-invariant, with slight deviations due to compressional effects.
 
-For the largest remnant the $|W|$-term is stays within the same order of magnitude, even for high mass ratio simulations where the largest remnant mass varies most. 
-
-
-% 
-
-% conclusion: only important for slow & grazing collisions
-% not scale independent because of $W$ term
-% is T/W scale independent?
-
-% cite canup for critical angle
-\cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 
-
-critical T / W for largest remnant\\
-critical T / W for second remnant at large $\thimp$ (get data)\\
-how to get from Erot and I to a rotation rate:
-\begin{equation}
-T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
-\end{equation}
-shedding of material due to rotational ejection well before stability limits given in the literature. why? departure from solid body rotation.\\
-$L_{bound}$ vs. $L_{imp}$ \\
-$t = \frac{T}{|W|}$
-$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} 
-
-
-
-1969Chandrasekhar.C
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
@@ -737,7 +715,7 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B}
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{19_rotperiod_r3.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $t_{spin, lr} = 2 \pi \frac{I}{T}$.}
 \label{ch03_fig19a}
 \end{center}
 \end{figure}
@@ -757,52 +735,89 @@ $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B}
 \label{ch03_fig19c}
 \end{center}
 \end{figure}
+\end{landscape}
+}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{33_SR_rotperiod_r3.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $T = 2 \pi \frac{I}{2 E_{rot}}$.}
-\label{ch03_fig33a}
-\end{center}
-\end{figure}
+A similar analysis of rotation can be done for the second remnant. Figures \ref{ch03_fig35a} to \ref{ch03_fig35c} show the ratio of rotational to potential energy for the central body of the second remnant for cases where $\Msr > 0.1 \Mimp$. Similarly to the largest remnant, also for the second remnant the $t$-factor shows similar characteristics like the quantity $L_{sr} / L_{imp}$. Because no second remnant forms for very slow collisions with large impact angles and $\vimp = 1.00 \dots 1.10 \vesc$, no values as high as for the $t$-factor of largest remnant are found for the second remnant. Remarkabely, in
 
+
+% conclusion: only important for slow & grazing collisions
+% not scale independent because of $W$ term
+% is T/W scale independent?
+
+% cite canup for critical angle
+\cite{Canup:2000p3542} gives a critial value for the collision angular momentum of \ref{ch03_fig35a} show 
+
+critical T / W for largest remnant\\
+critical T / W for second remnant at large $\thimp$ (get data)\\
+how to get from Erot and I to a rotation rate:
+\begin{equation}
+T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
+\end{equation}
+shedding of material due to rotational ejection well before stability limits given in the literature. why? departure from solid body rotation.\\
+$L_{bound}$ vs. $L_{imp}$ \\
+$t = \frac{T}{|W|}$
+$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} 
+
+
+
+1969Chandrasekhar.C
+
+
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_r3.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the largest remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ comparing the rotational energy $T$ with the potential energy $W$ for the second remnant in the \emph{r3} simulation set. Note that again only particles from the actual clump are considered for calculating both energies. Disk particles are not considered.}
 \label{ch03_fig35a}
-\end{center}
-\end{figure}
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{33_SR_rotperiod_c1.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig19a} }
-\label{ch03_fig33b}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_c1.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{c1}.}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the second remnant as a function of impact angle as in figure \ref{ch03_fig35a} but for simulation set \emph{c1}.}
 \label{ch03_fig35b} 
-\end{center}
-\end{figure}
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{33_SR_rotperiod_i1.pdf}
-\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig19a} }
-\label{ch03_fig33c}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{35_SR_rotstab_i1.pdf}
-\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the largest remnant as a function of impact angle as in figure \ref{ch03_fig10a} but for simulation set \emph{i1}.}
+\caption{Dimensionless rotational stability parameter $t = \frac{T}{|W|}$ for the second remnant as a function of impact angle as in figure \ref{ch03_fig35a} but for simulation set \emph{i1}.}
 \label{ch03_fig35c}
+\end{center}
+\end{figure}
+\end{landscape}
+}
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_r3.pdf}
+\caption{Rotation period of the second remnant as a function of impact angle for the \emph{r3} simulation set. Only particles in the remnant are considered which are part of the largest clump and not in a disk orbit. Solid body rotation is assumed for calculating the rotation period by simply comparing the rotational energy with the moment of intertia: $t_{spin, sr} = 2 \pi \frac{I}{T_{clmp, sr}}$.}
+\label{ch03_fig33a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_c1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{c1} simulation set as in figure \ref{ch03_fig33a} }
+\label{ch03_fig33b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{33_SR_rotperiod_i1.pdf}
+\caption{Rotation period of the largest remnant as a function of impact angle for the \emph{i1} simulation set as in figure \ref{ch03_fig33a} }
+\label{ch03_fig33c}
 \end{center}
 \end{figure}
 \end{landscape}
