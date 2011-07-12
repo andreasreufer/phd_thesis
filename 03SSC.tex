@@ -439,8 +439,11 @@ Another more exotic mechanism to form tertiary remnants are failed satellites. F
 \end{center}
 \end{figure}
 
-We now only considered the total mass of tertiary remnants. It would be interesting to obtain a size distribution, but unfortunately this would not produce any meaningful results by simply analyzing SPH simulations at a fixed, moderate resolution. Re-collapse of expanding structures like the above mentioned arm is often resolution-dependent and very high resolutions would be required to obtain converging results for the size distribution of tertiary remnants. This is beyond the scope of this parameter study.
-
+We now only considered the total mass of tertiary remnants. It would be interesting to obtain a size distribution, but unfortunately this would not produce any meaningful results by simply analyzing SPH simulations at a fixed, moderate resolution. Recollapse of the expanding arm structure often happens down to the resolution limit, so that very highly resolved simulations would be required to get converging results for the mass and size distribution of tertiary remnants. This is beyond the scope of this study. An order of magnitude estimation for the size of the clumps can be given by a stability analysis of a self-gravitating, infinite cylinder of fluid with constant density with radius $R$ \citep{1961Chandrasekhar.C}. Modes with
+\begin{align}
+\lambda > \lambda_{*} = \frac{2 \pi R}{x_*} \hspace{2.0cm} x_* = 1.0668
+\end{align} 
+are unstable and collapse into clumps. The associated break-up time of the cylinder is $\tau_{\mathrm{break-up}} = \frac{1}{0.2455 \sqrt{4 \pi G \rho} }$ which is on the order of magnitude of the gravitational timescale $\tau_{grav}$. Although the expanding arm structure with its non-constant $R$ cannot be directly compared to a cylinder initially at rest with a fixed $R$, the clumping of the arm occurs roughly on a length-scale comparable to the arms diameter as soon as it collapses.
 
 %%
 % ejecta 
@@ -652,32 +655,20 @@ The most efficient cases are for impact velocities starting at $1.10 \dots 1.15 
 \end{landscape}
 }
 
-The values of $L_{lr} / L_{coll}$ and only serve as measures for how efficiently the impact angular momentum is transferred into angular momentum of the remnants, but does not say much about the rotation of the bodies itself, as $\L_{imp}$ can vary considerably. A more interesting quantity is the rotation period $T$, which can be defined when assuming the a body rotates rigidly and has the same rotation rate $\omega$ for all radii. Strengthless, self-gravitating bodies have an upper limit for the rotation rate. When introducing rotation, rotation energy $\frac{1}{2} L^2 / I$ is added up to the total energy of the body. $I$ denotes the moment of inertia and depends on the shape and the mass distribution of the body. When rotating, the body is being deformed from a perfect sphere to an ellipsoidal shape, which changes both the moment of inertia and therefore both the rotation energy and potential energy $T$ terms, such as that the total energy of the body is being minimized. Above a critical value, a further increase of angular momentum changes the moment of inertia such that the decrease of rotation energy does no longer compensate the increase of potential energy. The body becomes secularly unstable and loses mass. A measure for the stability of a rotating body is the ratio of rotation $T$ versus potential energy $W$
+The values of $L_{lr} / L_{coll}$ and only serve as measures for how efficiently the impact angular momentum is transferred into angular momentum of the remnants, but does not say much about the rotation of the bodies itself, as $L_{imp}$ can vary considerably. A more interesting quantity is the rotation period $T$, which can be defined when assuming the a body rotates rigidly and has the same rotation rate $\omega$ for all radii. Strengthless, self-gravitating bodies have an upper limit for the rotation rate. When introducing rotation, rotation energy $\frac{1}{2} L^2 / I$ is added up to the total energy of the body. $I$ denotes the moment of inertia and depends on the shape and the mass distribution of the body. When rotating, the body is being deformed from a perfect sphere to an ellipsoidal shape, which changes both the moment of inertia and therefore both the rotation energy and potential energy $T$ terms, such as that the total energy of the body is being minimized. Above a critical value, a further increase of angular momentum changes the moment of inertia such that the decrease of rotation energy does no longer compensate the increase of potential energy. The body becomes secularly unstable and loses mass. A measure for the stability of a rotating body is the ratio of rotation $T$ versus potential energy $W$
 \begin{align}
 t = \frac{T}{|W|}
 \end{align}
-The critical value for $t$ can be analytically determined for constant-density bodies and is $t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B}. Figures \ref{ch03_fig10a} to \ref{ch03_fig10c} show the $t$-value the largest remnant. Note that 
+The critical value for $t$ can be analytically determined for constant-density bodies. MacLaurin spheroids becomes unstable for $t > 0.2738$ \citep{chandrasekhar1969ellipsoidal, 1987gady.book.....B}. Determining the ratio $t$ for the remnant bodies of our collisions shows, whether the angular momentum reaches values above stability. As we are interested in the stability of the central body in a remnant, it is important only to consider those particles for calculating the rotation and potential energy \footnote{The potential energy of a set of SPH particles is given by the sum $W = \frac{1}{2} \sum_{i} m_i \phi_i$ neglecting external potentials.}. For the definition and the determination of the central body, see section \ref{ch02_sec04_ss07}.
 
+Figures \ref{ch03_fig10a} to \ref{ch03_fig10c} show the $t$-value the central body of the largest remnant as a function of the impact angle. Obviously, the rotation energy increases for higher 
 
-changing the shape of the body does 
+% conclusion: only important for slow & grazing collisions
+% not scale dependent because of $W$ term
 
-
-
- body gains rotation energy which
-
-
-Above a critical value, the 
-
-
-
-Self-gravitating bodies have an upper limit for the angular momentum they can retain. For 
-
-
+% cite canup for critical angle
 \cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 
 
-
-
- critical ang. momentum\\
 critical T / W for largest remnant\\
 critical T / W for second remnant at large $\thimp$ (get data)\\
 how to get from Erot and I to a rotation rate:
@@ -687,10 +678,11 @@ T = 2 \pi \sqrt{ \frac{I}{2 E_{rot}} }
 shedding of material due to rotational ejection well before stability limits given in the literature. why? departure from solid body rotation.\\
 $L_{bound}$ vs. $L_{imp}$ \\
 $t = \frac{T}{|W|}$
-$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} \citep{chandrasekhar1969ellipsoidal}
+$t_{crit} = 0.2738$ for McLaurin spheroids \citep{1987gady.book.....B} 
 
 
 
+1969Chandrasekhar.C
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
