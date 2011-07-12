@@ -661,10 +661,29 @@ t = \frac{T}{|W|}
 \end{align}
 The critical value for $t$ can be analytically determined for constant-density bodies. MacLaurin spheroids becomes unstable for $t > 0.2738$ \citep{chandrasekhar1969ellipsoidal, 1987gady.book.....B}. Determining the ratio $t$ for the remnant bodies of our collisions shows, whether the angular momentum reaches values above stability. As we are interested in the stability of the central body in a remnant, it is important only to consider those particles for calculating the rotation and potential energy \footnote{The potential energy of a set of SPH particles is given by the sum $W = \frac{1}{2} \sum_{i} m_i \phi_i$ neglecting external potentials.}. For the definition and the determination of the central body, see section \ref{ch02_sec04_ss07}.
 
-Figures \ref{ch03_fig10a} to \ref{ch03_fig10c} show the $t$-value the central body of the largest remnant as a function of the impact angle. Obviously, the rotation energy increases for higher 
+The ratio $T / |W|$ for the largest remnant is scale-invariant, as
+\begin{align}
+W \sim - \frac{G M^2}{R} \hspace{1.0cm} T = \frac{1}{2} I \omega^2 = \frac{1}{2 I} L^2 \sim \frac{1}{M R^2} L_{imp} \sim \frac{1}{M R^2} R M \vesc \sim \frac{G M^2}{R}
+\end{align}
+assuming constant-density bodies and that all impact angular momentum goes into the largest remnant. Figures \ref{ch03_fig10a} to \ref{ch03_fig10c} show the $t$-value for the central body of the largest remnant as a function of the impact angle. Obviously, the rotation energy increases for higher impact angle, because $L_{imp}$ increases. For small impact velocities, the mass of the largest remnant and therefore also the potential energy term $|W|$ stays within the same order of magnitude for all impact angles. As $T \sim \frac{1}{2I} L^2$, the factor $t$ follows roughly $(L_{lr} \sin{\thimp} )^2$ and shows a similar dependence on the mass ratio as the relative angular momentum. Although the $t$-factor is not larger than $0.1$ for any composition or mass regime and therefore well below the critical value for Maclaurin spheroids cited above, this does not necessarily mean that the largest remnant is rotationally was stable after the collision. Several assumptions in the stability analysis for Maclaurin spheroids are violated: For example the largest remnants are not constant-density bodies. Also, the bodies are not slowly being spun-up with rigid-body rotation for all times, but a fast rotating surface layer spins-up a non-rotating inner body. 
+In the results, it is remarkable that the $t$-factor does not increase for a given impact angles when going from the slowest impact velocity of $1.00 \vesc$ to a higher value like $1.10$ or $1.15$. This can be observed very nicely for the $\Mtar = 0.1 \ME$ cases in simulation set \css for all mass ratios. Another interesting fact is, that the $t$-factor for the central decreases again for the $\vimp = 1.00 \vesc$ and large mass ratio cases, while $L_{lr} / L_{imp}$ is still $\approx 1$. This indicates, that the central body of the largest is shedding parts of its mass in order to remain rotationally stable. In other words, disk and satellite formation is expected for those cases, which will be analyzed later on. 
+Overall, the $t$-factor shows roughly a scale-invariance, although compressional effects changing the inertial moment $I$ of the bodies, introduces a weak dependence on the mass of the largest remnant.
+
+The rotation rate is another important property. All the central bodies of the largest remnants, show rigid body rotation towards the end of the simulations, which might be probably more an indication for the high numerical viscosity associated with modeling differentially rotating fluids with SPH, than a physical results. Although the timescale might be incorrect for which rigid body rotation starts to develop, as angular momentum and rotation energy are still well conserved in SPH, the rotation rates obtained in the simulations most probably model the real rotation rate of those bodies quite well. When again assuming, that the impact angular momentum is perfectly transferred into the largest remnant, the rotation rate also becomes scale-invariant:
+\begin{align}
+\omega = \frac{L}{I} \sim \frac{L_{imp}}{M R^2} \sim \frac{\vesc}{R} \sim \frac{M^{\frac{1}{3}}}{R} \sim \mathrm{const.}
+\end{align} 
+
+Figures
+
+For the largest remnant the $|W|$-term is stays within the same order of magnitude, even for high mass ratio simulations where the largest remnant mass varies most. 
+
+
+% 
 
 % conclusion: only important for slow & grazing collisions
-% not scale dependent because of $W$ term
+% not scale independent because of $W$ term
+% is T/W scale independent?
 
 % cite canup for critical angle
 \cite{Canup:2000p3542} gives a critial value for the collision angular momentum of 

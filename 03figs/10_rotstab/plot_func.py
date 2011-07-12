@@ -52,7 +52,7 @@ def filterFunc(sim):
 #xvar = "vimp"
 xvar = "angle"
 
-yaxis = [ 1.e-3, 0.9 ]
+yaxis = [ 1.e-3, 1.1 ]
 ylog  = True
 ylbl  = r"$T / |W|_{lr}$"
 yfmt  = tex_formatter

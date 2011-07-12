@@ -114,6 +114,7 @@ for ( sparm, axv ) in params:
 
   #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
   #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
+
   
   if xvar == "vimp":
     ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
@@ -123,6 +124,10 @@ for ( sparm, axv ) in params:
     ax.axis( [ 0., 90., yaxis[0], yaxis[1] ])
     ax.xaxis.set_ticks( (0.,15.,30.,45.,60.,75., 90.) )
     ax.xaxis.set_ticklabels( ("" , "" , "" , "" , "", "", "" ) )
+
+    impax = np.linspace( 0.1, 90., 100 )
+    rad2deg = 360./(2.*pi)
+    ax.plot( impax, np.sin(impax / rad2deg), 'k--' )
   ax.grid(True)
   
   ax.yaxis.set_ticks( ytik )
