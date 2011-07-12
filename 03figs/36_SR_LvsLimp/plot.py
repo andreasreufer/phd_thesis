@@ -112,8 +112,8 @@ for ( sparm, axv ) in params:
     else:
       ax.plot( xll[i], resll[i], ls, color=col, markersize=6)
 
-  #Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
-  #ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
+  Vhit = pl.loadtxt( "gamma_%3.2f0.txt" % ( sim.impb.m / sim.tarb.m ) )
+  ax.plot( Vhit[:,1], Vhit[:,2], 'k--', label="$V_{hit}$")
   
   if xvar == "vimp":
     ax.axis( [ 1.0, 4.0, yaxis[0], yaxis[1] ])
