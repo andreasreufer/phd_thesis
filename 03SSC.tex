@@ -818,13 +818,15 @@ Figures \ref{ch03_fig11a} to \ref{ch03_fig11c} show the change in specific energ
 \begin{align}
 \Delta (U / m )_{lr} = \frac{U_{lr}}{\Mlr} - \frac{U_{targ}}{\Mtar} 
 \end{align}
-Although this expression does not yield the correct value for the specific energy for bodies with mixed composition, it sill gives a measure for the overall increase in internal energy. 
+Although this expression does not yield the correct value for the specific energy for bodies with mixed composition, it sill gives a measure for the overall increase in internal energy. In general, the increase in internal energy becomes higher for smaller impact angles. For smaller impacts, less energy goes into rotation energy. Also the impactor volume hitting the target increases, which lead to more kinetic energy from the impactor to be converted into internal energy. For perfect accretion, increase in specific internal energy is the largest for impact angles $> 45 \dots 60 \deg$. For higher impact velocities, the increase in specific internal energy also increases up to a certain velocity and decreases again. While the initial shock heating right after contact of the two bodies is largest increases with the impact velocity, so does the mass loss due to smaller accretion efficiency. The largest remnant becomes lighter and due to unloading of the structure also decreases its specific internal energy. This turnaround occurs between $\vimp = 3.00 \dots 3.50$, depending on the impact mass regime, the mass ratio and the composition.
 
+Overall the increase in specific internal energy is not scale-free, as effects like shock-heating depend on absolute values. The definition of the increase also depends on the initial thermal state of the body. Nevertheless, the quantity shows the same overall characteristics for all target mass regimes and compositions.
 
-
-potential, internal and rotational energy\\
-energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
-$\Delta U$, accretion vs. non-accretion \\
+Figure \ref{ch03_fig42a} to \ref{ch03_fig42c} show the increase in specific internal energy for the second remnant
+\begin{align}
+\Delta (U / m )_{sr} = \frac{U_{sr}}{\Msr} - \frac{U_{imp}}{\Mimp} 
+\end{align}
+in case its mass fulfills $\Msr  > 0.1 \Mimp$. One would expect, that the relative change would be higher. Heating due to the shock wave generated at the time of first contact is relatively higher, as shock wave has the same strength as in the target, but requires to heat less mass for the same specific energy change. On the other hand, the impactor is also more easily striped of mass, and therefore its heated surface layers are more easily lost. Which effect is larger in the end depends on the target mass regime and the composition of the body. For example in simulation set \rss with its pure silicate bodies, the second remnant experiences relatively more intensive heating compared to the largest remnant. This effect increases to smaller mass ratios. Simulation sets \css and \iss shows similar specific heating values for the second and the largest remnant at the small target mass regime, with an relative increase of the specific heating for the second remnant compared for the largest remnant for higher target mass regimes.
 
 \afterpage{
 \clearpage % To flush out all floats, might not be what you want
@@ -904,11 +906,12 @@ $\Delta U$, accretion vs. non-accretion \\
 }
 
 
-
 %%
 % disk formation
 %% 
 \subsection{Satellite and disk formation}
+An interesting side effect of similar-sized collisions is the creation of disks and satellites which often form out of such disks. 
+
 crucial for life? (Laskar paper, E)\\
 analyze disk masses, angular momentum \& composition \\
 mean a and mean e, compare with roche limit \\
