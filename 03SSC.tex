@@ -906,13 +906,18 @@ in case its mass fulfills $\Msr  > 0.1 \Mimp$. One would expect, that the relati
 }
 
 
+
 %%
 % disk formation
 %% 
 \subsection{Satellite and disk formation}
-An interesting side effect of similar-sized collisions is the creation of disks and satellites which often form out of such disks. 
+An interesting side effect of similar-sized collisions is the creation of disks and satellites which often form out of such disks. Disk formation most probably is an important effect for terrestrial planet formation. Todays widely accepted model for the formation of the Earths Moon is a late giant impact, where a protolunar disk created during the collision, later on accreted into the Moon \cite{Benz:1985p1755, Canup:2000p3542}. Other satellites are also most probably the outcome of a giant collision at the late stages of the solar systems formation, like for the Pluto-Charon system \cite{Canup:2005p1987}. Obtaining satellites might actually be a crucial requirement to form life on a terrestrial planet, as large moons stabilize the orientation of a planets rotation axis \ref{2000rewc.book.....W}.
 
-crucial for life? (Laskar paper, E)\\
+We determine the disks of the remnants with the algorithm described in \ref{ch02_sec04_ss07}. The disk mass is then simply the sum of the mass of all SPH particles considered to belong to the disk. We also determine a mean eccentricity of the disk with the sum
+\begin{align}
+\overline{e_{disk}} = \frac{1}{M_{disk}} \sum_{i} e_i m_i 
+\end{align}
+
 analyze disk masses, angular momentum \& composition \\
 mean a and mean e, compare with roche limit \\
 satellite formation in second \\
