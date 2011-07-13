@@ -14,7 +14,7 @@ def plotFunc(sim):
 def filterFunc(sim):
   res = sim.results
   #return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ) and (sim.results.mm[2] > 0.1*sim.impb.m )
-  return res.valid and ( sim.results.valtmax / sim.tcol > 5. ) and ( res.mdiskmatm[1,:].sum() > 0 )
+  return res.valid and ( sim.results.valtmax / sim.tcol > 5. ) and ( res.mdiskmatm[1,:].sum() > 0.001*sim.mtot )
 
 
 #xvar = "vimp"
