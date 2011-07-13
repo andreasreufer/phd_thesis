@@ -812,8 +812,15 @@ E_{imp} = \frac{1}{2} \mu \vimp
 \end{align}
 where the reduced mass yields $\mu = \Mtar \Mimp / ( \Mtar + \Mimp )$. The impact energy scales $E_{imp} \sim M_{tot}^\frac{4}{3}$ for impact velocities on the order of the mutual escape velocity. For the Earth mass regime, it can easily yield specific values on the order energy release when detonating TNT \footnote{For example in simulation $\{ 1.0 \ME, 0.2, 0 \deg, 1.00 \vesc \}$ of set \css, the specific impact energy $Q = E_{imp} / ( \Mtar + \Mimp ) = 6 394 J / g \approx 1.5 \textrm{ TNT equivalents / ton}$. When scaling half the energy to $\Mimp$, the specific energy even yields $Q \approx 4.6 \textrm{ TNT equivalents / ton}$!}
 
+The impact energy $E_{imp}$ is composed of two contributions: First the kinetic energy at infinity $\frac{1}{2} \mu \vneginf$ and the potential energy which is freed when the two bodies approach each other until contact $G\frac{\Mimp \Mtar}{\Rtar + \Rimp}$. For strengthless bodies which merge during the collision, a lot more energy can be freed as the largest remnant has a lower gravitational binding energy than the sum of the binding energies of the target and the impactor body. Figures \ref{ch03_fig12a} to \ref{ch03_fig12c} show the difference of the largest remnant binding energy and the sum of the target and the impactor body binding energies. The connection with the accretion efficiency becomes obvious. For slow collisions $\vimp = 1.00 \dots 1.05$, where the target accretes the impactor efficiently, the change in gravitational binding energy is largest. In the small target mass regime, the change for small impact angles is up to $E_{imp}$, so the merging process alone contributes as much or more energy than the approach of the two bodies. The change is dependent on the impact angle, this becomes when considering again the $t$-factor from the previous section, which gives the ratio of rotational energy to binding energy. For increasing impact angles, more rotational energy builds up in the largest remnant. partially accretion collisions, the change in binding energy becomes smaller and goes above 0, as also for $\xi \approx 0$, a certain amount of rotation and also an increased internal energy is imposed on the largest remnant, both effects leads to an increase in radius of the body while the mass stays the same. This increases the gravitational binding energy of the largest remnant. The increase in gravitational binding energy for the largest remnant is mainly dependent on the mass ratio, while a small scale-dependence is introduced again due to compressional effects.
 
-for fluid bodies, a lot more energy can be gained by merging
+Figures \ref{ch03_fig11a} to \ref{ch03_fig11c} show the change in specific energy between the targer and the largest remnant 
+\begin{align}
+\Delta (U / m )_{lr} = \frac{U_{lr}}{\Mlr} - \frac{U_{targ}}{\Mtar} 
+\end{align}
+Although this expression does not yield the correct value for the specific energy for bodies with mixed composition, it sill gives a measure for the overall increase in internal energy. 
+
+
 
 potential, internal and rotational energy\\
 energy partition in bodies (shocks, tidal vs. self-gravity stress) \\
@@ -824,36 +831,11 @@ $\Delta U$, accretion vs. non-accretion \\
 \begin{landscape}
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
-\caption{Change in internal energy $\Delta U$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
-\label{ch03_fig11a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
 \includegraphics[scale=1.0]{12_dPot_impa_r3.pdf}
 \caption{Change in potential energy $\Delta W$ relative to the impact energy $E_{imp} = \frac{1}{2}\mu \vimp$ for the largest remnant as a function of the impact angle for the simulation set \emph{r3}.}
 \label{ch03_fig12a}
 \end{center}
 \end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{11_dU_impa_c1.pdf}
-\caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{c1}.}
-\label{ch03_fig11b}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{11_dU_impa_i1.pdf}
-\caption{Change in internal energy $\Delta U$ as in figure \ref{ch03_fig11a}, but for the simulation set \emph{i1}.}
-\label{ch03_fig11c}
-\end{center}
-\end{figure}
-
 
 \begin{figure}
 \begin{center}
@@ -868,6 +850,54 @@ $\Delta U$, accretion vs. non-accretion \\
 \includegraphics[scale=1.0]{12_dPot_impa_i1.pdf}
 \caption{Change in potential energy $\Delta W$ as in figure \ref{ch03_fig12a}, but for the simulation set \emph{i1}.}
 \label{ch03_fig12c}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_r3.pdf}
+\caption{Change in specific internal energy from the target to the largest remnant $\Delta (U / m )_{lr}$ as a function of the impact angle for simulation set \rss. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig11a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_c1.pdf}
+\caption{Change in specific internal energy from the target to the largest remnant $\Delta (U / m )_{lr}$ as a function of the impact angle for simulation set \css. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig11b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{11_dU_impa_i1.pdf}
+\caption{Change in specific internal energy from the target to the largest remnant $\Delta (U / m )_{lr}$ as a function of the impact angle for simulation set \iss. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig11c}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{42_SR_dU_impa_r3.pdf}
+\caption{Change in specific internal energy from the target to the second remnant $\Delta (U / m )_{sr}$ as a function of the impact angle for simulation set \rss for simulations where $\Msr  > 0.1 \Mimp$. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig42a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{42_SR_dU_impa_c1.pdf}
+\caption{Change in specific internal energy from the target to the second remnant $\Delta (U / m )_{sr}$ as a function of the impact angle for simulation set \css for simulations where $\Msr  > 0.1 \Mimp$. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig42b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{42_SR_dU_impa_i1.pdf}
+\caption{Change in specific internal energy from the target to the second remnant $\Delta (U / m )_{sr}$ as a function of the impact angle for simulation set \iss for simulations where $\Msr  > 0.1 \Mimp$. The dashes black line shows the relative volume of the impactor hit by the target assuming a straight trajectory after contact.}
+\label{ch03_fig42c}
 \end{center}
 \end{figure}
 \end{landscape}
