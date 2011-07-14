@@ -25,7 +25,13 @@ def plotFunc(sim):
   return y
 
 
-def filterFunc(sim):
+def filterFunc(sim, ssname):
+  key = sim.params.key
+  if ssname == "c1":
+    if key == "mtar000.100_mimp000.020_impa60.0_vimp1.10" or \
+        key == "mtar000.100_mimp000.020_impa75.0_vimp1.10":
+      return False
+
   return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ) and (sim.results.mm[2] > 0.1*sim.impb.m and sim.results.dblvarthetam.shape[0] > 2)
 
 
