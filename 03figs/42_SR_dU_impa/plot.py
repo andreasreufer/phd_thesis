@@ -89,7 +89,7 @@ for ( sparm, axv ) in params:
       x = sim.params.impa
       z = sim.params.vimprel
 
-    if filterFunc(sim):
+    if filterFunc(sim, ssname):
       sct2arr.newPoint(z, x, plotFunc(sim) )
       zset[z] = []
       

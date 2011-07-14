@@ -19,10 +19,20 @@ def plotFunc(sim):
   
 
 
-def filterFunc(sim):
+def filterFunc(sim, ssname):
   res = sim.results
   if not sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ):
     return False
+
+  key = sim.params.key
+  if ssname == "c1":
+    if key == "mtar001.000_mimp000.200_impa60.0_vimp2.50" or \
+        key == "mtar000.100_mimp000.020_impa75.0_vimp1.10":
+      return False
+  if ssname == "i1":
+    if key == "mtar000.010_mimp000.002_impa30.0_vimp4.00":
+      return False
+
 
   if not len(sim.results.mm) > 2:
     return False

@@ -10,7 +10,11 @@ def plotFunc(sim):
   #return (res.mm[1] - sim.tarb.m) / sim.impb.m
   return (res.mm[1] - sim.tarb.m) / sim.impb.m
 
-def filterFunc(sim):
+def filterFunc(sim, ssname):
+  if ssname == "c1":
+    if sim.params.key == "mtar001.000_mimp000.700_impa00.1_vimp1.40":
+      return False
+
   return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. )
 
 def auxplot(ax):

@@ -10,8 +10,14 @@ def plotFunc(sim):
   return (res.mm[1]) / (sim.mtot)
 
 
-def filterFunc(sim):
+def filterFunc(sim, ssname):
   #return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. ) and (sim.results.mm[2] > 0.1*sim.impb.m )
+
+  if ssname == "c1":
+    if sim.params.key == "mtar001.000_mimp000.700_impa00.1_vimp1.40":
+      return False
+  #if sim.params.key == ""
+
   return sim.results.valid and ( sim.results.valtmax / sim.tcol > 5. )
 
 

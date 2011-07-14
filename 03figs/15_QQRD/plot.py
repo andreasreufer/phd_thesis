@@ -102,15 +102,16 @@ for ( sparm, axv ) in params:
       
       x = QRQRD
       
-      print sim.params.vimprel, QRQRD
       
       #x = sim.params.vimprel
       z = sim.params.impa
+      
+      print sim.params.key, x,z
     else:
       x = sim.params.impa
       z = sim.params.vimprel
 
-    if filterFunc(sim):
+    if filterFunc(sim, ssname):
       sct2arr.newPoint(z, x, plotFunc(sim) )
       zset[z] = []
       
