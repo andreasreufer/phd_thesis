@@ -590,7 +590,7 @@ This compositional changes due to impact geometry can also be understood by cons
 %%
 % rotation stuff
 %% 
-\subsection{Spin-up, critical angular momentum}
+\subsection{Spin-up \& rotation}
 Another important consequence of similar-sized collisions is the build-up or change of rotation. As we do not consider pre-rotating bodies in this parameter study for simplicity reasons, we only have data on the initial build-up of rotation from non-rotating bodies.
 
 Every collision has an inherent angular momentum 
@@ -1002,56 +1002,78 @@ Here, differences are observable for different mass regimes and ratios, as disk 
 % dynamical effects 
 %% 
 \subsection{Dynamical effects: deflection and slow-down}
-Collisions can be regarded as the interaction 
+Collisions in the gravity can be regarded as a departure from a simple two body interaction between the target and impactor. Figure \ref{ch03_fig04} shows the deflection angle of the impactor in a target-centric frame of reference. Assuming the target and the impactor would be simple point masses and only interact through gravity, the impactor would simply follow a parabolic (for $\vneginf = 0$) or hyperbolic ($\vneginf > 0$) trajectory and the deflection angle would be $2 \vartheta$. For collisions where a second remnant forms, we can now define a deflection angle $2 \vartheta_{sr}$ and velocity at infinity $v_{\infty, sr}$. 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{04_vartheta}
+\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vneginf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
+\label{ch03_fig04}
+\end{center}
+\end{figure}
+
+Figures \ref{ch03_fig22a} to \ref{ch03_fig22c} show the difference $\Delta \vartheta = 2 ( \vartheta_{sr} - \vartheta)$. 
+
+
+calculate the departure of the actual deflection angle from the 
+
 
 vinf and deflection of impactor for non-accreting case\\
 deflection angles for h\&r \\
 bouncing vs. shearing \\
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{04_vartheta}
-\caption{Visualization of the deflection angle: The impactor approaches the target on a hyperbola (or on a parabola in case of $\vneginf = 0$). Without a collision the total deflection angle of the impactor would be simply $2 \vartheta$.}
-\label{ch03_fig02}
-\end{center}
-\end{figure}
 
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
-
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
-\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simultion set \emph{c1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
-\label{ch03_fig21a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
-\caption{Relative velocity between the largest remnant and the second remnant at infinity as in figure \ref{ch03_fig21a}, but for simulation set \emph{i1}.}
-\label{ch03_fig21b}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{22_SR_vartheta_c1.pdf}
-\caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{c1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
+\includegraphics[scale=1.0]{22_SR_vartheta_r3.pdf}
+\caption{Difference between the actual deflection angle of the second remnant $2 \vartheta_{sr}$ and the expected deflection angle $2 \vartheta$ for a purely gravitational interaction between the impactor and the target assuming point masses for simulation set \rss. Only simulations for which $\Msr > 0.1 \Mimp$.}
 \label{ch03_fig22a}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1.0]{22_SR_vartheta_i1.pdf}
-\caption{Difference between the actual deflection angle of the second remnant and the expected deflection angle $2 \vartheta_{orb}$ for the impactor assuming an orbit of two point masses as a function of impact angle for simulation set \emph{i1}. Only simulations are shown, where the second remnant has at least $10\%$ of the mass of the impactor.}
+\includegraphics[scale=1.0]{22_SR_vartheta_c1.pdf}
+\caption{Difference between the actual deflection angle of the second remnant $2 \vartheta_{sr}$ and the expected deflection angle $2 \vartheta$ for a purely gravitational interaction between the impactor and the target assuming point masses for simulation set \css. Only simulations for which $\Msr > 0.1 \Mimp$.}
 \label{ch03_fig22b}
 \end{center}
 \end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{22_SR_vartheta_i1.pdf}
+\caption{Difference between the actual deflection angle of the second remnant $2 \vartheta_{sr}$ and the expected deflection angle $2 \vartheta$ for a purely gravitational interaction between the impactor and the target assuming point masses for simulation set \iss. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\label{ch03_fig22c}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{21_SR_vinf_r3.pdf}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \rss. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\label{ch03_fig21a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \css. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\label{ch03_fig21b}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \iss. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\label{ch03_fig21c}
+\end{center}
+\end{figure}
+
 \end{landscape}
 }
 
