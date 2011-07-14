@@ -1001,8 +1001,8 @@ Here, differences are observable for different mass regimes and ratios, as disk 
 %%
 % dynamical effects 
 %% 
-\subsection{Dynamical effects: deflection and slow-down}
-Collisions in the gravity can be regarded as a departure from a simple two body interaction between the target and impactor. Figure \ref{ch03_fig04} shows the deflection angle of the impactor in a target-centric frame of reference. Assuming the target and the impactor would be simple point masses and only interact through gravity, the impactor would simply follow a parabolic (for $\vneginf = 0$) or hyperbolic ($\vneginf > 0$) trajectory and the deflection angle would be $2 \vartheta$. For collisions where a second remnant forms, we can now define a deflection angle $2 \vartheta_{sr}$ and velocity at infinity $v_{\infty, sr}$. 
+\subsection{Dynamical effects: deflection and slow-down of the impactor}
+Collisions in the gravity regime can be regarded as a departure from a simple two body interaction between the target and impactor idealized with point masses. Figure \ref{ch03_fig04} shows the deflection angle of the impactor in a target-centric frame of reference. Assuming the target and the impactor would be simple point masses and only interact through gravity, the impactor would follow a parabolic (for $\vneginf = 0$) or hyperbolic ($\vneginf > 0$) trajectory and the deflection angle would be $2 \vartheta$ \footnote{$\vartheta = \arctan{\frac{1}{\sqrt{ e^2 - 1}}}$ for $e > 1$ or $\vartheta = 180 \deg$ for $e = 1$}. For collisions where a second remnant forms, we can analogously define a deflection angle $2 \vartheta_{sr}$ and velocity at infinity $v_{\infty, sr}$.
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{04_vartheta}
@@ -1010,8 +1010,8 @@ Collisions in the gravity can be regarded as a departure from a simple two body 
 \label{ch03_fig04}
 \end{center}
 \end{figure}
-
-Figures \ref{ch03_fig22a} to \ref{ch03_fig22c} show the difference $\Delta \vartheta = 2 ( \vartheta_{sr} - \vartheta)$. A positive $\Delta \vartheta$ means, that the second remnant has been more deflected compared to an idealized two-body interaction. For sufficiently large impact velocities $> 1.15 \dots 1.20 \vesc$, all collisions consistently show independent of the composition or the mass ratio a smooth transition from $\Delta \vartheta \approx 0$ for $\thimp = 75 \dots 90 \deg$ towards smaller deflection values for decreasing impact angle. The decrease in deflection can simply be explained by the fact that during the collision, the parts of the impactor surviving the collision as the second remnant are at the time of the collision located farther from the the target than the parts which are being accreted. Due to the increases distance to the target, the deflection is smaller compared to the idealized two-body case. For very small impact velocities $\Delta \vartheta$ becomes positive. This can be explained by the loss of orbital energy due to the collision, so that after collision the second remnant follows a new trajectory with a smaller eccentricity for which the deflection is greater compared to the initial trajectory of the impactor. Overall $\Delta \vartheta$ shows scale-invariance and depends only on the mass ratio.
+Figures \ref{ch03_fig22a} to \ref{ch03_fig22c} show the difference $\Delta \vartheta = 2 ( \vartheta_{sr} - \vartheta)$. A positive $\Delta \vartheta$ means, that the second remnant is deflected stronger compared to an idealized two-body interaction. For sufficiently large impact velocities $\vimp > 1.15 \dots 1.20 \vesc$ all collisions consistently show independent of the composition or the mass ratio a smooth transition from $\Delta \vartheta \approx 0$ for $\thimp = 75 \dots 90 \deg$ towards smaller deflection values for decreasing impact angle. 
+The decrease in deflection can explained by a geometrical argument: The parts of the impactor surviving the collision and forming the second remnant are located farther from the target than the impactors center of mass and follow therefore a trajectory with a smaller deflection. For very small impact velocities $\Delta \vartheta$ becomes positive. This can be explained by the loss of orbital energy due to the collision, so that after collision the second remnant follows a new trajectory with a smaller eccentricity for which the deflection is greater compared to the initial trajectory of the impactor. Overall $\Delta \vartheta$ shows scale-invariance and depends only on the mass ratio.
 
 Figures \ref{ch03_fig21a} to \ref{ch03_fig21c} give the relative velocity $\vinf$ between the second and the largest remnant relative to the escape velocity. Similarly as for $\Delta \vartheta$, a smooth transition from the idealized two-body case can be observed where $\vinf \approx \vneginf$ (for the conversion between $\vimp$ and $\vneginf$ see table \ref{ch03_tbl01}) towards a reduction of $\vinf$ for smaller impact angles. Again, the value $\vinf / \vesc$ is scale-invariant and shows a dependence on the impact angle imposed by the impact geometry and therefore on the mass ratio.
 
@@ -1045,7 +1045,7 @@ Figures \ref{ch03_fig21a} to \ref{ch03_fig21c} give the relative velocity $\vinf
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_r3.pdf}
-\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \rss. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \rss. Only simulations for which $\Msr > 0.1 \Mimp$ are shown.}
 \label{ch03_fig21a}
 \end{center}
 \end{figure}
@@ -1053,7 +1053,7 @@ Figures \ref{ch03_fig21a} to \ref{ch03_fig21c} give the relative velocity $\vinf
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_c1.pdf}
-\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \css. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \css. Only simulations for which $\Msr > 0.1 \Mimp$ are shown.}
 \label{ch03_fig21b}
 \end{center}
 \end{figure}
@@ -1061,7 +1061,7 @@ Figures \ref{ch03_fig21a} to \ref{ch03_fig21c} give the relative velocity $\vinf
 \begin{figure}
 \begin{center}
 \includegraphics[scale=1.0]{21_SR_vinf_i1.pdf}
-\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \iss. Only simulations for which $\Msr > 0.1 \Mimp$.}
+\caption{Relative velocity between the largest remnant and the second remnant at infinity as a function of impact angle for the simulation set \iss. Only simulations for which $\Msr > 0.1 \Mimp$ are shown.}
 \label{ch03_fig21c}
 \end{center}
 \end{figure}
@@ -1070,13 +1070,28 @@ Figures \ref{ch03_fig21a} to \ref{ch03_fig21c} give the relative velocity $\vinf
 }
 
 \section{Summary}
-The various quantities presented here are scale-invariant or scale-dependent, depending on the dominating physics. For the 
-
-Scale-dependence of the various quantities presented here 
-
-\begin{itemize}
-\item haba
-\end{itemize}
+Some of the quantities presented here are scale-invariant, some are not depending on the dominating physics behind the quantitiy. Scale-invariant quantities have the potential to be approximated by simple scaling laws.
+\begin{description}
+\item[Largest remnant mass $\Mlr$] \hfill \\ 
+The overall characteristics of the accretion efficiency which ultimately leads to the largest remnant mass $\Mlr$ as a function of the impact angle or the impact velocity is similar for different mass regimes. For slow collisions, the accretion efficiency is largely affected by the exact impact geometry and a small scale dependence is introduced. It is difficult in this regime to approximate the accretion efficiency with simple scaling laws. For collisions in the disruptive regime (high impact velocities and small impact angles), the accretion efficiency becomes scale-invariant and can be approximated by specific impact energy considerations. Scaling laws for this regime as in \cite{Stewart:2009p3265, 2009ApJ...700L.118M, 2010ApJ...712L..73M, Leinhardt:2011p4060} work reasonably well.
+\item[Second remnant mass $\Msr$] \hfill \\ 
+Unlike the largest remnant mass, the mass of the second remnant can be estimated easily with a simple volumetric estimate of the impactor volume hitting the target (compare figures \ref{ch03_fig40a} to \ref{ch03_fig40c}). This works very well for impactors of homogenous composition as in simulation set \rss. For impactors with non-trivial structures as in simulation sets \css and \iss, the simple volumetric estimate agrees less. A more sophisticated calculation of the actual mass hitting the target would probably present a better fit. Overall, the second-remnant mass is scale-invariant and dominated by the impact geometry.
+\item[Tertiary remnants mass $\Mtr$] \hfill \\
+Wether tertiary remnants do form depends on the absolute impact velocities and therefore scale-dependent. Tertiary remnant formation is most efficient for impact angles in the region of $20 \dots 45 \deg$ for a certain range of the impact velocity depending on the speed of sound of the involved materials. The prospect for a simple scaling law is low.
+\item[Ejecta mass $M_{ej}$] \hfill \\ 
+For disruptive collisions with $Q_{R} / Q_{RD}^* > 0.5$, the ejecta mass shows for all mass ratios and target mass regimes the same overall order of magnitude of ejecta as a function of impact angle and velocity. The ejecta mass could therefore be well approximated by a scaling law as a function of $Q_{R} / Q_{RD}^*$ together with a geometric correction taking in account the impact angle.
+\item[Compositional changes] \hfill \\
+Compositional changes in the largest remnant is mainly a striping effect and therefore depends weakly on the absolute impact velocity. This scale-dependence is strongest for small impact angles $< 30 \deg$. For intermediate impact angles $30 \dots 60 \deg$, the scaling law proposed in \cite{2009ApJ...700L.118M} works well, although it lacks a correction for the impact angle.
+Compositional changes in the second remnant are similarly to the second remnant mass a geometric effect and are therefore largely scale-invariant.
+\item[Rotation rates and angular momentum] \hfill \\ 
+The efficiency of transferring impact angular momentum into the largest remnant is tightly coupled to the accretion efficiency. So approximating the largest remnants angular momentum and the associated rotation period with a scaling law faces the same problems as for the accretion efficiency. For hit \& run collisions, the angular momentum is transferred mainly by gravitational torques and therefore depends on the ratio $\tau_{grav} / \tau_{coll}$ or in other words on $\vimp / \vesc$. In this regime, the ratio $L_{lr} / L_{imp}$ is scale-invariant.
+\item[Change of internal energy] \hfill \\ 
+The change of internal energy depends on the composition and the initial thermal configuration of the bodies. Heating effects due to shocks depend on the absolute impact velocity and are therefore scale-dependent. Nevertheless, an energy budget of the collision can at least give an order of magnitude estimation for the change in internal energy.
+\item[Disk mass] \hfill \\ 
+For slow and grazing collisions, disk formation is a robust mechanism largely scale-independent. In that case, the disk mass depends mainly on the impactor mass for a given composition of the bodies. Disk formation at smaller impact angles are much more dependent on the composition and becomes scale-dependent.
+\item[Dynamics] \hfill \\
+In collisions where a second remnant forms, the deflection angle and velocity of this second remnant are scale-independent.
+\end{description}
 
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
