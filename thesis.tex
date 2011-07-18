@@ -11,14 +11,14 @@
 
 \usepackage[english]{babel}
 
-\usepackage[pdftex,
+\usepackage[xetex,
 	% remove to generate the printout version
 	colorlinks=true,
 	citecolor=black,
-	urlcolor=black
+	urlcolor=black,
 	pdfauthor={Andreas Reufer},
 	pdftitle={Collisions and impacts in planetary system},
-	pdfkeywords={SPH, computational astrophysics, rocket science}]{hyperref}
+	pdfkeywords={SPH, computational astrophysics, rocket science, collisions}]{hyperref}
 
 
 \usepackage{amssymb}
@@ -142,19 +142,16 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 
 %% Chapters
 % title page, declaration
-\include{00title}
+%\include{00title}
 
 % short planetary formation intro
-% motivation for simulating collisions
-% introduce collision basics and terms
-% give examples of collisions
-\include{01intro}
+%\include{01intro}
 
 % all about numerics and SPHLATCH
-\include{02code}
+%\include{02code}
 
 % pmc simulations, Lisse stuff, Eriks small body iron enrichment
-\include{03ssc} 
+%\include{03ssc} 
 
 % the mars paper
 \include{04mars}
@@ -162,8 +159,10 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 % the moon paper & hires simulations, additional plots for alt moon sims
 \include{05moon}
 
+
 \appendix
 \include{07appendix}
+
 
 % Include a bibliography
 %\bibliographystyle{plain}
@@ -175,7 +174,7 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 %\bibliographystyle{plainnat}
 %\bibliography{bibliography}
 
-%\include{acknowledgement}
+\include{08acknowledgements}
 
 \end{spacing}
 \end{document}
