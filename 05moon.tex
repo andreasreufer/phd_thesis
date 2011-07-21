@@ -35,27 +35,46 @@ sph collisions papers:
 
 
 \citep{Cameron:2000p1854}
+early scenario, 7:3, mtot = 0.65 me,
+
+\citep{Canup:2001p1861}  (Canup and Asphaug)
+late impact model,  tillotson
 
 
-\citep{Canup:2001p1861}
 \citep{Canup:2001p3295}
-maximum efficiency for $\gamma = 0.1$
+maximum efficiency for $\gamma = 0.1$,
 
 \citep{Canup:2004p115}  However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact."
 maximum disk mass for b = 0.7 to 0.8
+comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
+for larger impact parameters, the impactor tends to re-accumulate, 
+orbital angular momentum most consistent quantities, iron fraction the least consistent
+$\M_{disk} / \Mtot \approx 0.15 \gamma$ 
+disk comes from impactor (more than 70\% for all successful candidates)
 
 \citep{Canup:2005p1987}
-\citep{Canup:2008p3551}
-\cite{1997Icar..126..126C} Cameron 1997
 
+\citep{Canup:2008p3551}
+pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all previous simulations had $\gamma = 0.11 \dots 0.14$ and $\vimp < 1.1 \vesc$, fast collisions but with a small mass, fast collisions show similarly a decrease in impactor material in disk, still using the same constraint that Linitial = Lfinal, MFe varies widly for high velocities, successful simulations: more than one Moon mass satellite outside Roche limit and $L < 1.2 \lem$, target pre-rotation allow for larger impactors $\gamma = 0.2$, pre-rotating target might be favourable for Moon formation
+
+\cite{1997Icar..126..126C} Cameron 1997
 
 grid collisions:
 \cite{Wada:2006p1013}
+problem with low disk resolution (a few percent of the mass are in the disk), gravity dominated process
+
+
 \citep{Canup:2010p3713} (SPH vs. CTH)
 
 constraints:
 \cite{Wiechert:2001p3543}
+isotopic similarity within measuring uncertainty
+no more than 3\% H-chondrites or 5 \% Mars
+
 \cite{Stevenson:1987p3540}
+review: fission is dynamically implausible (3 times larger angular momentum), capture does not work dynamically, co-accretion does not match iron constraint and does not explain large angular momentum
+
+mechanism of giant impact: ejection and second burn to circularize orbit
 
 accretion:
 \citep{Kokubo:2000p2195}
@@ -66,7 +85,7 @@ disk of 2 to 4 moon masses required (\emph{compact disk}, most of the mass insid
 \cite{Canup:1996p3541} multiple moon formation not a problem, as long as their size sorted on radii. a lunar mass outside the Roche lobe ($2.9 \RE$ for lunar densities).
 
 \citep{Pahlevan:2007p2065}
-resolve the issue of isotopic similarity between the earth and the moon (Wiechert) 
+large isotopic heterogeneity in the solar system, resolve the issue of isotopic similarity between the earth and the moon (Wiechert), Moons depletion in volatiles
 
 
 \cite{2011E&PSL.301..433P} Pahlevan 2011
@@ -80,6 +99,11 @@ resolution dependence (clumping):
 
 
 accretion process cannot be decoupled from the impact, as orbital evolution is already strong during the impact
+
+impact depends quite strongly on the equations of state, must be a geometry effect
+
+sph might be problematic for integration times higher than a day due to numerical viscosity
+
 
 \section{Alternative giant impact model}
 % new simulations
