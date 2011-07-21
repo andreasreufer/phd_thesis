@@ -1,4 +1,4 @@
-\chapter{The giant impact}
+\chapter{The giant impact or a model for Moon formation}
 \label{ch05}
 \graphicspath{{./05figs/}}
 
@@ -10,13 +10,33 @@
 
 % new field
 
-\section{Introduction}
+\section{The problem}
+Despite its relative proximity compared to other astronomical objects, the formation of the Earths Moon presented a mystery deep within the space-age. While not directly shedding light on the formation itself, lunar samples showed that the Earth and the Moon have an identical signature in oxygen isotopes down to measuring uncertainty, opposing the heterogeneity in isotopic signatures in the solar system \citep{Wiechert:2001p3543}. This suggests, that the Moon has formed from the same material as the Earth. Another compositional constraints is the Moons lack of an iron core. Seismic measurements and its bulk density suggests, that the Moon has an iron core with lass than $5 \wtp$ \citep{2011Sci...331..309W} of its overall mass. A further dynamical constraint on a theory for lunar formation is the conservation of the Earth-Moon systems angular momentum since its formation within $10\%$ of its initial value \citep{Canup:2001p3295}. 
+
+Until the mid 1970ies, only three formation models have been around which all have their shortcomings \citep{Stevenson:1987p3540}. The fission theory goes back to the 19th century and proposes, that the Earth gained angular momentum due to some unknown mechanism and the rotation period went below the limit for rotational stability ($< 2.1h$). Part of the Earth is then shed into Earth orbit and re-accumulates into a satellite. While this theory matches nicely the composition constraints, todays Earth-Moon system would have an angular momentum three times higher that it actually is. Another theory suggests, that the Moon is simply a body which formed elsewhere and was later on captured into an orbit around the Earth. Aside from it's dynamical implausibility, it fails to explain the Moons iron depletion. A third theory proposes the co-accretion of the Moon in parallel to the Earth. While similar models might work well for the Giant planets moons, it fails to explain the relatively high angular momentum of the whole system in the case of Earth.
+
+It was not until 
+
+
+review: fission is dynamically implausible (3 times larger angular momentum), capture does not work dynamically, co-accretion does not match iron constraint and does not explain large angular momentum
+
+mechanism of giant impact: ejection and second burn to circularize orbit
+
+
 Different models for 
 
+old models, kona conference
+problem of parameter space, reference to chapter 3\\
+constraints\\
+assumptions made so far\\
+historical break-down: two simulation classes\\
 present canonical model\\
+additional work concerning
+current situation\\
+
 difficulties\\
-historical break-down\\
-disagreement between different codes\\
+
+sidenote: disagreement between different codes\\
 
 
 intro:
@@ -26,12 +46,13 @@ Kona conference 1984 \citep{1986ormo.conf.....H}
 refer to disk masses in chapter 3\\
 
 sph collisions papers:
-\citep{Benz:1985p1755}
 
+
+\citep{Benz:1985p1755}
+very first simulations, $\vinf$ a few $km/s$
 
 \citep{Benz:1989p1893}
 (Benz 1987) \citep{1987Icar...71...30B} similar paradigm change: Benz 1987  ruled out $\gamma < 0.12$ simulations due to high iron content. up to $1.3$ lunar masses of iron for $\vneginf = 10km/s$ cases ($\gamma = 0.1 \dots 0.2$). low resolution ($2048 particles$), more mass in clump than in disk, slow collision case most successful
-
 
 
 \citep{Cameron:2000p1854}
@@ -58,15 +79,13 @@ $\gamma > 0.115$ produce heavy disks, but also too much angular momentum
 smaller impactors $\gamma = 0.08 \dots 0.09$ don't work, because for the same amount of angular momentum, the impact becomes too grazing
 
 
-\citep{Canup:2004p115}  However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact."
+\citep{Canup:2004p115}  \emph{However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact.}
 maximum disk mass for b = 0.7 to 0.8
 comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
 for larger impact parameters, the impactor tends to re-accumulate, 
 orbital angular momentum most consistent quantities, iron fraction the least consistent
 $\M_{disk} / \Mtot \approx 0.15 \gamma$ 
 disk comes from impactor (more than 70\% for all successful candidates)
-
-\citep{Canup:2005p1987}
 
 \citep{Canup:2008p3551}
 pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all previous simulations had $\gamma = 0.11 \dots 0.14$ and $\vimp < 1.1 \vesc$, fast collisions but with a small mass, fast collisions show similarly a decrease in impactor material in disk, still using the same constraint that Linitial = Lfinal, MFe varies widly for high velocities, successful simulations: more than one Moon mass satellite outside Roche limit and $L < 1.2 \lem$, target pre-rotation allow for larger impactors $\gamma = 0.2$, pre-rotating target might be favourable for Moon formation
@@ -76,7 +95,6 @@ pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all 
 grid collisions:
 \cite{Wada:2006p1013}
 problem with low disk resolution (a few percent of the mass are in the disk), gravity dominated process
-
 
 \citep{Canup:2010p3713} (SPH vs. CTH)
 
@@ -114,12 +132,11 @@ resolution dependence (clumping):
 \citep{Canup:2010p3713} (SPH vs. CTH, 100k vs. 1M particles run still shows differences)
 
 
-
-accretion process cannot be decoupled from the impact, as orbital evolution is already strong during the impact
+accretion process cannot be decoupled from the impact, as orbital evolution is already strong during the impact 
 
 impact depends quite strongly on the equations of state, must be a geometry effect
 
-sph might be problematic for integration times higher than a day due to numerical viscosity
+sph might be problematic for integration times higher than a day due to numerical viscosity \citep{Canup:2004p115} 
 
 
 \section{Alternative giant impact model}
