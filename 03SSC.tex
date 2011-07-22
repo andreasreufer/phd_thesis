@@ -1,5 +1,6 @@
 \newpage
 \chapter{Similar-sized collisions: A parameter study}
+\label{ch03}
 \graphicspath{{./03figs/}}
 
 A collision is cratering, when the impactor is much smaller than the target. In this case, the impactor hits the target completely and comes to a full stop, the result is a crater. Such collisions corresponds to a point source energy input into the target and can be treated like an explosion \citep{Melosh:2007p3502}. Scaling laws exist for the resulting crater depth and shape \citep{Holsapple:1993p3018}. 
@@ -33,6 +34,7 @@ Similar sized collisions are interesting, because bodies in planetary systems gr
 Compared to cratering collisions the interplay of the governing physics in similar-sized collisions with impact velocities on the order of the mutual escape velocity the target and the impactor is more complex and there are only very basic scaling laws predicting the outcomes of similar-sized collisions. Hydrodynamics, gravity and thermodynamics interact in a complicated way and need to be modeled explicitly. The goal of this chapter is to perform a small parameter study in the regime of similar-sized collisions by performing a large number of impact simulations and then looking at various characteristic parameters describing the outcome of the collisions. The first section gives a quick overview of the physical processes involved in similar sized collisions and their associated timescales. In a second section, the detailed setup of the simulations and the used parameters are described. The actual results are presented in the third and summarized in the fourth section.
 
 \section{Physics of similar-sized collisions}
+\label{ch03_sec01}
 Looking at the associated timescales of physics gives a feeling on what are the important aspect of physics in similar-sized collisions. In the gravity regime, where the impact velocities are on the order of the mutual escape velocity, similar-sized collisions possess the nice property of scale-invariance on the first order: When the impact velocity is scaled to the escape velocity $\vesc$ and time to the collisional time $\tcol = ( \Rimp + \Rtar ) / \vesc$ the collision becomes scale-invariant. In other words: A collision at a given impact velocity relative to the escape velocity and angle for a certain mass ration $\gamma = \Mimp / \Mtar$, has the same outcome for a target mass of $0.01 \ME$ and $1.0 \ME$ assuming the bodies have in both cases the same density and effects like shocks or compressibility can be neglected.
 
 The collisional timescale is an estimate on how long it takes for the impactor to penetrate through the target and is given by
