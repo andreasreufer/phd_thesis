@@ -22,73 +22,19 @@ While \cite{1975Icar...24..504H} puts the impactor size on a rather low $R \appr
 
 In terms of time scales, the giant impact theory can be split up into three distinctive periods: First, the period of the actual impact. This happens on the order of the collisional timescale (see section \ref{ch03_sec01}) which yields $\approx 24h$ in case of the Earth. Debris is put in orbit around the Earth. During a second stage, this debris accretes into individual moonlets, a process happening on $50 - 1000 \tau_K$ \footnote{$\tau_K$ denotes the Kepler time at the Roche limit for lunar density material of the proto-Earth ($\approx 2.9 \RE$) and yields $\approx 7h$} or roughly a few months. The moonlets then undergo orbital evolution over millions of years due to tidal interaction with the proto-Earth and under circumstances even might collide if there were more than one \cite{Canup:1996p3541}.
 
-The first direct simulations \citep{Benz:1985p1755, Benz:1989p1893, Cameron:2000p1854} of the actual impact not only showed that the basic mechanism of the giant impact work, but also delivered first quantitative estimates on the required impact parameters for successfully putting enough material into Earth orbit. Already \cite{1975Icar...24..504H} note that roughly two lunar masses ($1 \ML = 0.012 \ME$) in orbit around the proto-Earth are required to later on successfully form the Moon. Similar results were obtained by N-body simulations of this second stage of the giant impact theory: \cite{Canup:1996p3541} find either a bit more than a lunar mass outside the Roche limit or more than two lunar masses near or inside the Roche limit are sufficient for lunar accretion. Additionally they find, that when most mass lies outside the Roche limit after the impact, multiple moonlet formation occurs. In that case tidal torques will change the orbit of the heavier moonlets more rapidly. So if the moonlet mass decreases with distance from the proto-Earth, the moonlets will collide again and finally form one large Moon. \citep{Ida:1997p3395} performed a similar study and found scaling laws for the final moon mass in dependence of the proto-lunar disk mass and the disk angular momentum. Their scaling law agrees with the results from \cite{Canup:1996p3541}.
+The first direct simulations \citep{Benz:1985p1755, Benz:1989p1893, Cameron:2000p1854} of the actual impact not only showed that the basic mechanism of the giant impact work, but also delivered first quantitative estimates on the required impact parameters for successfully putting enough material into Earth orbit. Already \cite{1975Icar...24..504H} note that roughly two lunar masses ($1 \ML = 0.012 \ME$) in orbit around the proto-Earth are required to later on successfully form the Moon. Similar results were obtained by N-body simulations of this second stage of the giant impact theory: \cite{Canup:1996p3541} find either a bit more than a lunar mass outside the Roche limit or more than two lunar masses near or inside the Roche limit are sufficient for lunar accretion. Additionally they find, that when most mass lies outside the Roche limit after the impact, multiple moonlet formation occurs. In that case tidal torques will change the orbit of the heavier moonlets more rapidly. So if the moonlet mass decreases with distance from the proto-Earth, the moonlets will collide again and finally form one large Moon. \citep{Ida:1997p3395} performed a similar study and found scaling laws for the final moon mass in dependence of the proto-lunar disk mass and the disk angular momentum. They showed, that the disk material can accrete into a Moon with an efficiency of $15 \% \dots 40 \%$, depending on the mass distribution and the disk angular momentum. Work by \citep{Kokubo:2000p2195} also included a better collision handling and delivered similar results. The scaling laws from both studies agrees well with the early results from \cite{Canup:1996p3541} and shows that disk masses of roughly two lunar masses are required to successfully accrete a Moon.
 
-The conundrum the giant impact simulations have to solve is to find suitable impact parameters which lead to the desired post-impact situation. Giant impact simulations require a moderate resolution, in order to resolve the proto-lunar disk sufficiently. For grid-based schemes where resolution is defined spatially, this means that the hydrodynamics at the time of impact are sufficiently well resolved while still covering the entire proto-lunar disk. For a Lagrangian code like SPH, the resolution is given by the smallest mass element being resolved. With the proto-lunar disk containing only a few percent of the systems total mass, a number of at least a few thousand particles is required in order to resolve the disk even remotely. The parameter space for the impact is comparable to the study performed in chapter \ref{ch03} of this thesis. In the 1980ies, parameter studies of such an extent with several thousand simulations each using thousands of particles was not feasible.
+The conundrum giant impact simulations have to solve is to find suitable impact parameters which lead to the desired post-impact situation. Giant impact simulations require a moderate resolution, in order to resolve the proto-lunar disk sufficiently. For grid-based schemes where resolution is defined spatially, this means that the hydrodynamics at the time of impact are sufficiently well resolved while still covering the entire proto-lunar disk. For a Lagrangian code like SPH, the resolution is given by the smallest mass element being resolved. With the proto-lunar disk containing only a few percent of the systems total mass, a number of at least a few thousand particles is required in order to resolve the disk even remotely. 
 
-Early work \citep{Benz:1985p1755, Benz:1989p1893, Cameron:2000p1854} thus tried to constrain the parameter space as much as possible by certain assumptions and then only performed a handful of simulations. Both the target and the impactor were always differentiated and to be of chondtritic composition ($70 \wtp$ silicates and $30 \wtp$ iron core), which is a reasonable assumption. A very strong constraint is given by the assumption, that the total mass is conserverd during the impact, thus $\Mimp + \Mtar \approx \ME + \ML$. Under this assumption, also the angular momentum is conservered, so that $\L_{imp} \approx 1.1 - 1.2 \lem$. This assumption is weaker, as even a small mass loss can lead to considerable angular momentum losses. The mass ratio $\gamma = \Mimp / \Mtar$ is then constrained by the maximal angular momentum an impact has at $\thimp = 90 \deg$ (or $b = 1$): $\Limp = \Lgraz$. This puts a lower limit of $\gamma > 0.08 \dots 0.09$ \citep{Canup:2001p1861}. For the impact angle, a value was chosen for which the mass ratio yields the desired angular momentum: $\Limp = \Lgraz (\Mtar, \Mimp, \vimp) \sin{\thimp} \approx 1 \lem$. 
+The parameter space for the impact is comparable to the study performed in chapter \ref{ch03} of this thesis, with the four major parameters being target mass, mass ratio, impact angle and velocity: $\{\Mtar, \gamma, \thimp, \vimp\}$. In the 1980ies, a parameter studies over a comparable extent like in chapter \ref{ch03}  with several thousand simulations each using thousands of particles was not feasible. 
 
+Early work \citep{Benz:1985p1755, Benz:1989p1893, Cameron:2000p1854} thus tried to constrain the parameter space as much as possible by certain assumptions and then only performed a handful of simulations. Both the target and the impactor were always differentiated and to be of chondtritic composition ($70 \wtp$ silicates and $30 \wtp$ iron core), which is a reasonable assumption. 
 
-\cite{Benz:1989p1893} used for the impact velocity values of $\vimp = \vesc$ ($\vneginf = 0$) and $\approx 1.4 \vesc$ ($\vneginf = 10km/s$). They found that slow collisions ($\vimp = \vesc$) with an impactor mass of $\Mimp = 0.11 \dots 0.14 \ME$ to be able to produce massive enough and iron-depleted proto-lunar disks. While the high velocity collisions also produced considerable disk masses, they were rejected because of a too large iron content. It is important to note that this simulations used only $3008$ particles and therefore resolved the disk with only $60 \dots 100$ particles! Determining the iron content of such a disk goes beyond the resolution, as anything above 5 iron particles in the disk will be considered an iron excess. 
+A very strong constraint on the parameters is given by assuming mass conservation during the impact thus $\Mimp + \Mtar \approx \Mlr$, where $\Mlr$ is the mass of the largest remnant or in the particular case of the giant impact the Earth-Moon system. Depending on the timing of the giant impact during the proto-Earths accretion, the total remnant mass is either chosen to be a fraction of or the whole mass of the Earth-Moon system $\ME + \ML$. For a given largest remnant mass, the mass conservation assumption gets rid of one free parameter. With mass conservation, also the angular momentum is conserved, so that $\L_{imp} \approx 1.1 - 1.2 \lem$. Note that this assumption is weaker, as even a small mass loss can lead to considerable angular momentum losses. The mass ratio is then constrained by the maximum angular momentum an impact can deliver at $\thimp = 90 \deg$ (or $b = 1$): $\Limp = \Lgraz$ and puts a lower limit of $\gamma > 0.08 \dots 0.09$ \citep{Canup:2001p1861}. The impact angle is then determined for a given mass ratio by the angular momentum, as $\Limp = \Lgraz (\Mtar, \Mimp, \vimp) \sin{\thimp} \approx 1 \lem$. Thus the assumption of mass conservation reduces the number of free parameters to two. The impact velocity is then also somehow constrained, as high impact velocities lead to mass loss and would violate the initial assumption. 
 
+\cite{Benz:1989p1893} used for the impact velocity values of $\vimp = \vesc$ ($\vneginf = 0$), but interestingly also tried out scenarios with $\approx 1.4 \vesc$ ($\vneginf = 10km/s$). They found that slow collisions ($\vimp = \vesc$) with an impactor mass of $\Mimp = 0.11 \dots 0.14 \ME$ and a total mass of $\Mtar + \Mimp = 1 \ME$ to be able to produce massive enough and iron-depleted proto-lunar disks. While the high velocity collisions also produced considerable disk masses, they were rejected because of a too large iron content (up to $1.3 \ML$). It is important to note that this simulations used only $3008$ particles and therefore resolved the disk with only $60 \dots 100$ particles! Determining the iron content of such a disk goes beyond the resolution, as anything above 5 iron particles in the disk will be considered an iron excess. After this finding, later work never considered collisions with $\vimp > 1.10 \vesc$.
 
-Interestingly, the argument of iron excess in high velocity collisions was 
-
-\cite{Cameron:2000p1854}
-
-
-
-
-
-
-
-
-\afterpage{
-%\clearpage% To flush out all floats, might not be what you want
-\begin{landscape}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=1.0]{02_disk_mass_c1.pdf}
-\caption{Largest remnant total disk mass as a function of impact angle for different impact velocities for the \emph{c1} simulation set from the parameter study in chapter \ref{ch03}. Simulations with a largest remnant disk mass below $0.01\% M_{tot}$ are omitted.}
-\label{ch05_fig02}
-\end{center}
-\end{figure}
-
-\end{landscape}
-}
-
-
-
-mechanism of giant impact: ejection and second burn to circularize orbit
-
-
-Different models for 
-
-problem of parameter space, reference to chapter 3\\
-constraints\\
-assumptions made so far\\
-historical break-down: two simulation classes\\
-present canonical model\\
-additional work concerning
-current situation\\
-
-difficulties\\
-
-sidenote: disagreement between different codes\\
-
-
-refer to disk masses in chapter 3\\
-
-sph collisions papers:
-
-
-\citep{Benz:1985p1755}
-very first simulations, $\vinf$ a few $km/s$
-
-\citep{Benz:1989p1893}
-(Benz 1987) \citep{1987Icar...71...30B} similar paradigm change: Benz 1987  ruled out $\gamma < 0.12$ simulations due to high iron content. up to $1.3$ lunar masses of iron for $\vneginf = 10km/s$ cases ($\gamma = 0.1 \dots 0.2$). low resolution ($2048 particles$), more mass in clump than in disk, slow collision case most successful
-
+Simulations by \cite{1997Icar..126..126C} with considerably higher resolution has trouble reproducing the initial results by the series of papers by Benz. He found the optimum range for the mass ratio $\gamma = 0.25 \dots 1.0$ and a total mass ot $\Mtot = 1 \ME$ to put enough material into orbit, but only for a $\Limp \approx 2 \lem$. Thus he put forward an \emph{early scenario} where the impact occurs when the Earth has accreted only part of its mass, so that $\Mtar \approx 0.5 \ME$. In \citep{Cameron:2000p1854} he shows, that a collision with $\gamma = 7:3$ and $\Mtot = 0.65 \ME$ is at $\vimp = \vesc$ is successful in putting roughly two lunar masses into orbit with the right amount of final angular momentum.
 
 \citep{Cameron:2000p1854}
 early scenario, 7:3, mtot = 0.65 me
@@ -133,6 +79,43 @@ problem with low disk resolution (a few percent of the mass are in the disk), gr
 
 \citep{Canup:2010p3713} (SPH vs. CTH)
 
+
+\afterpage{
+%\clearpage% To flush out all floats, might not be what you want
+\begin{landscape}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=1.0]{02_disk_mass_c1.pdf}
+\caption{Largest remnant total disk mass as a function of impact angle for different impact velocities for the \emph{c1} simulation set from the parameter study in chapter \ref{ch03}. Simulations with a largest remnant disk mass below $0.01\% M_{tot}$ are omitted.}
+\label{ch05_fig02}
+\end{center}
+\end{figure}
+
+\end{landscape}
+}
+
+
+
+mechanism of giant impact: ejection and second burn to circularize orbit
+
+
+Different models for 
+
+problem of parameter space, reference to chapter 3\\
+constraints\\
+assumptions made so far\\
+
+additional work concerning
+current situation\\
+
+difficulties\\
+
+sidenote: disagreement between different codes\\
+
+
+refer to disk masses in chapter 3\\
+
 constraints:
 \cite{Wiechert:2001p3543}
 isotopic similarity within measuring uncertainty
@@ -146,13 +129,13 @@ review: fission is dynamically implausible (3 times larger angular momentum), ca
 
 mechanism of giant impact: ejection and second burn to circularize orbit
 
-accretion:
-\citep{Kokubo:2000p2195}
-disk of 2 to 4 moon masses required (\emph{compact disk}, most of the mass inside the roche limit), mass distribution not important, process becomes more efficient for larger disk angular momentums, two moons are usually on an unstable horse-shoe orbit, evolution time 50 to 1000 kepler times ($T_K 7h$), N-body with collisions
-
-\citep{Ida:1997p3395} scaling law for the moon mass in dependence of the disk mass (10 to 40 \% efficiency, linear to Ldisk)
-
-\cite{Canup:1996p3541} multiple moon formation not a problem, as long as their size sorted on radii. a lunar mass outside the Roche lobe ($2.9 \RE$ for lunar densities).
+%accretion:
+%\citep{Kokubo:2000p2195}
+%disk of 2 to 4 moon masses required (\emph{compact disk}, most of the mass inside the roche limit), mass distribution not important, process becomes more efficient for larger disk angular momentums, two moons are usually on an unstable horse-shoe orbit, evolution time 50 to 1000 kepler times ($T_K 7h$), N-body with collisions
+%
+%\citep{Ida:1997p3395} scaling law for the moon mass in dependence of the disk mass (10 to 40 \% efficiency, linear to Ldisk)
+%
+%\cite{Canup:1996p3541} multiple moon formation not a problem, as long as their size sorted on radii. a lunar mass outside the Roche lobe ($2.9 \RE$ for lunar densities).
 
 \citep{Pahlevan:2007p2065}
 large isotopic heterogeneity in the solar system, resolve the issue of isotopic similarity between the earth and the moon (Wiechert), Moons depletion in volatiles
