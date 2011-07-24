@@ -2,6 +2,8 @@
 \label{ch05}
 \graphicspath{{./05figs/}}
 
+This chapter 
+
 % old models for Moon formation
 
 % introduction of Giant impact hypothesis
@@ -10,7 +12,9 @@
 
 % new field
 
-\section{Historical break-down}
+
+
+\section{Review of past work}
 Despite its relative proximity compared to other astronomical objects, the formation of the Earths Moon presented a mystery deep within the space-age. While not directly shedding light on the formation itself, lunar samples showed that the Earth and the Moon have an identical signature in oxygen isotopes down to measuring uncertainty, opposing the heterogeneity in isotopic signatures in the solar system \citep{Wiechert:2001p3543}. This suggests, that the Moon has formed from the same material as the Earth. Another compositional constraints is the Moons lack of an iron core. Seismic measurements and its bulk density suggests, that the Moon has an iron core with lass than $5 \wtp$ \citep{2011Sci...331..309W} of its overall mass. A further dynamical constraint on a theory for lunar formation is the conservation of the Earth-Moon systems angular momentum since its formation within $10\%$ of its initial value \citep{Canup:2001p3295}. 
 
 Until the mid 1970ies, only three formation models have been around which all have their shortcomings \citep{Stevenson:1987p3540}. The fission theory goes back to the 19th century and proposes, that the Earth gained angular momentum due to some unknown mechanism and the rotation period went below the limit for rotational stability ($< 2.1h$). Part of the Earth is then shed into Earth orbit and re-accumulates into a satellite. While this theory matches nicely the composition constraints, todays Earth-Moon system would have an angular momentum three times higher that it actually is. Another theory suggests, that the Moon is simply a body which formed elsewhere and was later on captured into an orbit around the Earth. Aside from it's dynamical implausibility, it fails to explain the Moons iron depletion. A third theory proposes the co-accretion of the Moon in parallel to the Earth. While similar models might work well for the Giant planets moons, it fails to explain the relatively high angular momentum of the whole system in the case of Earth.
@@ -34,44 +38,23 @@ A very strong constraint on the parameters is given by assuming mass conservatio
 
 \cite{Benz:1989p1893} used for the impact velocity values of $\vimp = \vesc$ ($\vneginf = 0$), but interestingly also tried out scenarios with $\approx 1.4 \vesc$ ($\vneginf = 10km/s$). They found that slow collisions ($\vimp = \vesc$) with an impactor mass of $\Mimp = 0.11 \dots 0.14 \ME$ and a total mass of $\Mtar + \Mimp = 1 \ME$ to be able to produce massive enough and iron-depleted proto-lunar disks. While the high velocity collisions also produced considerable disk masses, they were rejected because of a too large iron content (up to $1.3 \ML$). It is important to note that this simulations used only $3008$ particles and therefore resolved the disk with only $60 \dots 100$ particles! Determining the iron content of such a disk goes beyond the resolution, as anything above 5 iron particles in the disk will be considered an iron excess. After this finding, later work never considered collisions with $\vimp > 1.10 \vesc$.
 
-Simulations by \cite{1997Icar..126..126C} with considerably higher resolution has trouble reproducing the initial results by the series of papers by Benz. He found the optimum range for the mass ratio $\gamma = 0.25 \dots 1.0$ and a total mass ot $\Mtot = 1 \ME$ to put enough material into orbit, but only for a $\Limp \approx 2 \lem$. Thus he put forward an \emph{early scenario} where the impact occurs when the Earth has accreted only part of its mass, so that $\Mtar \approx 0.5 \ME$. In \citep{Cameron:2000p1854} he shows, that a collision with $\gamma = 7:3$ and $\Mtot = 0.65 \ME$ is at $\vimp = \vesc$ is successful in putting roughly two lunar masses into orbit with the right amount of final angular momentum.
+Simulations by \cite{1997Icar..126..126C} with considerably higher resolution has trouble reproducing the initial results by the series of papers by Benz. He found the optimum range for the mass ratio $\gamma = 0.25 \dots 1.0$ and a total mass ot $\Mtot = 1 \ME$ to put enough material into orbit, but only for a $\Limp \approx 2 \lem$. Thus he put forward an \emph{early scenario} where the impact occurs when the Earth has accreted only part of its mass, so that $\Mtar \approx 0.5 \ME$. In \citep{Cameron:2000p1854} he shows with $10k \dots100k$-particles simulations, that a collision with $\gamma = 7:3$ and $\Mtot = 0.65 \ME$ is at $\vimp = \vesc$ is successful in putting roughly two lunar masses into orbit with the right amount of final angular momentum. He also finds, that the escaping mass increases for slight increases to higher impact velocities and uses this as an argument to omit further simulations using higher impact velocities. The main problem with this \emph{early impact} scenario, is that the Earth-Moon system still has to accrete $\approx 0.35 \ME$ until its final configuration. It is unlikely, that the Moon would have kept its iron depletion during this accretion period.
 
-\citep{Cameron:2000p1854}
-early scenario, 7:3, mtot = 0.65 me
-large angular momentum puts a lower mass limit on the impactor
-1. find optimal total mass: low and high total mass (0.5 and 1.0 $\ME$), optimum 0.65 $\ME$
-2. run different 7:3 simulations with total masses between 0.5 and 1.0 and find maximum yield
-only $\vimp = \vesc$, as increasing impactor velocity \emph{main effect of increasing this velocity is to increase slightly the amount of escaping the mass}
-working rule: two lunar masses in orbit (anywhere)
-most material in orbit for very grazing collisions
-hi-res 100k runs, mtar = 0.455 me, mimp = 0.195 me
-gradual depletion of the clusters orbiting the protoplanet
-rotational flattering leads to a departure from an inverse square law potential and leads to non-keplerian orbits
+\cite{Canup:2001p3295} still followed the path of the \emph{late impact} scenario and confirmed with $10k \dots100k$-particles simulations the same issue as found by \citep{Cameron:2000p1854}: Late impacts only produce massive enough disks, when an excess angular momentum of $\Limp \approx 2 \lem$ is used. But their conclusion is different. As one possible explanation, \cite{Canup:2001p3295} state: \emph{If we assume that the Moon did in fact form via a large impact event, this finding suggest one or more of the following: (...) (2) regions of parameter space not explored in the above surveys could suggest different scaling relationships that would more easily yield the Earth-Moon system (...)}. Although \cite{Canup:2001p1861} were also unable to produce disks masses above $2 \ML$, they found that the satellite mass scaling law from  \citep{Kokubo:2000p2195} yields masses above a Moons mass for impacts with $\{0.88 \ME, 0.1, \approx 53 \deg, 1 \vesc \}$. So far, this has been considered to be the most promising impact scenario for the giant impact. We call it the \emph{canonical model}.
+
+Later work \citep{Canup:2004p115} concentrated on finding scaling laws for the disk mass in the low velocity regime. Similar to the early work by \cite{Benz:1989p1893}, they found that grazing collisions tend to produce iron-rich disks for $\vimp > 1.1 \vesc$ and thus also reject the possibility of a high velocity impact. More recent work \citep{Canup:2008p3551} also extended the parameter space by considering pre-impact rotation of both the target and the impactor. 
 
 
-\citep{Canup:2001p3295}
-10k - 100k, class of collisions with massive enough disks and L = 2 $\lem$
-\emph{regions of parameter space not explored in the above surveys could suggest different scaling relationships that would more easily yield the Earth-Moon system}
-
-\cite{Canup:2001p1861} (Canup and Asphaug)
-maximum efficiency for $\gamma = 0.1$ for mtot = me
-maximum orbital mass yield for $b \approx 0.8 $ (53 $\deg$)
-$\gamma > 0.115$ produce heavy disks, but also too much angular momentum
-smaller impactors $\gamma = 0.08 \dots 0.09$ don't work, because for the same amount of angular momentum, the impact becomes too grazing
-
-
-\citep{Canup:2004p115}  \emph{However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact.}
-maximum disk mass for b = 0.7 to 0.8
-comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
-for larger impact parameters, the impactor tends to re-accumulate, 
-orbital angular momentum most consistent quantities, iron fraction the least consistent
-$\M_{disk} / \Mtot \approx 0.15 \gamma$ 
-disk comes from impactor (more than 70\% for all successful candidates)
+%\citep{Canup:2004p115}  \emph{However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact.}
+%maximum disk mass for b = 0.7 to 0.8
+%comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
+%for larger impact parameters, the impactor tends to re-accumulate, 
+%orbital angular momentum most consistent quantities, iron fraction the least consistent
+%$\M_{disk} / \Mtot \approx 0.15 \gamma$ 
+%disk comes from impactor (more than 70\% for all successful candidates)
 
 \citep{Canup:2008p3551}
 pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all previous simulations had $\gamma = 0.11 \dots 0.14$ and $\vimp < 1.1 \vesc$, fast collisions but with a small mass, fast collisions show similarly a decrease in impactor material in disk, still using the same constraint that Linitial = Lfinal, MFe varies widly for high velocities, successful simulations: more than one Moon mass satellite outside Roche limit and $L < 1.2 \lem$, target pre-rotation allow for larger impactors $\gamma = 0.2$, pre-rotating target might be favourable for Moon formation
-
-\cite{1997Icar..126..126C} Cameron 1997
 
 grid collisions:
 \cite{Wada:2006p1013}
