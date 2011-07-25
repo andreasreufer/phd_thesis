@@ -51,11 +51,6 @@ The main problem of the canonical model, is the disagreement with the chemical e
 \section{Alternative impact scenario}
 The last section showed, that only a limited region of the parameter space for the giant impact has been studied. The fact that a successful model was found in the low velocity regime, does not exclude the possibility of other regions containing potential Moon-forming impacts. The search for new scenarios has been triggered for example by exotic models like \cite{2010M&PSA..73.5140W}, who suggest an \emph{icy impactor model} and argue that the impactors energy from beyond the ice line would provide much more kinetic energy. The gain in kinetic energy for an impactor migrating from the solar system snow line ($\approx 2.7 AU$) to the Earths orbit leads to $\vneginf = 33 km/s$ or in case of a $\{0.9 \ME, 0.2\}$ impact to an impact velocity of $3.78 \vesc$. Such collisions are mainly disruptive and unlikely to lead to the formation of a relatively massive satellite. Nevertheless, it is important to check such alternative scenarios for viability.
 
-Figure \ref{ch05_fig02} shows the largest remnant disk mass for the simulation set \css from the parameter study in chapter \ref{ch03}. Unlike the limited previous studies, this plot gives a complete overview of the parameter subspace for a given target mass and mass ratio. Although neither the target mass nor the mass ratio exactly match the used values in previous work and escpecially the canonical model by \cite{Canup:2001p1861}, the different velocity and impact angle regimes leading to considerable disk formation are recognizable. In case of $\{ 1 \ME, 0.1 \dots 0.2 \}$, two lunar mass correspond to $M_{disk} / \Mtot \approx 0.03$. The low velocity regime with $\vimp = 1.00 \dots 1.10$ can be clearly seen. 
-
-
-$M_{disk} / \Mtot$ value for the formation of the Moon is $\approx 0.03$. 
-
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
 \begin{landscape}
@@ -71,12 +66,20 @@ $M_{disk} / \Mtot$ value for the formation of the Moon is $\approx 0.03$.
 \end{landscape}
 }
 
+Figure \ref{ch05_fig02} shows the largest remnant disk mass for the simulation set \css from the parameter study in chapter \ref{ch03}. Unlike the limited previous studies, this plot gives a complete overview of the parameter subspace for a given target mass and mass ratio. Although neither the target mass nor the mass ratio exactly match the used values in previous work and escpecially the canonical model by \cite{Canup:2001p1861}, the different velocity and impact angle regimes leading to considerable disk formation are recognizable. In case of $\{ 1 \ME, 0.1 \dots 0.2 \}$, two lunar mass correspond to $M_{disk} / \Mtot \approx 0.03$. The low velocity regime with $\vimp = 1.00 \dots 1.10$ can be clearly seen. Interestingly, for $\gamma \ge 0.2$ there exists a very narrow range of impact angles, for which also high velocity impact produce disks with a considerable mass. For example the largest remnant in $\{ 1 \ME, 0.1 \dots 0.2, 1.30 \vesc, 37.5 \deg \}$ has a disk with a mass of $M_{disk} \approx 0.05 \Mtot$ after the collision. It was noted in the previous section, that \cite{Benz:1989p1893} already performed collisions in a similar velocity regime and also noticed disk formation. But they rejected the case due to relatively high amounts of iron in the disks.
+
+The simulations from the parameter study in chapter \ref{ch03} use a relatively small number of particles ($\approx 100k$). From looking at figure \ref{ch05_fig02}, the disk masses for the high velocity regime ($\vimp = 1.20 \dots 2.00$) is less independent on the actual parameters than in the low velocity regime ($\vimp = 1.00 \dots 1.10$). For $\gamma = 0.2$, the low velocity cases show considerable disk masses for a wide range of impact angles and also don't vary much between the individual target mass regimes. The high velocity regime is different: The $\{ 1 \ME, 0.1 \dots 0.2, 1.30 \vesc, 37.5 \deg \}$ case with a relatively massive disk for example appears to be an isolated case as a function of impact angle and appears only for $\Mtar = 1.0 \ME$. The same can be said for the entire high velocity regime. 
+
+This can be qualitatively explained by the basic mechanism behind disk formation: In order for material ending up in orbit around the largest remnant central clump, it requires just have the right orbital energy. In the low velocity regime, the disk is mainly compromised of the impactor. Its initial energy is already near the limit, for which the material is gravitationally bound. Disk formation in this regime happens for relatively grazing angles. Most of the impactor is only mildly decelerated and enters a bound orbit around the target or the later largest remnant. The required reduction in orbital energy is small compared to the range of orbital energy the material has to possess, so that it goes into the disk. The contrary applies in the high velocity regime: The required reduction is large compared to the required range, in that sense it's \emph{harder} to hit the right amount of orbital energy. This change is also more dependent on the actual impact geometry, as these collision occur at smaller angles than in the low velocity regime.
+
+We performed a set of high-resolution simulations with half a million particles. 
+
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{03_param_space_m0_010mimp.pdf}
 \includegraphics[scale=0.5]{03_param_space_m0_015mimp.pdf}
 \includegraphics[scale=0.5]{03_param_space_m0_020mimp.pdf}
-\caption{Parameter space view of the simulations with chondritic impactor composition, each panel shows a different impactor mass. Every simulation is shown as a filled circle with an area proportional to the silicate disk mass $M_{disk, \silc}$. The black circle gives the are for $2 \ML$ for reference. The color depicts the depletion factor in target material $\delta f_T$. Besides each circle, the bound angular momentum in $\lem$-units, the silicate disk and the iron disk mass in Moon masses are further noted.}
+\caption{Parameter space view of the simulations with chondritic impactor composition, each panel shows a different impactor mass. Every simulation is shown as a filled circle with an area proportional to the silicate disk mass $M_{disk, \silc}$. The black circle gives the are for $2 \ML$ for reference. The color depicts the depletion factor in target material $\delta f_T$. Besides each circle, the bound angular momentum in $\lem$-units, the silicate disk and the iron disk mass in Moon masses are further noted. }
 \label{ch05_fig03a}
 \end{center}
 \end{figure}
