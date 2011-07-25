@@ -14,12 +14,12 @@ This chapter
 
 
 
-\section{Review of past work}
+\section{The formation of the Moon}
 Despite its relative proximity compared to other astronomical objects, the formation of the Earths Moon presented a mystery deep within the space-age. While not directly shedding light on the formation itself, lunar samples showed that the Earth and the Moon have an identical signature in oxygen isotopes down to measuring uncertainty, opposing the heterogeneity in isotopic signatures in the solar system \citep{Wiechert:2001p3543}. This suggests, that the Moon has formed from the same material as the Earth. Another compositional constraints is the Moons lack of an iron core. Seismic measurements and its bulk density suggests, that the Moon has an iron core with lass than $5 \wtp$ \citep{2011Sci...331..309W} of its overall mass. A further dynamical constraint on a theory for lunar formation is the conservation of the Earth-Moon systems angular momentum since its formation within $10\%$ of its initial value \citep{Canup:2001p3295}. 
 
 Until the mid 1970ies, only three formation models have been around which all have their shortcomings \citep{Stevenson:1987p3540}. The fission theory goes back to the 19th century and proposes, that the Earth gained angular momentum due to some unknown mechanism and the rotation period went below the limit for rotational stability ($< 2.1h$). Part of the Earth is then shed into Earth orbit and re-accumulates into a satellite. While this theory matches nicely the composition constraints, todays Earth-Moon system would have an angular momentum three times higher that it actually is. Another theory suggests, that the Moon is simply a body which formed elsewhere and was later on captured into an orbit around the Earth. Aside from it's dynamical implausibility, it fails to explain the Moons iron depletion. A third theory proposes the co-accretion of the Moon in parallel to the Earth. While similar models might work well for the Giant planets moons, it fails to explain the relatively high angular momentum of the whole system in the case of Earth.
 
-\section{The giant impact theory}
+\section{The giant impact theory: Review of past work}
 A more promising approach is the \emph{giant impact} theory proposed by \cite{1975Icar...24..504H} and \cite{1976LPI.....7..120C}. They suggested, that todays Moon is a left-over of a giant impact between the forming Earth and an impacting second largest body from the proto-Earth's vicinity. The impact leaves debris in an Earth orbit. This material later on then accretes into a Moon. This model can not only explain the high angular momentum of the Earth-Moon system, but also allows impact processes to lead to the Moons iron depletion.
 
 While \cite{1975Icar...24..504H} puts the impactor size on a rather low $R \approx 1200km$ ($\approx 0.004 \ME$ for silicates) with a simple energy estimate, \cite{1976LPI.....7..120C} advocated for a larger body in the Mars mass regime ($\approx 0.1 \ME$). Despite those estimates, the model remained qualitative and lacked quantitative verification. It was not until 9 years later, where the theory spur major interest at the \emph{Origin of the Moon} Kona conference in 1984. The advancement in numerical techniques, most notably SPH, and the available computing power meant, that the theory could be put a for a test. 
@@ -42,26 +42,19 @@ Simulations by \cite{1997Icar..126..126C} with considerably higher resolution ha
 
 \cite{Canup:2001p3295} still followed the path of the \emph{late impact} scenario and confirmed with $10k \dots100k$-particles simulations the same issue as found by \citep{Cameron:2000p1854}: Late impacts only produce massive enough disks, when an excess angular momentum of $\Limp \approx 2 \lem$ is used. But their conclusion is different. As one possible explanation, \cite{Canup:2001p3295} state: \emph{If we assume that the Moon did in fact form via a large impact event, this finding suggest one or more of the following: (...) (2) regions of parameter space not explored in the above surveys could suggest different scaling relationships that would more easily yield the Earth-Moon system (...)}. Although \cite{Canup:2001p1861} were also unable to produce disks masses above $2 \ML$, they found that the satellite mass scaling law from  \citep{Kokubo:2000p2195} yields masses above a Moons mass for impacts with $\{0.88 \ME, 0.1, \approx 53 \deg, 1 \vesc \}$. So far, this has been considered to be the most promising impact scenario for the giant impact. We call it the \emph{canonical model}.
 
-Later work \citep{Canup:2004p115} concentrated on finding scaling laws for the disk mass in the low velocity regime. Similar to the early work by \cite{Benz:1989p1893}, they found that grazing collisions tend to produce iron-rich disks for $\vimp > 1.1 \vesc$ and thus also reject the possibility of a high velocity impact. More recent work \citep{Canup:2008p3551} also extended the parameter space by considering pre-impact rotation of both the target and the impactor. 
+Later work \citep{Canup:2004p115} concentrated on finding scaling laws for the disk mass in the low velocity regime. Similar to the early work by \cite{Benz:1989p1893}, they found that grazing collisions tend to produce iron-rich disks for $\vimp > 1.1 \vesc$ and thus also reject the possibility of a high velocity impact. More recent work \citep{Canup:2008p3551} also extended the parameter space by considering pre-impact rotation of both the target and the impactor. Interestingly, high velocity impacts up to $\vimp = 1.4 \vesc$, although with the same basic assumption of no mass escape. For that reason, these high velocity collisions were still performed with $\Limp \approx 1 \lem$, although the final angular momentum is lower with mass loss. Disk masses were found to be well below the required values for moon formation. The overall conclusion of this work was, that target pre-impact rotation might be favorable for Moon formation.
+
+Impact simulations with other methods than SPH are sparse: The first simulations with a grid code incorporating hydrodynamics and self-gravity, were performed by \cite{Wada:2006p1013}. They performed a few simulations in the low-velocity regime compared to previous SPH work and found the grid code results to agree in general, although using only very simple polytropic equations. This is not surprising, as the collisions occur in the gravity regime and are largely dominated by gravitational processes. More recent work \citep{Canup:2010p3713} compared the Eularian CTH code with the SPH results and found the basic results to agree during the first few hours of the impact.
+
+The main problem of the canonical model, is the disagreement with the chemical evidence: The canonical model predicts, that $70 \dots 80 \%$ from the disk material originates from the impactor. The isotopic similarity in oxygen isotopes between the Earth and the Moon heavily contradicts the observed heterogeneity in the solar system \citep{Wiechert:2001p3543}. A model has been put forward \citep{Pahlevan:2007p2065, 2011E&PSL.301..433P} which explains the isotopic similarity by re-equilibration of the oxygen isotopes through thorough mixing in the presumably hot proto-lunar disk after the impact event. It is a qualitative model and lacks proof of working through direct simulations of the proto-lunar disk. A major problem of the model is the requirement, that all the silicate reservoirs mix with each other efficiently. Thermal inversion layerd in the proto-Earth or clumps quickly being formed right after a accretion, a phenomenon often observed in simulations \citep{1997Icar..126..126C, Cameron:2000p1854, Canup:2001p1861, Canup:2004p115}, would prevent efficient mixing and inhibit the individual reservoirs of oxygen to re-equilibrate.
+
+\section{Alternative impact scenario}
+The last section showed, that only a limited region of the parameter space for the giant impact has been studied. The fact that a successful model was found in the low velocity regime, does not exclude the possibility of other regions containing potential Moon-forming impacts. The search for new scenarios has been triggered for example by exotic models like \cite{2010M&PSA..73.5140W}, who suggest an \emph{icy impactor model} and argue that the impactors energy from beyond the ice line would provide much more kinetic energy. The gain in kinetic energy for an impactor migrating from the solar system snow line ($\approx 2.7 AU$) to the Earths orbit leads to $\vneginf = 33 km/s$ or in case of a $\{0.9 \ME, 0.2\}$ impact to an impact velocity of $3.78 \vesc$. Such collisions are mainly disruptive and unlikely to lead to the formation of a relatively massive satellite. Nevertheless, it is important to check such alternative scenarios for viability.
+
+Figure \ref{ch05_fig02} shows the largest remnant disk mass for the simulation set \css from the parameter study in chapter \ref{ch03}. Unlike the limited previous studies, this plot gives a complete overview of the parameter subspace for a given target mass and mass ratio. Although neither the target mass nor the mass ratio exactly match the used values in previous work and escpecially the canonical model by \cite{Canup:2001p1861}, the different velocity and impact angle regimes leading to considerable disk formation are recognizable. In case of $\{ 1 \ME, 0.1 \dots 0.2 \}$, two lunar mass correspond to $M_{disk} / \Mtot \approx 0.03$. The low velocity regime with $\vimp = 1.00 \dots 1.10$ can be clearly seen. 
 
 
-%\citep{Canup:2004p115}  \emph{However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact.}
-%maximum disk mass for b = 0.7 to 0.8
-%comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
-%for larger impact parameters, the impactor tends to re-accumulate, 
-%orbital angular momentum most consistent quantities, iron fraction the least consistent
-%$\M_{disk} / \Mtot \approx 0.15 \gamma$ 
-%disk comes from impactor (more than 70\% for all successful candidates)
-
-\citep{Canup:2008p3551}
-pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all previous simulations had $\gamma = 0.11 \dots 0.14$ and $\vimp < 1.1 \vesc$, fast collisions but with a small mass, fast collisions show similarly a decrease in impactor material in disk, still using the same constraint that Linitial = Lfinal, MFe varies widly for high velocities, successful simulations: more than one Moon mass satellite outside Roche limit and $L < 1.2 \lem$, target pre-rotation allow for larger impactors $\gamma = 0.2$, pre-rotating target might be favourable for Moon formation
-
-grid collisions:
-\cite{Wada:2006p1013}
-problem with low disk resolution (a few percent of the mass are in the disk), gravity dominated process
-
-\citep{Canup:2010p3713} (SPH vs. CTH)
-
+$M_{disk} / \Mtot$ value for the formation of the Moon is $\approx 0.03$. 
 
 \afterpage{
 %\clearpage% To flush out all floats, might not be what you want
@@ -78,10 +71,29 @@ problem with low disk resolution (a few percent of the mass are in the disk), gr
 \end{landscape}
 }
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{03_param_space_m0_010mimp.pdf}
+\includegraphics[scale=0.5]{03_param_space_m0_015mimp.pdf}
+\includegraphics[scale=0.5]{03_param_space_m0_020mimp.pdf}
+\caption{Parameter space view of the simulations with chondritic impactor composition, each panel shows a different impactor mass. Every simulation is shown as a filled circle with an area proportional to the silicate disk mass $M_{disk, \silc}$. The black circle gives the are for $2 \ML$ for reference. The color depicts the depletion factor in target material $\delta f_T$. Besides each circle, the bound angular momentum in $\lem$-units, the silicate disk and the iron disk mass in Moon masses are further noted.}
+\label{ch05_fig03a}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{03_param_space_f0_010mimp.pdf}
+\includegraphics[scale=0.5]{03_param_space_f0_020mimp.pdf}
+\caption{Same parameter space plots as in figure \ref{ch05_fig03a} but for the simulations with an iron impactor ($70 \wtp$ Fe and $30 \wtp$ silicates.}
+\label{ch05_fig03b}
+\end{center}
+\end{figure}
+
+
 
 
 mechanism of giant impact: ejection and second burn to circularize orbit
-
 
 Different models for 
 
@@ -99,39 +111,24 @@ sidenote: disagreement between different codes\\
 
 refer to disk masses in chapter 3\\
 
-constraints:
-\cite{Wiechert:2001p3543}
-isotopic similarity within measuring uncertainty
-no more than 3\% H-chondrites or 5 \% Mars
+%constraints:
+%\cite{Wiechert:2001p3543}
+%isotopic similarity within measuring uncertainty
+%no more than 3\% H-chondrites or 5 \% Mars
 
 \cite{Chambers:2001p2105}
 median mass to hit the Earth $0.22 \ME$, median $\gamma = 0.67$
-
-\cite{Stevenson:1987p3540}
-review: fission is dynamically implausible (3 times larger angular momentum), capture does not work dynamically, co-accretion does not match iron constraint and does not explain large angular momentum
-
-mechanism of giant impact: ejection and second burn to circularize orbit
-
-%accretion:
-%\citep{Kokubo:2000p2195}
-%disk of 2 to 4 moon masses required (\emph{compact disk}, most of the mass inside the roche limit), mass distribution not important, process becomes more efficient for larger disk angular momentums, two moons are usually on an unstable horse-shoe orbit, evolution time 50 to 1000 kepler times ($T_K 7h$), N-body with collisions
-%
-%\citep{Ida:1997p3395} scaling law for the moon mass in dependence of the disk mass (10 to 40 \% efficiency, linear to Ldisk)
-%
-%\cite{Canup:1996p3541} multiple moon formation not a problem, as long as their size sorted on radii. a lunar mass outside the Roche lobe ($2.9 \RE$ for lunar densities).
-
-\citep{Pahlevan:2007p2065}
-large isotopic heterogeneity in the solar system, resolve the issue of isotopic similarity between the earth and the moon (Wiechert), Moons depletion in volatiles
+%\citep{Pahlevan:2007p2065}
+%large isotopic heterogeneity in the solar system, resolve the issue of isotopic similarity between the earth and the moon (Wiechert), Moons depletion in volatiles
 
 
-\cite{2011E&PSL.301..433P} Pahlevan 2011
+%\cite{2011E&PSL.301..433P} Pahlevan 2011
 
 hot initial conditions:
 \citep{2000orem.book..179P}
 
 resolution dependence (clumping):
 \citep{Canup:2010p3713} (SPH vs. CTH, 100k vs. 1M particles run still shows differences)
-
 
 accretion process cannot be decoupled from the impact, as orbital evolution is already strong during the impact 
 
@@ -231,26 +228,6 @@ identical to figure 1. Turquoise on the right shows water ice for the icy impact
 
 \includepdf[pages={1-},fitpaper=true]{01_paper_som}
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{03_param_space_m0_010mimp.pdf}
-\includegraphics[scale=0.5]{03_param_space_m0_015mimp.pdf}
-\includegraphics[scale=0.5]{03_param_space_m0_020mimp.pdf}
-\caption{Parameter space view of the simulations with chondritic impactor composition, each panel shows a different impactor mass. Every simulation is shown as a filled circle with an area proportional to the silicate disk mass $M_{disk, \silc}$. The black circle gives the are for $2 \ML$ for reference. The color depicts the depletion factor in target material $\delta f_T$. Besides each circle, the bound angular momentum in $\lem$-units, the silicate disk and the iron disk mass in Moon masses are further noted.}
-\label{ch05_fig03a}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{03_param_space_f0_010mimp.pdf}
-\includegraphics[scale=0.5]{03_param_space_f0_020mimp.pdf}
-\caption{Same parameter space plots as in figure \ref{ch05_fig03a} but for the simulations with an iron impactor ($70 \wtp$ Fe and $30 \wtp$ silicates.}
-\label{ch05_fig03b}
-\end{center}
-\end{figure}
-
-
 \bibliographystyle{plainnat}
 \bibliography{bibliography}
 
@@ -282,4 +259,33 @@ identical to figure 1. Turquoise on the right shows water ice for the icy impact
 %[25] \citep{2010LPI....41.2653F}
 %[26] \citep{2007Natur.450.1206T}
 %[27] \citep{2009GeCoA..73.5150K}
+
+
+%\citep{Canup:2004p115}  \emph{However, as the impact velocity is increased to 1.1vesc, an increasing amount of escaping material yields lower peak disk masses and angular momenta; in addition, there appears to be a fairly consistent increase in the fraction of disk iron with in- creasing	(vimp /vesc ) for a given impact parameter. Thus we consider (vimp /vesc ) = 1.1 to be an approximate upper limit for a potential lunar-forming impact.}
+%maximum disk mass for b = 0.7 to 0.8
+%comparable to tillotson runs, less massive disks with more iron, more material outside roche limit
+%for larger impact parameters, the impactor tends to re-accumulate, 
+%orbital angular momentum most consistent quantities, iron fraction the least consistent
+%$\M_{disk} / \Mtot \approx 0.15 \gamma$ 
+%disk comes from impactor (more than 70\% for all successful candidates)
+
+%\citep{Canup:2008p3551}
+%pre-impact rotation, $\ML = 0.012 \ME, 1 \lem 3.5 \times 10^41 g cm^2 / s$, all previous simulations had $\gamma = 0.11 \dots 0.14$ and $\vimp < 1.1 \vesc$, fast collisions but with a small mass, fast collisions show similarly a decrease in impactor material in disk, still using the same constraint that Linitial = Lfinal, MFe varies widly for high velocities, successful simulations: more than one Moon mass satellite outside Roche limit and $L < 1.2 \lem$, target pre-rotation allow for larger impactors $\gamma = 0.2$, pre-rotating target might be favourable for Moon formation
+
+%grid collisions:
+%\cite{Wada:2006p1013}
+%problem with low disk resolution (a few percent of the mass are in the disk), gravity dominated process
+
+%\citep{Canup:2010p3713} (SPH vs. CTH)
+
+
+
+%accretion:
+%\citep{Kokubo:2000p2195}
+%disk of 2 to 4 moon masses required (\emph{compact disk}, most of the mass inside the roche limit), mass distribution not important, process becomes more efficient for larger disk angular momentums, two moons are usually on an unstable horse-shoe orbit, evolution time 50 to 1000 kepler times ($T_K 7h$), N-body with collisions
+%
+%\citep{Ida:1997p3395} scaling law for the moon mass in dependence of the disk mass (10 to 40 \% efficiency, linear to Ldisk)
+%
+%\cite{Canup:1996p3541} multiple moon formation not a problem, as long as their size sorted on radii. a lunar mass outside the Roche lobe ($2.9 \RE$ for lunar densities).
+
 
