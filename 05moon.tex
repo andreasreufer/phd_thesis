@@ -78,10 +78,9 @@ Qualitatively this can be explained by the basic mechanism behind disk formation
 \end{center}
 \end{figure}
 
-In order to investigate the high velocity regime more thoroughly, we performed a set of high-resolution simulations with half a million particles. The details and the results are described in detail in the manuscript below, but the covered parameter space will be quickly discussed to put into the context with the review of previous work. Figures \ref{ch05_fig03a} and \ref{ch05_fig03b} show a few of those simulations and their location in the parameter space.
+In order to investigate the high velocity regime more thoroughly, we performed a set of high-resolution simulations with half a million particles. The details and the results are described in detail in the manuscript below, but the covered parameter space will be quickly discussed to put into the context with the review of previous work. Figures \ref{ch05_fig03a} and \ref{ch05_fig03b} show a few of those simulations and their location in the parameter space. The individual points also give the key results which give the potential for successful formation of an iron-depleted Moon massed satellite: The mass of the silicates and the iron in the disk and the total angular momentum bound in the largest remnant. The color additionally give the target material depletion, which will be explained in the following manuscript.
 
-
-mechanism of giant impact: ejection and second burn to circularize orbit
+As expected, for grazing collision ($\thimp = 45 \dots 50 \deg$) similar results are obtained as in the work previously mentioned. Relatively massive disks form with a certain fraction of the impactor mass. The disks are iron depleted and the resulting angular momentum corresponds roughly to the initial angular momentum of the collision. For $\Mimp = 0.10 \ME$ (top plot, figure \label{ch05_fig03a}), the results in the low velocity regime fit the constraints for Moon formation, while for $\Mimp = 0.20 \ME$ (bottom plot, figure \label{ch05_fig03a}) the angular momentum is too high due to the high impactor mass. Also shown in the plots are dashed lines for points in the impact parameter space with the same $L_{imp}$. When we now got to the high velocity regime ($\vimp = 1.30 \dots 1.35 \vesc$) the efficiency for disk formation is very low, resulting in disk masses roughly a magnitude too small for Moon formation. But another important effect is visible: The final angular momentum of the largest remnant is only about half of the initial amount due to mass loss during the collision. This means we can use a higher initial angular momentum. If stay in the same region in terms of impact velocity and angle, we can increase the impactor mass. The trend becomes apparent for $\Mimp = 0.15 \ME$ (middle plot, figure \label{ch05_fig03a}), where for example $\{1.20 \vesc, 35 \deg \}$ delivers already quite satisfying results, despite a slightly too small disk mass. The $\{1.10 \vesc, 40 \deg \}$ case lies in between the low and high velocity regime and delivers 
 
 Different models for 
 
@@ -96,43 +95,17 @@ difficulties\\
 
 sidenote: disagreement between different codes\\
 
-
 refer to disk masses in chapter 3\\
-
-%constraints:
-%\cite{Wiechert:2001p3543}
-%isotopic similarity within measuring uncertainty
-%no more than 3\% H-chondrites or 5 \% Mars
 
 \cite{Chambers:2001p2105}
 median mass to hit the Earth $0.22 \ME$, median $\gamma = 0.67$
-%\citep{Pahlevan:2007p2065}
-%large isotopic heterogeneity in the solar system, resolve the issue of isotopic similarity between the earth and the moon (Wiechert), Moons depletion in volatiles
-
-
-%\cite{2011E&PSL.301..433P} Pahlevan 2011
-
-hot initial conditions:
-\citep{2000orem.book..179P}
 
 resolution dependence (clumping):
 \citep{Canup:2010p3713} (SPH vs. CTH, 100k vs. 1M particles run still shows differences)
 
 accretion process cannot be decoupled from the impact, as orbital evolution is already strong during the impact 
 
-impact depends quite strongly on the equations of state, must be a geometry effect
-
 sph might be problematic for integration times higher than a day due to numerical viscosity \citep{Canup:2004p115} 
-
-
-%\section{\emph{Making the Moon from the Earths mantle} }
-% new simulations
-
-% additional figures
-%TODOPLOT: disk thermal profiles (temp as color, ecc vs. rad)
-
-%TODOPLOT: redo disk mass plot from c1 (linear scale)
-%TODOPLOT: 
 
 
 \cleardoublepage
@@ -159,7 +132,7 @@ The collisions presented here fall into the broad regime of slow hit-and-run col
 
 We used a standard SPH code with self-gravity and the ANEOS equation of state \citep{1972Thompson} for iron and water ice and M-ANEOS  \citep{Melosh:2007p3502} for silicate. All simulations used a resolution of around 500'000 particles and were performed in a similar manner as in previous work \citep{Benz:1985p1755, Canup:2001p1861, Canup:2001p3295, Canup:2004p115}. 
 
-A reference case (\emph{cA08}) uses initial parameters and conditions comparable to those used in the canonical case \citep{Canup:2004p115} and successfully reproduces an iron-depleted proto-lunar disk massive enough to form a Moon. For each of our simulations, the Moon mass is calculated using the disk mass and the specific angular momentum \citep{Kokubo:2000p2195}. We found collisions with an angle of $30-40\deg$ and $1.2 – 1.3 \vesc$ are also successful to put target material into orbit, when using differentiated impactors with chondritic Si/Fe composition ($30 \wtp \textrm{Fe}, 70 \wtp \silc$) and masses between $0.15-0.20 \ME$. Some cases in this regime show an iron excess of $> 5 \wtp$ in the proto-lunar disk and are rejected, as in previous work \citep{Canup:2004p115}. The best chondritic case matching all constraints is obtained using an impact angle of $35 \deg$ and a velocity of $1.20 \vesc$, where $56\%$ of the material in the silicate part of the disk originates from the target and $\delta f_{T}$ reduces to $-35\%$ compared to $-66\%$ in the canonical reference case. Figure \ref{ch05_fig01a} shows four consecutive snapshots of such a high velocity collision.
+A reference case (\emph{cA08}) uses initial parameters and conditions comparable to those used in the canonical case \citep{Canup:2004p115} and successfully reproduces an iron-depleted proto-lunar disk massive enough to form a Moon. For each of our simulations, the Moon mass is calculated using the disk mass and the specific angular momentum \citep{Kokubo:2000p2195}. We found collisions with an angle of $30-40\deg$ and $1.20 – 1.30 \vesc$ are also successful to put target material into orbit, when using differentiated impactors with chondritic Si/Fe composition ($30 \wtp \textrm{Fe}, 70 \wtp \silc$) and masses between $0.15-0.20 \ME$. Some cases in this regime show an iron excess of $> 5 \wtp$ in the proto-lunar disk and are rejected, as in previous work \citep{Canup:2004p115}. The best chondritic case matching all constraints is obtained using an impact angle of $35 \deg$ and a velocity of $1.20 \vesc$, where $56\%$ of the material in the silicate part of the disk originates from the target and $\delta f_{T}$ reduces to $-35\%$ compared to $-66\%$ in the canonical reference case. Figure \ref{ch05_fig01a} shows four consecutive snapshots of such a high velocity collision.
 
 The origin of the matter ending up in the proto-lunar disk is mainly defined by the geometry of the collision and is determined during the very early phase when the impactor is accelerating the target material. This can be seen in Figure \ref{ch05_fig01b} where the particles which later end up in the disk are highlighted in bright colour. In the canonical case, the impactor grazes around the target's mantle and is deformed. Due to the low impact velocity, material supposed to end up in orbit around the Earth must not be decelerated too strongly in order to retain enough energy to stay in orbit. In the canonical case, this is only the case for the parts of the impactor mantle most distant to the point of impact and some minor part of the target's mantle. But if impact velocity is increased from $1.00 \vesc$ (\emph{cA08}) to $1.30 \vesc$ (\emph{cC01}), parts from deeper within the target mantle receive the right amount of energy for orbit insertion. The outer regions of the target mantle receive too much energy and leave the system. This material removes mass and angular momentum from the system. While in case \emph{cB04} only $\approx 10\%$ of the initial angular momentum is removed, $\approx 45\%$ are removed in case cC06 (see table 1 in SOM).
 
