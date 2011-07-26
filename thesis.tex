@@ -4,7 +4,7 @@
 
 %\documentclass[xetex,mathserif,serif,titlepage,a4paper]{article}
 
-\documentclass[xetex,12pt,a4paper]{report}
+\documentclass[xetex,12pt,a4paper,twoside]{report}
 
 %\usepackage[xetex,draft]{graphicx}
 \usepackage[xetex]{graphicx}
@@ -134,15 +134,13 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 
 \begin{document}
 \pagestyle{headings}
-%\begin{spacing}{1.5}
-%\begin{spacing}{1.0}
 \begin{spacing}{1.2}
 
 \pagestyle{fancy}
 
 %% Chapters
 % title page, declaration
-%\include{00title}
+\include{00title}
 
 % short planetary formation intro
 %\include{01intro}
@@ -159,24 +157,14 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 % the moon paper & hires simulations, additional plots for alt moon sims
 \include{05moon}
 
-\appendix
+%\appendix
 %\include{07appendix}
 
-% Include a bibliography
-%\bibliographystyle{plain}
-%\bibliographystyle{natbib}
-%\bibliographystyle{natdin}
-%\bibliographystyle{abbrvnat}
-%\bibliographystyle{unsrtnat}
-
-%\bibliographystyle{plainnat}
-%\bibliography{bibliography}
-
 % acknowledgement
-%\include{08acknowledgements}
+\include{08acknowledgements}
 
 % CV & erklaerung
-%\include{09end}
+\include{09end}
 
 \end{spacing}
 \end{document}
