@@ -1,37 +1,23 @@
 \cleardoublepage
 \chapter{Introduction}
 \label{ch01}
-The field of planet formation lead a neglected existence besides other fields like stellar formation or cosmology. While telescopes allowed humankind to observe stars beyond our solar system already for centuries, the knowledge about planets has long been limited to our own system. The relative small luminosity of planets compared to stars makes it even today almost impossible to optically detect planets even for stars in our neighborhood. Whether planet formation is a common process or not along stellar formation remained a pointless without any further known systems. But the common wisdom was, that the solar system is a typical result of planet formation and that hypothetical extrasolar systems should look similar. This is no surprise, as planet formation models primarily aimed at explaining the solar system.
+The field of planet formation lead a neglected existence besides other fields like stellar formation or cosmology for a long time. While telescopes allowed humankind to observe stars beyond our solar system already for centuries, the knowledge about planets has long been limited to our own system. The relative small luminosity of planets compared to stars makes it even today almost impossible to optically detect planets even for stars in our neighborhood. Whether planet formation is a common process or not along stellar formation remained a pointless without any further known systems. But the common wisdom was, that the solar system is a typical result of planet formation and that hypothetical extrasolar systems should look similar. This is no surprise, as planet formation models primarily aimed at explaining the solar system.
 
-The discovery of the first extrasolar planet \emph{51 Pegasi b} around a solar-type star by \cite{1995Natur.378..355M} caused an overnight revolution. Nobody deemed it possible before this observation, that a Jupiter-mass planet could exist as close as $0.05 AU$ to its host star. As of July 2011, ongoing ground- and space-based observations have discovering more than 560 extrasolar planets. All of them are relatively massive and close-in, more resembling the originally observed \emph{51 Pegasi b} than the planets in our own solar system.
+The discovery of the first extrasolar planet \emph{51 Pegasi b} around a solar-type star by \cite{1995Natur.378..355M} caused an overnight revolution. Nobody deemed it possible before this observation, that a Jupiter-mass planet could exist as close as $0.05 AU$ to its host star. As of July 2011, ongoing ground- and space-based observations have discovering more than 560 extrasolar planets. All of them are relatively massive and close-in, more resembling the originally observed \emph{51 Pegasi b} than the planets in our own solar system. While this is primarily a cause of observational limitations of the instruments, favoring the detection of massive, close-in planets, the existence of such systems requires planet formation models also to explain them.
 
+Collisions between bodies of various sizes are an important process during all stages of planet formation. During a collision, two macroscopic bodies, the larger body called the target and the smaller body called the impactor, approach each other and depending on various parameters of the collision. When the target is considerably larger than the impactor, a collision is also often called an impact. Collisions occur at various stages during planet formation, with mass and size ranges varying several tens of magnitudes from dust grains up to Jupiter sized planets. This thesis covers different types of collisions all modeled with the same type of method described in detail in chapter \ref{ch02}. The following quick overview on planet formation should serve as a guideline to put the work of this thesis in context.
 
+According to the current understanding of planet formation, the formation process of a planetary system can be divided into different stages: A part of a giant molecular cloud, composed of gas (mainly H \& He) and dust, collapses and starts to form a rotating disk due to the conservation of angular momentum. When density and pressure are large enough in the center, hydrogen burning starts and a new star is born. Over time, what resembles a rotating lump of gas first, changes disk with decreasing pressure, density and temperature as a function of the distance to the star.
 
-spurred interest in extrasolar planets, new instruments will deliver data about terrestrial planets
+Due to the radial pressure gradient, the gas rotates with a sub-keplerian velocity around the star. In the vertical direction relative to the disks midplane, there is also a positive pressure gradient towards the midplane. While the dust is tightly coupled to the rotation of the gas around the star, it is pressureless in itself and therefore settles towards the disks midplane over a timescale of $10^4$ years. The $\mu m$-sized dust starts to coagulate due to strong van-der-Waals forces into larger grains \citep{2010A&A...513A..56G}. As the grains grow towards bigger, planetesimals their relative strength becomes smaller as inter-molecular forces increase $\sim r^2$ while intertial forces increase with $\sim r^3$. With the diameter approach the \emph{meter-sized barrier}, further growth of the solid is stopped and erosion begins \cite{Benz1999Icar..142....5B}.
 
-brief planet formation theory overview: physical processes 
-midplane accumulation in $10^4$ years
+How this barrier can be overcome is still a unknown. Recent suggestions have been the trapping of dust in vortices, either caused by magneto-rotational-instability \citep{Johansen:2007p37} or by turbulence in general \citep{2008ApJ...686.1292I}. In those scenarios, the trapped dust instantly collapses under its self-gravity into \emph{Ceres} sized objects ($\approx 10^{-4} \ME$). In this regime, gravity becomes strong enough to hold together those objects and further mass is accreted. Due to gravitational focussing, the zone where those bodies accreted mass from increases with their mass and leads to \emph{runaway accretion}. During this stage, the amout of gas in the disk already has decreased, either by accretion onto the central star or due to photo-evaporation due to the young stars UV radiation.
 
-dust -> grains (sticking, molecular forces dominate) up to cm sized bodies
-meter sized barrier, gravity is too weak, but velocities become large (gas drag becomes small, velocities go to keplerian speeds)
-\cite{Benz1999Icar..142....5B}
+The growing planetesimals now turn into planetary embryos and become a victim of their own success: When an embryo reaches a mass $\approx 100\times$ larger than the typical planetesimal mass in its vicinity, this feeding zone is being emptied and the accretion rate goes down again. Neighboring embryos can catch up and the \emph{oligarchic} accretion regime kicks in \citep{1993Icar..106..210I, 2010ApJ...714L.103O}.
 
-above the meter barrier, gravitational focussing let's the largest bodies grow the fastest (runaway growth)
+The individual embryos reach similar masses and are orderly spaced according to their feeding-zones. The remaining small planetesimals stabilize the orbits of the embryos through dynamical friction, while their own eccentricities and inclinations are pumped up, leading to slow removal of the planetesimals due to accretion onto embryos, loss into the central star or due to ejection. WIth the removal of the planetesimals and almost no gas around, the embryos becomes unstable again and eventually get on crossing orbits. The resulting two-body interactions chaotically re-arrange the embryos in the disk and lead to collisions in some cases \cite{Chambers:2001p2105, Chambers:2004p4098}. With all embryos occupying the same mass regime, these collisions are called similar-sized and lead to various outcomes \cite{Asphaug:2010p3539}. Such collisions and their outcomes are discussed in detail in chapter \ref{ch03}. Work on modelling the stage between the formation embryos and their final accretion into proto-planets often make simplified assumptions about these similar-sized collisions. The data provided in chapter \ref{ch03} permits such models to model this stage more precisely and investigate the role of these collisions.
 
-vortex or mri? \cite{Johansen:2007p37} turbulence in general \citep{2008ApJ...686.1292I} planetesimals form
-oligarchic growth
-
-gas is removed (photoevaporation due to stars UV)
-
-olichargic growth, when largest embroys becomes 100 larger than typical planetesimal mass. embryo dynamics determines now the \cite{1993Icar..106..210I} \cite{2010ApJ...714L.103O}
-embryos empty their feeding zones
-
-
-dynamical friction stabilizes large bodies, and excites small bodies, when no more planetesimals are around, bodies become excited again and start to collide again
-
-radial positions change, large radial mixing, similar-sized collisions, chaotic re-arrangement of mass mixing beyond ice line  \cite{Chambers:2004p4098} \cite{Chambers:2001p2105}
-
-collision speeds depend on the radial location
+While 
 
 giant planet formation due to core accretion \citep{1996Icar..124...62P} 
 
@@ -56,6 +42,8 @@ cratering collisions: helpful for dating
 application of impacts mars -> chapter 4
 
 
+
+
 \cite{Chambers:2004p4098}
 
 terrestrial planet formation: important as core formation for giants but also for planets themselves
@@ -67,7 +55,7 @@ compositional changes from collisions
 
 method side: SPH as a robust method for collisions, thermodynamics are important
 
-SPH has been used for single cases only
+SPH has been used for single, large cases mainly \cite{2005Natur.435..629S}
 
 progress in computational methods and computing power allows massively parallel 
 
