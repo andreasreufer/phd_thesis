@@ -1,13 +1,24 @@
-\cleardoublepage
+%\cleardoublepage
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.6]{01figs/01planet-collision.jpg}
+\caption{Artists impression of the Moon forming giant impact. Image courtesy of NASA/JPL-Caltech}
+\label{ch01_fig01}
+\end{center}
+\end{figure}
+
+
 \chapter{Introduction}
 \label{ch01}
 \graphicspath{{./01figs/}}
 
-The field of planet formation lead a neglected existence besides other fields like stellar formation or cosmology for a long time. While telescopes allowed humankind to observe stars beyond our solar system already for centuries, the knowledge about planets has long been limited to our own system. The relative small luminosity of planets compared to stars makes it even today almost impossible to optically detect planets even for stars in our neighborhood. Whether planet formation is a common process or not along stellar formation remained a pointless without any further known systems. But the common wisdom was, that the solar system is a typical result of planet formation and that hypothetical extrasolar systems should look similar. This is no surprise, as planet formation models primarily aimed at explaining the solar system.
+The field of planet formation lead a neglected existence besides related fields like stellar formation or cosmology for a long time. While telescopes allowed mankind to observe stars beyond the solar system for several centuries, the knowledge about planets has long been limited to the ones in our own system. The relative small luminosity of planets compared to stars makes it even today almost impossible to directly detect planets even for stars in our neighborhood. Without any further known systems, the question wether planet formation is a common process alongside of stellar formation remained non answerable question. But the common wisdom was, that the solar system is a typical result of planet formation and that hypothetical extrasolar systems should look similarly. This is no surprise, as planet formation models primarily aimed at explaining the solar system.
 
-The discovery of the first extrasolar planet \emph{51 Pegasi b} around a solar-type star by \cite{1995Natur.378..355M} caused an overnight revolution. Nobody deemed it possible before this observation, that a Jupiter-mass planet could exist as close as $0.05 AU$ to its host star. As of July 2011, ongoing ground- and space-based observations have discovering more than 560 extrasolar planets. All of them are relatively massive and close-in, more resembling the originally observed \emph{51 Pegasi b} than the planets in our own solar system. While this is primarily a cause of observational limitations of the instruments, favoring the detection of massive, close-in planets, the existence of such systems requires planet formation models also to explain them.
+The discovery of the first extrasolar planet \emph{51 Pegasi b} around a solar-type star by \cite{1995Natur.378..355M} caused an overnight revolution in the field. 
+Before this discovery, nobody deemed it possible that a Jupiter-mass planet could exist as close as $0.05 AU$ to its host star. As of July 2011, ongoing ground- and space-based observations have discovered more than 560 extrasolar planets. All of them are relatively massive and close-in, more resembling the originally observed \emph{51 Pegasi b} than the planets in our own solar system. This is primarily an effect of observational bias, favoring the detection of massive, close-in planets. Nevertheless, a model of planet formation also has to explain those systems.
 
-Collisions between bodies of various sizes are an important process during all stages of planet formation. A collision consists of two macroscopic bodies, the larger body called the \emph{target} and the smaller body called the \emph{impactor} approaching each other and resulting in a collisional outcome depending what the various parameters of the collision are. When the target is considerably larger than the impactor, a collision is also often called an impact. Collisions occur at various stages during planet formation, with mass and size ranges varying several tens of magnitudes from dust grains up to Jupiter sized planets. This thesis covers different types of collisions all modeled with the same type of method described in detail in chapter \ref{ch02}. The following brief overview on planet formation helps in putting these different types of collisions in context within planet formation.
+Collisions between bodies of various sizes are an important process during all stages of planet formation. A collision consists of two macroscopic bodies, the larger body termed the \emph{target} and the smaller body called the \emph{impactor} approaching each other and resulting in a collisional outcome depending what the various parameters of the collision are. When the target is considerably larger than the impactor, a collision is also often called an impact. Collisions occur at various stages during planet formation, with mass and size ranges varying several tens of magnitudes from dust grains up to Jupiter sized planets. This thesis covers different types of collisions all modeled with the same type of method described in detail in chapter \ref{ch02}. The following brief overview on planet formation helps in putting these different types of collisions in context within planet formation.
 
 According to the current understanding of planet formation, the formation process of a planetary system can be divided into different stages: A part of a giant molecular cloud, composed of gas (mainly H \& He) and dust, collapses and starts to form a rotating disk due to the conservation of angular momentum. When density and pressure are large enough in the center, hydrogen burning starts and a new star is born. Over time, what resembles a rotating lump of gas first, changes disk with decreasing pressure, density and temperature as a function of the distance to the star.
 
@@ -17,72 +28,38 @@ How this barrier can be overcome is still a unknown. Recent suggestions have bee
 
 The growing planetesimals now turn into planetary embryos and become a victim of their own success: When an embryo reaches a mass $\approx 100\times$ larger than the typical planetesimal mass in its vicinity, this feeding zone is being emptied and the accretion rate goes down again. Neighboring embryos can catch up and the \emph{oligarchic} accretion regime kicks in \citep{1993Icar..106..210I, 2010ApJ...714L.103O}.
 
-The individual embryos reach similar masses and are orderly spaced according to their feeding-zones. The remaining small planetesimals stabilize the orbits of the embryos through dynamical friction, while their own eccentricities and inclinations are pumped up, leading to slow removal of the planetesimals due to accretion onto embryos, loss into the central star or due to ejection. WIth the removal of the planetesimals and almost no gas around, the embryos becomes unstable again and eventually get on crossing orbits. The resulting two-body interactions chaotically re-arrange the embryos in the disk and lead to collisions in some cases \cite{Chambers:2001p2105, Chambers:2004p4098}. With all embryos occupying the same mass regime, these collisions are called similar-sized and lead to various outcomes \cite{Asphaug:2010p3539}. Such collisions and their outcomes are discussed in detail in chapter \ref{ch03}. Work on modeling the stage between the formation embryos and their final accretion into proto-planets often make simplified assumptions about these similar-sized collisions. The data provided in chapter \ref{ch03} permits such models to incorporate a more realistic collision handling and model this stage of planet formation more precisely. 
+The individual embryos reach similar masses and are orderly spaced according to their feeding-zones. The remaining small planetesimals stabilize the orbits of the embryos through dynamical friction, while their own eccentricities and inclinations are pumped up, leading to slow removal of the planetesimals due to accretion onto embryos, loss into the central star or due to ejection. WIth the removal of the planetesimals and almost no gas around, the embryos becomes unstable again and eventually get on crossing orbits. The resulting two-body interactions chaotically re-arrange the embryos in the disk and lead to collisions in some cases \cite{Chambers:2001p2105, Chambers:2004p4098}. With all embryos occupying the same mass regime, these collisions are called similar-sized and lead to various outcomes \cite{Asphaug:2010p3539}. Such collisions and their outcomes are discussed in detail in chapter \ref{ch03}. Work on modeling the stage between the formation embryos and their final accretion into proto-planets \cite{Chambers:2001p2105, 2006Icar..184...39O} often makes simplified assumptions about these similar-sized collisions. The data provided in chapter \ref{ch03} permits such models to incorporate a more realistic collision handling and model this stage of planet formation more precisely.
 
 Similar-sized collisions alter bodies in a profound way: Properties like composition, bulk density \citep{Benz:1988p3336} or the rotation can be changed by this collisions. They are also believed to trigger core formation \cite{1992Icar..100..326T}. 
 
 Consequently, the final properties of terrestrial planets are heavily influenced by the last massive collision they underwent: Primordial atmospheres can be removed \cite{2002DPS....34.2804A} or the planet can be depleted of its volatiles \citep{2001E&PSL.192..545H}.
 
-Another interesting effect of such collisions is satellite formation. The Earths Moon is most probably a direct outcome of a late giant collision between the proto-Earth and a roughly Mars sized body \citep{1975Icar...24..504H, 1976LPI.....7..120C, 1987Icar...71...30B, Canup:2001p1861}. In chapter \ref{05}, 
+Another interesting effect of such collisions is satellite formation. Along with the Pluto-Charon binary system \cite{Canup:2005p1987}, the Earths Moon is most probably a direct outcome of a late giant collision between the proto-Earth and a roughly Mars sized body \citep{1975Icar...24..504H, 1976LPI.....7..120C, 1987Icar...71...30B, Canup:2001p1861}. In chapter \ref{ch05}, we look into a model explaining the Moons formation with an alternative impact scenario.
+
+The growth of solid embryos is not only important for the formation of terrestrial planet, but also delivers the cores required for giant planet formation \citep{1996Icar..124...62P}. Understanding the timescales of embryo growth is crucial, as they have to becomes massive enough to start to accrete gas, before the gas disk vanishes. 
+
+With the late heavy bombardment marking the last major event in the solar systems history \citep{2005Natur.435..466G}, planet formation as a process has finished. Nevertheless, impacts of small remnants for example from the asteroid or the Kuiper belt onto planets and their moons still take place. While not delivering substantial mass relative to the target body, the craters such impacts leave give clues about the rheology and age of planetary surfaces. Chapter \ref{ch04} presents modeling work on martian craters which have been observed only months after their formation \cite{2009Sci...325.1674B}. 
 
 
 
 
-The final properties of planets are largely influenced by the last massive collision they have experienced: 
 
+%statistical results for evolution codes, to understand planet formation in general 
 
-Primordial atmospheres are altered \cite{2002DPS....34.2804A} or the 
-The final properties of terrestrial planets are heavily influenced by massive collisions they encounter at late stages. For small bodies, 
-
-The growth of the solid embryos is not only important for the formation of terrestrial planet, but also delivers the core required for giant planet formation \citep{1996Icar..124...62P}. 
-
-
-why are collisions important?
-late stages: single, large events determine:
-
-the final state of volatile depletion \citep{2001E&PSL.192..545H}
-triggering of core formation 
-change of primordial atmospheres 
-
-give direct examples:
-moon -> chapter 5 \cite{Canup:2001p1861} \cite{1987Icar...71...30B} \cite{1975Icar...24..504H} \cite{1976LPI.....7..120C}
-mercury \cite{Benz:1988p3336}
-pluto-charon \cite{Canup:2005p1987}
-
-statistical results for evolution codes, to understand planet formation in general 
-
-especially terrestrial planet formation \cite{2006Icar..184...39O} 
-\cite{Lisse:2009p3131} -> chapter 3
+especially terrestrial planet formation 
+%\cite{Lisse:2009p3131} -> chapter 3
 
 cratering collisions: helpful for dating 
 application of impacts mars -> chapter 4
 
 
-
-
-\cite{Chambers:2004p4098}
-
-terrestrial planet formation: important as core formation for giants but also for planets themselves
-
-
-what do the chapters have in common?
-
-compositional changes from collisions
-
 method side: SPH as a robust method for collisions, thermodynamics are important
 
-SPH has been used for single, large cases mainly \cite{2005Natur.435..629S}
+%SPH has been used for single, large cases mainly \cite{2005Natur.435..629S}
 
 progress in computational methods and computing power allows massively parallel 
 
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.6]{01planet-collision.jpg}
-\caption{Artists impression of the Moon forming giant impact}
-\label{ch01_fig01}
-\end{center}
-\end{figure}
 
 
 %\section{Motivation}

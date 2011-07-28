@@ -110,6 +110,18 @@
 \usepackage{aux/aas_macros}
 
 
+
+\usepackage{ifthen}
+ 
+\newcommand{\newevenside}{
+        \ifthenelse{\isodd{\thepage}}{\newpage}{
+        \newpage
+        \phantom{placeholder} % doesn't appear on page
+        %\thispagestyle{empty} % if want no header/footer
+        \newpage
+        }
+}
+
 % include some helpers
 \include{aux/definitions}
 
@@ -138,7 +150,7 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 
 %% Chapters
 % title page, declaration
-%\include{00title}
+\include{00title}
 
 % short planetary formation intro
 \include{01intro}
@@ -156,13 +168,13 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 %\include{05moon}
 
 \appendix
-%\include{07appendix}
+\include{07appendix}
 
 % acknowledgement
-%\include{08acknowledgements}
+\include{08acknowledgements}
 
 % CV & erklaerung
-%\include{09end}
+\include{09end}
 
 \end{spacing}
 \end{document}
