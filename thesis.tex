@@ -20,7 +20,6 @@
 	pdftitle={Collisions and impacts in planetary system},
 	pdfkeywords={SPH, computational astrophysics, rocket science, collisions}]{hyperref}
 
-
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
@@ -41,7 +40,7 @@
 \usepackage{a4wide}
 \usepackage{enumerate}
 
-\usepackage{natbib}
+\usepackage[authoryear]{natbib}
 \usepackage{chapterbib}
 \bibpunct{(}{)}{;}{a}{}{,}
 
@@ -109,10 +108,8 @@
 
 \usepackage{aux/aas_macros}
 
-
-
+% \evenpage command
 \usepackage{ifthen}
- 
 \newcommand{\newevenside}{
         \ifthenelse{\isodd{\thepage}}{\newpage}{
         \newpage
@@ -156,16 +153,16 @@ BoldItalicFont = MinionPro-BoldIt.otf ] {MinionPro-Regular.otf}
 \include{01intro}
 
 % all about numerics and SPHLATCH
-%\include{02code}
+\include{02code}
 
 % pmc simulations, Lisse stuff, Eriks small body iron enrichment
-%\include{03ssc} 
+\include{03ssc} 
 
 % the mars paper
-%\include{04mars}
+\include{04mars}
 
 % the moon paper & hires simulations, additional plots for alt moon sims
-%\include{05moon}
+\include{05moon}
 
 \appendix
 \include{07appendix}
