@@ -43,7 +43,7 @@ Those equations are formulated in an Eulerian form, this means in an inertial fr
 In the Lagrangian formulation of the momentum equation  \ref{ch02_fld01_eq003} the advection term $\vv (\nabla \vv)$ vanishes and the momentum equation yields
 \begin{equation}
 \label{ch02_fld01_eq003b}
-- \frac{\partial \mathbf{v}}{\partial t} = \frac{\nabla p}{\rho}
+- \frac{d \mathbf{v}}{d t} = \frac{\nabla p}{\rho}
 \end{equation}
 The continuity equation is un-affected by the choice of a Lagrangian frame of reference, as it depends only on the velocity divergence and not the absolute velocity. The actual Lagrangian of a in-viscous fluid without an external potential is given by
 \begin{equation}
@@ -133,7 +133,7 @@ so that the corresponding SPH sum becomes
 with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity divergence. If we take the partial time derivative of \ref{ch02_sph02_eq001}, where only the particle positions in the Kernel depend explicitly on time, we get: 
 \begin{equation}
 \label{ch02_sph02_eq004}
-\frac{\partial \rho_i}{\partial t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
+\frac{d \rho_i}{d t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
 \end{equation}
 So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle exactly.
 
