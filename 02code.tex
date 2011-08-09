@@ -2,7 +2,7 @@
 \chapter{Methods}
 \graphicspath{{./02figs/}}
 \label{ch02}
-This chapter describes the methods used to model the collisions covered in this thesis. The first section gives a short review of the governing physics of collision: Fluid- and thermodynamics.  Collision often can be characterized by large spatial dynamics: The mass is concentrated in bodies which only occupy a small fraction of the space to be modeled. Nevertheless it is still important to resolve the bodies well enough. Grid techniques can only handle this problem with complicated adaptive mesh refinement routines. 
+This chapter describes the methods used to model the collisions covered in this thesis. The first section gives a short review of the governing physics of collision: Fluid- and thermodynamics.  Collisions often can be characterized by large spatial dynamics: The mass is concentrated in bodies which only occupy a small fraction of the space to be modeled. Nevertheless it is still important to resolve the bodies well enough. Grid techniques can only handle this problem with complicated adaptive mesh refinement routines. 
 A more elegant Lagrangian approach is \emph{Smooth Particle Hydrodynamics} (SPH), a method in which the fluid is approximated by particles. It has the advantage that the computational elements in the form of particles follow the mass of the fluid, so the resolution is inherently where it is required. The second section of this cover different formulations of SPH.
 Gravity plays an important in planetary collisions. First of all gravity is the source of the kinetic energy such collisions. While for small bodies self-gravity can be neglected because it is too weak, it has to be modeled explicitly for large bodies. The third section covers the Barnes \& Hut tree algorithm, which allow to implement self-gravity into a particle code.
 A fourth section describes an implementation of a hydrodynamic SPH code with self-gravity adapted especially for collision simulations called \emph{SPHLATCH}. Two different versions are presented with different approaches for parallelization, one for distributed and one for shared memory computers.
@@ -11,36 +11,36 @@ The last section of this chapter describes several techniques required for setti
 \newpage
 
 \section{Fluid- and Thermodynamics}
-
 %%
 %   F L U I D S
 %%
 \subsection{Basics of fluid dynamics}
-A fluid is a classical continuum approximation of an ensemble of molecules or atoms. Characteristic variables are density $\rho$, specific internal energy $u$, temperature $T$, velocity $\vv$ and pressure $p$. Conservation of mass leads directly to the continuum equation, which equals the local change density to the negative product of velocity divergence and density:
+A fluid is a classical continuum approximation of an ensemble of molecules or atoms. Characteristic variables are density $\rho$, specific internal energy $u$, temperature $T$, velocity $\vv$ and pressure $p$. Conservation of mass leads directly to the continuum equation, which equals the local change density to the negative divergency of the product of velocity and density:
 \begin{equation}
 \label{ch02_fld01_eq001}
-\frac{\partial \rho}{\partial t} + \rho \nabla \mathbf{v} = 0
+\frac{\partial \rho}{\partial t} +    \nabla \rho \mathbf{v} = 0
 \end{equation}
-
 Momentum conservation ultimately gives us the \emph{Navier-Stokes equation} 
 \begin{equation}
 \label{ch02_fld01_eq002}
 \rho \frac{\partial \mathbf{v}}{\partial t} + \rho ( \mathbf{v} \nabla ) \mathbf{v} = - \nabla p + \nabla \Phi + \nu \Big( \nabla^2 \vv - \frac{2}{3} \nabla \nabla \vv \Big)
 \end{equation}
-
 for a viscous fluid, where $\nu$ is the kinematic viscosity and $\Phi$ any external potentials acting on the fluid, for example gravity \citep{shore2007astrophysical}. In the absence of viscosity and external potentials, the equation reduces  to the momentum equation of the \emph{Euler equations}
 \begin{equation}
 \label{ch02_fld01_eq003}
 - \frac{\partial \mathbf{v}}{\partial t} =  ( \mathbf{v} \nabla ) \mathbf{v} + \frac{\nabla p}{\rho}
 \end{equation}
-
 Energy conservation in the absence of dissipative terms yields the energy equation
 \begin{equation}
 \label{ch02_fld01_eq003a}
-\frac{\d}{\d t} \Big( \rho u + \frac{1}{2}\rho \vv^2 \Big) + \nabla \vv\Big( \rho u + \frac{1}{2} \rho \vv^2 + p \Big) = 0
+\frac{\partial}{\partial t} \rho \Big( \frac{1}{2} \vv^2 + u \Big) + \nabla \vv \rho \Big( \frac{1}{2} \rho \vv^2 + u + \frac{p}{\rho} \Big) = 0
 \end{equation}
-
-Those equations are formulated in an eulerian form, this means in an inertial frame of reference. The fluid moves relative to this reference frame. If we choose a frame of reference at rest relative to the fluid, we get a Lagrangian description of the momentum equation \ref{ch02_fld01_eq003} where the advection term $\vv (\nabla \vv)$ vanishes:
+Those equations are formulated in an Eulerian form, this means in an inertial frame of reference. The fluid moves relative to this reference frame. If we choose a frame of reference at rest relative to the fluid, the partial time derivative operator  yields
+\begin{equation}
+\label{ch02_fld01_eq003c}
+\frac{\partial}{\partial t} = \frac{d}{dt} - \vv \nabla
+\end{equation}
+In the Lagrangian formulation of the momentum equation  \ref{ch02_fld01_eq003} the advection term $\vv (\nabla \vv)$ vanishes and the momentum equation yields
 \begin{equation}
 \label{ch02_fld01_eq003b}
 - \frac{\partial \mathbf{v}}{\partial t} = \frac{\nabla p}{\rho}
@@ -57,46 +57,38 @@ SPH is the abbreviation for \emph{Smoothed particle hydrodynamics} and is approa
 \label{ch02_sph01_eq001}
 A(\rv) = \int  \delta(\rv - \rvs) A(\rvs) \ud \rvs
 \end{equation}
-
 We now replace the $\delta$-function with a smoothing kernel $W$, which has typical width $h$, the smoothing length, and which fulfils the following two criteria
 \begin{equation}
 \label{ch02_sph01_eq002}
 \limhzero W(\rv - \rvs, h) = \delta(\rv - \rvs) \hspace{1.0cm}
 \int W(\rv - \rvs, h) \ud \rvs = 1
 \end{equation}
-
 Equation \ref{ch02_sph01_eq001} can be re-written as a Taylor expansion:
 \begin{equation}
 \label{ch02_sph01_eq003}
 A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
 \end{equation}
-
 The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $\delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points, \emph{particles}, on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
 \begin{equation}
 \label{ch02_sph01_eq004}
 A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
-
 $V_{j}$ is the particle volume and is usually given by assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbors} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$. If the smoothing length goes to zero and the number of neighbors goes to infinity, the sum \ref{ch02_sph01_eq004} approximates the integral \ref{ch02_sph01_eq001} exactly. This is the \emph{SPH limit}.
-
 Spatial derivatives can be calculated by taking the partial derivative of the variable integral interpolant  and replacing it by the sum over all neighbors:
 \begin{equation}
 \label{ch02_sph01_eq005}
 \nabla A(\rv_i) = \frac{\partial}{\partial \rv}\int A(\rvs) \ud \rvs \frac{\partial}{\partial \rv}\ W(\rv_i - \rvs, h) + O(h^2)
 \approx \sum_{j} A_j V_{j} \nabla \Wij 
 \end{equation}
-
-Rotations of variables are similarly obtained:
+Curls of variables are similarly obtained:
 \begin{equation}
 \label{ch02_sph01_eq006}
 \nabla \times A_i \approx \sum_{j} A_i V_{j} (\nabla \times \Wij)
 \end{equation}
-
-Like in in grid based schemes, there are various ways of calculating spatial derivatives in SPH.
+Like in grid based schemes, there are various ways of calculating spatial derivatives in SPH.
 Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behavior. They will be presented further below.
 
 The kernel has to fulfill the two constraints given by equations \ref{ch02_sph01_eq002}. A natural choice would be a normalized Gaussian, but this function has the unpleasant property that it never goes to zero. All particles, also distant ones, would contribute to every individual SPH sum, making the method very inefficient although the distant contributions to sums would be very small. A better choice therefore are functions with compact support, which means that they go to zero at finite distance. A common choice is the cubic spline kernel
-
 \begin{equation}
 \label{ch02_sph01_eq007}
 W(| \rv |, h) = \frac{\sigma}{h^\nu \pi} \left \{ \begin{array}{lll}
@@ -115,7 +107,6 @@ where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \fra
 \end{array} \right. 
 \end{equation}
 and is also continuous. 
-
 The choice of the smoothing length is a trade-off. It is large compared compared to the spacing between the particles, then the variables are smoothed out over too large distances and small features cannot be resolved. If the smoothing length is too small, the variables are not sufficiently smoothed and become very noise, ultimately leading to instabilities. As a golden rule, the smoothing length should be chosen, such as the number of neighbors is roughly 50 inside a radius of $2h$.
 
 \subsection{standard SPH}
@@ -124,13 +115,11 @@ The most widely used version of SPH uses the density and particle mass to calcul
 \label{ch02_sph02_eq001}
 \rho_i = \sum_{j} m_j \Wij
 \end{equation}
-
 The velocity divergence $\nabla \vv$ could in principle be written as
 \begin{equation}
 \label{ch02_sph02_eq002}
 \nabla \vv_i = \sum_{j} \frac{m_j}{\rho_j} \vv_j \nabla \Wij
 \end{equation}
-
 but this form has the disadvantage of being asymmetric and not conserving linear momentum when used in the Euler equation. It is better to apply the \emph{second golden rule} of SPH \citep{Monaghan:1992p3721} and to re-write the velocity divergence term with the density placed inside the operators:
 \begin{equation}
 \label{ch02_sph02_eq003}
@@ -187,32 +176,28 @@ and leaves us with a symmetric SPH sum for the acceleration of a particle in abs
 \label{ch02_sph02_eq010}
 \frac{d \vv_i }{dt} = \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
 \end{equation}
-The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio et reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles.
+The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio et reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles. An easier proof of angular momentum conservation is obtained, by realizing that forces between SPH particles are always radial and therefore cannot exchange torques. The total sum of all torques is therefore also zero and total angular momentum is conserved.
 
 Except for isothermal calculations, the energy of the fluid is non-constant, so we also need a equation for the change in internal energy due to compressional heating. The rate of change in specific internal energy is given by 
 \begin{equation}
 \label{ch02_sph02_eq011}
 \frac{du}{dt} = -\frac{p}{\rho} \nabla \vv
 \end{equation}
-
 Using the velocity divergence SPH sum \ref{ch02_sph02_eq003}  yields
 \begin{equation}
 \label{ch02_sph02_eq012}
 \frac{du_i}{dt} = \frac{p_i}{\rho_i^2} \sum_{j} m_j \vvij  \dWij
 \end{equation}
-
 An SPH sum of this equation consistent with the equation of motion from above can be obtained by applying the golden rule again and putting the density inside the divergence operators:
 \begin{equation}
 \label{ch02_sph02_eq013}
 \frac{du}{dt} = - \nabla \Big( \frac{p \vv}{\rho} \Big) + \vv \nabla \Big( \frac{p}{\rho} \Big)
 \end{equation}
-
 The corresponding SPH sum yields the asymmetric equation
 \begin{equation}
 \label{ch02_sph02_eq014}
 \frac{du_i}{dt} = - \sum_{j} m_{j} \frac{p_j \vv_j}{\rho_j} \dWij + \vv_i \sum_{j} m_{j} \frac{p_j}{\rho_j^2}  \dWij = \sum_{j} m_j \vvij \frac{p_j}{\rho_j^2}  \dWij
 \end{equation}
-
 A symmetric formulation can be gained by taking the average of equations \ref{ch02_sph02_eq012} and \ref{ch02_sph02_eq014}:
 \begin{equation}
 \label{ch02_sph02_eq015}
@@ -427,7 +412,7 @@ art. visc. & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \mu_{ij} +  
 
 
 \subsection{Equations of state}
-The Navier-Stokes equation together with the continuity equation only present a closed system of equations, if an equation of state (EOS) delivering $p(\rho, s)$ is provided. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho } $ is used for the CFL criterion (equation \ref{ch02_sph02_eq023}) and in the artificial viscosity (equation \ref{ch02_sph02_eq016}).
+The Navier-Stokes equation together with the continuity equation only present a closed system of equations, if an equation of state (EOS) delivering $p(\rho, s)$ is provided. Instead of specific entropy, the specific energy is often used as the second thermodynamic state variable. The speed of sound defined as $c_S = \sqrt{ \partial p / \partial \rho }$ at constant density. It is used for the CFL criterion (equation \ref{ch02_sph02_eq023}) and in the artificial viscosity (equation \ref{ch02_sph02_eq016}).
 
 For an ideal gas, the equation of state and the speed of sound is given by
 \begin{equation}
@@ -456,7 +441,7 @@ Figure \ref{ch02_fig03} shows isobars for different materials obtained by ANEOS.
 \end{center}
 \end{figure}
 
-The original version of ANEOS treats the gas phase as a mixture of mono-atomic gases. Compared to a gas of molecules, the monoatomic gas has a very high internal energy and entropy for a given temperature. So in the mono-atomic case vaporization only starts at comparably high energies. \cite{Melosh:2007p3502} tackled this problem by modifying original ANEOS for $SiO_2$ and introducing molecular species in the gas phase. This modified version is called M-ANEOS. Figure \ref{ch02_fig05} shows expected gas mixtures for three different pressures as a function of temperature. Vaporization starts by producing a mixture mainly made up of $SiO$ and $O_2$ gas. Dissociation of these molecules only happens at much higher temperatures. The difference between the two models can be seen by comparing the isobars in figure for dunite (ANEOS, no molecules, green line) and for $SiO_2$ (M-ANEOS, with molecules, red line). The two materials are comparable silicates. At both pressures, the entropy jump for vaporization for $SiO_2$ starts at a temperature roughly $2000K$ lower compared to dunite. Vaporization of solid $SiO_2$ in collisions as a consequence of shock heating occurs, when the particle velocities exceed $7-8km/s$ \citep{Melosh:2007p3502}.
+The original version of ANEOS treats the gas phase as a mixture of mono-atomic gases. Compared to a gas of molecules, the monoatomic gas has a very high internal energy and entropy for a given temperature. So in the mono-atomic case vaporization only starts at comparably high energies. \cite{Melosh:2007p3502} tackled this problem by modifying the original ANEOS for $SiO_2$ and introducing molecular species in the gas phase. This modified version is called M-ANEOS. Figure \ref{ch02_fig05} shows expected gas mixtures for three different pressures as a function of temperature. Vaporization starts by producing a mixture mainly made up of $SiO$ and $O_2$ gas. Dissociation of these molecules only happens at much higher temperatures. The difference between the two models can be seen by comparing the isobars in figure for dunite (ANEOS, no molecules, green line) and for $SiO_2$ (M-ANEOS, with molecules, red line). The two materials are comparable silicates. At both pressures, the entropy jump for vaporization for $SiO_2$ starts at a temperature roughly $2000K$ lower compared to dunite. Vaporization of solid $SiO_2$ in collisions as a consequence of shock heating occurs, when the particle velocities exceed $7-8km/s$ \citep{Melosh:2007p3502}.
 
 \begin{figure}
 \includegraphics[scale=1.0]{05aneos_phases01}
@@ -468,7 +453,7 @@ The original version of ANEOS treats the gas phase as a mixture of mono-atomic g
 
 ANEOS uses as $(\rho, T)$ as the thermodynamical state variables as input parameters, whereas the hydrodynamical equations for a fluid require $(\rho, u)$ or $(\rho, s)$ as state variables, depending on whether the energy or the entropy equation is solved and integrated. Specific energy and entropy are both returned by ANEOS. Luckily both quantities $u(\rho, T)$ and  $s(\rho, T)$ are monotonic increasing functions of temperature, so the correct temperature for given specific energy or entropy can be found through a root finding algorithm. The Brent Rooter \citep{Press2002nrc..book.....P} converges usually within a few iteration steps, for a temperature range covering a few $K$ to a few ten thousand $K$ and a precision of $3 \times 10^{-8}$.
 
-ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. This iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference value. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. In the rare case, that a value outside of the table is requested, the code falls back to the iteration routine used to create the tables. Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the phase state information returned by ANEOS. Note that for mixed states, the single density used by ANEOS is the average density for all phases together. So for example in case of fluid droplets embedded into gas of the same material, ANEOS calculates the density as the average density of both the droplets and the gas.
+ANEOS dates back to a time, when computer memory was sparse and it was not possible to store large tables of complicated functions. Calling ANEOS itself therefore incorporates numerous internal iteration routines. These iterations over iterations make a single EOS call for given $(\rho, u)$ or $(\rho, s)$ computationally relatively costly. Nowadays memory is abundant. Therefore we tabulate ANEOS, so that EOS calls simply reduce to finding suitable points in the parameter space and interpolating between them. Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the tables for four different material. The parameter space is given by $(\log \rho, \log u)$ for the density-energy table and $(\log \rho, \log u)$ for the density-entropy table. Each material has a reference density $\rho_0$ at standard conditions. The important shock processes in planetary system collisions between solid or liquid bodies occur at densities roughly inside an order of magnitude above the reference density. At the same time the table needs to cover vaporized material which has a density many magnitudes below the reference value. In order to fulfill both requirements, the table is split into a high- and a low-density region. The high density region spans roughly 2.5 orders of magnitude starting from $100kg/m^3$ with 500 grid points. The low density  region covers the vapor and solid-vapor mixture regions and goes all the way down to $10^{-8}kg/m^3$ with only 100 grid points. This low number of grid points over such a large density range is no problem, because all variables behave sufficiently smooth in this regions and interpolation delivers good agreements to the theoretical values. Specific energy and entropy are tabulated in both tables with 1500 points in the logged value. In the rare case, that a value outside of the table is requested, the code falls back to the iteration routine used to create the tables. Figures \ref{ch02_fig04a} - \ref{ch02_fig04d} show the phase state information returned by ANEOS. Note that for mixed states, the single density used by ANEOS is the average density for all phases together. So for example in case of fluid droplets embedded into gas of the same material, ANEOS calculates the density as the average density of both the droplets and the gas.
 
 \begin{figure}
 \begin{center}
@@ -516,7 +501,7 @@ When we approximate the density field by discrete particles like in SPH, self-gr
 \Phi_j = - G \sum_{i \ne j} \frac{m_i}{r_{ij}} \hspace{2.0cm} \av_j = - G \sum_{i \ne j} \frac{m_i}{r_{ij}^2} \frac{\rvij}{r_{ij}} 
 \end{equation}
 
-Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE or GPUs). An example of such an application is the evolution and accretion of a proto-lunar disk into a Moon as done by \cite{Kokubo:2000p2195}. For problems using millions of particles, the direct summation is infeasible.
+Calculating self-gravity with this sum is called direct-summation and involves for a each of N particles a sum with N force terms. So the complexity of this simple algorithm is $O(N^2)$. By making use of the symmetry of the force terms, only half of the force terms need to be evaluated, but the algorithm still retains its $O(N^2)$ complexity. This method is only practical if the problem can be satisfactorily modeled by a small number of particles (a few thousand) and specially designed computers are used (e.g. GRAPE or GPUs). An example of such an application is the evolution and accretion of a proto-lunar disk into a Moon as done by \cite{Kokubo:2000p2195}. For problems using millions of particles, the direct summation is unfeasible.
 
 \subsection{Multipole approximation}
 Different methods exist to avoid the prohibitively high computational complexity of the direct summation method mentioned above.  They make use of two properties of a self-gravitating system of more or less equal mass particles: First, the strong $r^{-2}$ dependence of the gravitational field on distance means that near particles with a certain mass exert a much larger attraction than particles further away with a comparable mass. Secondly, the field of more distant particles can be approximated as background field, which does not have to be resolved down to the contribution of every single particle. Instead, distant particles can be summarized into clusters and their field be approximated as the one of single particles with the cluster's mass $m_C$ at the cluster's center of mass $\rv_C$:
@@ -525,14 +510,12 @@ Different methods exist to avoid the prohibitively high computational complexity
 \av_j &= - G \sum_{i~\epsilon~C} \frac{m_i}{r_{ij}^2} \frac{\rv_{ij}}{r_{ij}} \approx - G \frac{m_{C}}{r_{Cj}} \frac{\rv_{Cj}}{r_{Cj}} ~~~~ \text{when}~r_{ij} \gg r_{jk} ~~~ \forall j,k ~ \epsilon~C \\
 m_C &= \sum_{i~\epsilon~C} m_i ~~~~ \rv_C = \frac{1}{m_C} \sum_{i~\epsilon~C} \rv_i m_i ~~~~ \rv_{Cj} = \rv_j - \rv_C 
 \end{align}
-
 This is the \emph{monopole approximation}. In more general terms the total mass of the cluster is the rank-0 monopole tensor $M$ with the center of mass $X$
 \begin{align}
 \label{ch02_grav02_eq002}
 M & = \sum_{c} m_{c} \\
 \Xv  & = \frac{1}{M} \sum_{c} m_{c} \rv_{c} ~~~~~~~~ \text{for}~M > 0
 \end{align}
-
 We use the same indices as in \cite{McMillan:1993p43}, where $i,j$ number vector components and $c$ indexes particles in a cluster or clusters in a group of clusters. The next highest non-zero multipole term is the traceless rank-2 quadrupole tensor
 \begin{equation}
 \label{ch02_grav02_eq003}
@@ -548,7 +531,6 @@ and the single rank-0 component
 \label{ch02_grav02_eq005}
 S_{1 2 3} = 15 \sum_{c} m_c r_{1, c} r_{2, c} r_{3, c}
 \end{equation}
-
 Higher order moments are usually not used and skipped here. The field of a group of cluster can be approximated by summing up the multipole moments of the individual clusters $c$. The mass can simply by summed up:
 \begin{equation}
 \label{ch02_grav02_eq006}
@@ -761,7 +743,7 @@ In this section we will discuss the implementation of the SPH and selfgravity tr
 Since the introduction of electronic computers based on semiconductors, the transistor count on a microchip doubled every 18 months \citep{Moore:1965p4006}. Similarly also the performance, measured in FLOPS (floating point operations per second), increased over time. Until the late 1990ies this performance increase could be guaranteed by simply increasing the clocking frequency and complexity of the CPUs. After that physical limits upon the frequency and the size of semiconductor structures capped the performance increase of a single CPU \footnote{A single CPU is a unit capable of running a computer program independently. In other words, two CPUs can run two programs at the same time.}. So the computer industry started to face this problem by simply increasing the number of CPU cores per machine. The increased performance can therefore only be harvested, if a program is able to run in \emph{parallel} on several CPU cores. There exist basically two types of parallelization: 
 Distributed memory computing is based on several computers with independent (distributed) memory, but with a common network over which they can exchange data. A popular approach in scientific computing is MPI, a software library which provides functions to easily exchange or process numerical data. Often high speed networks like Ethernet or Infiniband are used as a transport media. Although it is non-trivial to parallelize a computer code with MPI, it provides a straightforward solution for using hundreds of CPUs at the same time simply by interconnecting a large number of cheap computers with a network. The first implementation of the code SPHLATCH presented here uses MPI for parallelization. 
 
-Shared memory computing on the other hand is based on several CPU cores sharing a common memory space. Data is simply exchanged by sharing certain parts of memory. A popularly used implementation in scientific computing is OpenMP, a simple set of compiler directives parallelizing loops and vector operations. The program runs as one process, but certain tasks are subdivided into threads, which can run on individual CPU cores. The disadvantage of this approach is, that the execution of the program is limited onto one computer. Only as much CPU cores can be used, as a single computer has. While this was a limitation a decade ago, when affordable computers did not have more than two or four CPU cores, nowadays machines offer a much larger number of cores. As of 2011, server machines with 32 or 48 CPU cores are no exception and very offardable. The second implementation of SPHLATCH uses OpenMP for parallelization.
+Shared memory computing on the other hand is based on several CPU cores sharing a common memory space. Data is simply exchanged by sharing certain parts of memory. A popularly used implementation in scientific computing is OpenMP, a simple set of compiler directives parallelizing loops and vector operations. The program runs as one process, but certain tasks are subdivided into threads, which can run on individual CPU cores. The disadvantage of this approach is, that the execution of the program is limited onto one computer. Only as much CPU cores can be used, as a single computer has. While this was a limitation a decade ago, when affordable computers did not have more than two or four CPU cores, nowadays machines offer a much larger number of cores. As of 2011, server machines with 32 or 48 CPU cores are no exceptions and very offardable. The second implementation of SPHLATCH uses OpenMP for parallelization.
 
 \subsection{SPHLATCH v1}
 The first version of SPHLATCH uses a distributed memory parallelization by employing the MPI library. As a first order approximation, we can assume, that the computational cost to calculate the SPH-sums and gravity forces is more or less the same for all particles. Therefore a standard approach in parallelizing a set of particles is to distribute them equally onto computational domains, called \emph{cost zones}. Each cost zone is a sub-volume of the whole simulation space and assigned to a processor. Integration of the particles is done locally in each cost-zone, so this means all forces and other derivatives for integration have to be collected in each cost-zone. Particles of course not only interact with other particles in the same computational domain. For short range forces like hydrodynamics this might be only the case for particles at the border of computational domains, for example when neighbors for a SPH sum actually come to lie in a different computational domain. For long-range forces like gravity, of all particles depend on information about other particles in other computational domains. The difficult part in a distributed memory parallelization is now to provide all the necessary information to local particles in a cost zone, without having to share all data about the remote particles. 
@@ -831,7 +813,7 @@ Figure \ref{ch02_fig21} now shows a summary of the building blocks of the parall
 The other parts in the code as shown in figure \ref{ch02_fig20} are parallelized in a straightforward way in this implementation of SPHLATCH. Loading the particles from a dump file in the parallel version differs as such, as only a part of the complete dump has to be loaded. It doesn't matter which part is loaded, as particles are exchanged into their proper cost zones anyway in the first derivation step. Determining the time step with the various criteria (equations \ref{ch02_sph02_eq023}, \ref{ch02_sph02_eq024}) is changed only as such, as the minima have to be found globally. Integrating the derivatives of the local particles can be done like in a serial code. Writing the particles into a dump file in a parallel can be a bit tricky. Writing in parallel to a single file can lead to different behavior depending on system libraries. Our code circumvents this problem by using the HDF5 library\footnote{http://www.hdfgroup.org/HDF5/}, which is supports parallel writes. Dump files are stored in a compatible way like in the H5PART\footnote{http://vis.lbl.gov/Research/H5Part/} library, which allows the use of existing software for analysis and post-processing. Apart from particle data, this file format also supports attributes which can be used for example to store simulation constants, like the gravitational constant or the courant number.
 
 
-This distributed memory parallelization shown here works sufficiently well for problems where particles are  relatively homogeneously distributed. Other codes like GADGET or GASOLINE use a very similar parallelization approach and successfully simulated cosmological problems with billions of particles \cite{2005Natur.435..629S}. While cosmological simulations show large spatial dynamics by collapse, the particles are overall relatively well distributed in space, which allows this parallelization approach to scale well up to large numbers of particles. In simulations of collisions, the particles are not well distributed: In the beginning particles are in two well separated bodies. After the collisions small fragments may fly far away thus enlarging the simulation space, while most particles are still concentrated in one or two large bodies. That the approach shown before is not capable of distributing the particles well onto different processors can be seen through a quick estimate: With the multipole acceptance criterion from equation \ref{ch02_grav02_eq013} with an opening angle between $0.6 \dots 1.0 $, we have seen that the top tree depth $d_{TT}$ has to be one larger than the cost zone depth $d_{cz}$. A top tree depth of 6 leads to $8^6 = 262144$ top tree cells, which for practical reasons is an upper limit.  This leaves us with a cost zone depth of 5 and 32 cost zone cells in each dimension. Now let's assume a situation in which a large, spherical central body in which most particles are located and some debris distributed around it no further than $10 \times$ the central bodies diameter. Figure \ref{ch02_fig23} shows a similar situation where the two original bodies of the collision with a mass ratio of 3:1 largely remained intact, but where large amounts of debris are generated. So in this example roughly $1.5$ cost zone cell side lengths equal the central body diameter. The central body will therefore lie in no more than 8 cost zone cells. Not only is it now impossible to distribute the particles to a large number of computational domains, it is not even possible to distribute the particles evenly to a small number of domains, as the granularity of the cost zone cells is too coarse to balance the domains. This is the reason why this approach of distributing particles does not work well for problems with un-even particles distributions. Not that in practice debris can be located much further out, making the problem worse.
+This distributed memory parallelization shown here works sufficiently well for problems where particles are  relatively homogeneously distributed. Other codes like GADGET or GASOLINE use a very similar parallelization approach and successfully simulated cosmological problems with billions of particles \cite{2005Natur.435..629S}. While cosmological simulations show large spatial dynamics by collapse, the particles are overall relatively well distributed in space, which allows this parallelization approach to scale well up to large numbers of particles. In simulations of collisions, the particles are not well distributed: In the beginning particles are in two well separated bodies. After the collisions small fragments may fly far away thus enlarging the simulation space, while most particles are still concentrated in one or two large bodies. That the approach shown before is not capable of distributing the particles well onto different processors can be seen through a quick estimate: With the multipole acceptance criterion from equation \ref{ch02_grav02_eq013} with an opening angle between $0.6 \dots 1.0 $, we have seen that the top tree depth $d_{TT}$ has to be one larger than the cost zone depth $d_{cz}$. A top tree depth of 6 leads to $8^6 = 262144$ top tree cells, which for practical reasons is an upper limit.  This leaves us with a cost zone depth of 5 and 32 cost zone cells in each dimension. Now let's assume a situation in which a large, spherical central body in which most particles are located and some debris distributed around it no further than $10 \times$ the central bodies diameter. Figure \ref{ch02_fig23} shows a similar situation where the two original bodies of the collision with a mass ratio of 3:1 largely remained intact, but where large amounts of debris are generated. So in this example roughly $1.5$ cost zone cell side lengths equal the central body diameter. The central body will therefore lie in no more than 8 cost zone cells. Not only is it now impossible to distribute the particles to a large number of computational domains, it is not even possible to distribute the particles evenly to a small number of domains, as the granularity of the cost zone cells is too coarse to balance the domains. This is the reason why this approach of distributing particles does not work well for problems with un-even particles distributions. Note that in practice debris can be located much further out, making the problem worse.
 
 Another disadvantage of this approach is the computational overhead of ghost particles. In practice there are usually twice the number of ghost particles on a domain than local particles. Not only uses this a lot of memory, but communicating ghost information introduces a large overhead. 
 
