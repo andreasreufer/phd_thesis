@@ -921,7 +921,7 @@ a_{fric} = - \frac{1}{\tau_{fric}} v \hspace{2.0cm} \tau_{fric} \gg \tau_{ff}\hs
 
 The dampening time scale $\tau_{fric}$ has to be larger than the free-fall time scale $\tau_{ff}$ \citep{shore2007astrophysical}, so that the oscillations do not get overdamped. We use a 1D Lagrangian code as described in \citep{Benz:1991p700} and keep the specific entropy constant for all cells. This avoids heating up of the structure during the relaxation process due to artificial viscosity. The 1D Lagrangian code uses the same equations of state as SPHLATCH, like ANEOS or ideal gas. We define the structure to be sufficiently relaxed, of the remnant velocities of the mass elements are below $1\%$ of the escape velocity. 
 
-\subsection{flavoring \& relaxing SPH spheres}
+\subsection{Flavoring \& relaxing SPH spheres}
 \label{ch02_sec04_ss03}
 Flavoring the "vanilla" spheres made out of particles on a HCP lattice with a one dimensional structure is straightforward for standard or miscibile SPH: Dividing the required density $\rho_i$ with the particle density $\delta_i$ obtained with SPH sum \ref{ch02_sph01_eq030} leads to the particle mass $m_i$. The inverse of the particle density is the particle volume. In case density is an integrated variable, both the particle mass and the density have to be set. The thermodynamic state variables can be set directly, as they are intensive. For convenience reasons, the particles are also numbered with a unique ID, so that each particle can later on be identified uniquely.
 
@@ -935,7 +935,6 @@ Note that the distance vector uses the center of mass for the origin. The SPH sp
 
 \subsection{Setting up a collision}
 \label{ch02_sec04_ss04}
-\label{ch}
 Again without gravity, setting up a collision is simple. To all particles of both the impactor and the target, positions and velocities are added, so that the desired initial separation $r_0$, impact angle $\thimp$ and velocity $\vv_{imp}$ result:
 \begin{align}
 \label{ch02_aux_eq002}
