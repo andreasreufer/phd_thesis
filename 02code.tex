@@ -71,7 +71,7 @@ A(\rv) = \int  W(\rv - \rvs, h) A(\rvs) \ud \rvs + O(h^2)
 The variable $A(\rv)$ is now smoothed out over the characteristic scale $h$. By replacing the $\delta$-function with a kernel of finite length, an error in the order of $h^2$ is introduced. Now comes the particle part: The continuum is replaced by a finite set of points, \emph{particles}, on which the quantities are defined. The integral can now be replaced by a sum with a finite number of summands:
 \begin{equation}
 \label{ch02_sph01_eq004}
-A(\rv) \approx \sum_{j} W(\rv - \rvj) A_i V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
+A(\rv) \approx \sum_{j} W(\rv - \rvj) A_j V_{j} \hspace{1.0cm} V_{j} = \frac{m_j}{\rho_j}
 \end{equation}
 $V_{j}$ is the particle volume and is usually given by assigning each particle a mass and dividing it by the density. The particles used in the summation are called \emph{neighbors} and are indexed here with $j$. For most purposes, the variable only needs to be known at particle position $i$. For convenience, we write the kernel used between two particles as $\Wij = W( \rvi - \rvj, h)$. If the smoothing length goes to zero and the number of neighbors goes to infinity, the sum \ref{ch02_sph01_eq004} approximates the integral \ref{ch02_sph01_eq001} exactly. This is the \emph{SPH limit}.
 Spatial derivatives can be calculated by taking the partial derivative of the variable integral interpolant  and replacing it by the sum over all neighbors:
@@ -83,7 +83,7 @@ Spatial derivatives can be calculated by taking the partial derivative of the va
 Curls of variables are similarly obtained:
 \begin{equation}
 \label{ch02_sph01_eq006}
-\nabla \times A_i \approx \sum_{j} A_i V_{j} (\nabla \times \Wij)
+\nabla \times A_i \approx \sum_{j} A_j V_{j} (\nabla \times \Wij)
 \end{equation}
 Like in grid based schemes, there are various ways of calculating spatial derivatives in SPH.
 Depending on the actual application of the derivative, whether it is to get the velocity divergence or a pressure gradient, there are better suited variants which show better error behavior. They will be presented further below.
@@ -109,7 +109,7 @@ where $\nu$ stands for the number of spatial dimensions and $\sigma = \big( \fra
 and is also continuous. 
 The choice of the smoothing length is a trade-off. It is large compared compared to the spacing between the particles, then the variables are smoothed out over too large distances and small features cannot be resolved. If the smoothing length is too small, the variables are not sufficiently smoothed and become very noise, ultimately leading to instabilities. As a golden rule, the smoothing length should be chosen, such as the number of neighbors is roughly 50 inside a radius of $2h$.
 
-\subsection{standard SPH}
+\subsection{Standard SPH}
 The most widely used version of SPH uses the density and particle mass to calculate the particle volumes ($V_j = m_j / \rho_j)$ and the density to interpolate all variables. The density for the particle with index $i$ is given by the simple particle sum
 \begin{equation}
 \label{ch02_sph02_eq001}
@@ -133,7 +133,7 @@ so that the corresponding SPH sum becomes
 with $\vvij = \vv_j - \vv_i$, which is a symmetric form for the velocity divergence. If we take the partial time derivative of \ref{ch02_sph02_eq001}, where only the particle positions in the Kernel depend explicitly on time, we get: 
 \begin{equation}
 \label{ch02_sph02_eq004}
-\frac{d \rho_i}{d t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
+\frac{\partial \rho_i}{\partial t}  = \sum_{j} m_j \Big( \frac{\partial}{\partial t} \rvij \Big) \nabla \Wij = \sum_{j} m_j \vvij \nabla \Wij 
 \end{equation}
 So this equation together with the velocity divergence equation \ref{ch02_sph02_eq003} fulfills the continuity equation \ref{ch02_fld01_eq001} for each particle exactly.
 
@@ -176,7 +176,7 @@ and leaves us with a symmetric SPH sum for the acceleration of a particle in abs
 \label{ch02_sph02_eq010}
 \frac{d \vv_i }{dt} = \sum_{j} m_j \Big( \frac{p_i}{\rho_i^2} + \frac{p_j}{\rho_j^2} \Big) \nabla W_{ij}
 \end{equation}
-The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{jj}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio et reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles. An easier proof of angular momentum conservation is obtained, by realizing that forces between SPH particles are always radial and therefore cannot exchange torques. The total sum of all torques is therefore also zero and total angular momentum is conserved.
+The derivative of the kernel is anti-symmetric ($\nabla W_{ij} = - \nabla W_{ji}$), therefore each interacting particle pair fulfils Newtons third law \emph{actio et reactio} and linear momentum is conserved. Angular momentum is also conserved, which can be shown by taking the time derivative of the $\frac{d}{dt} \sum_i (m_i \rv_i \times \vv_i)$ where some index magic \citep{Price:2004p2613} again shows that all terms cancel each other out in the sum over all particles. An easier proof of angular momentum conservation is obtained, by realizing that forces between SPH particles are always radial and therefore cannot exchange torques. The total sum of all torques is therefore also zero and total angular momentum is conserved.
 
 Except for isothermal calculations, the energy of the fluid is non-constant, so we also need a equation for the change in internal energy due to compressional heating. The rate of change in specific internal energy is given by 
 \begin{equation}
@@ -228,7 +228,7 @@ with the same choice for the signal velocity $\mu_{ij}$ and numerical constants 
 
 A disadvantage of this approach is that this viscosity also acts outside of shocks in situations of weak compression or shear flows. There exist several approaches to fix this issue by detecting shocks more cleverly: One approach by \cite{Morris1997J.-Comput.-Phys.Morris} tries to detect shocks more cleverly than by simply checking for compression. Another approach tries to limit artificial viscosity in shears flows \citep{Balsara1995JCoPh.121..357B}, which is useful for example when modeling astrophysical disks. In collision simulations increased viscosity due to artificial viscosity is hardly a problem, therefore we don't include such fixes in the code which will be presented later.
 
-\subsection{variable smoothing length}
+\subsection{Variable smoothing length}
 In order to meet the requirement of the optimum number of neighbors $N_{N,opt} = 50$ neighbors per particle, the smoothing has to be adjusted for each particle individually. For constant particle masses the density is proportional to the particle density $\delta_i$, which again is inverse proportional to the particle volume and therefore to the inverse third power of the smoothing length in 3D:
 \begin{equation}
 \label{ch02_sph02_eq026}
@@ -308,7 +308,7 @@ When particle density varies over several orders of magnitudes, the time step do
 
 For collision events in the gravity regime, the time steps don't vary too much. Solids have similar speed of sound and smoothing lengths, also under compression. The formation of dilute vapor is not an issue, because particles in vapor state have much larger smoothing lengths than solid length, while retaining a comparable speed of sound, resulting in an even larger time step. A hierarchical time stepping scheme is therefore not necessary for the simulations of collisions.
 
-\subsection{miscible SPH}
+\subsection{Miscible SPH}
 Standard SPH interpolates all variables weighed according to density. This works very well for single-phase fluids, but introduces difficulties with multi-phase fluids with large density contrasts. In reality, density can be discontinuous along boundaries, for example for fluid droplets embedded in a gas. 
 
 \begin{figure}[htbp]
@@ -325,7 +325,7 @@ The actual problem of standard SPH and density contrasts arises for fluids with 
 
 Figure \ref{ch02_fig01} demonstrates this with an actual radial profile of a two-fluid 3D sphere in equilibrium, this means that all particles are at rest. The structure models an early proto-Earth of $0.9 \ME$ with a $30 wt\%$ core of iron and a $70 wt\%$ mantle of silicate ($\silc$). A thin black line indicates the equilibrium solution of a 1D Lagrangian code (see section \ref{ch02_sec04_ss02}). Ideally the SPH particles would represent this solution in 3D. The left plots show the structure calculated with standard SPH. Particles have the actual density and pressure within a small error at most radii, except for the boundary between the core and the mantle, where there are differences in density leading to a huge pressure deviation (green circles). In standard SPH the iron particles obtain their density by interpolating over their neighbors, which include silicate particles with a considerably lower density for the same pressure. This leads to an under-estimated density at the boundary and ultimately to a pressure much too low. The same effect works the other way round for the silicate particles, which obtain an over-density and therefore also have a too large pressure.  By smoothing out the density at the boundary, it reaches unnatural values. 
 
-A method first proposed by \citep{Ott:2003p3727} and also mentioned by \cite{Solenthaler:2008p3720} and \cite{Price:2004p2613} drops the fundamental principle of SPH of interpolating all quantities with density \ref{ch02_sph01_eq001} and uses the particle density instead 
+A method first proposed by \cite{Ott:2003p3727} and also mentioned by \cite{Solenthaler:2008p3720} and \cite{Price:2004p2613} drops the fundamental principle of SPH of interpolating all quantities with density \ref{ch02_sph01_eq001} and uses the particle density instead 
 \begin{equation}
 \label{ch02_sph01_eq030}
 \delta_i = \sum_{j} \Wij
@@ -364,14 +364,12 @@ and similarly to the energy equation
 \end{align}
 with the same factors $\mu_{ij}, \alpha$ and $\beta$ as in equation \ref{ch02_sph02_eq016}. 
 
-The failure of standard SPH at boundaries can introduce difficulties in resolving Kelvin-Helmholtz instabilities properly, as noted by \cite{Agertz:2006p1552}. We will compare the ability to resolve this instability between standard and miscible SPH in chapter \ref{ch05} about the Moon-forming giant impact.
+The failure of standard SPH at boundaries can introduce difficulties in resolving Kelvin-Helmholtz instabilities properly, as noted by \cite{Agertz:2006p1552}. We will compare the ability to resolve this instability between standard and miscible SPH in chapter \ref{ch05} about the Moon-forming giant impact. Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter-like structures, where a solid impactor and, after the collision, solid debris travels through the gaseous envelope of the target.
 
-Another situation where standard SPH fails are mixed states between materials, for example if solid particles are embedded in gas particles. This occurs in the simulations of impacts into proto-Jupiter-like structures, where a solid impactor and, after the collision, solid debris travels through the gaseous envelope of the target.
-
-\subsection{solid state SPH}
+\subsection{Solid state SPH}
 SPH can also be used for modelling solids. For an elastic solid, the isotropic pressure of a fluid is replaced with the full stress tensor in order to additionally model shear stresses. Brittle failure due to cracks can be modeled with a statistical approach \cite{Grady1980147}. An SPH implementation of this is presented in \cite{1994Icar..107...98B}. Chapter \ref{ch04} uses an solid state SPH code with the features mentioned above. The code is described in detail in \cite{Nyffeler:2006p96} and will not be discussed any further here.
 
-\subsection{fluid SPH summary}
+\subsection{Fluid SPH summary}
 Table 2.1 shows a summary of the sums of the three different SPH formulations presented above. On modern computers, the computationally most expensive thing is to find the neighbors and fetch their variables. It is therefore useful, to collect several SPH sums which are independent of each other results to a single summation step. In case of standard SPH this means for example, that the 2nd SPH summation step searches the neighbors for particle with index $i$ and then calculates $\nabla \vv_i$, $ \frac{du_i}{dt} $ and $\frac{d \vv_i }{dt}$ at the same time. Standard and miscible SPH both require two summation steps, in order to calculate the physical and particle density respectively. In case the density is an integrated variable, only one summation step is required. 
 \begin{table}[htdp]
 \begin{center}
@@ -406,8 +404,8 @@ art. visc. & \multicolumn{2}{|c|}{$\Pi_{ij} = \frac{- \alpha c_{ij} \mu_{ij} +  
 \hline
 \end{tabular}
 \caption{Overview of the sums for different SPH variants}
-\end{center}
 \label{ch02_sph01_tabl01}
+\end{center}
 \end{table}
 
 
